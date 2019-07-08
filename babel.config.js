@@ -1,6 +1,7 @@
-module.exports = function(api) {
+const config = api => {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"]
   };
 };
+module.exports = config;

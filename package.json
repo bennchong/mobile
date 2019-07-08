@@ -5,7 +5,13 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "lint": "eslint . --ext js,ts,tsx",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "dependencies": {
     "expo": "^33.0.0",
@@ -15,9 +21,28 @@
     "react-native-web": "^0.11.4"
   },
   "devDependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/preset-env": "7.4.5",
+    "@babel/preset-typescript": "7.3.3",
+    "@types/debug": "4.1.4",
+    "@types/jest": "24.0.13",
     "@types/react": "^16.8.19",
     "@types/react-native": "^0.57.60",
+    "@typescript-eslint/eslint-plugin": "1.11.0",
+    "@typescript-eslint/parser": "1.11.0",
+    "babel-eslint": "10.0.2",
+    "babel-jest": "24.8.0",
     "babel-preset-expo": "^5.1.1",
+    "eslint": "6.0.0",
+    "eslint-config-airbnb-base": "13.2.0",
+    "eslint-config-prettier": "5.0.0",
+    "eslint-plugin-import": "2.17.3",
+    "eslint-plugin-prettier": "3.1.0",
+    "jest": "24.8.0",
+    "jest-expo": "^33.0.2",
+    "prettier": "1.18.2",
+    "react-test-renderer": "^16.8.6",
     "typescript": "^3.4.5"
   },
   "private": true
