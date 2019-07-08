@@ -15,6 +15,7 @@ jobs:
       script:
         - expo login -u $EXPO_USERNAME --non-interactive
         - expo publish --non-interactive --release-channel $TRAVIS_PULL_REQUEST
+        - ./scripts/commenter.sh
     - stage: deploy_prod
       if: branch = master
       script:
