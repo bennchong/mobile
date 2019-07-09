@@ -38,7 +38,6 @@ export default class BarcodeScannerExample extends React.Component {
             onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
             style={styles.scanner}
           />
-          <Text> HI THERE </Text>
 
           {scanned && (
             <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
