@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from 'react-navigation';
-import Profile from './Profile';
-import Settings from './Settings';
-import Scanner from '../BarcodeScannerExample';
+import ProfileScreen from './ProfileScreen';
+import SettingsScreen from './SettingsScreen';
+import ScannerScreen from '../BarcodeScannerExample';
 
 const AppNavigator = createBottomTabNavigator({
-  Settings: Settings,
-  Camera: Scanner,
-  Profile: Profile,
+  Settings: SettingsScreen,
+  Camera: ScannerScreen,
+  Profile: ProfileScreen,
   },
   {
   initialRouteName: 'Camera',
