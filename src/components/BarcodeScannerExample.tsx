@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Alert, View, StyleSheet, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -51,8 +51,18 @@ export default class BarcodeScannerExample extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    NavigationService.navigate('Profile', {barcode_status: 'Captured'});
+    Alert.alert(
+      'QR Code Detected',
+      'Do you want to accept this QR Code?',
+      [
+        {text: 'No', onPress: () => console.log('Rejected')},
+        {text: 'Yes', onPress: () => {
+          alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+          NavigationService.navigate('Profile', {barcode_status: 'Captured'});
+        }},
+      ], 
+      {cancelable: false},
+    );
   };
 }
 
