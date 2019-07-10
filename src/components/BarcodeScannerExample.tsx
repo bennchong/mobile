@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import NavigationService from '../navigation/NavigationService';
 
 export default class BarcodeScannerExample extends React.Component {
   state = {
@@ -51,6 +52,7 @@ export default class BarcodeScannerExample extends React.Component {
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    NavigationService.navigate('Profile', {barcode_status: 'Captured'});
   };
 }
 
