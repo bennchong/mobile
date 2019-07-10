@@ -5,8 +5,12 @@ import Scanner from '../BarcodeScannerExample';
 
 const AppNavigator = createBottomTabNavigator({
   Settings: Settings,
+  Camera: Scanner,
   Profile: Profile,
-  // Camera: Scanner
-});
+  },
+  {
+  initialRouteName: 'Camera',
+  }
+);
 
 export default AppNavigator;

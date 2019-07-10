@@ -22,29 +22,30 @@ export default class BarcodeScannerExample extends React.Component {
   render() {
     const { hasCameraPermission, scanned } = this.state;
 
-    if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
-    }
-    else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    }
-    else {
+    if (hasCameraPermission != null && hasCameraPermission === true) {
       return (
         <View
           style={{
-            flex: 1
+            flex: 1, 
+            justifyContent: "flex-end",
           }}>
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-            style={styles.scanner}
+            style={StyleSheet.absoluteFill}
           />
-
-          {scanned && (
-            <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
-          )}
+          <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
         </View>
       );
     }
+    else {
+      return null
+    }
+    // else if (hasCameraPermission === false) {
+    //   return <Text>No access to camera</Text>;
+    // }
+    // else {
+      
+    // }
   }
 
   handleBarCodeScanned = ({ type, data }) => {
@@ -54,10 +55,8 @@ export default class BarcodeScannerExample extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  scanner : {
+  b : {
     flex: 1,
-    height: 1000,
-    width: 1000,
-    position: 'relative'
+    justifyContent: "flex-end",
   }
 })
