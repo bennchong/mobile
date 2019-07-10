@@ -55,7 +55,9 @@ export default class BarcodeScannerExample extends React.Component {
       'QR Code Detected',
       'Do you want to accept this QR Code?',
       [
-        {text: 'No', onPress: () => console.log('Rejected')},
+        {text: 'No', onPress: () => {
+          NavigationService.navigate('Profile', {barcode_status: 'Not Captured'});
+        }},
         {text: 'Yes', onPress: () => {
           alert(`Bar code with type ${type} and data ${data} has been scanned!`);
           NavigationService.navigate('Profile', {barcode_status: 'Captured'});
