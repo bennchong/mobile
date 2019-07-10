@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from 'react-navigation';
-import ProfileScreen from './ProfileScreen';
-import SettingsScreen from './SettingsScreen';
-import ScannerScreen from '../BarcodeScannerExample';
+import ProfileScreen from './screens/ProfileScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import ScannerScreen from './screens/ScannerScreen';
 
 const AppNavigator = createBottomTabNavigator({
   Settings: SettingsScreen,

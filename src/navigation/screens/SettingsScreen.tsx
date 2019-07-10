@@ -1,12 +1,11 @@
-import React from 'react';
+import React from '../../../node_modules/react';
 import { StyleSheet, Text, View } from 'react-native';
-import BarcodeScannerExample from '../BarcodeScannerExample';
 
-export default class ScannerScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <BarcodeScannerExample/>
+        <Text>Settings Page</Text>
       </View>
     );
   }

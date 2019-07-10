@@ -1,11 +1,11 @@
-import React from 'react';
+import React from '../../../node_modules/react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class SettingsScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Settings Page</Text>
+        <Text>Profile Page</Text>
       </View>
     );
   }
