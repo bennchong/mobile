@@ -7,22 +7,8 @@ export default class ProfileTab extends React.Component {
   render() {
       return (
           <AppContext.Consumer>
-              {({test , changeTestState}) => (<ProfileScreen testState={test}/>)}
+              {({test}) => (<ProfileScreen testState={test}/>)}
           </AppContext.Consumer>         
-        // <AppContext.Provider>
-        //     {(test) => (
-        //         <ProfileScreen testState={test}/>
-        //     )}
-        // </AppContext.Provider>
       );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

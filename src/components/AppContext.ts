@@ -1,10 +1,5 @@
 import React from 'react';
 
-const StateContext = React.createContext<AppStateContext>(null);
-
-interface AppStateContext {
-  test: boolean,
-  changeTestState: () => {},
-}
+const StateContext = React.createContext(null);
 
 export default StateContext;

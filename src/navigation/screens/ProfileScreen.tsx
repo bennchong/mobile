@@ -4,11 +4,9 @@ import Profile from "./Stacks/profile/Profile";
 import NoProfile from "./Stacks/profile/NoProfile";
 
 export default class ProfileScreen extends React.Component {
+  
   render() {
-    const { navigation } = this.props;
-    const barcodeStatus = navigation.getParam('barcode_status', 'Not Captured');
-
-    if(barcodeStatus === 'Captured') {
+    if(this.props.testState) {
       return(
         <Profile />
       );
@@ -18,20 +16,5 @@ export default class ProfileScreen extends React.Component {
         <NoProfile />
       )
     }
-    // return (
-    //   <View style={styles.container}>
-    //     <Text>Profile Page</Text>
-    //     <Text>Have you captured QR code yet?: {JSON.stringify(barcodeStatus)}</Text>
-    //   </View>
-    // );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
