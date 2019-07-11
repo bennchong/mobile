@@ -10,7 +10,6 @@ const AppNavigator = createBottomTabNavigator({
   },
   {
   initialRouteName: 'Camera',
-  lazy: false,
   }
 );
 
