@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, View, StyleSheet, Button } from 'react-native';
+import { Alert, View, StyleSheet, Button, Text } from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -9,7 +9,12 @@ export default class BarcodeScannerExample extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
+    test: this.props.test,
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ test: nextProps.test });  
+  }
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -21,7 +26,9 @@ export default class BarcodeScannerExample extends React.Component {
   };
 
   render() {
-    const { hasCameraPermission, scanned } = this.state;
+    const { hasCameraPermission, scanned, test } = this.state;
+
+    Alert.alert("Rerendered");
 
     if (hasCameraPermission != null && hasCameraPermission === true) {
       return (
@@ -35,6 +42,7 @@ export default class BarcodeScannerExample extends React.Component {
             style={StyleSheet.absoluteFill}
           />
           <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
+          <Text> {test.toString()} hello {typeof(test)}</Text>
         </View>
       );
     }
@@ -51,12 +59,14 @@ export default class BarcodeScannerExample extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
+    const { hasCameraPermission, scanned, test } = this.state;
     Alert.alert(
       'QR Code Detected',
       'Do you want to accept this QR Code?',
       [
         {text: 'No', onPress: () => {
-          NavigationService.navigate('Profile', {barcode_status: 'Not Captured'});
+          this.props.changeTestState(); 
+          // NavigationService.navigate('Profile', {barcode_status: 'Not Captured'});
         }},
         {text: 'Yes', onPress: () => {
           alert(`Bar code with type ${type} and data ${data} has been scanned!`);

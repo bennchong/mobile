@@ -18,10 +18,10 @@ export default class App extends React.Component <MyProps, MyState> {
   }
 
   changeTestState = () => {
-    this.setState({
-      test: !this.state.test
-    })
-  }
+    this.setState(state => {
+      return {test: true};
+    });
+  };
 
   render() {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StateContext = React.createContext<AppStateContext>({test: false, changeTestState: () => {} });
+const StateContext = React.createContext<AppStateContext>(null);
 
 interface AppStateContext {
   test: boolean,
