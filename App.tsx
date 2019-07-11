@@ -2,7 +2,12 @@ import React from "react";
 import AppContainer from "./src/navigation/AppContainer";
 import NavigationService from './src/navigation/NavigationService';
 
-const ThemeContext = React.createContext('light');
+const StateContext = React.createContext<AppStateContext>({test: false, changeTestState: () => {} });
+
+interface AppStateContext {
+  test: boolean,
+  changeTestState: () => {},
+}
 
 interface MyProps{}
 interface MyState{
@@ -26,12 +31,12 @@ export default class App extends React.Component <MyProps, MyState> {
 
   render() {
     return (
-      <ThemeContext.Provider value="dark">
+      <StateContext.Provider value={{test: this.state.test, changeTestState: this.changeTestState }}>
         <AppContainer 
         ref={navigatorRef => {
           NavigationService.setTopLevelNavigator(navigatorRef);
         }}/>
-      </ThemeContext.Provider>
+      </StateContext.Provider>
       
     );
   }
