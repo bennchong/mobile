@@ -1,13 +1,7 @@
 import React from "react";
 import AppContainer from "./src/navigation/AppContainer";
 import NavigationService from './src/navigation/NavigationService';
-
-const StateContext = React.createContext<AppStateContext>({test: false, changeTestState: () => {} });
-
-interface AppStateContext {
-  test: boolean,
-  changeTestState: () => {},
-}
+import StateContext from './src/components/AppContext';
 
 interface MyProps{}
 interface MyState{
