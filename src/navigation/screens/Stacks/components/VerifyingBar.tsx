@@ -6,7 +6,12 @@ import {
   View,
 } from 'react-native'
 
-export default class VerifyingBar extends React.Component {
+interface MyProps{
+  status: String
+}
+interface MyState{}
+
+export default class VerifyingBar extends React.Component<MyProps, MyState> {
   render() {
     if (this.props.status === 'validating'){
         return (
@@ -40,18 +45,21 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: 'red',
       height: 100,
+      flexDirection: 'row',
     },
 
     verified: {
         justifyContent: 'center',
         backgroundColor: 'green',
         height: 100,
+        flexDirection: 'row',
     },
 
     invalid: {
         justifyContent: 'center',
         backgroundColor: 'red',
         height: 100,
+        flexDirection: 'row',
     },
 
     text: {
