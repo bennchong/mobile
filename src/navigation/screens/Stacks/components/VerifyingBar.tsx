@@ -42,30 +42,33 @@ export default class VerifyingBar extends React.Component<MyProps, MyState> {
 const styles = StyleSheet.create({
     
     validating: {
-      justifyContent: 'center',
-      backgroundColor: 'red',
-      height: 100,
+      flex:0.075,
       flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'baseline',
+      backgroundColor: 'red',
+      marginTop: 5,
     },
 
-    verified: {
-        justifyContent: 'center',
-        backgroundColor: 'green',
-        height: 100,
-        flexDirection: 'row',
+    verified: {      
+      flex:0.075,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'baseline',
+      backgroundColor: 'green',
+      marginTop: 5,
     },
 
-    invalid: {
-        justifyContent: 'center',
-        backgroundColor: 'red',
-        height: 100,
-        flexDirection: 'row',
+    invalid: {      
+      flex:0.075,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'baseline',
+      backgroundColor: 'red',
+      marginTop: 5,
     },
 
     text: {
-        flex:1, 
         color: 'white',
-        textAlign:'center',
-        justifyContent: 'center',
      },
   })

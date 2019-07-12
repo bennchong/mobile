@@ -6,7 +6,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <VerifyingBar status='validated'/>
+        <VerifyingBar status='validating'/>
         <Text>Profile Page Placeholder</Text>
       </View>
     );
@@ -16,8 +16,9 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
-    alignItems: 'stretch',
     justifyContent: 'flex-start',
+    alignItems: "stretch",
   },
 });
