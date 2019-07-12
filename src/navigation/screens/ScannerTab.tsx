@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import BarcodeScannerExample from '../../components/BarcodeScannerExample';
-import StateContext from '../../components/AppContext';
+import AppContext from '../../components/AppStore';
 
 export default class ScannerTab extends React.Component {
   render() {
     return (
       <View style={[StyleSheet.absoluteFillObject]}>
-        <StateContext.Consumer>
+        <AppContext.Consumer>
           {({test, changeTestState}) => (<BarcodeScannerExample test={test} changeTestState={changeTestState}/>)}
-        </StateContext.Consumer>       
+        </AppContext.Consumer>       
       </View>
     );
   }
