@@ -2,8 +2,6 @@ import React from '../../../node_modules/react';
 import Profile from "./Stacks/profile/Profile";
 import NoProfile from "./Stacks/profile/NoProfile";
 import AppContext from "../../components/AppStore";
-import { withNavigation } from "react-navigation";
-import { Alert } from 'react-native';
 
 export default class ProfileScreen extends React.Component<{},{}> {
 
