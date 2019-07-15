@@ -5,24 +5,10 @@ import AppContext from "../../components/AppStore";
 import { withNavigation } from "react-navigation";
 import { Alert } from 'react-native';
 
-class ProfileScreen extends React.Component<{},{}> {
+export default class ProfileScreen extends React.Component<{},{}> {
 
-// Read up on context, it links to AppStore Class apparently, and this.context would allow us to acess AppStore methods and variables  
-static contextType = AppContext; 
-  
-  componentDidMount() {
-    const { navigation } = this.props;
-    this.focusListener = navigation.addListener("didFocus", () => {
-      // The screen is focused
-      // Call any action
-      Alert.alert("Running re-verification placeholder function")
-    });
-  }
-
-  componentWillUnmount() {
-    // Remove the event listener
-    this.focusListener.remove();
-  }
+  // Read up on context, it links to AppStore Class apparently, and this.context would allow us to acess AppStore methods and variables  
+  static contextType = AppContext; 
 
   render() {
     if(this.context.test) {
@@ -37,5 +23,3 @@ static contextType = AppContext;
     }
   }
 }
-
-export default withNavigation(ProfileScreen);
