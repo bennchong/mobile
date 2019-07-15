@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import VerifyingBar from '../components/VerifyingBar';
 import { withNavigation } from "react-navigation";
 import { Alert } from 'react-native';
+import ProfileSection from './ProfileSection';
 
 class Profile extends React.Component {
-
+    
   state = {
     cert_status : 'validating'
   }
-
+  
   componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
@@ -37,7 +38,7 @@ class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <VerifyingBar status={this.state.cert_status}/>
-        <Text>Profile Page Placeholder</Text>
+        <ProfileSection />
       </View>
     );
   }
