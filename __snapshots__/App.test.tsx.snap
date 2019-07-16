@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> should render without crashing 1`] = `
+exports[`<SettingsTab /> should render without crashing 1`] = `
 <View
   style={
     Object {
@@ -12,7 +12,7 @@ exports[`<App /> should render without crashing 1`] = `
   }
 >
   <Text>
-    Open up App.tsx to start working on your app!
+    Settings Page
   </Text>
 </View>
 `;
