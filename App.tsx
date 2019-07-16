@@ -1,19 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import AppContainer from "./src/navigation/AppContainer";
+import NavigationService from "./src/navigation/NavigationService";
+import { AppStore } from "./src/components/AppStore";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+export default class App extends React.Component {
+  render() {
+    return (
+      <AppStore>
+        <AppContainer
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </AppStore>
+    );
   }
-});
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
 }
