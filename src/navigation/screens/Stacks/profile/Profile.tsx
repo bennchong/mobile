@@ -5,6 +5,16 @@ import VerifyingBar from "../components/VerifyingBar";
 import React from "../../../../../node_modules/react";
 import ProfileSection from "./ProfileSection";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#fff",
+    justifyContent: "flex-start",
+    alignItems: "stretch"
+  }
+});
+
 class Profile extends React.Component {
   state = {
     cert_status: "validating"
@@ -42,13 +52,3 @@ class Profile extends React.Component {
 }
 
 export default withNavigation(Profile);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#fff",
-    justifyContent: "flex-start",
-    alignItems: "stretch"
-  }
-});
