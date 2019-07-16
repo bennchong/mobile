@@ -13,6 +13,8 @@ import * as Permissions from "expo-permissions";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import NavigationService from "../navigation/NavigationService";
 
+import QRHandler from "./QRHandler";
+
 interface MyProps {
   test: boolean;
   changeTestState: () => {};
@@ -118,6 +120,7 @@ export default class BarcodeScannerExample extends React.Component<
             Alert.alert(
               `Bar code with type ${type} and data ${data} has been scanned!`
             );
+            // this.test = new QRHandler(data);
             NavigationService.navigate("Profile", {});
           }
         }
