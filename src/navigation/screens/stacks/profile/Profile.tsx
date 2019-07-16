@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
-import * as React from "react";
 import VerifyingBar from "../stackcomponents/VerifyingBar";
 
+import React from "../../../../../node_modules/react";
 import ProfileSection from "./ProfileSection";
 import CERT_VALIDITY_STATUS from "../../../../constants/CertValidityStatus";
 
@@ -22,7 +22,7 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    const navigation = this.props;
+    const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
       // The screen is focused
       // Call any action
