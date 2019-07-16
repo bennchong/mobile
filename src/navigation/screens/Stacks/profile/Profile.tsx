@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
-import VerifyingBar from "../components/VerifyingBar";
+import VerifyingBar from "../stackcomponents/VerifyingBar";
 
 import React from "../../../../../node_modules/react";
 import ProfileSection from "./ProfileSection";
+import CERT_VALIDITY_STATUS from '../../../../constants/CertValidityStatus';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
 
 class Profile extends React.Component {
   state = {
-    cert_status: "validating"
+    cert_status: CERT_VALIDITY_STATUS.VALIDATING
   };
 
   componentDidMount() {
@@ -26,12 +27,12 @@ class Profile extends React.Component {
       // The screen is focused
       // Call any action
       this.setState({
-        cert_status: "validating"
+        cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
 
       Alert.alert("Running re-verification placeholder function");
       setTimeout(() => {
-        this.setState({ cert_status: "validated" });
+        this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);
     });
   }

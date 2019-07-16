@@ -1,6 +1,6 @@
 import React from "../../../node_modules/react";
-import Profile from "./Stacks/profile/Profile";
-import NoProfile from "./Stacks/profile/NoProfile";
+import Profile from "./stacks/profile/Profile";
+import NoProfile from "./stacks/profile/NoProfile";
 import AppContext from "../../components/AppStore";
 
 export default class ProfileScreen extends React.Component<{}, {}> {

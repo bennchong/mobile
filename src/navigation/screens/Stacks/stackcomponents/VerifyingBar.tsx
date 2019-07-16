@@ -1,5 +1,6 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import CERT_VALIDITY_STATUS from '../../../../constants/CertValidityStatus';
 
 const styles = StyleSheet.create({
   validating: {
@@ -41,7 +42,7 @@ interface MyState {}
 
 export default class VerifyingBar extends React.Component<MyProps, MyState> {
   render() {
-    if (this.props.status === "validating") {
+    if (this.props.status === CERT_VALIDITY_STATUS.VALIDATING) {
       return (
         <View style={[styles.validating]}>
           <ActivityIndicator size="large" color="white" />
@@ -49,7 +50,7 @@ export default class VerifyingBar extends React.Component<MyProps, MyState> {
         </View>
       );
     }
-    if (this.props.status === "validated") {
+    if (this.props.status === CERT_VALIDITY_STATUS.VALID) {
       return (
         <View style={[styles.verified]}>
           <Text style={styles.text}> Valid </Text>
@@ -57,10 +58,12 @@ export default class VerifyingBar extends React.Component<MyProps, MyState> {
       );
     }
 
-    return (
-      <View style={[styles.invalid]}>
+    else if (this.props.status === CERT_VALIDITY_STATUS.INVALID) {
+      return (
+        <View style={[styles.invalid]}>
         <Text style={styles.text}> Invalid </Text>
       </View>
-    );
+      );
+    }
   }
 }
