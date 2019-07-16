@@ -10,12 +10,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class SettingsTab extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Settings Page</Text>
-      </View>
-    );
-  }
-}
+const SettingsTab = () => (
+  <View style={styles.container}>
+    <Text>Settings Page</Text>
+  </View>
+);
+
+export default SettingsTab;

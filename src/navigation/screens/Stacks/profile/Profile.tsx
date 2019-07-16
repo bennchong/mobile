@@ -4,7 +4,7 @@ import VerifyingBar from "../stackcomponents/VerifyingBar";
 
 import React from "../../../../../node_modules/react";
 import ProfileSection from "./ProfileSection";
-import CERT_VALIDITY_STATUS from '../../../../constants/CertValidityStatus';
+import CERT_VALIDITY_STATUS from "../../../../constants/CertValidityStatus";
 
 const styles = StyleSheet.create({
   container: {

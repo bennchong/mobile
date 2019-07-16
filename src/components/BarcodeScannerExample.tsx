@@ -18,10 +18,43 @@ interface MyProps {
   changeTestState: () => {};
 }
 
+const { width } = Dimensions.get("window");
+const qrSize = width * 0.7;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center"
+  },
+  qr: {
+    marginTop: "5%",
+    marginBottom: "5%",
+    width: qrSize,
+    height: qrSize
+  },
+  description: {
+    fontSize: width * 0.09,
+    marginTop: "30%",
+    textAlign: "center",
+    width: "70%",
+    color: "black"
+  },
+  cancel: {
+    fontSize: width * 0.05,
+    textAlign: "center",
+    width: "70%",
+    color: "white"
+  }
+});
+
 export default class BarcodeScannerExample extends React.Component<
   MyProps,
   {}
 > {
+  constructor(props) {
+    super(props);
+    this.QRBorder = require("../assets/QR.png");
+  }
+
   state = {
     hasCameraPermission: null,
     scanned: false
@@ -53,7 +86,7 @@ export default class BarcodeScannerExample extends React.Component<
             style={[StyleSheet.absoluteFill, styles.container]}
           >
             <Text style={styles.description}>Scan your QR code</Text>
-            <Image style={styles.qr} source={require("../assets/QR.png")} />
+            <Image style={styles.qr} source={this.QRBorder} />
             <Button
               title={"Tap to Scan Again"}
               color="black"
@@ -82,7 +115,7 @@ export default class BarcodeScannerExample extends React.Component<
           text: "Yes",
           onPress: () => {
             this.props.changeTestState();
-            alert(
+            Alert.alert(
               `Bar code with type ${type} and data ${data} has been scanned!`
             );
             NavigationService.navigate("Profile", {});
@@ -93,31 +126,3 @@ export default class BarcodeScannerExample extends React.Component<
     );
   };
 }
-
-const { width } = Dimensions.get("window");
-const qrSize = width * 0.7;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center"
-  },
-  qr: {
-    marginTop: "5%",
-    marginBottom: "5%",
-    width: qrSize,
-    height: qrSize
-  },
-  description: {
-    fontSize: width * 0.09,
-    marginTop: "30%",
-    textAlign: "center",
-    width: "70%",
-    color: "black"
-  },
-  cancel: {
-    fontSize: width * 0.05,
-    textAlign: "center",
-    width: "70%",
-    color: "white"
-  }
-});

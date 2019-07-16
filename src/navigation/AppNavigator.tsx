@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "react-navigation";
 import React from "react";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import ProfileTab from "./screens/ProfileTab";
 import SettingsTab from "./screens/SettingsTab";
 import ScannerTab from "./screens/ScannerTab";

@@ -1,4 +1,4 @@
-import React from "../../../node_modules/react";
+import React from "react";
 import ProfileScreen from "./ProfileScreen";
 
 export default class ProfileTab extends React.Component {
