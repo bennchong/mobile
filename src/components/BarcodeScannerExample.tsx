@@ -18,6 +18,7 @@ import QRHandler from "./QRHandler";
 interface MyProps {
   test: boolean;
   changeTestState: () => {};
+  storeCertificate: (cert) => {};
 }
 
 const { width } = Dimensions.get("window");
@@ -64,7 +65,7 @@ export default class BarcodeScannerExample extends React.Component<
 
   async componentDidMount() {
     this.getPermissionsAsync();
-    this.test = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/1113ec7f-ea30-459b-83b6-2e51339f8dd2;723906c739fb0aafdd215242808c6f5598b82860f3573933a18e795557c7e6da");
+    this.test = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/44b4c5e2-8458-49bf-8d2d-06fdb302832c;20841baa03c368e05b273712d0f69968224d744d87b0dd5d5035efffbc7fd10f");
   }
 
   getPermissionsAsync = async () => {
@@ -93,11 +94,14 @@ export default class BarcodeScannerExample extends React.Component<
             <Button
               title={"Tap to Scan Again"}
               color="black"
-              onPress={() => {this.setState({ scanned: false });console.log(this.test.get_encrypted_cert())}}
+              onPress={() => {
+                this.setState({ scanned: false });
+                console.log(this.test.get_encrypted_cert());
+                this.props.storeCertificate(this.test.get_encrypted_cert());
+              }}
             />
             <Text>
-              {" "}
-              {this.props.test.toString()} hello {typeof this.props.test}
+              {this.props.test.toString()} hello {typeof this.props.test} {this.props.certificate != null && this.props.certificate.toString()}
             </Text>
           </BarCodeScanner>
         </View>

@@ -6,8 +6,8 @@ import AppContext from "../../components/AppStore";
 const ScannerTab = () => (
   <View style={[StyleSheet.absoluteFillObject]}>
     <AppContext.Consumer>
-      {({ test, changeTestState }) => (
-        <BarcodeScannerExample test={test} changeTestState={changeTestState} />
+      {({ test, certificate, changeTestState, storeCertificate}) => (
+        <BarcodeScannerExample test={test} certificate={certificate} changeTestState={changeTestState} storeCertificate={storeCertificate}/>
       )}
     </AppContext.Consumer>
   </View>
