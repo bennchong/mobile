@@ -8,4 +8,6 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-.expo-shared/
+
+
+.DS_Store

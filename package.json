@@ -7,17 +7,20 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "lint": "eslint . --ext js,ts,tsx",
+    "lint": "./node_modules/.bin/eslint . --ext js,ts,tsx",
     "lint:fix": "npm run lint -- --fix"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@babel/types": "^7.5.0",
     "@expo/vector-icons": "^10.0.3",
+    "@types/node": "^12.6.3",
     "@types/react-native-vector-icons": "^6.4.1",
     "expo": "^33.0.0",
     "expo-barcode-scanner": "^5.0.1",
+    "expo-camera": "^5.0.1",
     "expo-permissions": "^5.0.1",
     "openpgp": "^4.5.5",
     "react": "16.8.3",
