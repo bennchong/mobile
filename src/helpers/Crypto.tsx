@@ -48,7 +48,7 @@ const encryptString = async document => {
     throw new Error("encryptString only accepts strings");
   }
   const passphrase = await generateEncryptionKey(256);
-  const message = openpgp.message.fromText(document);
+  const message = await openpgp.message.fromText(document);
   const options = {
     passwords: passphrase,
     message,
@@ -66,17 +66,17 @@ const encryptString = async document => {
 
 /**
  * decrypts an encrypted message given a passphrase
- * @param ciphertext 
- * @param passphrase 
+ * @param ciphertext
+ * @param passphrase
  */
 const decryptString = async (ciphertext, passphrase) => {
-  const message = await openpgp.message.readArmored(ciphertext)
+  const message = await openpgp.message.readArmored(ciphertext);
   const options = {
     passwords: passphrase,
     message,
-    compression: openpgp.enums.compression.zip                               // compress the data with zip
+    compression: openpgp.enums.compression.zip // compress the data with zip
   };
-  return await openpgp.decrypt(options);
+  return openpgp.decrypt(options);
 };
 
 const PGP_META_LENGTHS = {
