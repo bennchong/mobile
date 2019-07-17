@@ -1,4 +1,4 @@
-const openpgp = require('openpgp');
+const openpgp = require("openpgp");
 
 /**
  * Sets up recommended openpgp configuration options
@@ -64,6 +64,21 @@ const encryptString = async document => {
   };
 };
 
+/**
+ * decrypts an encrypted message given a passphrase
+ * @param ciphertext 
+ * @param passphrase 
+ */
+const decryptString = async (ciphertext, passphrase) => {
+  const message = await openpgp.message.readArmored(ciphertext)
+  const options = {
+    passwords: passphrase,
+    message,
+    compression: openpgp.enums.compression.zip                               // compress the data with zip
+  };
+  return await openpgp.decrypt(options);
+};
+
 const PGP_META_LENGTHS = {
   header: 31,
   footer: 29
@@ -72,5 +87,6 @@ const PGP_META_LENGTHS = {
 module.exports = {
   generateEncryptionKey,
   PGP_META_LENGTHS,
-  encryptString
+  encryptString,
+  decryptString
 };
