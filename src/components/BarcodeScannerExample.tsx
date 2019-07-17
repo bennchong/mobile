@@ -64,6 +64,7 @@ export default class BarcodeScannerExample extends React.Component<
 
   async componentDidMount() {
     this.getPermissionsAsync();
+    this.test = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/1113ec7f-ea30-459b-83b6-2e51339f8dd2;723906c739fb0aafdd215242808c6f5598b82860f3573933a18e795557c7e6da");
   }
 
   getPermissionsAsync = async () => {
@@ -92,7 +93,7 @@ export default class BarcodeScannerExample extends React.Component<
             <Button
               title={"Tap to Scan Again"}
               color="black"
-              onPress={() => this.setState({ scanned: false })}
+              onPress={() => {this.setState({ scanned: false });console.log(this.test.get_encrypted_cert())}}
             />
             <Text>
               {" "}
@@ -120,7 +121,6 @@ export default class BarcodeScannerExample extends React.Component<
             Alert.alert(
               `Bar code with type ${type} and data ${data} has been scanned!`
             );
-            // this.test = new QRHandler(data);
             NavigationService.navigate("Profile", {});
           }
         }

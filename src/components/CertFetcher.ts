@@ -1,14 +1,14 @@
-import { Alert } from "react-native";
-
 const CertFetcher = (url) => {
+  console.log(url);
 	return fetch(url)
-		.then((response) =>  response.json())
+		.then((response) =>  {
+      return response.json()
+    })
 		.then((responseJSON) => {
-			console.log(responseJSON);
 			return responseJSON.document
 		})
 		.catch((error) => {
-			Alert.alert("Error Fetching", error)
+			console.log("Error Fetching", error)
 		})
 }
 

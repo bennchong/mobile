@@ -1,30 +1,63 @@
 import CertFetcher from './CertFetcher';
 import openpgp from 'openpgp'
-import { placeholder } from '@babel/types';
+import { QR_VALIDITY, QR_ACTIONS } from '../constants/QRValidity';
 
 export default class QRHandler {
-    
+  
 	constructor(string){
-		var strArr = string.split(";");
-		this.state = {
-			action: strArr[0],
-			url: strArr[1],
-			uri: strArr[2],
-			decryptionKey: strArr[3]
-		}
 
-		console.log("HELLO");
-		console.log(strArr);
-		console.log(this.state.url);
-		this.retrieve_cert();
-		console.log(this.encryptedCert);
+		this.set_QRHandler_state(this.assert_validity(string), string);
+		
+		if (this.state.QRStatus) {
+			this.retrieve_cert();
+		}
+		
 		// this.decryptedCert = this.decrypt_file();
 	}
+
+	//Assertain of validity of QR Scanned 
+	assert_validity(QRString) {
+		var strArr = QRString.split(";");
+		return (strArr[0] === QR_ACTIONS.STORE || strArr[0] === QR_ACTIONS.VIEW);
+	}
+
+	//Sets variables of QR Handler
+	set_QRHandler_state(QRValidity, QRString) {
+		if(QRValidity) {
+			var strArr = QRString.split(";");
+			this.state = {
+				QRStatus: QRValidity,
+				action: strArr[0],
+				url: strArr[1],
+				uri: strArr[2],
+				decryptionKey: strArr[3]
+			};
+		} 
+
+		else {
+			this.state = {
+				QRStatus: QRValidity,
+				action: null,
+				url: null,
+				uri: null,
+				decryptionKey: null
+			};
+		}
+	}
+
+	//Returns Encrypted Certificate 
+	get_encrypted_cert() {
+		return this.encryptedCert;
+	}
 	
+	//Returns boolean 
+	get_QR_validity() {
+		return this.QRStatus;
+	}
+
 	//Calls cert fetcher and stores json into state
-	async retrieve_cert() {
-		this.encryptedCert = await CertFetcher(this.state.url + this.state.uri);
-		jfd = await placeholder();
+	retrieve_cert() {
+		this.encryptedCert = CertFetcher(this.state.url + this.state.uri);
 	}
 
 	// //Decrypts file using OpenPGP
