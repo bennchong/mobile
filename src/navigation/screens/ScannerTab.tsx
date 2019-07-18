@@ -71,8 +71,8 @@ export default class ScannerTab extends React.Component {
     return (
       <View style={styles.page}>
         <AppContext.Consumer>
-          {({ changeAppProfileState }) => (
-            <BarcodeScannerExample changeAppProfileState={changeAppProfileState} />
+          {({ changeAppProfileState, storeCertificate }) => (
+            <BarcodeScannerExample changeAppProfileState={changeAppProfileState} storeCertificate={storeCertificate} />
           )}
         </AppContext.Consumer>
         <View style={styles.titleBarContainer}>
