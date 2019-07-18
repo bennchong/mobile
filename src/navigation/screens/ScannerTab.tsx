@@ -123,6 +123,14 @@ export default class ScannerTab extends React.Component {
             }
           }}
         />
+        <Button
+          title={"Tap to Open Modal"}
+          color="black"
+          onPress={() => {
+              NavigationService.navigate("Modal", {certificate: SampleCert});
+            }
+          }
+        />
         <View style={{ flex: 14 }} />
       </View>
     );

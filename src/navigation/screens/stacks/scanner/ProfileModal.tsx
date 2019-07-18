@@ -43,10 +43,13 @@ class ProfileModal extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const certificate = navigation.getParam('certificate');
+
     return (
       <View style={styles.container}>
         <VerifyingBar status={this.state.cert_status} />
-        <ProfileSectionModal />
+        <ProfileSectionModal certificate={certificate}/>
       </View>
     );
   }

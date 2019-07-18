@@ -25,7 +25,7 @@ const getTabBarIcon = ({ navigation, tintColor }) => {
 
 const HomeStack = createStackNavigator({
   Home: ScannerTab,
-  Details: ProfileModal,
+  Modal: ProfileModal,
 },{
   headerMode: 'none'
 });

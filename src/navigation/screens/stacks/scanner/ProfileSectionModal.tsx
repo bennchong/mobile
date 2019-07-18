@@ -71,7 +71,7 @@ export default class ProfileSectionModal extends Component {
   };
   
   componentWillMount() {
-    this.data = this.context.certificate.document.data
+    this.data = this.props.certificate.document.data
     this.fin = this.data.recipient.fin
     this.fin = /:string:(.+)/.exec(this.fin)[1];
     
