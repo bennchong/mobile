@@ -47,6 +47,7 @@ export default class ScannerTab extends React.Component {
   };
 
   handler = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/e2d21afb-0f38-4cb6-8cef-1dd4f2c26ae1;d42ffe7b31b18d1633117531353bb0c5e7805e42c240e49241f01364d8bba2e5");
+  //Links Appstore with this component
   static contextType = AppContext;
 
   async componentDidMount() {
@@ -60,6 +61,9 @@ export default class ScannerTab extends React.Component {
       //Change to profile page immediately if cert exist
       console.log(res);
       this.context.changeTestState();
+      let cert = await this.CertStorer.getStoredCertificateFS();
+      cert = JSON.parse(cert);
+      this.context.storeCertificate(cert);
       NavigationService.navigate("Profile", {});
     }
   }
