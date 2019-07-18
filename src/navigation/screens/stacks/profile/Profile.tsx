@@ -29,8 +29,7 @@ class Profile extends React.Component {
       this.setState({
         cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
-
-      Alert.alert("Running re-verification placeholder function");
+      
       setTimeout(() => {
         this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);

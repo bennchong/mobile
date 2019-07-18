@@ -29,8 +29,6 @@ class ProfileModal extends React.Component {
       this.setState({
         cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
-
-      Alert.alert("Running re-verification placeholder function");
       setTimeout(() => {
         this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);
@@ -49,7 +47,7 @@ class ProfileModal extends React.Component {
     return (
       <View style={styles.container}>
         <VerifyingBar status={this.state.cert_status} />
-        <ProfileSectionModal certificate={certificate}/>
+        <ProfileSectionModal certificate={certificate} navigation={navigation}/>
       </View>
     );
   }

@@ -46,7 +46,7 @@ export default class VerifyingBar extends React.Component<MyProps, MyState> {
       return (
         <View style={[styles.validating]}>
           <ActivityIndicator size="large" color="white" />
-          <Text style={styles.text}> Verifying Certificate </Text>
+          <Text style={styles.text}> PlaceHolder Verifying Certificate </Text>
         </View>
       );
     }
