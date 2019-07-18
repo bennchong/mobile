@@ -7,10 +7,6 @@ export default class ProfileScreen extends React.Component<{}, {}> {
   // Read up on context, it links to AppStore Class apparently, and this.context would allow us to acess AppStore methods and variables
   static contextType = AppContext;
 
-  context = {
-    test: true
-  };
-
   render() {
     if (this.context.test) {
       return <Profile />;

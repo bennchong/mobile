@@ -32,9 +32,6 @@ export default class BarcodeScannerExample extends React.Component {
 
   async componentDidMount() {
     this.getPermissionsAsync();
-    this.test = new QRHandler(
-      "STORE;https://api-ropsten.opencerts.io/storage/get;/44b4c5e2-8458-49bf-8d2d-06fdb302832c;20841baa03c368e05b273712d0f69968224d744d87b0dd5d5035efffbc7fd10f"
-    );
   }
 
   getPermissionsAsync = async () => {
