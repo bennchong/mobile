@@ -8,6 +8,7 @@ import AppContext from "../../components/AppStore";
 import CertStore from "../../components/CertStore";
 import { CERT_STORAGE } from "../../constants/CertConstants";
 import NavigationService from "../NavigationService";
+
 const SampleCert = require("../../constants/SampleCert.json");
 
 const styles = StyleSheet.create({
@@ -45,7 +46,7 @@ export default class ScannerTab extends React.Component {
     hasCameraPermission: null
   };
 
-  //Links Appstore with this component
+  // Links Appstore with this component
   static contextType = AppContext;
 
   async componentDidMount() {
@@ -53,10 +54,10 @@ export default class ScannerTab extends React.Component {
     this.setState({ hasCameraPermission: status === "granted" });
     this.CertStorer = new CertStore();
 
-    //Checks if there is already a cert stored on the phone
-    let res = await this.CertStorer.checkStoredCertificateExistsFS();
+    // Checks if there is already a cert stored on the phone
+    const res = await this.CertStorer.checkStoredCertificateExistsFS();
     if (res.exists) {
-      //Change to profile page immediately if cert exist
+      // Change to profile page immediately if cert exist
       console.log(res);
       this.context.changeTestState();
       let cert = await this.CertStorer.getStoredCertificateFS();
@@ -81,10 +82,12 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Store Cert"}
           color="black"
           onPress={async () => {
-            //MOCK CERTIFICATE
-            let res = await this.CertStorer.storeCertificateFS(JSON.stringify(SampleCert));
-            if (  res === CERT_STORAGE.SUCCESS) {
-              console.log("Storing Works"); 
+            // MOCK CERTIFICATE
+            const res = await this.CertStorer.storeCertificateFS(
+              JSON.stringify(SampleCert)
+            );
+            if (res === CERT_STORAGE.SUCCESS) {
+              console.log("Storing Works");
             } else {
               console.log("Storing failed");
             }
@@ -94,10 +97,10 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Retrieve Cert"}
           color="black"
           onPress={async () => {
-            let res = await this.CertStorer.getStoredCertificateFS();
-            if (  res !== CERT_STORAGE.FAILURE ) {
+            const res = await this.CertStorer.getStoredCertificateFS();
+            if (res !== CERT_STORAGE.FAILURE) {
               console.log("Retrieving Works");
-              console.log(res); 
+              console.log(res);
             } else {
               console.log("Retrieving failed");
             }
@@ -107,10 +110,10 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Delete Cert"}
           color="black"
           onPress={async () => {
-            let res = await this.CertStorer.deleteStoredCertificateFS();
-            if (  res === CERT_STORAGE.SUCCESS ) {
+            const res = await this.CertStorer.deleteStoredCertificateFS();
+            if (res === CERT_STORAGE.SUCCESS) {
               console.log("Deleting Works");
-              console.log(res); 
+              console.log(res);
             } else {
               console.log("Deleting failed");
             }
@@ -120,9 +123,8 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Open Modal"}
           color="black"
           onPress={() => {
-              NavigationService.navigate("Modal", {certificate: SampleCert});
-            }
-          }
+            NavigationService.navigate("Modal", { certificate: SampleCert });
+          }}
         />
         <View style={{ flex: 14 }} />
       </View>

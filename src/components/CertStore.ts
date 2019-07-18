@@ -1,37 +1,36 @@
 import * as SecureStore from "expo-secure-store";
+import * as FileSystem from "expo-file-system";
 import { CERT_STORAGE } from "../constants/CertConstants";
-import * as FileSystem from 'expo-file-system';
 
-//Class to handle storing and retrieving of DECRYPTED certificate
+// Class to handle storing and retrieving of DECRYPTED certificate
 export default class CertStore {
   constructor() {
-    this.uri = FileSystem.documentDirectory + "CERTIFICATE"; 
+    this.uri = `${FileSystem.documentDirectory}CERTIFICATE`;
   }
 
   async checkStoredCertificateExistsFS() {
-    let res 
+    let res;
     try {
-      res = await FileSystem.getInfoAsync(this.uri)
+      res = await FileSystem.getInfoAsync(this.uri);
     } catch (e) {
       console.log(e);
     }
-    return  res
+    return res;
   }
 
   async getStoredCertificateFS() {
-    let cert 
+    let cert;
     try {
       cert = await FileSystem.readAsStringAsync(this.uri);
     } catch (e) {
       console.log(e);
     }
-    
-    //Checks if file exists, because it will return undefined if not
-    if (typeof cert === 'undefined'){
+
+    // Checks if file exists, because it will return undefined if not
+    if (typeof cert === "undefined") {
       return CERT_STORAGE.FAILURE;
-    } else {
-      return cert; 
     }
+    return cert;
   }
 
   async storeCertificateFS(certificate) {
@@ -57,15 +56,15 @@ export default class CertStore {
   }
 
   async getStoredCertificate() {
-    //A promise that resolves to the previously stored value, or null if there is no entry for the given key.
-    let cert 
+    // A promise that resolves to the previously stored value, or null if there is no entry for the given key.
+    let cert;
     try {
       cert = await SecureStore.getItemAsync(this.key);
     } catch (e) {
       console.log(e);
     }
-    
-    return cert; 
+
+    return cert;
   }
 
   async storeCertificate(certificate) {

@@ -6,7 +6,7 @@ enum CERT_VALIDITY_STATUS {
 
 enum CERT_STORAGE {
   SUCCESS = "success",
-  FAILURE = "failure",
+  FAILURE = "failure"
 }
 
-export { CERT_VALIDITY_STATUS, CERT_STORAGE }
+export { CERT_VALIDITY_STATUS, CERT_STORAGE };

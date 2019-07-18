@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Button
+} from "react-native";
 import LevelOneDetails from "../profile/LevelOneDetails";
 
 const styles = StyleSheet.create({
@@ -69,18 +77,17 @@ export default class ProfileSectionModal extends Component {
     displayLevel2: false,
     displayLevel3: false
   };
-  
+
   componentWillMount() {
-    this.data = this.props.certificate.document.data
-    this.fin = this.data.recipient.fin
+    this.data = this.props.certificate.document.data;
+    this.fin = this.data.recipient.fin;
     this.fin = /:string:(.+)/.exec(this.fin)[1];
-    
+
     this.name = this.data.recipient.name;
     this.name = /:string:(.+)/.exec(this.name)[1];
 
-    this.profilepicture = this.data.recipient.photo
+    this.profilepicture = this.data.recipient.photo;
     this.profilepicture = /:string:(.+)/.exec(this.profilepicture)[1];
-
   }
 
   toggleOption1() {
@@ -97,7 +104,7 @@ export default class ProfileSectionModal extends Component {
 
   render() {
     return (
-      <ScrollView  style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.header}></View>
         <Image
           style={styles.avatar}
@@ -113,7 +120,11 @@ export default class ProfileSectionModal extends Component {
             <Text style={styles.info}>{this.fin}</Text>
             <Text style={styles.name}>{this.name}</Text>
 
-            <LevelOneDetails data={this.data} toggle={() => this.toggleOption1()} state={this.state.displayLevel1}/>
+            <LevelOneDetails
+              data={this.data}
+              toggle={() => this.toggleOption1()}
+              state={this.state.displayLevel1}
+            />
 
             <TouchableOpacity
               style={styles.buttonContainer}
@@ -132,7 +143,7 @@ export default class ProfileSectionModal extends Component {
             {this.state.displayLevel3 && <Text> Top Secret </Text>}
           </View>
         </View>
-      </ScrollView >
+      </ScrollView>
     );
   }
 }

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
+import React from "react";
 import VerifyingBar from "../stackcomponents/VerifyingBar";
 
-import React from "react";
 import { CERT_VALIDITY_STATUS } from "../../../../constants/CertConstants";
 import ProfileSectionModal from "./ProfileSectionModal";
 
@@ -42,12 +42,15 @@ class ProfileModal extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const certificate = navigation.getParam('certificate');
+    const certificate = navigation.getParam("certificate");
 
     return (
       <View style={styles.container}>
         <VerifyingBar status={this.state.cert_status} />
-        <ProfileSectionModal certificate={certificate} navigation={navigation}/>
+        <ProfileSectionModal
+          certificate={certificate}
+          navigation={navigation}
+        />
       </View>
     );
   }

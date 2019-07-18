@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
 import AppContext from "../../../../components/AppStore";
 import LevelOneDetails from "./LevelOneDetails";
 
@@ -70,21 +77,20 @@ export default class Profile extends Component {
     displayLevel2: false,
     displayLevel3: false
   };
-  
+
   componentWillMount() {
-    this.data = this.context.certificate.document.data
-    this.fin = this.data.recipient.fin
+    this.data = this.context.certificate.document.data;
+    this.fin = this.data.recipient.fin;
     this.fin = /:string:(.+)/.exec(this.fin)[1];
-    
+
     this.name = this.data.recipient.name;
     this.name = /:string:(.+)/.exec(this.name)[1];
 
-    this.profilepicture = this.data.recipient.photo
+    this.profilepicture = this.data.recipient.photo;
     this.profilepicture = /:string:(.+)/.exec(this.profilepicture)[1];
-
   }
 
-  //Links this Component with Appstore
+  // Links this Component with Appstore
   static contextType = AppContext;
 
   toggleOption1() {
@@ -101,7 +107,7 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <ScrollView  style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.header}></View>
         <Image
           style={styles.avatar}
@@ -112,7 +118,11 @@ export default class Profile extends Component {
             <Text style={styles.info}>{this.fin}</Text>
             <Text style={styles.name}>{this.name}</Text>
 
-            <LevelOneDetails data={this.data} toggle={() => this.toggleOption1()} state={this.state.displayLevel1}/>
+            <LevelOneDetails
+              data={this.data}
+              toggle={() => this.toggleOption1()}
+              state={this.state.displayLevel1}
+            />
 
             <TouchableOpacity
               style={styles.buttonContainer}
@@ -131,7 +141,7 @@ export default class Profile extends Component {
             {this.state.displayLevel3 && <Text> Top Secret </Text>}
           </View>
         </View>
-      </ScrollView >
+      </ScrollView>
     );
   }
 }

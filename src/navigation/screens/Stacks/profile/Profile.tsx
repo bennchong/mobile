@@ -29,7 +29,7 @@ class Profile extends React.Component {
       this.setState({
         cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
-      
+
       setTimeout(() => {
         this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);

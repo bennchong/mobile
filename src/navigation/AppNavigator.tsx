@@ -1,4 +1,7 @@
-import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
+import {
+  createBottomTabNavigator,
+  createStackNavigator
+} from "react-navigation";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import ProfileTab from "./screens/ProfileTab";
@@ -23,12 +26,15 @@ const getTabBarIcon = ({ navigation, tintColor }) => {
   return <Ionicons name={iconName} size={25} color={tintColor} />;
 };
 
-const HomeStack = createStackNavigator({
-  Home: ScannerTab,
-  Modal: ProfileModal,
-},{
-  headerMode: 'none'
-});
+const HomeStack = createStackNavigator(
+  {
+    Home: ScannerTab,
+    Modal: ProfileModal
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 const AppNavigator = createBottomTabNavigator(
   {
