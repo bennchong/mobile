@@ -22,7 +22,7 @@ const SampleCert = require("../constants/SampleCert.json");
 
 interface MyProps {
   test: boolean;
-  changeTestState: () => {};
+  changeAppProfileState: () => {};
   storeCertificate: (cert) => {};
 }
 
@@ -121,7 +121,7 @@ export default class BarcodeScannerExample extends React.Component {
             this.handler = new QRHandler(
               "STORE;https://api-ropsten.opencerts.io/storage/get;/e2d21afb-0f38-4cb6-8cef-1dd4f2c26ae1;d42ffe7b31b18d1633117531353bb0c5e7805e42c240e49241f01364d8bba2e5"
             );
-            this.props.changeTestState();
+            this.props.changeAppProfileState();
             alert(
               `Bar code with type ${type} and data ${data} has been scanned!`
             );

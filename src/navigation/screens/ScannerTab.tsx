@@ -59,7 +59,7 @@ export default class ScannerTab extends React.Component {
     if (res.exists) {
       // Change to profile page immediately if cert exist
       console.log(res);
-      this.context.changeTestState();
+      this.context.changeAppProfileState();
       let cert = await this.CertStorer.getStoredCertificateFS();
       cert = JSON.parse(cert);
       this.context.storeCertificate(cert);
@@ -71,8 +71,8 @@ export default class ScannerTab extends React.Component {
     return (
       <View style={styles.page}>
         <AppContext.Consumer>
-          {({ changeTestState }) => (
-            <BarcodeScannerExample changeTestState={changeTestState} />
+          {({ changeAppProfileState }) => (
+            <BarcodeScannerExample changeAppProfileState={changeAppProfileState} />
           )}
         </AppContext.Consumer>
         <View style={styles.titleBarContainer}>

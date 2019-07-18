@@ -9,7 +9,7 @@ export class AppStore extends React.Component {
   };
 
   // Toggles Test state (state to show that a QR Code has been scanned)
-  changeTestState = () => {
+  changeAppProfileState = () => {
     this.setState(state => {
       return { test: !this.state.test };
     });
@@ -25,7 +25,7 @@ export class AppStore extends React.Component {
       <AppContext.Provider
         value={{
           ...this.state,
-          changeTestState: this.changeTestState,
+          changeAppProfileState: this.changeAppProfileState,
           storeCertificate: this.storeCertificate
         }}
       >
