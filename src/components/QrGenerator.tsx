@@ -1,33 +1,45 @@
-import * as React from "react";
-import {
-  Alert,
-  View,
-  StyleSheet,
-  Button,
-  Text,
-  Dimensions,
-  Image
-} from "react-native";
-import * as Permissions from "expo-permissions";
-import { Camera } from "expo-camera";
-import { Constants } from "expo-barcode-scanner";
-import { NavigationEvents } from "react-navigation";
-import NavigationService from "../navigation/NavigationService";
-const crypto = require("..//helpers/Crypto")
+import React, { Component } from 'react';
+import QRCode from 'react-native-qrcode-svg';
 
-export default class QrCodeGenerator extends React.Component{
+import { StyleSheet, View, TextInput } from 'react-native';
 
-    async componentDidMount(){
-        // encryptString("aaaaa").then( data => {
-        //     return decryptString(data.encryptedString)
-        // }).then( res => {
-        //     this.setState({result: res});
-        // });
-    }
-    render(){
+// https://github.com/dumbest/react-native-qrcode-svg-expo
 
-        return(
-            <Text> {crypto.PGP_META_LENGTHS} </Text>
-        );
-    }
+export default class QrCodeGenerator extends Component {
+  state = {
+    text: 'http://facebook.github.io/react-native/',
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <QRCode
+          value={this.state.text}
+          size={300 }/>
+      </View>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'red',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        margin: 10,
+        borderRadius: 5,
+        padding: 5,
+    },
+
+    qrCode :{
+        backgroundColor:"red",
+        borderColor:"black",
+        borderWidth:20,
+    }
+});
