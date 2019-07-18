@@ -8,6 +8,8 @@ import AppContext from "../../components/AppStore";
 import QRHandler from "../../components/QRHandler";
 import CertStore from "../../components/CertStore";
 import { CERT_STORAGE } from "../../constants/CertConstants";
+import NavigationService from "../NavigationService";
+const SampleCert = require("../../constants/SampleCert.json");
 
 const styles = StyleSheet.create({
   page: {
@@ -45,11 +47,21 @@ export default class ScannerTab extends React.Component {
   };
 
   handler = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/e2d21afb-0f38-4cb6-8cef-1dd4f2c26ae1;d42ffe7b31b18d1633117531353bb0c5e7805e42c240e49241f01364d8bba2e5");
+  static contextType = AppContext;
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" });
     this.CertStorer = new CertStore();
+
+    //Checks if there is already a cert stored on the phone
+    let res = await this.CertStorer.checkStoredCertificateExistsFS();
+    if (res.exists) {
+      //Change to profile page immediately if cert exist
+      console.log(res);
+      this.context.changeTestState();
+      NavigationService.navigate("Profile", {});
+    }
   }
 
   render() {
@@ -72,7 +84,8 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Store Cert"}
           color="black"
           onPress={async () => {
-            let res = await this.CertStorer.storeCertificateFS(this.handler.GetEncryptedCert());
+            //MOCK CERTIFICATE
+            let res = await this.CertStorer.storeCertificateFS(JSON.stringify(SampleCert));
             if (  res === CERT_STORAGE.SUCCESS) {
               console.log("Storing Works"); 
             } else {
@@ -85,7 +98,7 @@ export default class ScannerTab extends React.Component {
           color="black"
           onPress={async () => {
             let res = await this.CertStorer.getStoredCertificateFS();
-            if (  res !== null ) {
+            if (  res !== CERT_STORAGE.FAILURE ) {
               console.log("Retrieving Works");
               console.log(res); 
             } else {

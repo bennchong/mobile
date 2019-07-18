@@ -8,6 +8,16 @@ export default class CertStore {
     this.uri = FileSystem.documentDirectory + "CERTIFICATE"; 
   }
 
+  async checkStoredCertificateExistsFS() {
+    let res 
+    try {
+      res = await FileSystem.getInfoAsync(this.uri)
+    } catch (e) {
+      console.log(e);
+    }
+    return  res
+  }
+
   async getStoredCertificateFS() {
     let cert 
     try {
@@ -18,7 +28,7 @@ export default class CertStore {
     
     //Checks if file exists, because it will return undefined if not
     if (typeof cert === 'undefined'){
-      return null
+      return CERT_STORAGE.FAILURE;
     } else {
       return cert; 
     }
