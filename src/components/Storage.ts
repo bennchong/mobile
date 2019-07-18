@@ -3,7 +3,7 @@ import * as FileSystem from "expo-file-system";
 import { CERT_STORAGE } from "../constants/CertConstants";
 
 // Class to handle storing and retrieving of DECRYPTED certificate
-export default class CertStore {
+export default class Storage {
   constructor() {
     this.uri = `${FileSystem.documentDirectory}CERTIFICATE`;
   }

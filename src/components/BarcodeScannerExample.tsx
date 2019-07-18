@@ -16,7 +16,6 @@ import NavigationService from "../navigation/NavigationService";
 
 import QRHandler from "./QRHandler";
 import { QR_ACTIONS } from "../constants/QRValidity";
-import CertStore from "./CertStore";
 
 const SampleCert = require("../constants/SampleCert.json");
 

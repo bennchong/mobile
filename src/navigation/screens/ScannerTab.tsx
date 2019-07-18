@@ -5,7 +5,7 @@ import * as Permissions from "expo-permissions";
 import BarcodeScannerExample from "../../components/BarcodeScannerExample";
 import TitleBar from "../../components/TitleBar";
 import AppContext from "../../components/AppStore";
-import CertStore from "../../components/CertStore";
+import Storage from "../../components/Storage";
 import { CERT_STORAGE } from "../../constants/CertConstants";
 import NavigationService from "../NavigationService";
 
@@ -52,15 +52,15 @@ export default class ScannerTab extends React.Component {
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" });
-    this.CertStorer = new CertStore();
+    this.Storage = new Storage();
 
     // Checks if there is already a cert stored on the phone
-    const res = await this.CertStorer.checkStoredCertificateExistsFS();
+    const res = await this.Storage.checkStoredCertificateExistsFS();
     if (res.exists) {
       // Change to profile page immediately if cert exist
       console.log(res);
       this.context.changeAppProfileState();
-      let cert = await this.CertStorer.getStoredCertificateFS();
+      let cert = await this.Storage.getStoredCertificateFS();
       cert = JSON.parse(cert);
       this.context.storeCertificate(cert);
       NavigationService.navigate("Profile", {});
@@ -83,7 +83,7 @@ export default class ScannerTab extends React.Component {
           color="black"
           onPress={async () => {
             // MOCK CERTIFICATE
-            const res = await this.CertStorer.storeCertificateFS(
+            const res = await this.Storage.storeCertificateFS(
               JSON.stringify(SampleCert)
             );
             if (res === CERT_STORAGE.SUCCESS) {
@@ -97,7 +97,7 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Retrieve Cert"}
           color="black"
           onPress={async () => {
-            const res = await this.CertStorer.getStoredCertificateFS();
+            const res = await this.Storage.getStoredCertificateFS();
             if (res !== CERT_STORAGE.FAILURE) {
               console.log("Retrieving Works");
               console.log(res);
@@ -110,7 +110,7 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Delete Cert"}
           color="black"
           onPress={async () => {
-            const res = await this.CertStorer.deleteStoredCertificateFS();
+            const res = await this.Storage.deleteStoredCertificateFS();
             if (res === CERT_STORAGE.SUCCESS) {
               console.log("Deleting Works");
               console.log(res);
