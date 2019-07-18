@@ -5,7 +5,6 @@ import * as Permissions from "expo-permissions";
 import BarcodeScannerExample from "../../components/BarcodeScannerExample";
 import TitleBar from "../../components/TitleBar";
 import AppContext from "../../components/AppStore";
-import QRHandler from "../../components/QRHandler";
 import CertStore from "../../components/CertStore";
 import { CERT_STORAGE } from "../../constants/CertConstants";
 import NavigationService from "../NavigationService";
@@ -46,7 +45,6 @@ export default class ScannerTab extends React.Component {
     hasCameraPermission: null
   };
 
-  handler = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/e2d21afb-0f38-4cb6-8cef-1dd4f2c26ae1;d42ffe7b31b18d1633117531353bb0c5e7805e42c240e49241f01364d8bba2e5");
   //Links Appstore with this component
   static contextType = AppContext;
 
@@ -79,11 +77,6 @@ export default class ScannerTab extends React.Component {
         <View style={styles.titleBarContainer}>
           <TitleBar style={styles.titleBar}>SCAN QR</TitleBar>
         </View>
-        <Button
-          title={"Tap to Get Cert"}
-          color="black"
-          onPress={() => console.log(this.handler.GetEncryptedCert())}
-        />
         <Button
           title={"Tap to Store Cert"}
           color="black"

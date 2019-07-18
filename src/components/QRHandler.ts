@@ -2,23 +2,29 @@ import openpgp from "openpgp";
 import CertFetcher from "./CertFetcher";
 import { QR_VALIDITY, QR_ACTIONS } from "../constants/QRValidity";
 import { decryptString } from "../helpers/Crypto";
-
+const SampleCert = require("../constants/SampleCert.json");
 
 export default class QRHandler {
+
   constructor(string) {
-    this.SetQRHandlerState(this.CheckQRValidity(string), string);
+    this.SetQRHandlerState(QRHandler.CheckQRType(string), string);
 
     if (this.state.QRStatus) {
       this.FetchCert();
     }
 
+    //Then Decrypts Cert
     // this.decryptedCert = this.decrypt_file();
+
+    //After decrypting, returns decrypted cert by calling it outside here
   }
 
-  // Assertain of validity of QR Scanned
-  CheckQRValidity(QRString) {
+  //Returns type of QR, null if invalid
+  static CheckQRType(QRString) {
     const strArr = QRString.split(";");
-    return strArr[0] === QR_ACTIONS.STORE || strArr[0] === QR_ACTIONS.VIEW;
+    if (strArr[0] === QR_ACTIONS.STORE) return QR_ACTIONS.STORE
+    else if (strArr[0] === QR_ACTIONS.VIEW) return QR_ACTIONS.VIEW
+    else return null
   }
 
   // Sets variables of QR Handler
@@ -43,9 +49,9 @@ export default class QRHandler {
     }
   }
 
-  // Returns Encrypted Certificate
-  GetEncryptedCert() {
-    return this.encryptedCert;
+  // Returns Decrypted Certificate PLACEHOLDER
+  ReturnsDecryptedCert() {
+    return SampleCert;
   }
 
   // Returns boolean

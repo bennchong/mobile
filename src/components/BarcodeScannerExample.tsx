@@ -15,6 +15,9 @@ import { NavigationEvents } from "react-navigation";
 import NavigationService from "../navigation/NavigationService";
 
 import QRHandler from "./QRHandler";
+import { QR_ACTIONS } from "../constants/QRValidity";
+import CertStore from "./CertStore";
+const SampleCert = require("../constants/SampleCert.json");
 
 interface MyProps {
   test: boolean;
@@ -29,6 +32,8 @@ export default class BarcodeScannerExample extends React.Component {
     type: Camera.Constants.Type.back,
     isFocused: true
   };
+
+  
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -83,9 +88,26 @@ export default class BarcodeScannerExample extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
+    if (QRHandler.CheckQRType(data) === QR_ACTIONS.STORE){
+      this.download_qr(type,data);
+    } else if (QRHandler.CheckQRType(data) === QR_ACTIONS.VIEW){
+      this.setState({ scanned: false });
+      NavigationService.navigate("Modal", {certificate: SampleCert});
+    } else {
+      
+      Alert.alert("Invalid QR", "Please Try Again", [{
+        text: "Yes",
+        onPress: () => {
+          this.setState({ scanned: false });
+        }
+      }]);
+    }
+  };
+
+  download_qr(type, data) {
     Alert.alert(
       "QR Code Detected",
-      "Do you want to accept this QR Code?",
+      "Do you want download profile?",
       [
         {
           text: "No",
@@ -96,10 +118,12 @@ export default class BarcodeScannerExample extends React.Component {
         {
           text: "Yes",
           onPress: () => {
+            this.handler = new QRHandler("STORE;https://api-ropsten.opencerts.io/storage/get;/e2d21afb-0f38-4cb6-8cef-1dd4f2c26ae1;d42ffe7b31b18d1633117531353bb0c5e7805e42c240e49241f01364d8bba2e5");
             this.props.changeTestState();
             alert(
               `Bar code with type ${type} and data ${data} has been scanned!`
             );
+            this.props.storeCertificate(this.handler.ReturnsDecryptedCert());
             NavigationService.navigate("Profile", {});
             this.setState({ scanned: false });
           }
@@ -107,7 +131,7 @@ export default class BarcodeScannerExample extends React.Component {
       ],
       { cancelable: false }
     );
-  };
+  }
 }
 
 const { width } = Dimensions.get("window");
