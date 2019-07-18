@@ -72,7 +72,7 @@ export default class ScannerTab extends React.Component {
           title={"Tap to Store Cert"}
           color="black"
           onPress={async () => {
-            let res = await this.CertStorer.storeCertificateFS("Placeholder Cert 3");
+            let res = await this.CertStorer.storeCertificateFS(this.handler.GetEncryptedCert());
             if (  res === CERT_STORAGE.SUCCESS) {
               console.log("Storing Works"); 
             } else {
@@ -90,6 +90,19 @@ export default class ScannerTab extends React.Component {
               console.log(res); 
             } else {
               console.log("Retrieving failed");
+            }
+          }}
+        />
+        <Button
+          title={"Tap to Delete Cert"}
+          color="black"
+          onPress={async () => {
+            let res = await this.CertStorer.deleteStoredCertificateFS();
+            if (  res === CERT_STORAGE.SUCCESS ) {
+              console.log("Deleting Works");
+              console.log(res); 
+            } else {
+              console.log("Deleting failed");
             }
           }}
         />

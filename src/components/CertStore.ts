@@ -16,7 +16,12 @@ export default class CertStore {
       console.log(e);
     }
     
-    return cert; 
+    //Checks if file exists, because it will return undefined if not
+    if (typeof cert === 'undefined'){
+      return null
+    } else {
+      return cert; 
+    }
   }
 
   async storeCertificateFS(certificate) {
@@ -25,6 +30,17 @@ export default class CertStore {
       return CERT_STORAGE.SUCCESS;
     } catch (e) {
       console.log("Error Storing Cert");
+      console.log(e);
+      return CERT_STORAGE.FAILURE;
+    }
+  }
+
+  async deleteStoredCertificateFS() {
+    try {
+      await FileSystem.deleteAsync(this.uri);
+      return CERT_STORAGE.SUCCESS;
+    } catch (e) {
+      console.log("Error Deleting Cert");
       console.log(e);
       return CERT_STORAGE.FAILURE;
     }
