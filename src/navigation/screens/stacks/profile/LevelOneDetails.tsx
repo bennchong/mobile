@@ -20,15 +20,21 @@ const styles = StyleSheet.create({
 
 export default class LevelOneDetails extends React.Component {
   componentWillMount() {
-    this.country = this.props.data.recipient.country;
-    this.country = /:string:(.+)/.exec(this.country)[1];
+    const {
+      country,
+      dob,
+      address: { streetAddress: address }
+    } = this.props.data.recipient;
 
-    this.dob = this.props.data.recipient.dob;
-    this.dob = /:string:(.+)/.exec(this.dob)[1];
-    this.dob = /(.+)T/.exec(this.dob)[0];
+    this.country = country;
+    [, this.country] = /:string:(.+)/.exec(this.country);
 
-    this.address = this.props.data.recipient.address.streetAddress;
-    this.address = /:string:(.+)/.exec(this.address)[1];
+    this.dob = dob;
+    [, this.dob] = /:string:(.+)/.exec(this.dob);
+    [this.dob] = /(.+)T/.exec(this.dob);
+
+    this.address = address;
+    [, this.address] = /:string:(.+)/.exec(this.address);
   }
 
   render() {

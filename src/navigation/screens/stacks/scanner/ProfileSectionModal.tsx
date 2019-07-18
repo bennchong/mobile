@@ -79,15 +79,18 @@ export default class ProfileSectionModal extends Component {
   };
 
   componentWillMount() {
-    this.data = this.props.certificate.document.data;
-    this.fin = this.data.recipient.fin;
-    this.fin = /:string:(.+)/.exec(this.fin)[1];
+    // Object Destructuring
+    const { fin, name, photo: profilepicture } = this.data.recipient;
 
-    this.name = this.data.recipient.name;
-    this.name = /:string:(.+)/.exec(this.name)[1];
+    this.fin = fin;
+    this.name = name;
+    this.profilepicture = profilepicture;
 
-    this.profilepicture = this.data.recipient.photo;
-    this.profilepicture = /:string:(.+)/.exec(this.profilepicture)[1];
+    [, this.fin] = /:string:(.+)/.exec(this.fin);
+
+    [, this.name] = /:string:(.+)/.exec(this.name);
+
+    [, this.profilepicture] = /:string:(.+)/.exec(this.profilepicture);
   }
 
   toggleOption1() {

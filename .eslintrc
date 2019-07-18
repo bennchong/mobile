@@ -27,7 +27,7 @@
           "error",
           { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }
         ],
-        "class-methods-use-this": ["error", { "exceptMethods": ["render", "CheckQRValidity"] }]
+        "class-methods-use-this": ["error", { "exceptMethods": ["render", "CheckQRValidity", "ReturnsDecryptedCert"] }]
       }
     }
   ]
