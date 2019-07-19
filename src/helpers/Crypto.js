@@ -56,7 +56,6 @@ const encryptString = async document => {
     compression: openpgp.enums.compression.zlib
   };
   const encryptedMessage = await openpgp.encrypt(options);
-  console.log(encryptedMessage);
   return {
     encryptedString: encryptedMessage.data,
     key: passphrase,
