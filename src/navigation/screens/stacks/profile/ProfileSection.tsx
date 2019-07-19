@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  StyleSheet,
+  Button,
   Text,
   View,
   Image,
@@ -9,74 +9,24 @@ import {
 } from "react-native";
 import AppContext from "../../../../components/AppStore";
 import LevelOneDetails from "./LevelOneDetails";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    backgroundColor: "#00BFFF",
-    height: 200
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130
-  },
-  name1: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: "600"
-  },
-  body: {
-    marginTop: 40
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: "center",
-    padding: 30
-  },
-  name: {
-    fontSize: 28,
-    color: "#696969",
-    fontWeight: "600"
-  },
-  info: {
-    fontSize: 16,
-    color: "#00BFFF",
-    marginTop: 10
-  },
-  description: {
-    fontSize: 16,
-    color: "#696969",
-    marginTop: 10,
-    textAlign: "center"
-  },
-  buttonContainer: {
-    marginTop: 10,
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
-    backgroundColor: "#00BFFF"
-  }
-});
+import styles from "../../styles";
+import QrCodeGenerator from "../../../../components/QrGenerator";
 
 export default class Profile extends Component {
   state = {
     displayLevel1: false,
     displayLevel2: false,
-    displayLevel3: false
+    displayLevel3: false,
+    isDialogVisible: false
   };
+
+  showQrDialog = () => {
+    this.setState({ isDialogVisible: true });
+  };
+
+  handleCancel = () => {
+    this.setState({ isDialogVisible: false });
+  }
 
   componentWillMount() {
     this.data = this.context.certificate.document.data;
@@ -144,6 +94,12 @@ export default class Profile extends Component {
               <Text>Level 3 Information</Text>
             </TouchableOpacity>
             {this.state.displayLevel3 && <Text> Top Secret </Text>}
+            <View style={styles.page}>
+              <View style={[styles.contentScreen]}>
+                <Button title="show qr" onPress={this.showQrDialog} />
+                <QrCodeGenerator isVisible={this.state.isDialogVisible} handleCancel={this.handleCancel} />
+              </View>
+            </View>
           </View>
         </View>
       </ScrollView>
