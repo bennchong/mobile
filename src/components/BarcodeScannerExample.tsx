@@ -65,7 +65,7 @@ export default class BarcodeScannerExample extends React.Component {
             barCodeTypes: [Constants.BarCodeType.qr]
           }}
           onBarCodeScanned={
-            scanned ? () => console.log(scanned) : this.handleBarCodeScanned
+            scanned ? () => undefined : this.handleBarCodeScanned
           }
         >
           <NavigationEvents
@@ -79,8 +79,6 @@ export default class BarcodeScannerExample extends React.Component {
         </Camera>
       );
     }
-
-    console.log("camera is null");
     return null;
   }
 
