@@ -1,6 +1,4 @@
 import React from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
-
 import Profile from "./stacks/profile/Profile";
 import NoProfile from "./stacks/profile/NoProfile";
 import AppContext from "../../components/AppStore";
@@ -10,11 +8,9 @@ export default class ProfileScreen extends React.Component<{}, {}> {
   static contextType = AppContext;
 
   render() {
-    return <Text> asd</Text>;
-    // if (this.context.test) {
-    //   return <Profile />;
-    // }
-
-    // return <NoProfile />;
+    if (this.context.test) {
+      return <Profile />;
+    }
+    return <NoProfile />;
   }
 }

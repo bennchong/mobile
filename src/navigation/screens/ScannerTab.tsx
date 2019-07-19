@@ -83,54 +83,6 @@ export default class ScannerTab extends React.Component {
         <View style={styles.titleBarContainer}>
           <TitleBar style={styles.titleBar}>SCAN QR</TitleBar>
         </View>
-        <Button
-          title={"Tap to Store Cert"}
-          color="black"
-          onPress={async () => {
-            // MOCK CERTIFICATE
-            const res = await this.Storage.storeCertificateFS(
-              JSON.stringify(SampleCert)
-            );
-            if (res === CERT_STORAGE.SUCCESS) {
-              console.log("Storing Works");
-            } else {
-              console.log("Storing failed");
-            }
-          }}
-        />
-        <Button
-          title={"Tap to Retrieve Cert"}
-          color="black"
-          onPress={async () => {
-            const res = await this.Storage.getStoredCertificateFS();
-            if (res !== CERT_STORAGE.FAILURE) {
-              console.log("Retrieving Works");
-              console.log(res);
-            } else {
-              console.log("Retrieving failed");
-            }
-          }}
-        />
-        <Button
-          title={"Tap to Delete Cert"}
-          color="black"
-          onPress={async () => {
-            const res = await this.Storage.deleteStoredCertificateFS();
-            if (res === CERT_STORAGE.SUCCESS) {
-              console.log("Deleting Works");
-              console.log(res);
-            } else {
-              console.log("Deleting failed");
-            }
-          }}
-        />
-        <Button
-          title={"Tap to Open Modal"}
-          color="black"
-          onPress={() => {
-            NavigationService.navigate("Modal", { certificate: SampleCert });
-          }}
-        />
         <View style={{ flex: 14 }} />
       </View>
     );
