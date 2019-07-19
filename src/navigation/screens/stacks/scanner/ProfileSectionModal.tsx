@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    backgroundColor: "#00BFFF",
+    backgroundColor: "#570be3",
     height: 200
   },
   avatar: {
@@ -119,10 +119,10 @@ export default class ProfileSectionModal extends Component {
         />
         <View style={styles.body}>
           <View style={styles.bodyContent}>
-            <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+            <Text style={{ fontSize: 30 }}>Previewing Profile</Text>
             <Button
               onPress={() => this.props.navigation.goBack()}
-              title="Dismiss"
+              title="Go Back to QR Scanner"
             />
             <Text style={styles.info}>{this.fin}</Text>
             <Text style={styles.name}>{this.name}</Text>
