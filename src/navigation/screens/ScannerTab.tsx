@@ -49,22 +49,24 @@ export default class ScannerTab extends React.Component {
   // Links Appstore with this component
   static contextType = AppContext;
 
-  async componentDidMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === "granted" });
+  async componentWillMount() {
     this.Storage = new Storage();
 
     // Checks if there is already a cert stored on the phone
     const res = await this.Storage.checkStoredCertificateExistsFS();
     if (res.exists) {
       // Change to profile page immediately if cert exist
-      console.log(res);
       this.context.changeAppProfileState();
       let cert = await this.Storage.getStoredCertificateFS();
       cert = JSON.parse(cert);
       this.context.storeCertificate(cert);
       NavigationService.navigate("Profile", {});
     }
+  }
+
+  async componentDidMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === "granted" });
   }
 
   render() {

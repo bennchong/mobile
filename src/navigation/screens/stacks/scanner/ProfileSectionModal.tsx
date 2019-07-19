@@ -80,7 +80,7 @@ export default class ProfileSectionModal extends Component {
 
   componentWillMount() {
     // Object Destructuring
-    const { fin, name, photo: profilepicture } = this.data.recipient;
+    const { fin, name, photo: profilepicture } = this.props.certificate.document.data.recipient;
 
     this.fin = fin;
     this.name = name;
@@ -124,7 +124,7 @@ export default class ProfileSectionModal extends Component {
             <Text style={styles.name}>{this.name}</Text>
 
             <LevelOneDetails
-              data={this.data}
+              data={this.props.certificate.document.data}
               toggle={() => this.toggleOption1()}
               state={this.state.displayLevel1}
             />
