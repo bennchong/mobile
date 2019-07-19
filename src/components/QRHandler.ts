@@ -36,6 +36,15 @@ export default class QRHandler {
     return null;
   }
 
+  // Returns null if other parameters of QR code is invalid
+  static CheckQRValidity(QRString) {
+    const strArr = QRString.split(";");
+    const regex1 = new RegExp("https://api-ropsten.opencerts.io/storage/get");
+    const regex2 = new RegExp("[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}");
+    const regex3 = new RegExp("[a-z0-9]{64}");
+    return (regex1.test(strArr[1]) && regex2.test(strArr[2]) && regex3.test(strArr[3]));
+  }
+
   // Sets variables of QR Handler
   SetQRHandlerState(QRValidity, QRString) {
     if (QRValidity) {
