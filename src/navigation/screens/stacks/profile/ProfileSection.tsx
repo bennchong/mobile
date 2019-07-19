@@ -26,7 +26,7 @@ export default class Profile extends Component {
 
   handleCancel = () => {
     this.setState({ isDialogVisible: false });
-  }
+  };
 
   componentWillMount() {
     this.data = this.context.certificate.document.data;
@@ -97,7 +97,10 @@ export default class Profile extends Component {
             <View style={styles.page}>
               <View style={[styles.contentScreen]}>
                 <Button title="show qr" onPress={this.showQrDialog} />
-                <QrCodeGenerator isVisible={this.state.isDialogVisible} handleCancel={this.handleCancel} />
+                <QrCodeGenerator
+                  isVisible={this.state.isDialogVisible}
+                  handleCancel={this.handleCancel}
+                />
               </View>
             </View>
           </View>
