@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Constants } from "expo";
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   page: {
     flex: 1,
     flexDirection: "column",
@@ -32,5 +32,3 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   }
 });
-
-export { styles };
