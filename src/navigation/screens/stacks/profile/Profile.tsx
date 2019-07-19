@@ -4,7 +4,7 @@ import VerifyingBar from "../stackcomponents/VerifyingBar";
 
 import React from "../../../../../node_modules/react";
 import ProfileSection from "./ProfileSection";
-import CERT_VALIDITY_STATUS from "../../../../constants/CertValidityStatus";
+import { CERT_VALIDITY_STATUS } from "../../../../constants/CertConstants";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +30,6 @@ class Profile extends React.Component {
         cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
 
-      Alert.alert("Running re-verification placeholder function");
       setTimeout(() => {
         this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);

@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
+import AppContext from "../../../../components/AppStore";
+import LevelOneDetails from "./LevelOneDetails";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +29,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: 130
   },
-  name: {
+  name1: {
     fontSize: 22,
     color: "#FFFFFF",
     fontWeight: "600"
@@ -33,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 30
   },
-  name1: {
+  name: {
     fontSize: 28,
     color: "#696969",
     fontWeight: "600"
@@ -69,6 +78,26 @@ export default class Profile extends Component {
     displayLevel3: false
   };
 
+  componentWillMount() {
+    this.data = this.context.certificate.document.data;
+
+    // Object Destructuring
+    const { fin, name, photo: profilepicture } = this.data.recipient;
+
+    this.fin = fin;
+    this.name = name;
+    this.profilepicture = profilepicture;
+
+    [, this.fin] = /:string:(.+)/.exec(this.fin);
+
+    [, this.name] = /:string:(.+)/.exec(this.name);
+
+    [, this.profilepicture] = /:string:(.+)/.exec(this.profilepicture);
+  }
+
+  // Links this Component with Appstore
+  static contextType = AppContext;
+
   toggleOption1() {
     this.setState({ displayLevel1: !this.state.displayLevel1 });
   }
@@ -83,28 +112,22 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.header}></View>
         <Image
           style={styles.avatar}
-          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
+          source={{ uri: `data:image/gif;base64,${this.profilepicture}` }}
         />
         <View style={styles.body}>
           <View style={styles.bodyContent}>
-            <Text style={styles.name}>John Doe</Text>
-            <Text style={styles.info}>UX Designer / Mobile developer</Text>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-              electram expetendis, omittam deseruisse consequuntur ius an,
-            </Text>
+            <Text style={styles.info}>{this.fin}</Text>
+            <Text style={styles.name}>{this.name}</Text>
 
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              onPress={() => this.toggleOption1()}
-            >
-              <Text>Level 1 Information</Text>
-            </TouchableOpacity>
-            {this.state.displayLevel1 && <Text> I'm Displayed! </Text>}
+            <LevelOneDetails
+              data={this.data}
+              toggle={() => this.toggleOption1()}
+              state={this.state.displayLevel1}
+            />
 
             <TouchableOpacity
               style={styles.buttonContainer}
@@ -123,7 +146,7 @@ export default class Profile extends Component {
             {this.state.displayLevel3 && <Text> Top Secret </Text>}
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

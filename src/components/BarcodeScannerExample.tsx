@@ -15,10 +15,13 @@ import { NavigationEvents } from "react-navigation";
 import NavigationService from "../navigation/NavigationService";
 
 import QRHandler from "./QRHandler";
+import QR_ACTIONS from "../constants/QRConstants";
+
+const SampleCert = require("../constants/SampleCert.json");
 
 interface MyProps {
   test: boolean;
-  changeTestState: () => {};
+  changeAppProfileState: () => {};
   storeCertificate: (cert) => {};
 }
 
@@ -32,9 +35,6 @@ export default class BarcodeScannerExample extends React.Component {
 
   async componentDidMount() {
     this.getPermissionsAsync();
-    this.test = new QRHandler(
-      "STORE;https://api-ropsten.opencerts.io/storage/get;/44b4c5e2-8458-49bf-8d2d-06fdb302832c;20841baa03c368e05b273712d0f69968224d744d87b0dd5d5035efffbc7fd10f"
-    );
   }
 
   getPermissionsAsync = async () => {
@@ -84,9 +84,32 @@ export default class BarcodeScannerExample extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
+    if (
+      QRHandler.CheckQRType(data) === QR_ACTIONS.STORE &&
+      QRHandler.CheckQRValidity(data)
+    ) {
+      this.DownloadQr(type, data);
+    } else if (
+      QRHandler.CheckQRType(data) === QR_ACTIONS.VIEW &&
+      QRHandler.CheckQRValidity(data)
+    ) {
+      this.ViewQR(data);
+    } else {
+      Alert.alert("Invalid QR", "Please Try Again", [
+        {
+          text: "Yes",
+          onPress: () => {
+            this.setState({ scanned: false });
+          }
+        }
+      ]);
+    }
+  };
+
+  DownloadQr(type, data) {
     Alert.alert(
       "QR Code Detected",
-      "Do you want to accept this QR Code?",
+      "Do you want download profile from the QR?",
       [
         {
           text: "No",
@@ -97,10 +120,10 @@ export default class BarcodeScannerExample extends React.Component {
         {
           text: "Yes",
           onPress: () => {
-            this.props.changeTestState();
-            // alert(
-            //   `Bar code with type ${type} and data ${data} has been scanned!`
-            // );
+            this.handler = new QRHandler(data);
+            this.props.changeAppProfileState();
+            // Stores in AppStore, not phone memory
+            this.props.storeCertificate(this.handler.ReturnsDecryptedCert());
             NavigationService.navigate("Profile", {});
             this.setState({ scanned: false });
           }
@@ -108,7 +131,35 @@ export default class BarcodeScannerExample extends React.Component {
       ],
       { cancelable: false }
     );
-  };
+  }
+
+  ViewQR(data) {
+    Alert.alert(
+      "QR Code Detected",
+      "Do you want view profile from the QR?",
+      [
+        {
+          text: "No",
+          onPress: () => {
+            this.setState({ scanned: false });
+          }
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            this.handler = new QRHandler(data);
+            this.setState({ scanned: false });
+            // Passing placeholder cert here
+            const placeholderCert = this.handler.ReturnsDecryptedCert();
+            NavigationService.navigate("Modal", {
+              certificate: placeholderCert
+            });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  }
 }
 
 const { width } = Dimensions.get("window");
