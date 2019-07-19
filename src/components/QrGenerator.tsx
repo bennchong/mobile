@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import QRCode from "react-native-qrcode-svg";
-import Dialog from "react-native-dialog";
 
 import {
   Dimensions,
@@ -13,7 +12,6 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-import { Constants } from "expo-barcode-scanner";
 
 // https://github.com/dumbest/react-native-qrcode-svg-expo
 
@@ -79,6 +77,7 @@ export default class QrGeneratorModal extends Component<CustomProps> {
 
   handleCancel = () => {
     this.setState({ isVisible: false });
+    this.props.handleCancel();
   };
 
   refreshQr = () => {

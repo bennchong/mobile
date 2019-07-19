@@ -43,7 +43,7 @@ const AppNavigator = createBottomTabNavigator(
     Profile: ProfileTab
   },
   {
-    initialRouteName: "Settings",
+    initialRouteName: "Camera",
 
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => getTabBarIcon({ navigation, tintColor })
