@@ -118,7 +118,7 @@ export default class BarcodeScannerExample extends React.Component {
           onPress: () => {
             this.handler = new QRHandler(data);
             this.props.changeAppProfileState();
-            //Stores in AppStore, not phone memory
+            // Stores in AppStore, not phone memory
             this.props.storeCertificate(this.handler.ReturnsDecryptedCert());
             NavigationService.navigate("Profile", {});
             this.setState({ scanned: false });
@@ -145,10 +145,11 @@ export default class BarcodeScannerExample extends React.Component {
           onPress: () => {
             this.handler = new QRHandler(data);
             this.setState({ scanned: false });
-            //Passing placeholder cert here
-            let placeholderCert = this.handler.ReturnsDecryptedCert(); 
-            NavigationService.navigate("Modal", { certificate: placeholderCert });
-
+            // Passing placeholder cert here
+            const placeholderCert = this.handler.ReturnsDecryptedCert();
+            NavigationService.navigate("Modal", {
+              certificate: placeholderCert
+            });
           }
         }
       ],

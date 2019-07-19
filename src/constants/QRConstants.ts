@@ -3,4 +3,4 @@ enum QR_ACTIONS {
   VIEW = "VIEW"
 }
 
-export { QR_ACTIONS };
+export default QR_ACTIONS;

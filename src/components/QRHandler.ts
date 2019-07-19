@@ -1,9 +1,9 @@
-import CertFetcher from "./CertFetcher";
-import { QR_ACTIONS } from "../constants/QRConstants";
-import { CERT_STORAGE } from "../constants/CertConstants";
-import Storage from "../components/Storage";
-import { decryptString } from "../helpers/Crypto";
 import openpgp from "openpgp";
+import CertFetcher from "./CertFetcher";
+import QR_ACTIONS from "../constants/QRConstants";
+import { CERT_STORAGE } from "../constants/CertConstants";
+import Storage from "./Storage";
+import { decryptString } from "../helpers/Crypto";
 
 const SampleCert = require("../constants/SampleCert.json");
 
@@ -12,7 +12,7 @@ export default class QRHandler {
     this.Storage = new Storage();
     this.SetQRHandlerState(QRHandler.CheckQRType(string), string);
 
-    if(this.state.QRStatus) {
+    if (this.state.QRStatus) {
       this.FetchCert();
     }
 
@@ -20,11 +20,10 @@ export default class QRHandler {
     // this.decryptedCert = this.decrypt_file();
     // Saves decrypted cert
 
-    if(this.state.QRStatus == QR_ACTIONS.STORE) {
-      this.StoreCert(JSON.stringify(SampleCert))
-        .then((res) => {
-          if (res == CERT_STORAGE.FAILURE) console.log("Cert Storing Error");//Capture Error Here 
-        }); 
+    if (this.state.QRStatus === QR_ACTIONS.STORE) {
+      this.StoreCert(JSON.stringify(SampleCert)).then(res => {
+        if (res === CERT_STORAGE.FAILURE) console.log("Cert Storing Error"); // Capture Error Here
+      });
     }
     // After decrypting, returns decrypted cert by calling it outside here
   }
@@ -33,7 +32,7 @@ export default class QRHandler {
   static CheckQRType(QRString) {
     const strArr = QRString.split(";");
     if (strArr[0] === QR_ACTIONS.STORE) return QR_ACTIONS.STORE;
-    else if (strArr[0] === QR_ACTIONS.VIEW) return QR_ACTIONS.VIEW;
+    if (strArr[0] === QR_ACTIONS.VIEW) return QR_ACTIONS.VIEW;
     return null;
   }
 
@@ -77,8 +76,8 @@ export default class QRHandler {
 
   // Calls Storage and saves decrypted cert (string) into phone memory
   async StoreCert(decryptedCert) {
-    let res = await this.Storage.storeCertificateFS(decryptedCert);
-    return res; 
+    const res = await this.Storage.storeCertificateFS(decryptedCert);
+    return res;
   }
 
   // //Decrypts file using OpenPGP

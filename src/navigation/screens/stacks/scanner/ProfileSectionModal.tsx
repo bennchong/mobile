@@ -80,7 +80,11 @@ export default class ProfileSectionModal extends Component {
 
   componentWillMount() {
     // Object Destructuring
-    const { fin, name, photo: profilepicture } = this.props.certificate.document.data.recipient;
+    const {
+      fin,
+      name,
+      photo: profilepicture
+    } = this.props.certificate.document.data.recipient;
 
     this.fin = fin;
     this.name = name;
