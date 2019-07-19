@@ -86,9 +86,15 @@ export default class BarcodeScannerExample extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    if (QRHandler.CheckQRType(data) === QR_ACTIONS.STORE && QRHandler.CheckQRValidity(data)) {
+    if (
+      QRHandler.CheckQRType(data) === QR_ACTIONS.STORE &&
+      QRHandler.CheckQRValidity(data)
+    ) {
       this.DownloadQr(type, data);
-    } else if (QRHandler.CheckQRType(data) === QR_ACTIONS.VIEW && QRHandler.CheckQRValidity(data)) {
+    } else if (
+      QRHandler.CheckQRType(data) === QR_ACTIONS.VIEW &&
+      QRHandler.CheckQRValidity(data)
+    ) {
       this.ViewQR(data);
     } else {
       Alert.alert("Invalid QR", "Please Try Again", [

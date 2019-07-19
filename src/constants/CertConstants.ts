@@ -9,4 +9,10 @@ enum CERT_STORAGE {
   FAILURE = "failure"
 }
 
-export { CERT_VALIDITY_STATUS, CERT_STORAGE };
+enum CERT_FETCHING {
+  NOT_OK = "return value not ok",
+  IS_OK = "return value is ok",
+  ERROR = "Fetching Failed"
+}
+
+export { CERT_VALIDITY_STATUS, CERT_STORAGE, CERT_FETCHING };
