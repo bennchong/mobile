@@ -81,7 +81,7 @@ export default class QrGeneratorModal extends Component<CustomProps> {
     this.setState({ isVisible: false });
   };
 
-  refreshQr = async () => {
+  refreshQr = () => {
     // fetch api here
     this.setState({ text: `${this.state.text}asd` });
   };
