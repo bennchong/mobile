@@ -3,7 +3,15 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { SettingsTab, CameraTab, ProfileTab } from "./tabs";
 
-const getTabBarIcon = ({ navigation, tintColor }) => {
+// eslint-disable-next-line no-unused-vars
+import { Navigation } from "./types";
+
+interface getTabBarIconProps {
+  navigation: Navigation;
+  tintColor: string;
+}
+
+const getTabBarIcon = ({ navigation, tintColor }: getTabBarIconProps) => {
   const { routeName } = navigation.state;
   let iconName;
   if (routeName === "Camera") {
