@@ -1,15 +1,13 @@
-import openpgp from "openpgp";
 import CertFetcher from "./CertFetcher";
 import QR_ACTIONS from "../constants/QRConstants";
 import { CERT_STORAGE, CERT_FETCHING } from "../constants/CertConstants";
-import Storage from "./Storage";
+import { storeCertificate } from "../services/FileSystem";
 import { decryptString } from "../helpers/Crypto";
 
 const SampleCert = require("../constants/SampleCert.json");
 
 export default class QRHandler {
   constructor(string) {
-    this.Storage = new Storage();
     this.SetQRHandlerState(QRHandler.CheckQRType(string), string);
 
     if (this.state.QRStatus) {
@@ -101,9 +99,9 @@ export default class QRHandler {
     }
   }
 
-  // Calls Storage and saves decrypted cert (string) into phone memory
+  // saves decrypted cert (string) into phone memory
   async StoreCert(decryptedCert) {
-    const res = await this.Storage.storeCertificateFS(decryptedCert);
+    const res = await storeCertificate(decryptedCert);
     return res;
   }
 

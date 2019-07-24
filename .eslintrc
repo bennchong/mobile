@@ -20,6 +20,7 @@
       },
       "plugins": ["@typescript-eslint"],
       "rules": {
+        "import/prefer-default-export" : "off",
         "no-undef": "off",
         "no-unused-vars": "off",
         "no-restricted-globals": "off",
@@ -28,7 +29,7 @@
           "error",
           { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }
         ],
-        "class-methods-use-this": ["error", { "exceptMethods": ["render", "CheckQRValidity", "ReturnsDecryptedCert"] }]
+        "class-methods-use-this": ["error", { "exceptMethods": ["StoreCert","render", "CheckQRValidity", "ReturnsDecryptedCert"] }]
       }
     }
   ]

@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { ProfileStyle } from "./ProfileImage";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   page: {
     flex: 1,
     flexDirection: "column",
@@ -32,22 +33,7 @@ export default StyleSheet.create({
     justifyContent: "flex-start"
   },
   container: {
-    flex: 1
-  },
-  header: {
-    backgroundColor: "#00BFFF",
-    height: 200
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130
+    flex: 14
   },
   name1: {
     fontSize: 22,
@@ -90,3 +76,5 @@ export default StyleSheet.create({
     backgroundColor: "#00BFFF"
   }
 });
+
+export { styles, ProfileStyle };

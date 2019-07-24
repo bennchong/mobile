@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import SettingsTab from "./src/navigation/screens/SettingsTab";
+import SettingsTab from "./src/navigation/tabs/Settings/SettingsTab";
 
 describe("<SettingsTab />", () => {
   it("should render without crashing", () => {

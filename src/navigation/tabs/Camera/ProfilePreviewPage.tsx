@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
-import VerifyingBar from "../stackcomponents/VerifyingBar";
+import React from "react";
+import { ValidationBar } from "../../../components/VerifyingBar";
+import {
+  sampleCert,
+  CERT_VALIDITY_STATUS
+} from "../../../constants/CertConstants";
 
-import React from "../../../../../node_modules/react";
-import ProfileSection from "./ProfileSection";
-import { CERT_VALIDITY_STATUS } from "../../../../constants/CertConstants";
+import ProfilePreviewSection from "./ProfilePreviewSection";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +19,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class Profile extends React.Component {
+class ProfilePreviewPage extends React.Component {
   state = {
     cert_status: CERT_VALIDITY_STATUS.VALIDATING
   };
@@ -29,7 +32,6 @@ class Profile extends React.Component {
       this.setState({
         cert_status: CERT_VALIDITY_STATUS.VALIDATING
       });
-
       setTimeout(() => {
         this.setState({ cert_status: CERT_VALIDITY_STATUS.VALID });
       }, 5000);
@@ -42,13 +44,19 @@ class Profile extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const certificate = navigation.getParam("certificate");
+
     return (
       <View style={styles.container}>
-        <VerifyingBar status={this.state.cert_status} />
-        <ProfileSection />
+        <ValidationBar certificate={sampleCert} />
+        <ProfilePreviewSection
+          certificate={certificate}
+          navigation={navigation}
+        />
       </View>
     );
   }
 }
 
-export default withNavigation(Profile);
+export default withNavigation(ProfilePreviewPage);

@@ -20,12 +20,11 @@ import QR_ACTIONS from "../constants/QRConstants";
 const SampleCert = require("../constants/SampleCert.json");
 
 interface MyProps {
-  test: boolean;
   changeAppProfileState: () => {};
   storeCertificate: (cert) => {};
 }
 
-export default class BarcodeScannerExample extends React.Component {
+export default class QRScanner extends React.Component<MyProps> {
   state = {
     hasCameraPermission: null,
     scanned: false,
@@ -122,7 +121,6 @@ export default class BarcodeScannerExample extends React.Component {
           onPress: () => {
             this.handler = new QRHandler(data);
             this.props.changeAppProfileState();
-            // Stores in AppStore, not phone memory
             this.props.storeCertificate(this.handler.ReturnsDecryptedCert());
             NavigationService.navigate("Profile", {});
             this.setState({ scanned: false });
@@ -151,7 +149,7 @@ export default class BarcodeScannerExample extends React.Component {
             this.setState({ scanned: false });
             // Passing placeholder cert here
             const placeholderCert = this.handler.ReturnsDecryptedCert();
-            NavigationService.navigate("Modal", {
+            NavigationService.navigate("ProfilePreview", {
               certificate: placeholderCert
             });
           }

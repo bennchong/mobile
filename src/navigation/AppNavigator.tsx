@@ -1,13 +1,7 @@
-import {
-  createBottomTabNavigator,
-  createStackNavigator
-} from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import ProfileTab from "./screens/ProfileTab";
-import SettingsTab from "./screens/SettingsTab";
-import ScannerTab from "./screens/ScannerTab";
-import ProfileModal from "./screens/stacks/scanner/ProfileModal";
+import { SettingsTab, CameraTab, ProfileTab } from "./tabs";
 
 const getTabBarIcon = ({ navigation, tintColor }) => {
   const { routeName } = navigation.state;
@@ -26,20 +20,10 @@ const getTabBarIcon = ({ navigation, tintColor }) => {
   return <Ionicons name={iconName} size={25} color={tintColor} />;
 };
 
-const HomeStack = createStackNavigator(
-  {
-    Home: ScannerTab,
-    Modal: ProfileModal
-  },
-  {
-    headerMode: "none"
-  }
-);
-
 const AppNavigator = createBottomTabNavigator(
   {
     Settings: SettingsTab,
-    Camera: HomeStack,
+    Camera: CameraTab,
     Profile: ProfileTab
   },
   {
