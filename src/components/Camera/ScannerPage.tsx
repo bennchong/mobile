@@ -1,14 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 import * as Permissions from "expo-permissions";
-import QRScanner from "../../../components/QRScanner";
-import { TitleBar } from "../../../components/TitleBar";
+import QRScanner from "./QRScanner";
+import { TitleBar } from "../TitleBar";
 import {
   checkStoredCertificateExists,
   getStoredCertificate
-} from "../../../services/fileSystem";
-import NavigationService from "../../NavigationService";
-import { StateContext } from "../../../state";
+} from "../../services/fileSystem";
+import NavigationService from "../../navigation/NavigationService";
+import { StateContext } from "../../state";
 import styles from "./ScannerPageStyleSheet";
 
 
@@ -46,7 +46,6 @@ export class ScannerPage extends React.Component {
         <QRScanner
           storeCertificate={storeCertificate}
         />
-
         <View style={styles.titleBarContainer}>
           <TitleBar text="SCAN QR" />
         </View>

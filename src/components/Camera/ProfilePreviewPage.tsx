@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
 import React from "react";
-import { ValidationBar } from "../../../components/VerifyingBar";
+import { ValidationBar } from "../VerifyingBar";
 import {
   sampleCert,
   CERT_VALIDITY_STATUS
-} from "../../../constants/CertConstants";
+} from "../../constants/CertConstants";
 
-import ProfilePreviewSection from "../../../components/ProfilePreviewSection";
+import ProfilePreviewSection from "../ProfilePreviewSection";
 
 const styles = StyleSheet.create({
   container: {

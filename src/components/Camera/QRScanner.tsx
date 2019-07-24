@@ -12,10 +12,10 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
-import { StateContext } from "../state";
-import NavigationService from "../navigation/NavigationService";
-import { fetchDocument, getActionFromQR } from "../services/qrHandler";
-import { storeCertificate } from "../services/fileSystem";
+import { StateContext } from "../../state";
+import NavigationService from "../../navigation/NavigationService";
+import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
+import { storeCertificate } from "../../services/fileSystem";
 
 interface QRScannerProps {
   storeCertificate: (cert) => {};
