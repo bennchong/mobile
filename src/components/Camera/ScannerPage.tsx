@@ -9,6 +9,7 @@ import {
 } from "../../services/fileSystem";
 import NavigationService from "../../navigation/NavigationService";
 import { StateContext } from "../../state";
+import { Header } from "../Layout/Header";
 import styles from "./ScannerPageStyleSheet";
 
 
@@ -42,14 +43,13 @@ export class ScannerPage extends React.Component {
         certificate
       });
     return (
-      <View style={styles.page}>
-        <QRScanner
-          storeCertificate={storeCertificate}
-        />
-        <View style={styles.titleBarContainer}>
-          <TitleBar text="SCAN QR" />
+      <View style={{ flex: 1 }}>
+        <Header text="SCAN QR" />
+        <View style={{ flex: 1, marginTop: 60 }}>
+          <QRScanner
+            storeCertificate={storeCertificate}
+          />
         </View>
-        <View style={{ flex: 14 }} />
       </View>
     );
   }

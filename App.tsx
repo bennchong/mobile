@@ -12,6 +12,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WORKPASS":
       return { ...state, certificate: action.certificate };
+    case "DELETE_CERTIFICATE":
+      return { ...state, certificate: null };
     default:
       return state;
   }
