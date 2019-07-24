@@ -1,6 +1,5 @@
 import React from "react";
-import { Constants } from "expo";
-import { StyleSheet, View, Button } from "react-native";
+import { View } from "react-native";
 import * as Permissions from "expo-permissions";
 import QRScanner from "../../../components/QRScanner";
 import { TitleBar } from "../../../components/TitleBar";
@@ -10,36 +9,8 @@ import {
 } from "../../../services/fileSystem";
 import NavigationService from "../../NavigationService";
 import { StateContext } from "../../../state";
+import styles from "./ScannerPageStyleSheet";
 
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "stretch",
-    marginTop: Constants.statusBarHeight
-  },
-  titleBar: {
-    color: "white",
-    fontSize: 24,
-    opacity: 1,
-    fontWeight: "bold",
-    textAlign: "center",
-    textAlignVertical: "center",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  camera: {
-    flex: 15,
-    backgroundColor: "whitesmoke"
-  },
-  titleBarContainer: {
-    flex: 1,
-    backgroundColor: "gray",
-    justifyContent: "center",
-    opacity: 0.8
-  }
-});
 
 export class ScannerPage extends React.Component {
   state = {
@@ -48,23 +19,19 @@ export class ScannerPage extends React.Component {
 
   static contextType = StateContext;
 
-  async componentWillMount() {
+  async componentDidMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === "granted" });
+
     const [, dispatch] = this.context;
 
     // Checks if there is already a cert stored on the phone
     const res = await checkStoredCertificateExists();
-    if (res.exists) {
-      // Change to profile page immediately if cert exist
-      let cert = await getStoredCertificate();
-      cert = JSON.parse(cert);
-      dispatch({ type: "UPDATE_WORKPASS", certificate: cert });
+    if (res) {
+      //Take Cert directly from FileSystem 
+      dispatch({ type: "UPDATE_WORKPASS", certificate: await getStoredCertificate() });
       NavigationService.navigate("Profile", {});
     }
-  }
-
-  async componentDidMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === "granted" });
   }
 
   render() {
@@ -74,14 +41,9 @@ export class ScannerPage extends React.Component {
         type: "UPDATE_WORKPASS",
         certificate
       });
-    const changeAppProfileState = () =>
-      dispatch({
-        type: "TOGGLE_TEST_FLAG"
-      });
     return (
       <View style={styles.page}>
         <QRScanner
-          changeAppProfileState={changeAppProfileState}
           storeCertificate={storeCertificate}
         />
 

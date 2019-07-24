@@ -18,7 +18,6 @@ import { fetchDocument, getActionFromQR } from "../services/qrHandler";
 import { storeCertificate } from "../services/fileSystem";
 
 interface QRScannerProps {
-  changeAppProfileState: () => {};
   storeCertificate: (cert) => {};
   navigation: any;
 }
