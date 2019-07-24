@@ -1,7 +1,7 @@
 import CertFetcher from "./CertFetcher";
 import QR_ACTIONS from "../constants/QRConstants";
 import { CERT_STORAGE, CERT_FETCHING } from "../constants/CertConstants";
-import { storeCertificate } from "../services/FileSystem";
+import { storeCertificate } from "../services/fileSystem";
 import { decryptString } from "../helpers/Crypto";
 
 const SampleCert = require("../constants/SampleCert.json");

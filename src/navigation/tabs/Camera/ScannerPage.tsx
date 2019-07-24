@@ -7,7 +7,7 @@ import { TitleBar } from "../../../components/TitleBar";
 import {
   checkStoredCertificateExists,
   getStoredCertificate
-} from "../../../services/FileSystem";
+} from "../../../services/fileSystem";
 import NavigationService from "../../NavigationService";
 import { StateContext } from "../../../state";
 

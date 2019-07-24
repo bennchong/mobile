@@ -11,28 +11,30 @@ import {
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
-import { NavigationEvents } from "react-navigation";
+import { NavigationEvents, withNavigationFocus } from "react-navigation";
+import { StateContext } from "../state";
 import NavigationService from "../navigation/NavigationService";
-
+import { fetchDocument, getActionFromQR } from "../services/qrHandler";
 import QRHandler from "./QRHandler";
 import QR_ACTIONS from "../constants/QRConstants";
-
+import { storeCertificate } from "../services/fileSystem";
 const SampleCert = require("../constants/SampleCert.json");
 
-interface MyProps {
+interface QRScannerProps {
   changeAppProfileState: () => {};
   storeCertificate: (cert) => {};
+  navigation: any;
 }
 
-export default class QRScanner extends React.Component<MyProps> {
+class QRScanner extends React.Component<QRScannerProps> {
+  static contextType = StateContext;
   state = {
     hasCameraPermission: null,
-    scanned: false,
-    type: Camera.Constants.Type.back,
-    isFocused: true
+    isProcessingQr: false,
+    type: Camera.Constants.Type.back
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getPermissionsAsync();
   }
 
@@ -41,21 +43,46 @@ export default class QRScanner extends React.Component<MyProps> {
     this.setState({ hasCameraPermission: status === "granted" });
   };
 
+  handleProfileView = document => {
+    NavigationService.navigate("ProfilePreview", {
+      certificate: { document }
+    });
+  };
+
+  handleProfileStorage = document => {
+    const [, dispatch] = this.context;
+    const updateCertificate = certificate => {
+      dispatch({
+        type: "UPDATE_WORKPASS",
+        certificate
+      });
+    };
+
+    Alert.alert(
+      "Profile detected",
+      "Do you want to overwrite your current profile?",
+      [
+        {
+          text: "No"
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            await storeCertificate(document);
+            updateCertificate(document);
+            NavigationService.navigate("Profile", {});
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
   render() {
-    const { hasCameraPermission, scanned } = this.state;
-    if (this.state.isFocused === false) {
-      return (
-        <NavigationEvents
-          onWillFocus={payload => {
-            this.setState({ isFocused: true });
-          }}
-          onDidBlur={payload => {
-            this.setState({ isFocused: false });
-          }}
-        />
-      );
-    }
-    if (hasCameraPermission != null && hasCameraPermission === true) {
+    const { hasCameraPermission } = this.state;
+    const isFocused = this.props.navigation.isFocused();
+
+    if (hasCameraPermission && isFocused) {
       return (
         <Camera
           style={{ ...StyleSheet.absoluteFillObject }}
@@ -63,127 +90,40 @@ export default class QRScanner extends React.Component<MyProps> {
           barCodeScannerSettings={{
             barCodeTypes: [Constants.BarCodeType.qr]
           }}
-          onBarCodeScanned={
-            scanned ? () => undefined : this.handleBarCodeScanned
-          }
-        >
-          <NavigationEvents
-            onWillFocus={payload => {
-              this.setState({ isFocused: true });
-            }}
-            onDidBlur={payload => {
-              this.setState({ isFocused: false });
-            }}
-          />
-        </Camera>
+          onBarCodeScanned={this.handleBarCodeScanned}
+        ></Camera>
+      );
+    } else {
+      return (
+        <View>
+          <Text>Please enable camera permissions</Text>
+        </View>
       );
     }
-    return null;
   }
 
-  handleBarCodeScanned = ({ type, data }) => {
-    this.setState({ scanned: true });
-    if (
-      QRHandler.CheckQRType(data) === QR_ACTIONS.STORE &&
-      QRHandler.CheckQRValidity(data)
-    ) {
-      this.DownloadQr(type, data);
-    } else if (
-      QRHandler.CheckQRType(data) === QR_ACTIONS.VIEW &&
-      QRHandler.CheckQRValidity(data)
-    ) {
-      this.ViewQR(data);
-    } else {
-      Alert.alert("Invalid QR", "Please Try Again", [
-        {
-          text: "Yes",
-          onPress: () => {
-            this.setState({ scanned: false });
-          }
-        }
-      ]);
+  handleBarCodeScanned = async ({ type, data }) => {
+    const { isProcessingQr } = this.state;
+
+    if (isProcessingQr) return;
+    this.setState({ isProcessingQr: true });
+
+    try {
+      const { action, uri, key } = await getActionFromQR(data);
+      const document = await fetchDocument(uri);
+
+      // TODO NEED TO VERIFY DOCUMENT 
+
+      if (action === "STORE") {
+        this.handleProfileStorage(document);
+      } else {
+        this.handleProfileView(document);
+      }
+    } catch (e) {
+      alert("Invalid QR");
     }
+    this.setState({ isProcessingQr: false });
   };
-
-  DownloadQr(type, data) {
-    Alert.alert(
-      "QR Code Detected",
-      "Do you want download profile from the QR?",
-      [
-        {
-          text: "No",
-          onPress: () => {
-            this.setState({ scanned: false });
-          }
-        },
-        {
-          text: "Yes",
-          onPress: () => {
-            this.handler = new QRHandler(data);
-            this.props.changeAppProfileState();
-            this.props.storeCertificate(this.handler.ReturnsDecryptedCert());
-            NavigationService.navigate("Profile", {});
-            this.setState({ scanned: false });
-          }
-        }
-      ],
-      { cancelable: false }
-    );
-  }
-
-  ViewQR(data) {
-    Alert.alert(
-      "QR Code Detected",
-      "Do you want view profile from the QR?",
-      [
-        {
-          text: "No",
-          onPress: () => {
-            this.setState({ scanned: false });
-          }
-        },
-        {
-          text: "Yes",
-          onPress: () => {
-            this.handler = new QRHandler(data);
-            this.setState({ scanned: false });
-            // Passing placeholder cert here
-            const placeholderCert = this.handler.ReturnsDecryptedCert();
-            NavigationService.navigate("ProfilePreview", {
-              certificate: placeholderCert
-            });
-          }
-        }
-      ],
-      { cancelable: false }
-    );
-  }
 }
 
-const { width } = Dimensions.get("window");
-const qrSize = width * 0.7;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: 1000
-  },
-  qr: {
-    marginTop: "5%",
-    marginBottom: "5%",
-    width: qrSize,
-    height: qrSize
-  },
-  description: {
-    fontSize: width * 0.09,
-    marginTop: "30%",
-    textAlign: "center",
-    width: "70%",
-    color: "black"
-  },
-  cancel: {
-    fontSize: width * 0.05,
-    textAlign: "center",
-    width: "70%",
-    color: "white"
-  }
-});
+export default withNavigationFocus(QRScanner);
