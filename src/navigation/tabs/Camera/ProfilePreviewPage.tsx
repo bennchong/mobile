@@ -7,7 +7,7 @@ import {
   CERT_VALIDITY_STATUS
 } from "../../../constants/CertConstants";
 
-import ProfilePreviewSection from "./ProfilePreviewSection";
+import ProfilePreviewSection from "../../../components/ProfilePreviewSection";
 
 const styles = StyleSheet.create({
   container: {

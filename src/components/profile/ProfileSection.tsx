@@ -8,11 +8,11 @@ import {
   ScrollView
 } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
-import { StateContext } from "../../../../state";
+import { StateContext } from "../../state";
 import LevelOneDetails from "./LevelOneDetails";
-import { styles, ProfileStyle } from "../../../../styles";
+import { styles, ProfileStyle } from "../../styles";
 
-import QrCodeGenerator from "../../../../components/QrGenerator";
+import QrCodeGenerator from "../../components/QrGenerator";
 
 const ProfileImage = ({ uri }) => {
   return (

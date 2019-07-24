@@ -1,11 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { useStateValue } from "../../../state";
 import { styles } from "../../../styles";
 import { TitleBar } from "../../../components/TitleBar";
 
-const SettingsTab = () => {
-  const [{ certificate }] = useStateValue();
+export const SettingsTab = () => {
   return (
     <View style={styles.page}>
       <TitleBar text="SETTINGS" />
@@ -15,5 +13,3 @@ const SettingsTab = () => {
     </View>
   );
 };
-
-export { SettingsTab };

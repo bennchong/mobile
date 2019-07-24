@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
 import React from "react";
-import { ValidationBar } from "../../../../components/VerifyingBar";
-import { styles } from "../../../../styles";
+import { ValidationBar } from "../VerifyingBar";
+import { styles } from "../../styles";
 import { ProfileSection } from "./ProfileSection";
 import {
   CERT_VALIDITY_STATUS,
   sampleCert
-} from "../../../../constants/CertConstants";
+} from "../../constants/CertConstants";
 
 const Profile = props => {
   return (
