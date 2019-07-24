@@ -11,14 +11,11 @@ import {
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
-import { NavigationEvents, withNavigationFocus } from "react-navigation";
+import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../state";
 import NavigationService from "../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../services/qrHandler";
-import QRHandler from "./QRHandler";
-import QR_ACTIONS from "../constants/QRConstants";
 import { storeCertificate } from "../services/fileSystem";
-const SampleCert = require("../constants/SampleCert.json");
 
 interface QRScannerProps {
   changeAppProfileState: () => {};
@@ -28,6 +25,7 @@ interface QRScannerProps {
 
 class QRScanner extends React.Component<QRScannerProps> {
   static contextType = StateContext;
+
   state = {
     hasCameraPermission: null,
     isProcessingQr: false,
@@ -93,13 +91,12 @@ class QRScanner extends React.Component<QRScannerProps> {
           onBarCodeScanned={this.handleBarCodeScanned}
         ></Camera>
       );
-    } else {
-      return (
-        <View>
-          <Text>Please enable camera permissions</Text>
-        </View>
-      );
     }
+    return (
+      <View>
+        <Text>Please enable camera permissions</Text>
+      </View>
+    );
   }
 
   handleBarCodeScanned = async ({ type, data }) => {
@@ -112,7 +109,7 @@ class QRScanner extends React.Component<QRScannerProps> {
       const { action, uri, key } = await getActionFromQR(data);
       const document = await fetchDocument(uri);
 
-      // TODO NEED TO VERIFY DOCUMENT 
+      // TODO NEED TO VERIFY DOCUMENT
 
       if (action === "STORE") {
         this.handleProfileStorage(document);
@@ -120,6 +117,7 @@ class QRScanner extends React.Component<QRScannerProps> {
         this.handleProfileView(document);
       }
     } catch (e) {
+      // eslint-disable-next-line no-alert
       alert("Invalid QR");
     }
     this.setState({ isProcessingQr: false });

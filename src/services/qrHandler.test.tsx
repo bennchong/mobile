@@ -1,4 +1,5 @@
 import { fetchDocument, getActionFromQR } from "./qrHandler";
+
 describe("fetchDocument", () => {
   it("should fetch the document from the uri", async () => {
     // TODO This test could be stubbed instead of making an actual API call.

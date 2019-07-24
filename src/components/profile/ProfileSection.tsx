@@ -12,7 +12,7 @@ import { StateContext } from "../../state";
 import LevelOneDetails from "./LevelOneDetails";
 import { styles, ProfileStyle } from "../../styles";
 
-import QrCodeGenerator from "../../components/QrGenerator";
+import QrCodeGenerator from "../QrGenerator";
 
 const ProfileImage = ({ uri }) => {
   return (
