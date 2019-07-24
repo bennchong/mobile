@@ -13,8 +13,43 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
     }
   }
 >
-  <Text>
-    Settings Placeholder
-  </Text>
+  <View
+    style={
+      Object {
+        "backgroundColor": "gray",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 0.8,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "alignItems": "center",
+          "color": "white",
+          "fontSize": 24,
+          "fontWeight": "bold",
+          "justifyContent": "center",
+          "opacity": 1,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+        }
+      }
+    >
+      SETTINGS
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 14,
+      }
+    }
+  >
+    <Text>
+       SETTINGS PAGE 
+    </Text>
+  </View>
 </View>
 `;

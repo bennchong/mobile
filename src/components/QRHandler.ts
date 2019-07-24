@@ -4,6 +4,24 @@ import { CERT_STORAGE, CERT_FETCHING } from "../constants/CertConstants";
 import { storeCertificate } from "../services/FileSystem";
 import { decryptString } from "../helpers/Crypto";
 
+
+// Input: String of QR
+// Eg: VIEW;https://skjdnf.com/somf;secretKey
+
+// 0. Verify if QR is formatted correctly
+// 1. Know the command
+// {
+//   action: "VIEW", // or DOWNLOAD
+//   uri: "https://resource.com/tada",
+//   key: "secretKey"
+// }
+// 2. Download the JSON content
+// 3. Decrpyt the content with secret key ()
+// 4. Save to fs
+// 5. Save to global context
+
+
+
 const SampleCert = require("../constants/SampleCert.json");
 
 export default class QRHandler {

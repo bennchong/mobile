@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
   }
 });
 
-interface CustomProps {
+interface QrGeneratorModalProps {
   isVisible: boolean;
 }
 
-export default class QrGeneratorModal extends Component<CustomProps> {
+export default class QrGeneratorModal extends Component<QrGeneratorModalProps> {
   state = {
     isVisible: false,
     text: "asd"
