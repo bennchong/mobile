@@ -4,11 +4,10 @@ import React from "react";
 import { ValidationBar } from "../VerifyingBar";
 import { styles } from "../../styles";
 import { ProfileSection } from "./ProfileSection";
-import {
-  CERT_VALIDITY_STATUS,
-  sampleCert
-} from "../../constants/CertConstants";
 
+const sampleCert = {
+  test: "sample"
+};
 const Profile = props => {
   return (
     <View style={styles.contentScreen}>

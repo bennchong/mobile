@@ -1,6 +1,6 @@
 import React from "react";
 import { Constants } from "expo";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as Permissions from "expo-permissions";
 import QRScanner from "../../../components/QRScanner";
 import { TitleBar } from "../../../components/TitleBar";
@@ -48,6 +48,7 @@ export class ScannerPage extends React.Component {
 
   static contextType = StateContext;
 
+  // eslint-disable-next-line react/no-deprecated
   async componentWillMount() {
     const [, dispatch] = this.context;
 
