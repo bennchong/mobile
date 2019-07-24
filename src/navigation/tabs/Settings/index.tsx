@@ -1,15 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { styles } from "../../../styles";
-import { TitleBar } from "../../../components/TitleBar";
+import { SettingTemplate } from "../../../components/settings/SettingTemplate";
 
-export const SettingsTab = () => {
-  return (
-    <View style={styles.page}>
-      <TitleBar text="SETTINGS" />
-      <View style={{ flex: 14 }}>
-        <Text> SETTINGS PAGE </Text>
-      </View>
-    </View>
-  );
-};
+const SettingsTab = () => <SettingTemplate />;
+
+export { SettingsTab };
