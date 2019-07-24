@@ -67,7 +67,8 @@ class QRScanner extends React.Component<QRScannerProps> {
           onPress: async () => {
             await storeCertificate(document);
             updateCertificate(document);
-            NavigationService.navigate("Profile", {});
+            //TODO, change flow if downloading, read directly from Filesytem
+            NavigationService.navigate("Profile", {workpass: document});
           }
         }
       ],

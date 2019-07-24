@@ -12,7 +12,7 @@ const ProfileTab = () => {
     <View style={styles.page}>
       <TitleBar text="MY PROFILE" />
       <View style={{ flex: 14 }}>
-        {certificate ? <Profile /> : <NoProfile />}
+        {certificate ? <Profile workpass={certificate} /> : <NoProfile />}
       </View>
     </View>
   );
