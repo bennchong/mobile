@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, Alert, StyleSheet } from "react-native";
-import { deleteStoredCertificate } from "../../services/fileSystem";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { deleteStoredworkpass } from "../../services/fileSystem";
 import { StateContext } from "../../state";
 import { Header } from "../Layout/Header";
+import { styles } from "./styles";
 
-const SettingTemplate = () => {
+export const SettingTemplate = () => {
   const context = useContext(StateContext);
 
   return (
@@ -26,11 +27,13 @@ const SettingTemplate = () => {
                     text: "Yes",
                     onPress: async () => {
                       try {
-                        await deleteStoredCertificate();
-                        context[1]({ type: "DELETE_CERTIFICATE" });
-                        alert("Certificate successfully deleted!");
+                        await deleteStoredworkpass();
+                        context[1]({ type: "DELETE_workpass" });
+                        // eslint-disable-next-line no-alert
+                        Alert.alert("workpass successfully deleted!");
                       } catch (e) {
-                        alert("No certificate to delete");
+                        // eslint-disable-next-line no-alert
+                        Alert.alert("No workpass to delete");
                       }
                     }
                   }
@@ -39,25 +42,10 @@ const SettingTemplate = () => {
               );
             }}
           >
-            <Text style={styles.buttonText}>Delete Current Certificate</Text>
+            <Text style={styles.buttonText}>Delete Current workpass</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
-
-export { SettingTemplate };
-
-const styles = StyleSheet.create({
-  page: { flex: 1 },
-  buttonContainer: {
-    width: "100%",
-    backgroundColor: "#2cae",
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  button: { width: "100%" },
-  buttonText: { marginLeft: 16, color: "#fff" }
-});

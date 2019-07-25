@@ -7,12 +7,12 @@ import { styles } from "../../../styles";
 import { Header } from "../../../components/Layout/Header";
 
 const ProfileTab = () => {
-  const [{ certificate }] = useStateValue();
+  const [{ workpass }] = useStateValue();
   return (
     <View style={styles.page}>
       <Header text="MY PROFILE" />
       <View style={{ flex: 14 }}>
-        {certificate ? <Profile workpass={certificate} /> : <NoProfile />}
+        {workpass ? <Profile workpass={workpass} /> : <NoProfile />}
       </View>
     </View>
   );

@@ -22,15 +22,12 @@ interface ProfilePreviewPageProps {
 
 const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
   const { navigation } = props;
-  const certificate = navigation.getParam("certificate");
+  const workpass = navigation.getParam("workpass");
 
   return (
     <View style={styles.container}>
-      <ValidationBar certificate={"sampleCert"} />
-      <ProfilePreviewSection
-        certificate={certificate}
-        navigation={navigation}
-      />
+      <ValidationBar workpass={"sampleCert"} />
+      <ProfilePreviewSection workpass={workpass} navigation={navigation} />
     </View>
   );
 };

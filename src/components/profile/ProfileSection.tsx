@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView
-} from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
-import { StateContext } from "../../state";
-import LevelOneDetails from "./LevelOneDetails";
 import { styles, ProfileStyle } from "../../styles";
 
-import QrCodeGenerator from "../QrGenerator";
+interface ProfileImageProps {
+  uri: string;
+}
 
-const ProfileImage = ({ uri }) => {
+interface ProfileSectionProps {
+  isPreview: boolean;
+  workpass: any;
+}
+
+const ProfileImage = ({ uri }: ProfileImageProps) => {
   return (
     <View style={{ alignItems: "center", justifyContent: "center" }}>
       <View style={ProfileStyle.avatarBackground} />
@@ -31,13 +29,18 @@ const ProfileImage = ({ uri }) => {
   );
 };
 
-const ProfileSection = ({ isPreview, certificate }) => {
-  const cleanDocument = getData(certificate.document);
+const ProfileSection = ({
+  /* isPreview */
+  workpass
+}: ProfileSectionProps) => {
+  /* eslint-disable */
+  const cleanDocument = getData(workpass.document);
   const { pass, recipient, employer } = cleanDocument;
   const [isLevelOneVisible, setLevelOneVisible] = useState(true);
   const [isLevelTwoVisible, setLevelTwoVisible] = useState(false);
   const [isLevelThreeVisible, setLevelThreeVisible] = useState(false);
   const [isQrVisible, setQrVisible] = useState(false);
+  /* eslint-enable */
 
   return (
     <ScrollView style={styles.container}>
@@ -47,11 +50,7 @@ const ProfileSection = ({ isPreview, certificate }) => {
           <Text style={styles.info}>{recipient.fin}</Text>
           <Text style={styles.name}>{recipient.name}</Text>
 
-          <LevelOneDetails
-            data={certificate.document.data}
-            toggle={() => this.toggleOption1()}
-            state={this.state.displayLevel1}
-          />
+
 
           <TouchableOpacity
             style={styles.buttonContainer}

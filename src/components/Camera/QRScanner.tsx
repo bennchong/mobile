@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Alert,
-  View,
-  StyleSheet,
-  Button,
-  Text,
-  Dimensions,
-  Image
-} from "react-native";
+import { Alert, View, StyleSheet, Text } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
@@ -15,10 +7,10 @@ import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
-import { storeCertificate } from "../../services/fileSystem";
+import { storeworkpass } from "../../services/fileSystem";
 
 interface QRScannerProps {
-  storeCertificate: (cert) => {};
+  storeworkpass: (cert) => {};
   navigation: any;
 }
 
@@ -42,16 +34,16 @@ class QRScanner extends React.Component<QRScannerProps> {
 
   handleProfileView = document => {
     NavigationService.navigate("ProfilePreview", {
-      certificate: { document }
+      workpass: { document }
     });
   };
 
   handleProfileStorage = document => {
     const [, dispatch] = this.context;
-    const updateCertificate = certificate => {
+    const updateworkpass = workpass => {
       dispatch({
         type: "UPDATE_WORKPASS",
-        certificate
+        workpass
       });
     };
 
@@ -65,10 +57,10 @@ class QRScanner extends React.Component<QRScannerProps> {
         {
           text: "Yes",
           onPress: async () => {
-            await storeCertificate(document);
-            updateCertificate(document);
-            //TODO, change flow if downloading, read directly from Filesytem
-            NavigationService.navigate("Profile", {workpass: document});
+            await storeworkpass(document);
+            updateworkpass(document);
+            // TODO, change flow if downloading, read directly from Filesytem
+            NavigationService.navigate("Profile", { workpass: document });
           }
         }
       ],
@@ -99,7 +91,7 @@ class QRScanner extends React.Component<QRScannerProps> {
     );
   }
 
-  handleBarCodeScanned = async ({ type, data }) => {
+  handleBarCodeScanned = async ({ data }) => {
     const { isProcessingQr } = this.state;
 
     if (isProcessingQr) return;
@@ -107,7 +99,7 @@ class QRScanner extends React.Component<QRScannerProps> {
 
     try {
       const { action, uri, key } = await getActionFromQR(data);
-      const document = await fetchDocument(uri);
+      const document = await fetchDocument(uri, key);
 
       // TODO NEED TO VERIFY DOCUMENT
 
@@ -118,7 +110,7 @@ class QRScanner extends React.Component<QRScannerProps> {
       }
     } catch (e) {
       // eslint-disable-next-line no-alert
-      alert("Invalid QR");
+      Alert.alert("ERROR", "INVALID QR");
     }
     this.setState({ isProcessingQr: false });
   };

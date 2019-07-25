@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { CERT_VALIDITY_STATUS } from "../constants/CertConstants";
 
 const styles = StyleSheet.create({
   baseBar: {
@@ -31,7 +30,7 @@ const VerifyingBar = () => {
   return (
     <View style={[styles.baseBar, styles.validating]}>
       <ActivityIndicator size="large" color="white" />
-      <Text style={styles.text}>Verifying Certificate</Text>
+      <Text style={styles.text}>Verifying workpass</Text>
     </View>
   );
 };
@@ -52,13 +51,15 @@ const InvalidBar = () => {
   );
 };
 
+/* eslint-disable no-unused-vars */
 enum statusEnum {
   VALIDATING,
   VALID,
   INVALID
 }
+/* eslint-enable */
 
-const ValidationBar = ({ certificate }) => {
+const ValidationBar = () => {
   const [verificationStatus, setVerificationStatus] = useState(
     statusEnum.VALIDATING
   );
