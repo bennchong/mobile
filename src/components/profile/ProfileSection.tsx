@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView, Text } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { styles, ProfileStyle } from "../../styles";
 
 interface ProfileImageProps {
-  uri: string;
-}
-
-interface ProfileSectionProps {
-  isPreview: boolean;
-  workpass: any;
+  uri: any;
 }
 
 const ProfileImage = ({ uri }: ProfileImageProps) => {
@@ -29,19 +24,23 @@ const ProfileImage = ({ uri }: ProfileImageProps) => {
   );
 };
 
-const ProfileSection = ({
+interface ProfileSectionProps {
+  isPreview: boolean;
+  workpass: any;
+}
+
+export const ProfileSection = ({
   /* isPreview */
   workpass
 }: ProfileSectionProps) => {
   /* eslint-disable */
-  const cleanDocument = getData(workpass.document);
+  const cleanDocument = getData(workpass);
   const { pass, recipient, employer } = cleanDocument;
   const [isLevelOneVisible, setLevelOneVisible] = useState(true);
   const [isLevelTwoVisible, setLevelTwoVisible] = useState(false);
   const [isLevelThreeVisible, setLevelThreeVisible] = useState(false);
   const [isQrVisible, setQrVisible] = useState(false);
   /* eslint-enable */
-
   return (
     <ScrollView style={styles.container}>
       <ProfileImage uri={recipient.photo} />
@@ -81,5 +80,3 @@ const ProfileSection = ({
     </ScrollView>
   );
 };
-
-export { ProfileSection };

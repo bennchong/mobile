@@ -26,7 +26,7 @@ const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
 
   return (
     <View style={styles.container}>
-      <ValidationBar workpass={"sampleCert"} />
+      <ValidationBar />
       <ProfilePreviewSection workpass={workpass} navigation={navigation} />
     </View>
   );

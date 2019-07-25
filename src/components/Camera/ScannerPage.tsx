@@ -25,6 +25,7 @@ export class ScannerPage extends React.Component {
 
     // Checks if there is already a cert stored on the phone
     const res = await checkStoredworkpassExists();
+
     if (res) {
       // Take Cert directly from FileSystem
       dispatch({

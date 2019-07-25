@@ -19,16 +19,16 @@ const reducer = (state, action) => {
   }
 };
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <StateProvider initialState={initialState} reducer={reducer}>
-        <AppContainer
-          ref={navigatorRef => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
-      </StateProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <AppContainer
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    </StateProvider>
+  );
+};
+
+export default App;
