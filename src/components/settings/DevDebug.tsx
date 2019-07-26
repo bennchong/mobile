@@ -1,12 +1,13 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Button } from "react-native";
 import { styles } from "./styles";
 import { DeleteWorkPassFromFS } from "./DevDebugSection/DeleteWorkPassFromFS";
 import { DeleteWorkPassFromState } from "./DevDebugSection/DeleteWorkPassFromState";
 import { StoreWorkPassIntoFS } from "./DevDebugSection/StoreWorkPassIntoFS";
 import { StoreWorkPassIntoState } from "./DevDebugSection/StoreWorkPassIntoState";
+import { withNavigation } from "react-navigation";
 
-const DevDebug = () => {
+const DevDebug = (props) => {
 
   return (
     <ScrollView>
@@ -15,9 +16,10 @@ const DevDebug = () => {
         <DeleteWorkPassFromFS />
         <StoreWorkPassIntoState />
         <DeleteWorkPassFromState />
+        <Button title="Go Back to Settings Page" onPress={() =>  props.navigation.goBack()} />
       </View>
     </ScrollView>
   );
 }
 
-export { DevDebug }; 
+export default withNavigation(DevDebug);

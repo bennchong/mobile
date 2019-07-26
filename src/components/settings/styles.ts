@@ -5,6 +5,12 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 60,
   },
+  button: {
+    borderRadius: 2,
+    marginTop: 5,
+    marginBottom: 5,
+  }
 });
