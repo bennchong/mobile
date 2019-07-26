@@ -69,11 +69,9 @@ interface QrGeneratorModalProps {
 }
 
 export const QrGeneratorModal = (props: QrGeneratorModalProps) => {
-  const [isVisible, setVisible] = useState(props.isVisible);
   const [qrText, setQrText] = useState("asd");
 
   const handleCancel = () => {
-    setVisible(false);
     props.handleCancel();
   };
 
