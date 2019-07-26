@@ -8,7 +8,7 @@ import {
   ScrollView,
   Button
 } from "react-native";
-import LevelOneDetails from "./profile/LevelOneDetails";
+import LevelOneDetails from "../profile/LevelOneDetails";
 
 const styles = StyleSheet.create({
   container: {

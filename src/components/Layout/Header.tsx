@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "gray",
     justifyContent: "flex-end",
-    opacity: 0.8
+    opacity: 0.8,
+    display: "flex", 
   },
   headerText: {
     color: "white",

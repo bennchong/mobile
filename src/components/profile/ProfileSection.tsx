@@ -40,7 +40,7 @@ const ProfileSection = ({ isPreview, certificate }) => {
   const [isQrVisible, setQrVisible] = useState(false);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <ProfileImage uri={recipient.photo} />
       {/* <View style={styles.body}>
         <View style={styles.bodyContent}>

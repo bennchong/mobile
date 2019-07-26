@@ -29,7 +29,7 @@ export class ScannerPage extends React.Component {
     // Checks if there is already a cert stored on the phone
     const res = await checkStoredCertificateExists();
     if (res) {
-      //Take Cert directly from FileSystem 
+      //TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view 
       dispatch({ type: "UPDATE_WORKPASS", certificate: await getStoredCertificate() });
       NavigationService.navigate("Profile", {});
     }

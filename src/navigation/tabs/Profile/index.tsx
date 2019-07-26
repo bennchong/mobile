@@ -9,11 +9,11 @@ import { Header } from "../../../components/Layout/Header";
 const ProfileTab = () => {
   const [{ certificate }] = useStateValue();
   return (
-    <View style={styles.page}>
+    <View style={styles.contentScreen}>
       <Header text="MY PROFILE" />
-      <View style={{ flex: 14 }}>
-        {certificate ? <Profile workpass={certificate} /> : <NoProfile />}
-      </View>
+      
+      {certificate ? <Profile workpass={certificate} /> : <NoProfile />}
+      
     </View>
   );
 };

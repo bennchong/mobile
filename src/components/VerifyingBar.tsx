@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { CERT_VALIDITY_STATUS } from "../constants/CertConstants";
 
 const styles = StyleSheet.create({
   baseBar: {
