@@ -1,8 +1,8 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
 import React from "react";
-import { ValidationBar } from "../VerifyingBar";
-import ProfilePreviewSection from "./ProfilePreviewSection";
+import { ValidationBar, statusEnum } from "../VerifyingBar";
+// import ProfilePreviewSection from "./ProfilePreviewSection";
 // eslint-disable-next-line no-unused-vars
 import { Navigation } from "../../navigation/types";
 
@@ -26,8 +26,12 @@ const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
 
   return (
     <View style={styles.container}>
-      <ValidationBar />
-      <ProfilePreviewSection workpass={workpass} navigation={navigation} />
+      <ValidationBar status={statusEnum.VALIDATING}/>
+      {/* <ProfilePreviewSection workpass={workpass} navigation={navigation} /> */}
+      <Button
+              onPress={() => navigation.goBack()}
+              title="Go Back to QR Scanner"
+      />
     </View>
   );
 };
