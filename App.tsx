@@ -12,7 +12,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WORKPASS":
       return { ...state, workpass: action.workpass };
-    case "DELETE_workpass":
+    case "DELETE_WORKPASS":
       return { ...state, workpass: null };
     default:
       return state;
