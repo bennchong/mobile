@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 import { ScannerPage } from "../../../components/Camera/ScannerPage";
-import ProfilePreviewPage from "../../../components/Camera/ProfilePreviewPage";
+import ProfilePreviewPage from "../Preview";
 
 const CameraTab = createStackNavigator(
   {

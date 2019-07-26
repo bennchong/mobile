@@ -5,15 +5,19 @@ import { StateProvider } from "./src/state";
 
 // TODO https://github.com/piotrwitek/typesafe-actions#1-basic-actions
 const initialState = {
-  certificate: null
+  certificate: null,
+  firstVerified: false,
+  timeVerified: ""
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WORKPASS":
       return { ...state, certificate: action.certificate };
+    case "FIRST_VERIFY_CERTIFICATE":
+      return { ...state, firstVerified: true, timeVerified: action.time };
     case "DELETE_CERTIFICATE":
-      return { ...state, certificate: null };
+      return initialState;
     default:
       return state;
   }
