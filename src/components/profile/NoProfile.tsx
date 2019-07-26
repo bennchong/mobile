@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 import metrics from "../../config/metrics";
 import { AntDesign } from "@expo/vector-icons";

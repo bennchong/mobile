@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
 import { AntDesign } from "@expo/vector-icons";
@@ -83,34 +83,35 @@ const InvalidBar = () => {
   );
 };
 
-enum statusEnum {
+/* eslint-disable no-unused-vars */
+export enum statusEnum {
   VALIDATING,
   VALID,
   INVALID
 }
+/* eslint-enable */
 
-const ValidationBar = ({ certificate }) => {
-  const [verificationStatus, setVerificationStatus] = useState(
-    statusEnum.VALIDATING
-  );
+interface ValidationBarProps {
+  status: statusEnum;
+}
+
+// presentation component, only switch according to props
+export const ValidationBar = (props: ValidationBarProps) => {
+  // const [verificationStatus, setVerificationStatus] = useState(
+  //   statusEnum.VALIDATING
+  // );
   const context = useContext(StateContext);
   const { firstVerified } = context[0];
-
-  setTimeout(() => {
-    setVerificationStatus(statusEnum.VALID);
-  }, 3000);
 
   if (!firstVerified) {
     return <VerifyYourID />;
   }
 
-  if (verificationStatus === statusEnum.VALIDATING) {
+  if (props.status === statusEnum.VALIDATING) {
     return <VerifyingBar />;
   }
-  if (verificationStatus === statusEnum.VALID) {
+  if (props.status === statusEnum.VALID) {
     return <ValidBar />;
   }
   return <InvalidBar />;
 };
-
-export { ValidationBar };

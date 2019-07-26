@@ -5,7 +5,7 @@ import { StateProvider } from "./src/state";
 
 // TODO https://github.com/piotrwitek/typesafe-actions#1-basic-actions
 const initialState = {
-  certificate: null,
+  workpass: null,
   firstVerified: false,
   timeVerified: ""
 };
@@ -13,26 +13,26 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WORKPASS":
-      return { ...state, certificate: action.certificate };
-    case "FIRST_VERIFY_CERTIFICATE":
+      return { ...state, workpass: action.workpass };
+    case "FIRST_VERIFY_WORKPASS":
       return { ...state, firstVerified: true, timeVerified: action.time };
-    case "DELETE_CERTIFICATE":
+    case "DELETE_WORKPASS":
       return initialState;
     default:
       return state;
   }
 };
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <StateProvider initialState={initialState} reducer={reducer}>
-        <AppContainer
-          ref={navigatorRef => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
-      </StateProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <AppContainer
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    </StateProvider>
+  );
+};
+
+export default App;

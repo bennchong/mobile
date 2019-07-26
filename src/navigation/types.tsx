@@ -1,8 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-import { NavigationScreenProp, NavigationState } from "react-navigation";
+/* eslint-disable no-unused-vars */
+import {
+  NavigationScreenProp,
+  NavigationParams,
+  NavigationRoute
+} from "react-navigation";
+/* eslint-enable no-unused-vars */
 
-interface StateParams extends NavigationState{
-  routeName?: string;
-}
+type StateParams = NavigationRoute<NavigationParams>;
 
 export type Navigation = NavigationScreenProp<StateParams>;

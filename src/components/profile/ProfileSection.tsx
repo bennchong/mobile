@@ -8,10 +8,10 @@ import { VerifyProfile } from "./VerifyProfile";
 import QrCodeGenerator from "../QrGenerator";
 import { VerifyModal } from "../Modals/VerifyModal";
 
-const ProfileSection = ({ certificate, navigation, isPreview }) => {
+const ProfileSection = ({ workpass, navigation, isPreview }) => {
   const cleanDocument = isPreview
-    ? getData(certificate.document)
-    : getData(certificate);
+    ? getData(workpass.document)
+    : getData(workpass);
   const { pass, recipient, employer } = cleanDocument;
 
   const [isQrVisible, setQrVisible] = useState(false);

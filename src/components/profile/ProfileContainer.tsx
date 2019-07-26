@@ -7,12 +7,12 @@ import { NoProfile } from "./NoProfile";
 const sampleCert = {
   test: "sample"
 };
-const ProfileContainer = ({ navigation, certificate, isPreview }) => {
-  return certificate ? (
+const ProfileContainer = ({ navigation, workpass, isPreview }) => {
+  return workpass ? (
     <View style={styles.container}>
-      <ValidationBar certificate={certificate} />
+      <ValidationBar />
       <ProfileSection
-        certificate={certificate}
+        workpass={workpass}
         navigation={navigation}
         isPreview={isPreview}
       />

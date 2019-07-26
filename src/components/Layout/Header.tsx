@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "gray",
     justifyContent: "flex-end",
-    opacity: 0.8
+    opacity: 0.8,
+    display: "flex", 
   },
   headerText: {
     color: "white",
@@ -23,7 +24,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const Header = ({ text }) => (
+interface HeaderProps {
+  text: string;
+}
+
+const Header = ({ text }: HeaderProps) => (
   <View style={styles.headerContainer}>
     <Text style={styles.headerText}>{text}</Text>
   </View>

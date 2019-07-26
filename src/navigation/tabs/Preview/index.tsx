@@ -11,12 +11,12 @@ interface ProfilePreviewPageProps {
 
 const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
   const { navigation } = props;
-  const certificate = navigation.getParam("certificate");
+  const workpass = navigation.getParam("workpass");
 
   return (
     <View style={{ flex: 1 }}>
       <ProfileContainer
-        certificate={certificate}
+        workpass={workpass}
         navigation={navigation}
         isPreview={true}
       />
