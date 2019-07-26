@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const Header = ({ text }) => (
+interface HeaderProps {
+  text: string;
+}
+
+const Header = ({ text }: HeaderProps) => (
   <View style={styles.headerContainer}>
     <Text style={styles.headerText}>{text}</Text>
   </View>

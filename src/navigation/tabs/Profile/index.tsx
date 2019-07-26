@@ -1,19 +1,18 @@
 import React from "react";
 import { View } from "react-native";
-import { Profile } from "../../../components/profile/Profile";
+import { Profile } from "../../../components/profile/ProfileView";
 import { NoProfile } from "../../../components/profile/NoProfile";
 import { useStateValue } from "../../../state";
-import { styles } from "../../../styles";
 import { Header } from "../../../components/Layout/Header";
 
 const ProfileTab = () => {
-  const [{ certificate }] = useStateValue();
+  const [{ workpass }] = useStateValue();
   return (
-    <View style={styles.contentScreen}>
+    <View style={{ flex: 1 }}>
       <Header text="MY PROFILE" />
-      
-      {certificate ? <Profile workpass={certificate} /> : <NoProfile />}
-      
+      <View style={{ flex: 14 }}>
+        {workpass ? <Profile workpass={workpass} /> : <NoProfile />}
+      </View>
     </View>
   );
 };

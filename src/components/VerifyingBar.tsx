@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
@@ -30,7 +30,7 @@ const VerifyingBar = () => {
   return (
     <View style={[styles.baseBar, styles.validating]}>
       <ActivityIndicator size="large" color="white" />
-      <Text style={styles.text}>Verifying Certificate</Text>
+      <Text style={styles.text}>Verifying workpass</Text>
     </View>
   );
 };
@@ -51,28 +51,29 @@ const InvalidBar = () => {
   );
 };
 
-enum statusEnum {
+/* eslint-disable no-unused-vars */
+export enum statusEnum {
   VALIDATING,
   VALID,
   INVALID
 }
+/* eslint-enable */
 
-const ValidationBar = ({ certificate }) => {
-  const [verificationStatus, setVerificationStatus] = useState(
-    statusEnum.VALIDATING
-  );
+interface ValidationBarProps {
+  status: statusEnum;
+}
 
-  setTimeout(() => {
-    setVerificationStatus(statusEnum.VALID);
-  }, 3000);
+// presentation component, only switch according to props
+export const ValidationBar = (props: ValidationBarProps) => {
+  // const [verificationStatus, setVerificationStatus] = useState(
+  //   statusEnum.VALIDATING
+  // );
 
-  if (verificationStatus === statusEnum.VALIDATING) {
+  if (props.status === statusEnum.VALIDATING) {
     return <VerifyingBar />;
   }
-  if (verificationStatus === statusEnum.VALID) {
+  if (props.status === statusEnum.VALID) {
     return <ValidBar />;
   }
   return <InvalidBar />;
 };
-
-export { ValidationBar };
