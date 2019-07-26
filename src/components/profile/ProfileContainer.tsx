@@ -4,9 +4,6 @@ import { ValidationBar } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
 
-const sampleCert = {
-  test: "sample"
-};
 const ProfileContainer = ({ navigation, workpass, isPreview }) => {
   return workpass ? (
     <View style={styles.container}>

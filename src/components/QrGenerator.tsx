@@ -69,7 +69,7 @@ interface QrGeneratorModalProps {
 }
 
 export const QrGeneratorModal = (props: QrGeneratorModalProps) => {
-  const [isVisible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useState(props.isVisible);
   const [qrText, setQrText] = useState("asd");
 
   const handleCancel = () => {
@@ -82,7 +82,7 @@ export const QrGeneratorModal = (props: QrGeneratorModalProps) => {
   };
 
   return (
-    <Modal animationType="fade" transparent={true} visible={isVisible}>
+    <Modal animationType="fade" transparent={true} visible={props.isVisible}>
       <TouchableHighlight onPress={handleCancel} style={styles.touchable}>
         <View style={styles.box}>
           <Text style={styles.text}>Share Workpass</Text>
