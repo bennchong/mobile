@@ -3,7 +3,7 @@ import { TouchableOpacity, Alert, Text } from "react-native";
 import { deleteStoredworkpass } from "../../../services/fileSystem";
 import { styles } from "./styles";
 
-const DeleteCurrentWorkPassFromFS = () => {
+const DeleteWorkPassFromFS = () => {
   return (
     <TouchableOpacity
       style={styles.button}
@@ -38,4 +38,4 @@ const DeleteCurrentWorkPassFromFS = () => {
   );
 }
 
-export { DeleteCurrentWorkPassFromFS };
+export { DeleteWorkPassFromFS };

@@ -4,7 +4,7 @@ import { StateContext } from "../../../state";
 import { useContext } from "react";
 import { styles } from "./styles";
 
-const DeleteCurrentWorkPassFromState = () => {
+const DeleteWorkPassFromState = () => {
 
   const context = useContext(StateContext);
   return (
@@ -36,4 +36,4 @@ const DeleteCurrentWorkPassFromState = () => {
   );
 }
 
-export { DeleteCurrentWorkPassFromState };
+export { DeleteWorkPassFromState };

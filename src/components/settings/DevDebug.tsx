@@ -1,16 +1,20 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 import { styles } from "./styles";
-import { DeleteCurrentWorkPassFromFS } from "./DevDebugSection/DeleteCurrentWorkPassFromFS";
-import { DeleteCurrentWorkPassFromState } from "./DevDebugSection/DeleteCurrentWorkPassFromState";
+import { DeleteWorkPassFromFS } from "./DevDebugSection/DeleteWorkPassFromFS";
+import { DeleteWorkPassFromState } from "./DevDebugSection/DeleteWorkPassFromState";
+import { StoreWorkPassIntoFS } from "./DevDebugSection/StoreWorkPassIntoFS";
+import { StoreWorkPassIntoState } from "./DevDebugSection/StoreWorkPassIntoState";
 
 const DevDebug = () => {
 
   return (
     <ScrollView>
       <View style={styles.buttonContainer}>
-        <DeleteCurrentWorkPassFromFS />
-        <DeleteCurrentWorkPassFromState />
+        <StoreWorkPassIntoFS />
+        <DeleteWorkPassFromFS />
+        <StoreWorkPassIntoState />
+        <DeleteWorkPassFromState />
       </View>
     </ScrollView>
   );
