@@ -34,6 +34,7 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   handleProfileView = document => {
+    this.setState({ isProcessingQr: false });
     NavigationService.navigate("ProfilePreview", {
       workpass: { document }
     });
@@ -60,6 +61,7 @@ class QRScanner extends React.Component<QRScannerProps> {
           onPress: async () => {
             await storeworkpass(document);
             updateworkpass(document);
+            this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem
             NavigationService.navigate("Profile", { workpass: document });
           }
@@ -113,7 +115,6 @@ class QRScanner extends React.Component<QRScannerProps> {
       // eslint-disable-next-line no-alert
       Alert.alert("ERROR", "INVALID QR");
     }
-    this.setState({ isProcessingQr: false });
   };
 }
 

@@ -1,14 +1,20 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  page: { flex: 1 },
-  buttonContainer: {
+  container: {
     width: "100%",
-    backgroundColor: "#2cae",
-    height: 60,
-    justifyContent: "center",
+    marginVertical: 10,
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignItems: "center"
   },
-  button: { width: "100%" },
-  buttonText: { marginLeft: 16, color: "#fff" }
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 16
+  },
+  textContainer: { marginLeft: 16 },
+  right: {
+    marginRight: 16
+  }
 });

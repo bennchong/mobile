@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 const VerifyYourID = () => {
   return (
     <View style={[styles.baseBar, styles.verify]}>
-      <Text style={styles.verifyText}>Verify your ID</Text>
+      <Text style={styles.verifyText}>Please verify your ID and accept it below</Text>
     </View>
   );
 };
