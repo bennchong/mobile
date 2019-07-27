@@ -101,9 +101,8 @@ export const ValidationBar = (props: ValidationBarProps) => {
   //   statusEnum.VALIDATING
   // );
   const context = useContext(StateContext);
-  const { firstVerified } = context[0];
-
-  if (!firstVerified) {
+  const { workpassAccepted } = context[0];
+  if (!workpassAccepted) {
     return <VerifyYourID />;
   }
 

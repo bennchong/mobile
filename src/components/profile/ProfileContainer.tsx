@@ -1,16 +1,13 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { ValidationBar } from "../VerifyingBar";
+import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
 
-const sampleCert = {
-  test: "sample"
-};
 const ProfileContainer = ({ navigation, workpass, isPreview }) => {
   return workpass ? (
     <View style={styles.container}>
-      <ValidationBar />
+      <ValidationBar status={statusEnum.VALIDATING} />
       <ProfileSection
         workpass={workpass}
         navigation={navigation}

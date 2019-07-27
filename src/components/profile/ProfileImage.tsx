@@ -7,13 +7,13 @@ import { StateContext } from "../../state";
 const ProfileImage = ({ recipient, navigation, isPreview }) => {
   const { photo, fin, name } = recipient;
   const context = useContext(StateContext);
-  const { timeVerified } = context[0];
+  const { timeAccepted } = context[0];
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {timeVerified.length == 0 ? null : (
-            <Text style={{ paddingTop: 5 }}>Verified on {timeVerified}</Text>
+          {timeAccepted.length == 0 ? null : (
+            <Text style={{ paddingTop: 5 }}>Verified on {timeAccepted}</Text>
           )}
         </View>
         <ProfileName
