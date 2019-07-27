@@ -1,22 +1,23 @@
 import React from "react";
-import Modal from "react-native-modal";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import metrics from "../../config/metrics";
 import { AntDesign } from "@expo/vector-icons";
 
 const VerifyModal = ({ onPress, showModal }) => {
   return (
-    <Modal isVisible={showModal}>
-      <View style={styles.modalContainer}>
-        <View style={styles.modal}>
-          <AntDesign name="checkcircle" size={50} color="#32CD32" />
-          <Text style={styles.modalText}>Digital work pass saved!</Text>
-          <TouchableOpacity
-            style={styles.modalButton}
-            onPress={() => onPress()}
-          >
-            <Text>View profile</Text>
-          </TouchableOpacity>
+    <Modal visible={showModal} transparent={true} animationType="fade">
+      <View style={styles.overlay}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modal}>
+            <AntDesign name="checkcircle" size={50} color="#32CD32" />
+            <Text style={styles.modalText}>Digital work pass saved!</Text>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => onPress()}
+            >
+              <Text>View profile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -73,5 +74,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: "center",
     justifyContent: "center"
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.4)"
   }
 });
