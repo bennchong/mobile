@@ -19,7 +19,7 @@ const VerifyProfile = ({ isPreview, onPress }) => {
           onPress={() => {
             onPress();
             context[1]({
-              type: "FIRST_VERIFY_CERTIFICATE",
+              type: "FIRST_VERIFY_WORKPASS",
               time: getCurrentDateAndTime()
             });
           }}

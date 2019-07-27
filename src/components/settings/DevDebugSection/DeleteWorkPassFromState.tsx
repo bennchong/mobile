@@ -1,15 +1,15 @@
 import React from "react";
-import { TouchableOpacity, Alert, Text } from "react-native";
+import { View, TouchableOpacity, Alert, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
 import { useContext } from "react";
-import { styles } from "./styles";
+import { styles } from "../styles";
 
 const DeleteWorkPassFromState = () => {
-
   const context = useContext(StateContext);
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={styles.container}
       onPress={() => {
         Alert.alert(
           "Delete Profile",
@@ -23,7 +23,10 @@ const DeleteWorkPassFromState = () => {
               onPress: async () => {
                 context[1]({ type: "DELETE_WORKPASS" });
                 // eslint-disable-next-line no-alert
-                Alert.alert("Dev Info","Workpass has been deleted from state!");
+                Alert.alert(
+                  "Dev Info",
+                  "Workpass has been deleted from state!"
+                );
               }
             }
           ],
@@ -31,9 +34,15 @@ const DeleteWorkPassFromState = () => {
         );
       }}
     >
-      <Text style={styles.buttonText}>Delete Current workpass from state</Text>
+      <View style={styles.iconContainer}>
+        <AntDesign name="delete" size={30} color="red" />
+        <Text style={styles.textContainer}>
+          Delete Current workpass from state
+        </Text>
+      </View>
+      <AntDesign name="right" size={20} color="black" style={styles.right} />
     </TouchableOpacity>
   );
-}
+};
 
 export { DeleteWorkPassFromState };

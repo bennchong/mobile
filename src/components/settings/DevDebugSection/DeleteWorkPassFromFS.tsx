@@ -1,12 +1,13 @@
 import React from "react";
-import { TouchableOpacity, Alert, Text } from "react-native";
+import { View, TouchableOpacity, Alert, Text } from "react-native";
+import { Foundation, AntDesign } from "@expo/vector-icons";
 import { deleteStoredworkpass } from "../../../services/fileSystem";
-import { styles } from "./styles";
+import { styles } from "../styles";
 
 const DeleteWorkPassFromFS = () => {
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={styles.container}
       onPress={() => {
         Alert.alert(
           "Delete Profile",
@@ -21,10 +22,16 @@ const DeleteWorkPassFromFS = () => {
                 try {
                   await deleteStoredworkpass();
                   // eslint-disable-next-line no-alert
-                  Alert.alert("Dev Info","Workpass in file system is successfully deleted");
+                  Alert.alert(
+                    "Dev Info",
+                    "Workpass in file system is successfully deleted"
+                  );
                 } catch (e) {
                   // eslint-disable-next-line no-alert
-                  Alert.alert("Dev Info","No workpass in file system to delete");
+                  Alert.alert(
+                    "Dev Info",
+                    "No workpass in file system to delete"
+                  );
                 }
               }
             }
@@ -33,9 +40,15 @@ const DeleteWorkPassFromFS = () => {
         );
       }}
     >
-      <Text style={styles.buttonText}>Delete Current workpass from file system</Text>
+      <View style={styles.iconContainer}>
+        <Foundation name="page-delete" size={30} color="red" />
+        <Text style={styles.textContainer}>
+          Delete Current workpass from file system
+        </Text>
+      </View>
+      <AntDesign name="right" size={20} color="black" style={styles.right} />
     </TouchableOpacity>
   );
-}
+};
 
 export { DeleteWorkPassFromFS };

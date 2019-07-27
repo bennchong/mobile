@@ -1,18 +1,66 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, ScrollView, TouchableOpacity, Text } from "react-native";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { Header } from "../Layout/Header";
 import { styles } from "./styles";
 import { withNavigation } from "react-navigation";
 
-const SettingsTemplate = (props) => {
+const tabs = [
+  {
+    icon: <AntDesign name="edit" size={30} color="#ffdd42" />,
+    title: "Dev Settings",
+    link: "DevDebug"
+  },
+  {
+    icon: <AntDesign name="questioncircle" size={30} color="#000" />,
+    title: "Terms & Conditions",
+    link: null
+  },
+  {
+    icon: (
+      <MaterialCommunityIcons
+        name="shield"
+        size={30}
+        color="#fff"
+        style={{ backgroundColor: "#2cae", borderRadius: 5 }}
+      />
+    ),
+    title: "Privacy Policy",
+    link: null
+  },
+  {
+    icon: <AntDesign name="infocirlce" size={30} color="#2C85DE" />,
+    title: "About Us",
+    link: null
+  }
+];
+
+const SettingsTemplate = props => {
+  const { navigate } = props.navigation;
   return (
-    <View style={styles.page}>
+    <ScrollView>
       <Header text={"SETTINGS"} />
-      <View style={styles.buttonContainer}>
-        {/* <Button title="Open Information Page"onPress={() =>  props.navigation.navigate("DevDebug")} /> */}
-        <Button title="Open Dev Debug Page"onPress={() =>  props.navigation.navigate("DevDebug")} />
+      <View style={{ marginTop: 60 }}>
+        {tabs.map(tab => (
+          <TouchableOpacity
+            style={styles.container}
+            key={tab.title}
+            onPress={() => navigate(tab.link)}
+          >
+            <View style={styles.iconContainer}>
+              {tab.icon}
+              <Text style={styles.textContainer}>{tab.title}</Text>
+            </View>
+            <AntDesign
+              name="right"
+              size={20}
+              color="black"
+              style={styles.right}
+            />
+          </TouchableOpacity>
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
