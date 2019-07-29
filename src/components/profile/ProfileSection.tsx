@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { ScrollView } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { ProfileImage } from "./ProfileImage";
 import { ProfileBasicDetails } from "./ProfileBasicDetails";
 import { ProfilePassDetails } from "./ProfilePassDetails";
 import { VerifyProfile } from "./VerifyProfile";
-import { QrCodeGenerator } from "../QrGenerator";
 import { VerifyModal } from "../Modals/VerifyModal";
 
 const ProfileSection = ({ workpass, navigation, isPreview }) => {
@@ -14,7 +14,6 @@ const ProfileSection = ({ workpass, navigation, isPreview }) => {
     : getData(workpass);
   const { pass, recipient, employer } = cleanDocument;
 
-  const [isQrVisible, setQrVisible] = useState(false);
   const [modal, setModal] = useState(false);
 
   return (
@@ -33,3 +32,9 @@ const ProfileSection = ({ workpass, navigation, isPreview }) => {
 };
 
 export { ProfileSection };
+
+ProfileSection.propTypes = {
+  workpass: PropTypes.object,
+  navigation: PropTypes.any,
+  isPreview: PropTypes.bool
+};

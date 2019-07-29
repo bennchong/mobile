@@ -6,43 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
+import PropTypes from "prop-types";
 import { StateContext } from "../../state";
 import metrics from "../../config/metrics";
 import { getCurrentDateAndTime } from "../../services/date";
-
-const VerifyProfile = ({ isPreview, onPress }) => {
-  const context = useContext(StateContext);
-  const { workpassAccepted } = context[0];
-
-  if (!workpassAccepted && !isPreview) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.acknowledgeText}>
-          I acknowledge that the information above is true
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={async () => {
-            onPress();
-            await AsyncStorage.setItem(
-              "@storedTimeAccepted",
-              getCurrentDateAndTime()
-            );
-            context[1]({
-              type: "SET_WORKPASS_ACCEPTED",
-              time: getCurrentDateAndTime()
-            });
-          }}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-  return null;
-};
-
-export { VerifyProfile };
 
 const styles = StyleSheet.create({
   container: {
@@ -97,3 +64,42 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
+
+const VerifyProfile = ({ isPreview, onPress }) => {
+  const context = useContext(StateContext);
+  const { workpassAccepted } = context[0];
+
+  if (!workpassAccepted && !isPreview) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.acknowledgeText}>
+          I acknowledge that the information above is true
+        </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={async () => {
+            onPress();
+            await AsyncStorage.setItem(
+              "@storedTimeAccepted",
+              getCurrentDateAndTime()
+            );
+            context[1]({
+              type: "SET_WORKPASS_ACCEPTED",
+              time: getCurrentDateAndTime()
+            });
+          }}
+        >
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  return null;
+};
+
+export { VerifyProfile };
+
+VerifyProfile.propTypes = {
+  isPreview: PropTypes.bool,
+  onPress: PropTypes.func
+};

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
-import { QrCodeGenerator } from "../QrGenerator";
 import { AntDesign } from "@expo/vector-icons";
+import { QrCodeGenerator } from "../QrGenerator";
 import metrics from "../../config/metrics";
 
 const styles = StyleSheet.create({
