@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const NoProfile = () => (
+export const NoProfile = () => (
   <View style={styles.container}>
     <View style={styles.warningContainer}>
       <AntDesign name="exclamationcircle" size={50} color="red" />
@@ -39,5 +39,3 @@ const NoProfile = () => (
     </View>
   </View>
 );
-
-export { NoProfile };

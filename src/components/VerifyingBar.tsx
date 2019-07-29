@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";\
+import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./BarStyles";
 
 const VerifyingBar = () => {
