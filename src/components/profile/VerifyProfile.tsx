@@ -25,7 +25,7 @@ const VerifyProfile = ({ isPreview, onPress }) => {
           onPress={async () => {
             onPress();
             await AsyncStorage.setItem(
-              "storedTimeAccepted",
+              "@storedTimeAccepted",
               getCurrentDateAndTime()
             );
             context[1]({

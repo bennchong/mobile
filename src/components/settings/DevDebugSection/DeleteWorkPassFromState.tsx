@@ -28,7 +28,7 @@ const DeleteWorkPassFromState = () => {
               text: "Yes",
               onPress: async () => {
                 context[1]({ type: "DELETE_WORKPASS" });
-                await AsyncStorage.removeItem("storedTimeAccepted");
+                await AsyncStorage.removeItem("@storedTimeAccepted");
                 // eslint-disable-next-line no-alert
                 Alert.alert(
                   "Dev Info",

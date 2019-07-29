@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     justifyContent: "flex-end",
     opacity: 0.8,
-    display: "flex", 
+    display: "flex"
   },
   headerText: {
     color: "white",
