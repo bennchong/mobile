@@ -12,9 +12,10 @@ import { getCurrentDateAndTime } from "../../services/date";
 
 const VerifyProfile = ({ isPreview, onPress }) => {
   const context = useContext(StateContext);
-  const { firstVerified } = context[0];
+  const { workpassAccepted } = context[0];
+  const [, dispatch] = context;
 
-  if (!firstVerified && !isPreview) {
+  if (!workpassAccepted && !isPreview) {
     return (
       <View style={styles.container}>
         <Text style={styles.acknowledgeText}>
