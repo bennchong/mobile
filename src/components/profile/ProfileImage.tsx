@@ -1,38 +1,64 @@
-import React, { useContext } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import React from "react";
+import { AsyncStorage, View, Image, Text, StyleSheet } from "react-native";
 import metrics from "../../config/metrics";
 import { ProfileName } from "./ProfileName";
 import { StateContext } from "../../state";
 
-const ProfileImage = ({ recipient, navigation, isPreview }) => {
-  const { photo, fin, name } = recipient;
-  const context = useContext(StateContext);
-  const { timeVerified } = context[0];
-  return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.background}>
-          {timeVerified.length == 0 ? null : (
-            <Text style={{ paddingTop: 5 }}>Verified on {timeVerified}</Text>
-          )}
-        </View>
-        <ProfileName
-          fin={fin}
-          name={name}
-          navigation={navigation}
-          isPreview={isPreview}
-        />
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{ uri: `data:image/gif;base64,${photo}` }}
+interface ProfileImageProps {
+  recipient: any;
+  navigation: any;
+  isPreview: boolean;
+}
+
+class ProfileImage extends React.Component<ProfileImageProps> {
+  static contextType = StateContext;
+
+  async componentDidMount() {
+    const [, dispatch] = this.context;
+
+    let storedTimeVerified = await AsyncStorage.getItem("@storedTimeVerified");
+    if (storedTimeVerified) {
+      console.log("Fetched data: ", storedTimeVerified);
+      dispatch({
+        type: "FIRST_VERIFY_WORKPASS",
+        time: storedTimeVerified
+      });
+    }
+  }
+
+  render() {
+    const data = this.context[0];
+
+    const { recipient, navigation, isPreview } = this.props;
+    const { photo, fin, name } = recipient;
+    return (
+      <>
+        <View style={styles.container}>
+          <View style={styles.background}>
+            {data.timeVerified.length == 0 ? null : (
+              <Text style={{ paddingTop: 5 }}>
+                Verified on {data.timeVerified}
+              </Text>
+            )}
+          </View>
+          <ProfileName
+            fin={fin}
+            name={name}
+            navigation={navigation}
+            isPreview={isPreview}
           />
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{ uri: `data:image/gif;base64,${photo}` }}
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.margin} />
-    </>
-  );
-};
+        <View style={styles.margin} />
+      </>
+    );
+  }
+}
 
 export { ProfileImage };
 

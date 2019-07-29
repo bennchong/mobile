@@ -1,5 +1,11 @@
 import React from "react";
-import { View, TouchableOpacity, Alert, Text } from "react-native";
+import {
+  AsyncStorage,
+  View,
+  TouchableOpacity,
+  Alert,
+  Text
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
 import { useContext } from "react";
@@ -22,6 +28,7 @@ const DeleteWorkPassFromState = () => {
               text: "Yes",
               onPress: async () => {
                 context[1]({ type: "DELETE_WORKPASS" });
+                await AsyncStorage.removeItem("storedTimeVerified");
                 // eslint-disable-next-line no-alert
                 Alert.alert(
                   "Dev Info",

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import metrics from "../../config/metrics";
 import { AntDesign } from "@expo/vector-icons";
-import {QrGeneratorModal} from "../QrGenerator";
+import { QrCodeGenerator } from "../QrGenerator";
 
 const ProfileName = ({ fin, name, navigation, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
   let handleCancel = () => {
-    setVisible(!isDialogVisible); 
-  }
-  
+    setVisible(!isDialogVisible);
+  };
+
   return (
     <View style={styles.textContainer}>
       <Text style={styles.fin}>{fin}</Text>
@@ -25,11 +25,18 @@ const ProfileName = ({ fin, name, navigation, isPreview }) => {
             <Text style={styles.previewButtonText}>Go back to QR scanner</Text>
           </TouchableOpacity>
         </View>
-      ) : ( //Not Preview Section
-        <TouchableOpacity style={styles.shareContainer} onPress={()=>setVisible(!isDialogVisible)}>
+      ) : (
+        //Not Preview Section
+        <TouchableOpacity
+          style={styles.shareContainer}
+          onPress={() => setVisible(!isDialogVisible)}
+        >
           <AntDesign name="qrcode" size={15} color="#808080" />
           <Text style={styles.shareText}>SHARE ID</Text>
-          <QrGeneratorModal isVisible={isDialogVisible} handleCancel={handleCancel} />
+          <QrCodeGenerator
+            isVisible={isDialogVisible}
+            handleCancel={handleCancel}
+          />
         </TouchableOpacity>
       )}
     </View>

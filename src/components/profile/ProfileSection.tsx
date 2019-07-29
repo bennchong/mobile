@@ -5,7 +5,7 @@ import { ProfileImage } from "./ProfileImage";
 import { ProfileBasicDetails } from "./ProfileBasicDetails";
 import { ProfilePassDetails } from "./ProfilePassDetails";
 import { VerifyProfile } from "./VerifyProfile";
-import QrCodeGenerator from "../QrGenerator";
+import { QrCodeGenerator } from "../QrGenerator";
 import { VerifyModal } from "../Modals/VerifyModal";
 
 const ProfileSection = ({ workpass, navigation, isPreview }) => {

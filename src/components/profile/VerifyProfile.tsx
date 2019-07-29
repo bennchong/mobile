@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  AsyncStorage,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet
+} from "react-native";
 import { StateContext } from "../../state";
 import metrics from "../../config/metrics";
 import { getCurrentDateAndTime } from "../../services/date";
@@ -16,8 +22,12 @@ const VerifyProfile = ({ isPreview, onPress }) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => {
+          onPress={async () => {
             onPress();
+            await AsyncStorage.setItem(
+              "storedTimeVerified",
+              getCurrentDateAndTime()
+            );
             context[1]({
               type: "FIRST_VERIFY_WORKPASS",
               time: getCurrentDateAndTime()
