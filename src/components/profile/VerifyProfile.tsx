@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import {
-  AsyncStorage,
   View,
   Text,
   TouchableOpacity,
@@ -10,6 +9,7 @@ import PropTypes from "prop-types";
 import { StateContext } from "../../state";
 import metrics from "../../config/metrics";
 import { getCurrentDateAndTime } from "../../services/date";
+import { setTimeAccepted, getTimeAccepted } from "../../services/fileSystem";
 
 const styles = StyleSheet.create({
   container: {
@@ -79,10 +79,7 @@ const VerifyProfile = ({ isPreview, onPress }) => {
           style={styles.button}
           onPress={async () => {
             onPress();
-            await AsyncStorage.setItem(
-              "@storedTimeAccepted",
-              getCurrentDateAndTime()
-            );
+            await setTimeAccepted(getCurrentDateAndTime());
             context[1]({
               type: "SET_WORKPASS_ACCEPTED",
               time: getCurrentDateAndTime()

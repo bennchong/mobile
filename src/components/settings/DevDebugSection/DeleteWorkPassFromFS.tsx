@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  AsyncStorage,
   View,
   TouchableOpacity,
   Alert,
@@ -9,7 +8,7 @@ import {
 import { Foundation, AntDesign } from "@expo/vector-icons";
 import { deleteStoredworkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
-
+import { resetTimeAccepted } from "../../../services/fileSystem";
 const DeleteWorkPassFromFS = () => {
   return (
     <TouchableOpacity
@@ -32,7 +31,7 @@ const DeleteWorkPassFromFS = () => {
                     "Dev Info",
                     "Workpass in file system is successfully deleted"
                   );
-                  await AsyncStorage.removeItem("@storedTimeAccepted");
+                  await resetTimeAccepted();
                 } catch (e) {
                   // eslint-disable-next-line no-alert
                   Alert.alert(

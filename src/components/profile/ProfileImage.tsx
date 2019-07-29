@@ -1,8 +1,9 @@
 import React from "react";
-import { AsyncStorage, View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import metrics from "../../config/metrics";
 import { ProfileName } from "./ProfileName";
 import { StateContext } from "../../state";
+import { getTimeAccepted } from "../../services/fileSystem";
 
 const styles = StyleSheet.create({
   container: { alignItems: "center" },
@@ -56,9 +57,7 @@ class ProfileImage extends React.Component<ProfileImageProps> {
   async componentDidMount() {
     const [, dispatch] = this.context;
 
-    const storedTimeAccepted = await AsyncStorage.getItem(
-      "@storedTimeAccepted"
-    );
+    const storedTimeAccepted = await getTimeAccepted();
     if (storedTimeAccepted) {
       dispatch({
         type: "SET_WORKPASS_ACCEPTED",

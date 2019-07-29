@@ -1,5 +1,6 @@
 import * as FileSystem from "expo-file-system";
 
+
 const DEFAULT_FILE_NAME = `${FileSystem.documentDirectory}workpass`;
 
 export const checkStoredworkpassExists = async () => {
@@ -23,4 +24,19 @@ export const storeworkpass = workpass => {
 
 export const deleteStoredworkpass = () => {
   return FileSystem.deleteAsync(DEFAULT_FILE_NAME);
+};
+
+const TIME_ACCEPTED_FILE_NAME = "@storedTimeAccepted"
+
+export const setTimeAccepted = (time) => {
+  return FileSystem.writeAsStringAsync(TIME_ACCEPTED_FILE_NAME, time);
+};
+
+export const getTimeAccepted = () => {
+  return FileSystem.readAsStringAsync(TIME_ACCEPTED_FILE_NAME);
+};
+
+export const resetTimeAccepted = () => {
+  return FileSystem.deleteAsync(TIME_ACCEPTED_FILE_NAME);
+
 };
