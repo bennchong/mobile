@@ -1,16 +1,15 @@
-import React from "react";
-import  SettingsTemplate  from "../../../components/settings/SettingsTemplate";
-import  DevDebug  from "../../../components/settings/DevDebug";
 import { createStackNavigator } from "react-navigation";
+import SettingsTemplate from "../../../components/settings/SettingsTemplate";
+import DevDebug from "../../../components/settings/DevDebug";
 
 const SettingsTab = createStackNavigator(
   {
-    SettingsHome: SettingsTemplate,
-    DevDebug: DevDebug
+    SettingsTemplate,
+    DevDebug
   },
   {
     headerMode: "none"
   }
-); 
+);
 
 export { SettingsTab };

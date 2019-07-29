@@ -21,7 +21,7 @@ const StoreWorkPassIntoFS = () => {
               text: "Yes",
               onPress: async () => {
                 try {
-                  let workpass = await fetchDocument(
+                  const workpass = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json",
                     "key"
                   );

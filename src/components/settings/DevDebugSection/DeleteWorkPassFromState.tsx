@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AsyncStorage,
   View,
@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
-import { useContext } from "react";
 import { styles } from "../styles";
 
 const DeleteWorkPassFromState = () => {

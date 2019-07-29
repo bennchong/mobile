@@ -1,9 +1,10 @@
 import React from "react";
 import { View, ScrollView, TouchableOpacity, Text } from "react-native";
+import { withNavigation } from "react-navigation";
+import PropTypes from "prop-types";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { Header } from "../Layout/Header";
 import { styles } from "./styles";
-import { withNavigation } from "react-navigation";
 
 const tabs = [
   {
@@ -65,3 +66,7 @@ const SettingsTemplate = props => {
 };
 
 export default withNavigation(SettingsTemplate);
+
+SettingsTemplate.propTypes = {
+  navigation: PropTypes.any
+};

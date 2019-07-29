@@ -11,12 +11,12 @@ export const formatDate = dateString => {
 };
 
 export const getCurrentDateAndTime = () => {
-  var date = new Date().getDate(); //Current Date
-  var month = new Date().getMonth() + 1; //Current Month
-  var year = new Date().getFullYear(); //Current Year
-  var hours = new Date().getHours(); //Current Hours
-  var min = new Date().getMinutes(); //Current Minutes
-  var result = `${date}${"/"}${
+  const date = new Date().getDate(); // Current Date
+  const month = new Date().getMonth() + 1; // Current Month
+  const year = new Date().getFullYear(); // Current Year
+  const hours = new Date().getHours(); // Current Hours
+  const min = new Date().getMinutes(); // Current Minutes
+  const result = `${date}${"/"}${
     month < 10 ? `0${month}` : `${month}`
   }${"/"}${year}${" "}${hours < 10 ? `0${hours}` : `${hours}`}${":"}${
     min < 10 ? `0${min}` : `${min}`

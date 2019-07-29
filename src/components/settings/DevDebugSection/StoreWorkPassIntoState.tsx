@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
-import { useContext } from "react";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler";
 
@@ -23,7 +22,7 @@ const StoreWorkPassIntoState = () => {
             {
               text: "Yes",
               onPress: async () => {
-                let workpass = await fetchDocument(
+                const workpass = await fetchDocument(
                   "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json",
                   "key"
                 );

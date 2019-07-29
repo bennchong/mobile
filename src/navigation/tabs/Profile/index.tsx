@@ -1,6 +1,5 @@
 import React from "react";
 import { useStateValue } from "../../../state";
-import "../../../components/profile/ProfileContainer";
 import { ProfileContainer } from "../../../components/profile/ProfileContainer";
 
 const ProfileTab = () => {
