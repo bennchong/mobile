@@ -27,14 +27,12 @@ const DeleteWorkPassFromFS = () => {
               onPress: async () => {
                 try {
                   await deleteStoredworkpass();
-                  // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",
                     "Workpass in file system is successfully deleted"
                   );
                   await AsyncStorage.removeItem("@storedTimeAccepted");
                 } catch (e) {
-                  // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",
                     "No workpass in file system to delete"

@@ -30,7 +30,6 @@ const StoreWorkPassIntoState = () => {
                   type: "UPDATE_WORKPASS",
                   workpass
                 });
-                // eslint-disable-next-line no-alert
                 Alert.alert(
                   "Dev Info",
                   "Valid Workpass have been stored into state!"

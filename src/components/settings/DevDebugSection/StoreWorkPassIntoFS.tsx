@@ -26,13 +26,11 @@ const StoreWorkPassIntoFS = () => {
                     "key"
                   );
                   await storeworkpass(workpass);
-                  // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",
                     "Workpass in file system has been successfully stored"
                   );
                 } catch (e) {
-                  // eslint-disable-next-line no-alert
                   Alert.alert("Dev Info", e);
                 }
               }
