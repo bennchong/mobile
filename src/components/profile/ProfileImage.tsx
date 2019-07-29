@@ -16,12 +16,12 @@ class ProfileImage extends React.Component<ProfileImageProps> {
   async componentDidMount() {
     const [, dispatch] = this.context;
 
-    let storedTimeVerified = await AsyncStorage.getItem("@storedTimeVerified");
-    if (storedTimeVerified) {
-      console.log("Fetched data: ", storedTimeVerified);
+    let storedTimeAccepted = await AsyncStorage.getItem("@storedTimeAccepted");
+    if (storedTimeAccepted) {
+      console.log("Fetched data: ", storedTimeAccepted);
       dispatch({
         type: "FIRST_VERIFY_WORKPASS",
-        time: storedTimeVerified
+        time: storedTimeAccepted
       });
     }
   }
@@ -35,9 +35,9 @@ class ProfileImage extends React.Component<ProfileImageProps> {
       <>
         <View style={styles.container}>
           <View style={styles.background}>
-            {data.timeVerified.length == 0 ? null : (
+            {data.timeAccepted.length == 0 ? null : (
               <Text style={{ paddingTop: 5 }}>
-                Verified on {data.timeVerified}
+                Verified on {data.timeAccepted}
               </Text>
             )}
           </View>

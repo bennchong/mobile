@@ -32,7 +32,7 @@ const DeleteWorkPassFromFS = () => {
                     "Dev Info",
                     "Workpass in file system is successfully deleted"
                   );
-                  await AsyncStorage.removeItem("storedTimeVerified");
+                  await AsyncStorage.removeItem("storedTimeAccepted");
                 } catch (e) {
                   // eslint-disable-next-line no-alert
                   Alert.alert(

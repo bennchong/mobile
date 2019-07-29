@@ -13,7 +13,6 @@ import { getCurrentDateAndTime } from "../../services/date";
 const VerifyProfile = ({ isPreview, onPress }) => {
   const context = useContext(StateContext);
   const { workpassAccepted } = context[0];
-  const [, dispatch] = context;
 
   if (!workpassAccepted && !isPreview) {
     return (
@@ -26,11 +25,11 @@ const VerifyProfile = ({ isPreview, onPress }) => {
           onPress={async () => {
             onPress();
             await AsyncStorage.setItem(
-              "storedTimeVerified",
+              "storedTimeAccepted",
               getCurrentDateAndTime()
             );
             context[1]({
-              type: "FIRST_VERIFY_WORKPASS",
+              type: "SET_WORKPASS_ACCEPTED",
               time: getCurrentDateAndTime()
             });
           }}
