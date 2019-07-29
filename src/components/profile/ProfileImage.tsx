@@ -20,7 +20,7 @@ class ProfileImage extends React.Component<ProfileImageProps> {
     if (storedTimeAccepted) {
       console.log("Fetched data: ", storedTimeAccepted);
       dispatch({
-        type: "FIRST_VERIFY_WORKPASS",
+        type: "SET_WORKPASS_ACCEPTED",
         time: storedTimeAccepted
       });
     }
