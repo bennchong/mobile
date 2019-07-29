@@ -3,8 +3,8 @@ import { View } from "react-native";
 import * as Permissions from "expo-permissions";
 import QRScanner from "./QRScanner";
 import {
-  checkStoredworkpassExists,
-  getStoredworkpass
+  checkStoredWorkpassExists,
+  getStoredWorkpass
 } from "../../services/fileSystem";
 import NavigationService from "../../navigation/NavigationService";
 import { StateContext } from "../../state";
@@ -24,13 +24,17 @@ export class ScannerPage extends React.Component {
     const [, dispatch] = this.context;
 
     // Checks if there is already a cert stored on the phone
+<<<<<<< HEAD
     const workpassExist = await checkStoredworkpassExists();
+=======
+    const workpassExist = await checkStoredWorkpassExists();
+>>>>>>> 9cae180737711c9afb0a10801ee289efd061ec19
 
     if (workpassExist) {
       // TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view
       dispatch({
         type: "UPDATE_WORKPASS",
-        workpass: await getStoredworkpass()
+        workpass: await getStoredWorkpass()
       });
       NavigationService.navigate("Profile", {});
     }
@@ -38,7 +42,7 @@ export class ScannerPage extends React.Component {
 
   render() {
     const [, dispatch] = this.context;
-    const storeworkpass = workpass =>
+    const storeWorkpass = workpass =>
       dispatch({
         type: "UPDATE_WORKPASS",
         workpass
@@ -47,7 +51,7 @@ export class ScannerPage extends React.Component {
       <View style={{ flex: 1 }}>
         <Header text="SCAN QR" />
         <View style={{ flex: 1, marginTop: 60 }}>
-          <QRScanner storeworkpass={storeworkpass} />
+          <QRScanner storeWorkpass={storeWorkpass} />
         </View>
       </View>
     );

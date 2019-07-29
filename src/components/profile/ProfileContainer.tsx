@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
+import { StateContext } from "../../state";
+import { MessageBar } from "../MessageBar";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,9 +22,13 @@ const ProfileContainer = ({ navigation, workpass, isPreview }) => {
     setValidityStatus(statusEnum.VALID);
   }, 3000);
 
+  const context = useContext(StateContext);
+  const { workpassAccepted } = context[0];
+
   return workpass ? (
     <View style={styles.container}>
-      <ValidationBar status={validityStatus} />
+      {workpassAccepted && <ValidationBar status={validityStatus} />}
+      {!workpassAccepted && <MessageBar />}
       <ProfileSection
         workpass={workpass}
         navigation={navigation}
