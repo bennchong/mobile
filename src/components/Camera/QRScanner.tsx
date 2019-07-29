@@ -112,7 +112,6 @@ class QRScanner extends React.Component<QRScannerProps> {
         this.handleProfileView(document);
       }
     } catch (e) {
-      // eslint-disable-next-line no-alert
       Alert.alert("ERROR", "INVALID QR");
     }
   };

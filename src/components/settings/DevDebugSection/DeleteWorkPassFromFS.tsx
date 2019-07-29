@@ -7,7 +7,7 @@ import {
   Text
 } from "react-native";
 import { Foundation, AntDesign } from "@expo/vector-icons";
-import { deleteStoredworkpass } from "../../../services/fileSystem";
+import { deleteStoredWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
 
 const DeleteWorkPassFromFS = () => {
@@ -26,7 +26,7 @@ const DeleteWorkPassFromFS = () => {
               text: "Yes",
               onPress: async () => {
                 try {
-                  await deleteStoredworkpass();
+                  await deleteStoredWorkpass();
                   // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",
