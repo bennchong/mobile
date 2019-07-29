@@ -27,7 +27,7 @@ export class ScannerPage extends React.Component {
     const res = await checkStoredworkpassExists();
 
     if (res) {
-      //TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view 
+      // TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view
       dispatch({
         type: "UPDATE_WORKPASS",
         workpass: await getStoredworkpass()

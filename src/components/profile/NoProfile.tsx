@@ -1,22 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import React from "react";
-import metrics from "../../config/metrics";
 import { AntDesign } from "@expo/vector-icons";
-
-const NoProfile = () => (
-  <View style={styles.container}>
-    <View style={styles.warningContainer}>
-      <AntDesign name="exclamationcircle" size={50} color="red" />
-      <Text style={styles.mainText}>No Profile Detected</Text>
-      <Text style={styles.sideText}>
-        Scan a valid Ministry of Manpower QR code to download your digital work
-        pass!
-      </Text>
-    </View>
-  </View>
-);
-
-export { NoProfile };
+import metrics from "../../config/metrics";
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
@@ -41,3 +26,18 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
+
+const NoProfile = () => (
+  <View style={styles.container}>
+    <View style={styles.warningContainer}>
+      <AntDesign name="exclamationcircle" size={50} color="red" />
+      <Text style={styles.mainText}>No Profile Detected</Text>
+      <Text style={styles.sideText}>
+        Scan a valid Ministry of Manpower QR code to download your digital work
+        pass!
+      </Text>
+    </View>
+  </View>
+);
+
+export { NoProfile };
