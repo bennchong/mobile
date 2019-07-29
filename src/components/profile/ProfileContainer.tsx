@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const ProfileContainer = ({ navigation, workpass, isPreview }) => {
+export const ProfileContainer = ({ navigation, workpass, isPreview }) => {
   const [validityStatus, setValidityStatus] = useState(statusEnum.VALIDATING);
 
   setTimeout(() => {
@@ -39,8 +39,6 @@ const ProfileContainer = ({ navigation, workpass, isPreview }) => {
     <NoProfile />
   );
 };
-
-export { ProfileContainer };
 
 ProfileContainer.propTypes = {
   navigation: PropTypes.any,

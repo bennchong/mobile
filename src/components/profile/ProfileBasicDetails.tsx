@@ -5,7 +5,7 @@ import { Margin } from "../Layout/Margin";
 import { TextRow } from "../Layout/TextRow";
 import { formatDate } from "../../services/date";
 
-const ProfileBasicDetails = ({ recipient }) => {
+export const ProfileBasicDetails = ({ recipient }) => {
   return (
     <View>
       <TextRow label="Country of Residence" text={recipient.country} />
@@ -15,8 +15,6 @@ const ProfileBasicDetails = ({ recipient }) => {
     </View>
   );
 };
-
-export { ProfileBasicDetails };
 
 ProfileBasicDetails.propTypes = {
   recipient: PropTypes.object

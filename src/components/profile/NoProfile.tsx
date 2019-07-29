@@ -1,31 +1,7 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import metrics from "../../config/metrics";
-
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center" },
-  warningContainer: {
-    width: (2 * metrics.DEVICE_WIDTH) / 3,
-    height: (2 * metrics.DEVICE_WIDTH) / 3,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 30,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  mainText: {
-    color: "red",
-    fontWeight: "bold",
-    fontSize: 20,
-    marginTop: 10
-  },
-  sideText: {
-    fontSize: 15,
-    marginTop: 10,
-    textAlign: "center"
-  }
-});
+import { styles } from "./Styles/NoProfileStyles";
 
 export const NoProfile = () => (
   <View style={styles.container}>
