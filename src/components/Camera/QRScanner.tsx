@@ -7,10 +7,10 @@ import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
-import { storeworkpass } from "../../services/fileSystem";
+import { storeWorkpass } from "../../services/fileSystem";
 
 interface QRScannerProps {
-  storeworkpass: (cert) => {};
+  storeWorkpass: (cert) => {};
   navigation: any;
   isFocused: boolean;
 }
@@ -59,7 +59,7 @@ class QRScanner extends React.Component<QRScannerProps> {
         {
           text: "Yes",
           onPress: async () => {
-            await storeworkpass(document);
+            await storeWorkpass(document);
             updateworkpass(document);
             this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem

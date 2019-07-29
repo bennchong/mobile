@@ -14,7 +14,7 @@ export const getStoredworkpass = async () => {
   return JSON.parse(documentAsString);
 };
 
-export const storeworkpass = workpass => {
+export const storeWorkpass = workpass => {
   return FileSystem.writeAsStringAsync(
     DEFAULT_FILE_NAME,
     JSON.stringify(workpass)

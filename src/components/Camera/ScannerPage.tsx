@@ -38,7 +38,7 @@ export class ScannerPage extends React.Component {
 
   render() {
     const [, dispatch] = this.context;
-    const storeworkpass = workpass =>
+    const storeWorkpass = workpass =>
       dispatch({
         type: "UPDATE_WORKPASS",
         workpass
@@ -47,7 +47,7 @@ export class ScannerPage extends React.Component {
       <View style={{ flex: 1 }}>
         <Header text="SCAN QR" />
         <View style={{ flex: 1, marginTop: 60 }}>
-          <QRScanner storeworkpass={storeworkpass} />
+          <QRScanner storeWorkpass={storeWorkpass} />
         </View>
       </View>
     );
