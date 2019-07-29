@@ -8,7 +8,7 @@ import { styles } from "./Styles/ProfileNameStyles";
 const ProfileName = ({ fin, name, navigation, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
 
-  const handleCancel = () => {
+  const toggleVisibility = () => {
     setVisible(!isDialogVisible);
   };
 
@@ -37,7 +37,7 @@ const ProfileName = ({ fin, name, navigation, isPreview }) => {
           <Text style={styles.shareText}>SHARE ID</Text>
           <QrCodeGenerator
             isVisible={isDialogVisible}
-            handleCancel={handleCancel}
+            handleCancel={toggleVisibility}
           />
         </TouchableOpacity>
       )}

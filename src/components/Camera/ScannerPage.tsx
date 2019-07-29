@@ -24,11 +24,7 @@ export class ScannerPage extends React.Component {
     const [, dispatch] = this.context;
 
     // Checks if there is already a cert stored on the phone
-<<<<<<< HEAD
-    const workpassExist = await checkStoredworkpassExists();
-=======
     const workpassExist = await checkStoredWorkpassExists();
->>>>>>> 9cae180737711c9afb0a10801ee289efd061ec19
 
     if (workpassExist) {
       // TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view

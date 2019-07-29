@@ -17,9 +17,7 @@ export const getActionFromQR = (qrData: string) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-export const fetchDocument = async (uri: string, key: string) => {
+export const fetchDocument = async (uri: string) => {
   const results = await axios.get(uri, { responseType: "json" });
-  // console.log("AXIOS");
-  // console.log(results);
   return results.data;
 };
