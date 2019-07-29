@@ -69,14 +69,14 @@ interface QrGeneratorModalProps {
 }
 
 const QrCodeGenerator = (props: QrGeneratorModalProps) => {
-  const [qrText, setQrText] = useState("asd");
+  const [qrText, setQrText] = useState("VIEW");
 
   const handleCancel = () => {
     props.handleCancel();
   };
 
   const refreshQr = () => {
-    setQrText(`${qrText} + "asd"`);
+    setQrText(`${qrText} + "placeholder URL"`);
   };
 
   return (
