@@ -12,7 +12,6 @@ import { storeworkpass } from "../../services/fileSystem";
 interface QRScannerProps {
   storeworkpass: (cert) => {};
   navigation: any;
-  isFocused: boolean;
 }
 
 class QRScanner extends React.Component<QRScannerProps> {
