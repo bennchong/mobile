@@ -12,8 +12,9 @@ export const formatDate = dateString => {
 
 export const getCurrentDateAndTime = () => {
   const date = new Date();
-  const dateString : string = tz(date.getTime(), TIMEZONE).format("DD/MM/YYYY HH:MM");
-  console.log(dateString);
+  const dateString: string = tz(date.getTime(), TIMEZONE).format(
+    "DD/MM/YYYY HH:MM"
+  );
   return dateString;
 };
 
@@ -21,6 +22,4 @@ export const checkIfExpired = dateString => {
   const expiryDate = new Date(dateString);
   const now = new Date();
   return expiryDate.getTime() < now.getTime();
-}
-
-
+};

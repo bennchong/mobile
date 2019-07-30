@@ -13,12 +13,13 @@ export const ProfileImage = ({ recipient, navigation, isPreview }) => {
       <View style={styles.container}>
         <View style={styles.background}>
           {data.timeAccepted.length === 0 ? null : (
-            <Text style={{ paddingTop: 5 }}>
+            <Text style={styles.verifiedText}>
               Verified on {data.timeAccepted}
             </Text>
           )}
         </View>
         <ProfileName
+          photo={photo}
           fin={fin}
           name={name}
           navigation={navigation}

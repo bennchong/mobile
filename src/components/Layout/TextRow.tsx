@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 16,
+    paddingHorizontal: 26,
     marginVertical: 10
   },
-  text: { color: "#808080" }
+  text: { color: "#808080", fontSize: 13 }
 });
 
 const TextRow = ({ label, text }) => {

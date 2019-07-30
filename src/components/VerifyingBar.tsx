@@ -42,11 +42,13 @@ export const ValidationBar = (props: ValidationBarProps) => {
   switch (props.status) {
     case statusEnum.VALIDATING:
       barColor = { backgroundColor: "#DAA520" };
-      icon = <ActivityIndicator size="small" color="white" />;
+      icon = (
+        <ActivityIndicator size="small" color="white" style={styles.icon} />
+      );
       text = "VERIFYING";
       break;
     case statusEnum.VALID:
-      barColor = { backgroundColor: "#32CD32" };
+      barColor = { backgroundColor: "#5FC660" };
       icon = (
         <AntDesign
           name="checkcircle"

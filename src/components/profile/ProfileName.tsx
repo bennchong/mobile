@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { QrCodeGenerator } from "../QrGenerator";
 import { styles } from "./Styles/ProfileNameStyles";
 
-export const ProfileName = ({ fin, name, navigation, isPreview }) => {
+export const ProfileName = ({ photo, fin, name, navigation, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -36,6 +36,9 @@ export const ProfileName = ({ fin, name, navigation, isPreview }) => {
           <AntDesign name="qrcode" size={15} color="#808080" />
           <Text style={styles.shareText}>SHARE ID</Text>
           <QrCodeGenerator
+            photo={photo}
+            name={name}
+            fin={fin}
             isVisible={isDialogVisible}
             handleCancel={toggleVisibility}
           />
@@ -45,10 +48,10 @@ export const ProfileName = ({ fin, name, navigation, isPreview }) => {
   );
 };
 
-
 ProfileName.propTypes = {
   fin: PropTypes.string,
   name: PropTypes.string,
+  photo: PropTypes.string,
   navigation: PropTypes.any,
   isPreview: PropTypes.bool
 };

@@ -5,9 +5,7 @@ import { styles } from "./BarStyles";
 export const MessageBar = () => {
   return (
     <View style={[styles.baseBar, styles.verify]}>
-      <Text style={styles.verifyText}>
-        Please verify your ID and accept it below
-      </Text>
+      <Text style={styles.verifyText}>Verify your ID</Text>
     </View>
   );
 };

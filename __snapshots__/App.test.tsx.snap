@@ -133,7 +133,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                         Object {
                           "alignItems": "center",
                           "flexDirection": "row",
-                          "marginLeft": 16,
+                          "marginLeft": 26,
                         }
                       }
                     >
@@ -141,7 +141,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       <Text
                         style={
                           Object {
-                            "marginLeft": 16,
+                            "marginLeft": 26,
                           }
                         }
                       >
@@ -175,7 +175,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                         Object {
                           "alignItems": "center",
                           "flexDirection": "row",
-                          "marginLeft": 16,
+                          "marginLeft": 26,
                         }
                       }
                     >
@@ -183,7 +183,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       <Text
                         style={
                           Object {
-                            "marginLeft": 16,
+                            "marginLeft": 26,
                           }
                         }
                       >
@@ -217,7 +217,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                         Object {
                           "alignItems": "center",
                           "flexDirection": "row",
-                          "marginLeft": 16,
+                          "marginLeft": 26,
                         }
                       }
                     >
@@ -225,7 +225,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       <Text
                         style={
                           Object {
-                            "marginLeft": 16,
+                            "marginLeft": 26,
                           }
                         }
                       >
@@ -259,7 +259,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                         Object {
                           "alignItems": "center",
                           "flexDirection": "row",
-                          "marginLeft": 16,
+                          "marginLeft": 26,
                         }
                       }
                     >
@@ -267,7 +267,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       <Text
                         style={
                           Object {
-                            "marginLeft": 16,
+                            "marginLeft": 26,
                           }
                         }
                       >

@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#DAA520"
   },
   verified: {
-    backgroundColor: "#32CD32"
+    backgroundColor: "#3FA540"
   },
   invalid: {
     backgroundColor: "#B22222"
@@ -22,12 +22,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5"
   },
   verifyText: {
-    color: "#808080"
+    color: "#707070"
   },
   text: {
     color: "#fff",
     fontWeight: "bold",
-    fontSize: 18
+    fontSize: 16
   },
   icon: {
     marginBottom: 4,

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, AsyncStorage, Text} from "react-native";
+import { View, StyleSheet, AsyncStorage, Text } from "react-native";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
@@ -28,6 +28,7 @@ export const ProfileContainer = ({
 }: ProfileContainerProps) => {
   const [validityStatus, setValidityStatus] = useState(statusEnum.VALIDATING);
   const [{ workpassAccepted }, dispatch] = useStateValue();
+
   useEffect(() => {
     verifyWorkpassBoolean(workpass).then(isValid => {
       setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
@@ -52,7 +53,6 @@ export const ProfileContainer = ({
         navigation={navigation}
         isPreview={isPreview}
       />
-      <Text> hi </Text>
     </View>
   ) : (
     <NoProfile />

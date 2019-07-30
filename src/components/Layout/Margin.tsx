@@ -5,10 +5,8 @@ const Margin = () => {
   return (
     <View
       style={{
-        marginHorizontal: 16,
-        height: 45,
-        borderBottomWidth: 1,
-        borderColor: "#A9A9A9"
+        marginHorizontal: 26,
+        height: 45
       }}
     />
   );

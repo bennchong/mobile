@@ -11,10 +11,10 @@ export const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 16
+    marginLeft: 26
   },
-  textContainer: { marginLeft: 16 },
+  textContainer: { marginLeft: 26 },
   right: {
-    marginRight: 16
+    marginRight: 26
   }
 });

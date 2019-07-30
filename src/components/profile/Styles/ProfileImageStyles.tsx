@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     width: metrics.DIAMETER,
     height: metrics.DIAMETER,
     borderRadius: metrics.RADIUS,
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "#fff",
     alignSelf: "center"
   },
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     marginTop: metrics.RADIUS,
     position: "absolute",
     shadowColor: "#000000",
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.15,
     shadowRadius: 3,
     shadowOffset: {
       height: 5,
@@ -34,9 +34,12 @@ export const styles = StyleSheet.create({
     alignItems: "center"
   },
   margin: {
-    marginHorizontal: 16,
-    height: 55,
-    borderBottomWidth: 1,
-    borderColor: "#A9A9A9"
+    marginHorizontal: 26,
+    height: 55
+  },
+  verifiedText: {
+    paddingTop: 5,
+    color: "#707070",
+    fontSize: 9
   }
 });
