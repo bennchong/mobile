@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { View } from "react-native";
 import { DetailSection } from "./DetailSection";
 import { Margin } from "../Layout/Margin";
@@ -42,4 +43,8 @@ export const ProfileDetails = ({ cleanDocument }) => {
       </DetailSection>
     </View>
   );
+};
+
+ProfileDetails.propTypes = {
+  cleanDocument: PropTypes.object
 };

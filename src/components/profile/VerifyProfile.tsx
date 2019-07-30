@@ -102,5 +102,5 @@ export { VerifyProfile };
 
 VerifyProfile.propTypes = {
   isPreview: PropTypes.bool,
-  onPress: PropTypes.func
+  handleShowModal: PropTypes.func
 };

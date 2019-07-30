@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 26,
-    marginVertical: 10
+    marginVertical: 10,
+    backgroundColor: "#fff"
   },
   text: { color: "#808080", fontSize: 13 }
 });

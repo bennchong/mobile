@@ -6,7 +6,8 @@ const Margin = () => {
     <View
       style={{
         marginHorizontal: 26,
-        height: 45
+        height: 45,
+        backgroundColor: "#fff"
       }}
     />
   );

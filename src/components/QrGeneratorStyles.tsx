@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import metrics from "../config/metrics";
 import Constants from "expo-constants";
+import metrics from "../config/metrics";
 
 export const styles = StyleSheet.create({
   box: {
@@ -51,7 +51,6 @@ export const styles = StyleSheet.create({
   qrContainer: {
     width: metrics.MODAL_QR_CONTAINER,
     height: metrics.MODAL_QR_CONTAINER,
-    // paddingVertical: 20,
     backgroundColor: "#fff",
     marginTop: 20,
     shadowColor: "#000",
@@ -59,10 +58,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-    // shadowOffset: {
-    //   height: 5,
-    //   width: 5
-    // },
     justifyContent: "center",
     alignItems: "center"
   },

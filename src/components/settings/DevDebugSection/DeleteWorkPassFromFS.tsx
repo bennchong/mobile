@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  View,
-  TouchableOpacity,
-  Alert,
-  Text
-} from "react-native";
+import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { Foundation, AntDesign } from "@expo/vector-icons";
-import { deleteStoredworkpass } from "../../../services/fileSystem";
+import {
+  resetTimeAccepted,
+  deleteStoredWorkpass
+} from "../../../services/fileSystem";
 import { styles } from "../styles";
-import { resetTimeAccepted } from "../../../services/fileSystem";
+
 const DeleteWorkPassFromFS = () => {
   return (
     <TouchableOpacity
@@ -25,7 +23,7 @@ const DeleteWorkPassFromFS = () => {
               text: "Yes",
               onPress: async () => {
                 try {
-                  await deleteStoredworkpass();
+                  await deleteStoredWorkpass();
                   // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",

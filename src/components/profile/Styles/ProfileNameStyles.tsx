@@ -31,17 +31,5 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#707070",
     fontSize: 11
-  },
-  previewContainer: { alignItems: "center", marginTop: 10 },
-  previewText: { fontSize: 30, color: "#DAA520", fontWeight: "bold" },
-  previewButton: {
-    flexDirection: "row",
-    backgroundColor: "#DAA520",
-    height: 40,
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
-  previewButtonText: { marginLeft: 5 }
+  }
 });

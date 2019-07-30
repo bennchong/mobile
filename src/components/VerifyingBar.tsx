@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
@@ -6,7 +6,6 @@ import Constants from "expo-constants";
 const styles = StyleSheet.create({
   baseBar: {
     flexDirection: "row",
-    height: Constants.statusBarHeight + 35,
     justifyContent: "center",
     alignItems: "flex-end",
     paddingBottom: 5
@@ -32,6 +31,7 @@ export enum statusEnum {
 
 interface ValidationBarProps {
   status: statusEnum;
+  isPreview: boolean;
 }
 
 // presentation component, only switch according to props
@@ -59,7 +59,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
       );
       text = "VALID";
       break;
-    case statusEnum.INVALID:
+    default:
       barColor = { backgroundColor: "#B22222" };
       icon = (
         <AntDesign
@@ -74,7 +74,13 @@ export const ValidationBar = (props: ValidationBarProps) => {
   }
 
   return (
-    <View style={[styles.baseBar, barColor]}>
+    <View
+      style={[
+        styles.baseBar,
+        barColor,
+        { height: props.isPreview ? 35 : Constants.statusBarHeight + 35 }
+      ]}
+    >
       <Text style={styles.text}>{text}</Text>
       {icon}
     </View>

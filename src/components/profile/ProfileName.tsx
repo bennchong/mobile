@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { QrCodeGenerator } from "../QrGenerator";
 import { styles } from "./Styles/ProfileNameStyles";
 
-export const ProfileName = ({ photo, fin, name, navigation, isPreview }) => {
+export const ProfileName = ({ photo, fin, name, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -16,18 +16,7 @@ export const ProfileName = ({ photo, fin, name, navigation, isPreview }) => {
     <View style={styles.textContainer}>
       <Text style={styles.fin}>{fin}</Text>
       <Text style={styles.name}>{name}</Text>
-      {isPreview ? ( // Is Preview Section
-        <View style={styles.previewContainer}>
-          <Text style={styles.previewText}>Preview Only</Text>
-          <TouchableOpacity
-            style={styles.previewButton}
-            onPress={() => navigation.goBack()}
-          >
-            <AntDesign name="back" size={15} />
-            <Text style={styles.previewButtonText}>Go back to QR scanner</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
+      {isPreview ? null : ( // Is Preview Section
         // Not Preview Section
         <TouchableOpacity
           style={styles.shareContainer}
@@ -52,6 +41,5 @@ ProfileName.propTypes = {
   fin: PropTypes.string,
   name: PropTypes.string,
   photo: PropTypes.string,
-  navigation: PropTypes.any,
   isPreview: PropTypes.bool
 };

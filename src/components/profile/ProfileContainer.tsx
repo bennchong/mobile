@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, AsyncStorage, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, AsyncStorage } from "react-native";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
@@ -16,13 +16,11 @@ const styles = StyleSheet.create({
 });
 
 interface ProfileContainerProps {
-  navigation: any;
   workpass: object;
   isPreview: boolean;
 }
 
 export const ProfileContainer = ({
-  navigation,
   workpass,
   isPreview
 }: ProfileContainerProps) => {
@@ -46,13 +44,11 @@ export const ProfileContainer = ({
 
   return workpass ? (
     <View style={styles.container}>
-      {workpassAccepted && <ValidationBar status={validityStatus} />}
+      {workpassAccepted && (
+        <ValidationBar isPreview={isPreview} status={validityStatus} />
+      )}
       {!workpassAccepted && <MessageBar />}
-      <ProfileSection
-        workpass={workpass}
-        navigation={navigation}
-        isPreview={isPreview}
-      />
+      <ProfileSection workpass={workpass} isPreview={isPreview} />
     </View>
   ) : (
     <NoProfile />

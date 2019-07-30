@@ -34,7 +34,8 @@ export const styles = StyleSheet.create({
     alignItems: "center"
   },
   margin: {
-    marginHorizontal: 26,
+    backgroundColor: "#fff",
+    width: "100%",
     height: 55
   },
   verifiedText: {

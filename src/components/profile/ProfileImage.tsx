@@ -4,7 +4,7 @@ import { ProfileName } from "./ProfileName";
 import { StateContext } from "../../state";
 import { styles } from "./Styles/ProfileImageStyles";
 
-export const ProfileImage = ({ recipient, navigation, isPreview }) => {
+export const ProfileImage = ({ recipient, isPreview }) => {
   const context = useContext(StateContext);
   const data = context[0];
   const { photo, fin, name } = recipient;
@@ -22,7 +22,6 @@ export const ProfileImage = ({ recipient, navigation, isPreview }) => {
           photo={photo}
           fin={fin}
           name={name}
-          navigation={navigation}
           isPreview={isPreview}
         />
         <View style={styles.imageContainer}>

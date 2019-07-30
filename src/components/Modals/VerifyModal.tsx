@@ -26,6 +26,6 @@ export const VerifyModal = ({ handleCloseModal, showModal }) => {
 };
 
 VerifyModal.propTypes = {
-  onPress: PropTypes.func,
+  handleCloseModal: PropTypes.func,
   showModal: PropTypes.bool
 };

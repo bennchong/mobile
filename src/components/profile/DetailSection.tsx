@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 26,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderColor: "#A9A9A9"
+    borderColor: "#A9A9A9",
+    backgroundColor: "#fff"
   },
   header: { color: "#808080", fontWeight: "bold", fontSize: 13 }
 });
@@ -16,19 +17,24 @@ interface DetailSectionProps {
   children: any;
 }
 
-const DetailSectionHeader = ({ title }) => {
-  if (title) {
+interface DetailSectionHeaderProps {
+  title: string;
+}
+
+const DetailSectionHeader = (props: DetailSectionHeaderProps) => {
+  if (props.title) {
     return (
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.header}>{props.title}</Text>
       </View>
     );
-  } else return null;
+  }
+  return null;
 };
 
 export const DetailSection = (props: DetailSectionProps) => {
   return (
-    <View>
+    <View style={{ backgroundColor: "#fff" }}>
       <DetailSectionHeader title={props.title} />
       {props.children}
     </View>

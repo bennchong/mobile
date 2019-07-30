@@ -1,14 +1,10 @@
 import React, { useContext } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Alert,
-  Text
-} from "react-native";
+import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
 import { styles } from "../styles";
 import { resetTimeAccepted } from "../../../services/fileSystem";
+
 const DeleteWorkPassFromState = () => {
   const context = useContext(StateContext);
   return (
