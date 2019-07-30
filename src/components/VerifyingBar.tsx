@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import Constants from "expo-constants";
 import { AntDesign } from "@expo/vector-icons";
-import { StateContext } from "../state/index";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   baseBar: {
@@ -11,21 +10,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     paddingBottom: 5
-  },
-  validating: {
-    backgroundColor: "#DAA520"
-  },
-  verified: {
-    backgroundColor: "#32CD32"
-  },
-  invalid: {
-    backgroundColor: "#B22222"
-  },
-  verify: {
-    backgroundColor: "#f5f5f5"
-  },
-  verifyText: {
-    color: "#808080"
   },
   text: {
     color: "#fff",
@@ -37,53 +21,6 @@ const styles = StyleSheet.create({
     marginLeft: 5
   }
 });
-
-const VerifyYourID = () => {
-  return (
-    <View style={[styles.baseBar, styles.verify]}>
-      <Text style={styles.verifyText}>
-        Please verify your ID and accept it below
-      </Text>
-    </View>
-  );
-};
-
-const VerifyingBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.validating]}>
-      <ActivityIndicator size="small" color="white" />
-      <Text style={styles.text}>VERIFYING</Text>
-    </View>
-  );
-};
-
-const ValidBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.verified]}>
-      <Text style={styles.text}>VALID</Text>
-      <AntDesign
-        name="checkcircle"
-        color="#fff"
-        size={15}
-        style={styles.icon}
-      />
-    </View>
-  );
-};
-
-const InvalidBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.invalid]}>
-      <Text style={styles.text}>INVALID</Text>
-      <AntDesign
-        name="closecircle"
-        color="#fff"
-        size={15}
-        style={styles.icon}
-      />
-    </View>
-  );
-};
 
 /* eslint-disable no-unused-vars */
 export enum statusEnum {
@@ -99,20 +36,45 @@ interface ValidationBarProps {
 
 // presentation component, only switch according to props
 export const ValidationBar = (props: ValidationBarProps) => {
-  // const [verificationStatus, setVerificationStatus] = useState(
-  //   statusEnum.VALIDATING
-  // );
-  const context = useContext(StateContext);
-  const { workpassAccepted } = context[0];
-  if (!workpassAccepted) {
-    return <VerifyYourID />;
+  let barColor;
+  let icon;
+  let text;
+  switch (props.status) {
+    case statusEnum.VALIDATING:
+      barColor = { backgroundColor: "#DAA520" };
+      icon = <ActivityIndicator size="small" color="white" />;
+      text = "VERIFYING";
+      break;
+    case statusEnum.VALID:
+      barColor = { backgroundColor: "#32CD32" };
+      icon = (
+        <AntDesign
+          name="checkcircle"
+          color="#fff"
+          size={15}
+          style={styles.icon}
+        />
+      );
+      text = "VALID";
+      break;
+    case statusEnum.INVALID:
+      barColor = { backgroundColor: "#B22222" };
+      icon = (
+        <AntDesign
+          name="closecircle"
+          color="#fff"
+          size={15}
+          style={styles.icon}
+        />
+      );
+      text = "INVALID";
+      break;
   }
 
-  if (props.status === statusEnum.VALIDATING) {
-    return <VerifyingBar />;
-  }
-  if (props.status === statusEnum.VALID) {
-    return <ValidBar />;
-  }
-  return <InvalidBar />;
+  return (
+    <View style={[styles.baseBar, barColor]}>
+      <Text style={styles.text}>{text}</Text>
+      {icon}
+    </View>
+  );
 };

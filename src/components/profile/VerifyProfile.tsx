@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  AsyncStorage
 } from "react-native";
 import PropTypes from "prop-types";
 import { StateContext } from "../../state";
@@ -65,9 +66,19 @@ const styles = StyleSheet.create({
   }
 });
 
-const VerifyProfile = ({ isPreview, onPress }) => {
+const VerifyProfile = ({ isPreview, handleShowModal }) => {
   const context = useContext(StateContext);
   const { workpassAccepted } = context[0];
+  const dispatch = context[1];
+
+  const handleWorkpassConfirmation = async () => {
+    handleShowModal();
+    await AsyncStorage.setItem("@storedTimeAccepted", getCurrentDateAndTime());
+    dispatch({
+      type: "SET_WORKPASS_ACCEPTED",
+      time: getCurrentDateAndTime()
+    });
+  };
 
   if (!workpassAccepted && !isPreview) {
     return (
@@ -77,14 +88,7 @@ const VerifyProfile = ({ isPreview, onPress }) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={async () => {
-            onPress();
-            await setTimeAccepted(getCurrentDateAndTime());
-            context[1]({
-              type: "SET_WORKPASS_ACCEPTED",
-              time: getCurrentDateAndTime()
-            });
-          }}
+          onPress={() => handleWorkpassConfirmation()}
         >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
