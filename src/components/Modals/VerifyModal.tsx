@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { styles } from "./modalStyles";
 
-export const VerifyModal = ({ onPress, showModal }) => {
+export const VerifyModal = ({ handleCloseModal, showModal }) => {
   return (
     <Modal visible={showModal} transparent={true} animationType="fade">
       <View style={styles.overlay}>
@@ -12,7 +12,10 @@ export const VerifyModal = ({ onPress, showModal }) => {
           <View style={styles.modal}>
             <AntDesign name="checkcircle" size={50} color="#32CD32" />
             <Text style={styles.modalText}>Digital work pass saved!</Text>
-            <TouchableOpacity style={styles.modalButton} onPress={onPress}>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => handleCloseModal()}
+            >
               <Text>View profile</Text>
             </TouchableOpacity>
           </View>

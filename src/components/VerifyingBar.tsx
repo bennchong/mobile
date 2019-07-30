@@ -1,44 +1,26 @@
-import React from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import React, { useState } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { styles } from "./BarStyles";
+import Constants from "expo-constants";
 
-const VerifyingBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.validating]}>
-      <ActivityIndicator size="small" color="white" />
-      <Text style={styles.text}>VERIFYING</Text>
-    </View>
-  );
-};
-
-const ValidBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.verified]}>
-      <Text style={styles.text}>VALID</Text>
-      <AntDesign
-        name="checkcircle"
-        color="#fff"
-        size={15}
-        style={styles.icon}
-      />
-    </View>
-  );
-};
-
-const InvalidBar = () => {
-  return (
-    <View style={[styles.baseBar, styles.invalid]}>
-      <Text style={styles.text}>INVALID</Text>
-      <AntDesign
-        name="closecircle"
-        color="#fff"
-        size={15}
-        style={styles.icon}
-      />
-    </View>
-  );
-};
+const styles = StyleSheet.create({
+  baseBar: {
+    flexDirection: "row",
+    height: Constants.statusBarHeight + 35,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingBottom: 5
+  },
+  text: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 18
+  },
+  icon: {
+    marginBottom: 4,
+    marginLeft: 5
+  }
+});
 
 /* eslint-disable no-unused-vars */
 export enum statusEnum {
@@ -54,11 +36,45 @@ interface ValidationBarProps {
 
 // presentation component, only switch according to props
 export const ValidationBar = (props: ValidationBarProps) => {
-  if (props.status === statusEnum.VALIDATING) {
-    return <VerifyingBar />;
+  let barColor;
+  let icon;
+  let text;
+  switch (props.status) {
+    case statusEnum.VALIDATING:
+      barColor = { backgroundColor: "#DAA520" };
+      icon = <ActivityIndicator size="small" color="white" />;
+      text = "VERIFYING";
+      break;
+    case statusEnum.VALID:
+      barColor = { backgroundColor: "#32CD32" };
+      icon = (
+        <AntDesign
+          name="checkcircle"
+          color="#fff"
+          size={15}
+          style={styles.icon}
+        />
+      );
+      text = "VALID";
+      break;
+    case statusEnum.INVALID:
+      barColor = { backgroundColor: "#B22222" };
+      icon = (
+        <AntDesign
+          name="closecircle"
+          color="#fff"
+          size={15}
+          style={styles.icon}
+        />
+      );
+      text = "INVALID";
+      break;
   }
-  if (props.status === statusEnum.VALID) {
-    return <ValidBar />;
-  }
-  return <InvalidBar />;
+
+  return (
+    <View style={[styles.baseBar, barColor]}>
+      <Text style={styles.text}>{text}</Text>
+      {icon}
+    </View>
+  );
 };

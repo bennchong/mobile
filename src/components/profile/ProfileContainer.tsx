@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import { View, StyleSheet, AsyncStorage } from "react-native";
 import PropTypes from "prop-types";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
@@ -23,12 +23,23 @@ export const ProfileContainer = ({ navigation, workpass, isPreview }) => {
   }, 3000);
 
   const context = useContext(StateContext);
-  const { workpassAccepted } = context[0];
+  const dispatch = context[1];
+
+  useEffect(() => {
+    AsyncStorage.getItem("@storedTimeAccepted").then(storedTimeAccepted => {
+      if (storedTimeAccepted) {
+        dispatch({
+          type: "SET_WORKPASS_ACCEPTED",
+          time: storedTimeAccepted
+        });
+      }
+    });
+  }, []);
 
   return workpass ? (
     <View style={styles.container}>
-      {workpassAccepted && <ValidationBar status={validityStatus} />}
-      {!workpassAccepted && <MessageBar />}
+      {context[0].workpassAccepted && <ValidationBar status={validityStatus} />}
+      {!context[0].workpassAccepted && <MessageBar />}
       <ProfileSection
         workpass={workpass}
         navigation={navigation}

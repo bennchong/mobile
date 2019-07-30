@@ -9,6 +9,7 @@ import { StateContext } from "../../../state";
 
 const DevStoreWorkPass = props => {
   const context = useContext(StateContext);
+  const dispatch = context[1];
   let buttonText;
   if (props.source === "filesystem") {
     buttonText = "Store valid workpass into the file system";
@@ -66,7 +67,7 @@ const DevStoreWorkPass = props => {
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json",
                     "key"
                   );
-                  context[1]({
+                  dispatch({
                     type: "UPDATE_WORKPASS",
                     workpass
                   });

@@ -25,8 +25,11 @@ const ProfileSection = ({ workpass, navigation, isPreview }) => {
       />
       <ProfileBasicDetails recipient={recipient} />
       <ProfilePassDetails pass={pass} employer={employer} />
-      <VerifyProfile isPreview={isPreview} onPress={() => setModal(true)} />
-      <VerifyModal showModal={modal} onPress={() => setModal(false)} />
+      <VerifyProfile
+        isPreview={isPreview}
+        handleShowModal={() => setModal(true)}
+      />
+      <VerifyModal showModal={modal} handleCloseModal={() => setModal(false)} />
     </ScrollView>
   );
 };

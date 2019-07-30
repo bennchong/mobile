@@ -14,6 +14,7 @@ import { StateContext } from "../../../state";
 
 const DevDeleteWorkpass = props => {
   const context = useContext(StateContext);
+  const dispatch = context[1];
 
   let buttonText;
   if (props.source === "filesystem") {
@@ -66,7 +67,7 @@ const DevDeleteWorkpass = props => {
               {
                 text: "Yes",
                 onPress: async () => {
-                  context[1]({ type: "DELETE_WORKPASS" });
+                  dispatch({ type: "DELETE_WORKPASS" });
                   try {
                     // await AsyncStorage.removeItem("@storedTimeAccepted");
                     Alert.alert(
