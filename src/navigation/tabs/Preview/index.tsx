@@ -12,7 +12,6 @@ interface ProfilePreviewPageProps {
 const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
   const { navigation } = props;
   const workpass = navigation.getParam("workpass");
-
   return (
     <View style={{ flex: 1 }}>
       <ProfileContainer

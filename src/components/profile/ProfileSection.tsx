@@ -9,13 +9,10 @@ import { VerifyProfile } from "./VerifyProfile";
 import { VerifyModal } from "../Modals/VerifyModal";
 
 const ProfileSection = ({ workpass, navigation, isPreview }) => {
-  const cleanDocument = isPreview
-    ? getData(workpass.document)
-    : getData(workpass);
+  const cleanDocument = getData(workpass);
   const { pass, recipient, employer } = cleanDocument;
 
   const [modal, setModal] = useState(false);
-
   return (
     <ScrollView style={{ flex: 1 }}>
       <ProfileImage

@@ -36,7 +36,7 @@ class QRScanner extends React.Component<QRScannerProps> {
   handleProfileView = document => {
     this.setState({ isProcessingQr: false });
     NavigationService.navigate("ProfilePreview", {
-      workpass: { document }
+      workpass: document 
     });
   };
 

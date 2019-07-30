@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
+import { verifyWorkpassBoolean } from "../../services/verificationService";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +13,22 @@ const styles = StyleSheet.create({
   }
 });
 
-const ProfileContainer = ({ navigation, workpass, isPreview }) => {
+interface ProfileContainerProps {
+  navigation: any;
+  workpass: object;
+  isPreview: boolean;
+}
+
+export const ProfileContainer = ({
+  navigation,
+  workpass,
+  isPreview
+}: ProfileContainerProps) => {
   const [validityStatus, setValidityStatus] = useState(statusEnum.VALIDATING);
 
-  setTimeout(() => {
-    setValidityStatus(statusEnum.VALID);
-  }, 3000);
+  verifyWorkpassBoolean(workpass).then(isValid => {
+    setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
+  });
 
   return workpass ? (
     <View style={styles.container}>
@@ -32,12 +42,4 @@ const ProfileContainer = ({ navigation, workpass, isPreview }) => {
   ) : (
     <NoProfile />
   );
-};
-
-export { ProfileContainer };
-
-ProfileContainer.propTypes = {
-  navigation: PropTypes.any,
-  workpass: PropTypes.object,
-  isPreview: PropTypes.bool
 };

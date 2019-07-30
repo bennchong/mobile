@@ -20,6 +20,6 @@ export const getActionFromQR = (qrData: string) => {
 export const fetchDocument = async (uri: string, key: string) => {
   const results = await axios.get(uri, { responseType: "json" });
   // console.log("AXIOS");
-  // console.log(results);
+  // console.log(results.data);
   return results.data;
 };
