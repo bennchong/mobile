@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { QrCodeGenerator } from "../QrGenerator";
 import { styles } from "./Styles/ProfileNameStyles";
 
-const ProfileName = ({ fin, name, navigation, isPreview }) => {
+export const ProfileName = ({ fin, name, navigation, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -45,7 +45,6 @@ const ProfileName = ({ fin, name, navigation, isPreview }) => {
   );
 };
 
-export { ProfileName };
 
 ProfileName.propTypes = {
   fin: PropTypes.string,

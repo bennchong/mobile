@@ -19,7 +19,7 @@ interface QrGeneratorModalProps {
   handleCancel: Function;
 }
 
-const QrCodeGenerator = (props: QrGeneratorModalProps) => {
+export const QrCodeGenerator = (props: QrGeneratorModalProps) => {
   const [qrText, setQrText] = useState("VIEW");
 
   const handleCancel = () => {
@@ -48,5 +48,3 @@ const QrCodeGenerator = (props: QrGeneratorModalProps) => {
     </Modal>
   );
 };
-
-export { QrCodeGenerator };

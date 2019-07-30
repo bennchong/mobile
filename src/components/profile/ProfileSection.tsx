@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 import { ScrollView } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { ProfileImage } from "./ProfileImage";
-import { ProfileBasicDetails } from "./ProfileBasicDetails";
-import { ProfilePassDetails } from "./ProfilePassDetails";
 import { VerifyProfile } from "./VerifyProfile";
 import { VerifyModal } from "../Modals/VerifyModal";
+import { ProfileDetails } from "./ProfileDetails";
 
 const ProfileSection = ({ workpass, navigation, isPreview }) => {
   const cleanDocument = getData(workpass);
-  const { pass, recipient, employer } = cleanDocument;
+  const { recipient } = cleanDocument;
 
   const [modal, setModal] = useState(false);
   return (
@@ -20,8 +19,7 @@ const ProfileSection = ({ workpass, navigation, isPreview }) => {
         navigation={navigation}
         isPreview={isPreview}
       />
-      <ProfileBasicDetails recipient={recipient} />
-      <ProfilePassDetails pass={pass} employer={employer} />
+      <ProfileDetails cleanDocument={cleanDocument}/>
       <VerifyProfile
         isPreview={isPreview}
         handleShowModal={() => setModal(true)}

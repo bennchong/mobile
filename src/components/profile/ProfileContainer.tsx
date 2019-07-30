@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, AsyncStorage} from "react-native";
+import { View, StyleSheet, AsyncStorage, Text} from "react-native";
 import { ValidationBar, statusEnum } from "../VerifyingBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile";
 import { verifyWorkpassBoolean } from "../../services/verificationService";
 import { MessageBar } from "../MessageBar";
-import { StateContext } from "../../state";
+import { useStateValue } from "../../state";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,15 +27,12 @@ export const ProfileContainer = ({
   isPreview
 }: ProfileContainerProps) => {
   const [validityStatus, setValidityStatus] = useState(statusEnum.VALIDATING);
-
-  verifyWorkpassBoolean(workpass).then(isValid => {
-    setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
-  });
-
-  const context = useContext(StateContext);
-  const dispatch = context[1];
-
+  const [{ workpassAccepted }, dispatch] = useStateValue();
   useEffect(() => {
+    verifyWorkpassBoolean(workpass).then(isValid => {
+      setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
+    });
+
     AsyncStorage.getItem("@storedTimeAccepted").then(storedTimeAccepted => {
       if (storedTimeAccepted) {
         dispatch({
@@ -48,13 +45,14 @@ export const ProfileContainer = ({
 
   return workpass ? (
     <View style={styles.container}>
-      {context[0].workpassAccepted && <ValidationBar status={validityStatus} />}
-      {!context[0].workpassAccepted && <MessageBar />}
+      {workpassAccepted && <ValidationBar status={validityStatus} />}
+      {!workpassAccepted && <MessageBar />}
       <ProfileSection
         workpass={workpass}
         navigation={navigation}
         isPreview={isPreview}
       />
+      <Text> hi </Text>
     </View>
   ) : (
     <NoProfile />
