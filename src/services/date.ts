@@ -11,16 +11,16 @@ export const formatDate = dateString => {
 };
 
 export const getCurrentDateAndTime = () => {
-  const date = new Date().getDate(); // Current Date
-  const month = new Date().getMonth() + 1; // Current Month
-  const year = new Date().getFullYear(); // Current Year
-  const hours = new Date().getHours(); // Current Hours
-  const min = new Date().getMinutes(); // Current Minutes
-  const result = `${date}${"/"}${
-    month < 10 ? `0${month}` : `${month}`
-  }${"/"}${year}${" "}${hours < 10 ? `0${hours}` : `${hours}`}${":"}${
-    min < 10 ? `0${min}` : `${min}`
-  }`;
-
-  return result;
+  const date = new Date();
+  const dateString : string = tz(date.getTime(), TIMEZONE).format("DD/MM/YYYY HH:MM");
+  console.log(dateString);
+  return dateString;
 };
+
+export const checkIfExpired = dateString => {
+  const expiryDate = new Date(dateString);
+  const now = new Date();
+  return expiryDate.getTime() < now.getTime();
+}
+
+
