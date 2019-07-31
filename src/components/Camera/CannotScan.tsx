@@ -7,7 +7,6 @@ export const CannotScan = () => {
       style={{
         position: "absolute",
         bottom: "5%",
-        zIndex: 999,
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center"

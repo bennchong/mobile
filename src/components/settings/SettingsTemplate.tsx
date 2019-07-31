@@ -40,7 +40,7 @@ const SettingsTemplate = props => {
   const { navigate } = props.navigation;
   return (
     <ScrollView>
-      <Header text={"SETTINGS"} />
+      <Header text={"Settings"} />
       <View style={{ marginTop: 60 }}>
         {tabs.map(tab => (
           <TouchableOpacity

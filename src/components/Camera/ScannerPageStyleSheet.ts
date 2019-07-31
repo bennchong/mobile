@@ -12,7 +12,6 @@ const ScannerPageStyleSheet = StyleSheet.create({
   titleBar: {
     color: "white",
     fontSize: 24,
-    opacity: 1,
     fontWeight: "bold",
     textAlign: "center",
     textAlignVertical: "center",

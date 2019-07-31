@@ -73,14 +73,12 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                 <View
                   style={
                     Object {
-                      "backgroundColor": "gray",
-                      "display": "flex",
+                      "backgroundColor": "rgba(0,0,0,0.5)",
                       "height": 60,
-                      "justifyContent": "flex-end",
-                      "opacity": 0.8,
                       "position": "absolute",
                       "top": 0,
                       "width": "100%",
+                      "zIndex": 999,
                     }
                   }
                 >
@@ -89,12 +87,10 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       Object {
                         "alignItems": "center",
                         "color": "white",
-                        "fontSize": 24,
-                        "fontWeight": "bold",
-                        "justifyContent": "center",
+                        "fontSize": 16,
+                        "marginTop": 35,
                         "opacity": 1,
                         "textAlign": "center",
-                        "textAlignVertical": "center",
                       }
                     }
                   >
