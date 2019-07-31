@@ -16,7 +16,7 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
     <View style={styles.textContainer}>
       <Text style={styles.fin}>{fin}</Text>
       <Text style={styles.name}>{name}</Text>
-      {!isPreview && status == 1 ? ( // Is Preview Section
+      {!isPreview && status === 1 ? ( // Is Preview Section
         // Not Preview Section
         <TouchableOpacity
           style={styles.shareContainer}
