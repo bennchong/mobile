@@ -7,7 +7,8 @@ const Margin = () => {
       style={{
         marginHorizontal: 26,
         height: 45,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        width: "100%"
       }}
     />
   );

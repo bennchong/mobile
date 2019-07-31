@@ -1,55 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
-import * as Permissions from "expo-permissions";
 import QRScanner from "./QRScanner";
 import {
-  checkStoredWorkpassExists,
-  getStoredWorkpass
+  getStoredWorkpass,
+  checkStoredWorkpassExists
 } from "../../services/fileSystem";
 import NavigationService from "../../navigation/NavigationService";
-import { StateContext } from "../../state";
+import { useStateValue } from "../../state";
 import { Header } from "../Layout/Header";
 import { CannotScan } from "./CannotScan";
 
-export class ScannerPage extends React.Component {
-  state = {
-    hasCameraPermission: null
+const checkForStoredWorkpass = async onResult => {
+  if (await checkStoredWorkpassExists()) {
+    const workpass = await getStoredWorkpass();
+    if (workpass) onResult(workpass);
+  }
+};
+
+export const ScannerPage = () => {
+  const [, dispatch] = useStateValue();
+
+  const updateWorkpassDispatch = workpass => {
+    dispatch({
+      type: "UPDATE_WORKPASS",
+      workpass
+    });
   };
 
-  static contextType = StateContext;
+  const onWorkpassFetch = workpass => {
+    updateWorkpassDispatch(workpass);
+    NavigationService.navigate("Profile", {});
+  };
 
-  async componentDidMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === "granted" });
+  useEffect(() => {
+    checkForStoredWorkpass(onWorkpassFetch);
+  }, []);
 
-    const [, dispatch] = this.context;
-
-    // Checks if there is already a cert stored on the phone
-    const workpassExist = await checkStoredWorkpassExists();
-
-    if (workpassExist) {
-      // TODO: Profile will take directly from FS if its looking at stored Workpass, and from global state if its view
-      dispatch({
-        type: "UPDATE_WORKPASS",
-        workpass: await getStoredWorkpass()
-      });
-      NavigationService.navigate("Profile", {});
-    }
-  }
-
-  render() {
-    const [, dispatch] = this.context;
-    const storeWorkpass = workpass =>
-      dispatch({
-        type: "UPDATE_WORKPASS",
-        workpass
-      });
-    return (
-      <View style={{ flex: 1 }}>
-        <Header text="Scan QR code" />
-        <QRScanner storeWorkpass={storeWorkpass} />
-        <CannotScan />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={{ flex: 1 }}>
+      <Header text="Scan QR code" />
+      <QRScanner storeWorkpass={updateWorkpassDispatch} />
+      <CannotScan />
+    </View>
+  );
+};

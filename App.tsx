@@ -1,10 +1,13 @@
 import React from "react";
 import AppContainer from "./src/navigation/AppContainer";
 import NavigationService from "./src/navigation/NavigationService";
-import { StateProvider } from "./src/state";
+/* eslint-disable no-unused-vars */
+import { StateProvider, IContextState } from "./src/state";
+/* eslint-enable */
 
 // TODO https://github.com/piotrwitek/typesafe-actions#1-basic-actions
-const initialState = {
+
+const initialState: IContextState = {
   workpass: null,
   workpassAccepted: false,
   timeAccepted: ""

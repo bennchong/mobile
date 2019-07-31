@@ -1,10 +1,17 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import PropTypes from "prop-types";
 import { styles } from "./modalStyles";
 
-export const VerifyModal = ({ handleCloseModal, showModal }) => {
+interface IVerifyModalProps {
+  showModal: boolean;
+  handleCloseModal: () => any;
+}
+
+export const VerifyModal = ({
+  handleCloseModal,
+  showModal
+}: IVerifyModalProps) => {
   return (
     <Modal visible={showModal} transparent={true} animationType="fade">
       <View style={styles.overlay}>
@@ -23,9 +30,4 @@ export const VerifyModal = ({ handleCloseModal, showModal }) => {
       </View>
     </Modal>
   );
-};
-
-VerifyModal.propTypes = {
-  handleCloseModal: PropTypes.func,
-  showModal: PropTypes.bool
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from "react-native";
 import PropTypes from "prop-types";
-import { StateContext } from "../../state";
+import { useStateValue } from "../../state";
 import metrics from "../../config/metrics";
 import { getCurrentDateAndTime } from "../../services/date";
 
@@ -67,9 +67,7 @@ const styles = StyleSheet.create({
 });
 
 const VerifyProfile = ({ isPreview, handleShowModal }) => {
-  const context = useContext(StateContext);
-  const { workpassAccepted } = context[0];
-  const dispatch = context[1];
+  const [{ workpassAccepted }, dispatch] = useStateValue();
 
   const handleWorkpassConfirmation = async () => {
     handleShowModal();
@@ -88,7 +86,7 @@ const VerifyProfile = ({ isPreview, handleShowModal }) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => handleWorkpassConfirmation()}
+          onPress={handleWorkpassConfirmation}
         >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>

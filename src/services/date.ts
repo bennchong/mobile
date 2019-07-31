@@ -12,7 +12,7 @@ export const formatDate = dateString => {
 
 export const getCurrentDateAndTime = () => {
   const dateString: string = tz(Date.now(), TIMEZONE).format(
-    "DD/MM/YYYY hh:mm"
+    "DD/MM/YYYY HH:mm"
   );
   return dateString;
 };

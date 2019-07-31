@@ -21,8 +21,3 @@ export const fetchDocument = async (uri: string) => {
   const results = await axios.get(uri, { responseType: "json" });
   return results.data;
 };
-
-export const fetchAndDecrypt = async (uri: string) => {
-  const data = await fetchDocument(uri);
-  return data;
-};

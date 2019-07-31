@@ -35,10 +35,10 @@ class QRScanner extends React.Component<QRScannerProps> {
     this.setState({ hasCameraPermission: status === "granted" });
   };
 
-  handleProfileView = document => {
+  handleProfileView = workpass => {
     this.setState({ isProcessingQr: false });
     NavigationService.navigate("ProfilePreview", {
-      workpass: document
+      workpass
     });
   };
 

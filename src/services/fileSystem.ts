@@ -38,3 +38,12 @@ export const getTimeAccepted = () => {
 export const resetTimeAccepted = () => {
   return FileSystem.deleteAsync(TIME_ACCEPTED_FILE_NAME);
 };
+export const getStoredWorkpassIfExists = async () => {
+  try {
+    const documentJSON = await getStoredWorkpass();
+    return documentJSON;
+  } catch (e) {
+    if (e.message.includes("No such file or directory")) return null;
+    throw e;
+  }
+};

@@ -2,8 +2,8 @@ import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { Foundation, AntDesign } from "@expo/vector-icons";
 import {
-  resetTimeAccepted,
-  deleteStoredWorkpass
+  deleteStoredworkpass,
+  resetTimeAccepted
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 
@@ -23,7 +23,7 @@ const DeleteWorkPassFromFS = () => {
               text: "Yes",
               onPress: async () => {
                 try {
-                  await deleteStoredWorkpass();
+                  await deleteStoredworkpass();
                   // eslint-disable-next-line no-alert
                   Alert.alert(
                     "Dev Info",
