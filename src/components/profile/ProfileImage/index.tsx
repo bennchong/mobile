@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 import { ProfileName } from "../ProfileName";
-import { useStateValue } from "../../../state";
+import { StateContext } from "../../../state";
 import { styles } from "./ProfileImageStyles";
 
-export const ProfileImage = ({ recipient, navigation, isPreview }) => {
-  const [{ timeAccepted }] = useStateValue();
-
+export const ProfileImage = ({ status, recipient, isPreview }) => {
+  const context = useContext(StateContext);
+  const data = context[0];
   const { photo, fin, name } = recipient;
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {timeAccepted.length === 0 ? null : (
-            <Text style={{ paddingTop: 5 }}>Verified on {timeAccepted}</Text>
+          {data.timeAccepted.length === 0 ? null : (
+            <Text style={styles.verifiedText}>
+              Verified on {data.timeAccepted}
+            </Text>
           )}
         </View>
         <ProfileName
+          status={status}
+          photo={photo}
           fin={fin}
           name={name}
-          navigation={navigation}
           isPreview={isPreview}
         />
         <View style={styles.imageContainer}>
@@ -37,6 +40,6 @@ export const ProfileImage = ({ recipient, navigation, isPreview }) => {
 
 ProfileImage.propTypes = {
   recipient: PropTypes.object,
-  navigation: PropTypes.object,
-  isPreview: PropTypes.bool
+  isPreview: PropTypes.bool,
+  status: PropTypes.number
 };

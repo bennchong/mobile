@@ -11,29 +11,25 @@ export const styles = StyleSheet.create({
   },
   fin: {
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 18,
+    color: "#414141"
   },
   name: {
-    fontSize: 15
+    fontSize: 13,
+    color: "#414141"
   },
   shareContainer: {
     marginTop: 5,
     padding: 5,
+    borderRadius: 4,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#f5f5f5"
+    backgroundColor: "#F4F4F4"
   },
-  shareText: { marginLeft: 5, fontWeight: "bold", color: "#808080" },
-  previewContainer: { alignItems: "center", marginTop: 10 },
-  previewText: { fontSize: 30, color: "#DAA520", fontWeight: "bold" },
-  previewButton: {
-    flexDirection: "row",
-    backgroundColor: "#DAA520",
-    height: 40,
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
-  previewButtonText: { marginLeft: 5 }
+  shareText: {
+    marginLeft: 5,
+    fontWeight: "bold",
+    color: "#707070",
+    fontSize: 11
+  }
 });
