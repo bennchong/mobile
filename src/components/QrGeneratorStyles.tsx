@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.6)"
+    backgroundColor: "rgba(0,0,0,0.2)"
   },
 
   image: {
@@ -101,8 +101,9 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 14,
     fontWeight: "bold",
-    color: "#fff",
-    zIndex: 999
+    color: "#434343",
+    position: "absolute",
+    zIndex: 99
   },
   textContainer: {
     paddingTop: metrics.RADIUS + 5,

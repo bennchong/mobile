@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-
 import { styles } from "./QrGeneratorStyles";
 import metrics from "../config/metrics";
 import { getCurrentDateAndTime } from "../services/date";
+
+const imageSource = require("../assets/blur2.jpg");
 
 // https://github.com/dumbest/react-native-qrcode-svg-expo
 
@@ -39,6 +40,7 @@ export const QrCodeGenerator = (props: QrGeneratorModalProps) => {
 
   return (
     <Modal animationType="fade" transparent={true} visible={props.isVisible}>
+      <Image source={imageSource} style={{ resizeMode: "cover" }} />
       <Text style={styles.text}>Ask requestor to scan QR code</Text>
 
       <View style={styles.imageContainer}>
