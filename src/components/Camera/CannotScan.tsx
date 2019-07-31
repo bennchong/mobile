@@ -13,7 +13,7 @@ export const CannotScan = () => {
         justifyContent: "center"
       }}
     >
-      <Text style={{ color: "#414141", fontSize: 12 }}>Can't Scan?</Text>
+      <Text style={{ color: "#414141", fontSize: 12 }}>Can&apos;t Scan?</Text>
       <TouchableOpacity
         style={{
           marginTop: 10,

@@ -5,7 +5,7 @@ import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
-import { InvalidQRModal } from "../../components/Modals/InvalidQRModal";
+import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";

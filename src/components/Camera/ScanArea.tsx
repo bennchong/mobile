@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     top: 0,
+    bottom: 0,
     right: 0,
     left: 0
   },
@@ -60,14 +61,14 @@ export class ScanArea extends Component {
   };
 
   measureTotalSize(e) {
-    let totalSize = e.layout;
+    const totalSize = e.layout;
     this.setState({
       topWidth: totalSize.width
     });
   }
 
   measureRectPosition(e) {
-    let rectSize = e.layout;
+    const rectSize = e.layout;
     this.setState({
       topHeight: rectSize.y,
       leftWidth: rectSize.x
@@ -82,42 +83,20 @@ export class ScanArea extends Component {
     return this.state.topHeight + 240;
   }
 
-  getSideMaskHeight() {
-    return 240;
-  }
-
   getSideMaskWidth() {
     return this.state.leftWidth;
-  }
-
-  getBottomMenuHeight() {
-    return {
-      bottom: 0
-    };
-  }
-
-  getScanBarMargin() {
-    return {
-      marginRight: 6,
-      marginLeft: 6
-    };
-  }
-
-  getScanImageWidth() {
-    return 240 - 12;
   }
 
   render() {
     return (
       <View
         onLayout={({ nativeEvent: e }) => this.measureTotalSize(e)}
-        style={[styles.container, this.getBottomMenuHeight()]}
+        style={styles.container}
       >
         <View
           style={[styles.viewfinder, { height: 240, width: 240 }]}
           onLayout={({ nativeEvent: e }) => this.measureRectPosition(e)}
         >
-          {/*扫描框边线*/}
           <View
             style={{
               height: 240,
@@ -125,7 +104,6 @@ export class ScanArea extends Component {
             }}
           ></View>
 
-          {/*扫描框转角-左上角*/}
           <View
             style={[
               { borderColor: "#fff", height: 20, width: 20 },
@@ -137,7 +115,6 @@ export class ScanArea extends Component {
             ]}
           />
 
-          {/*扫描框转角-右上角*/}
           <View
             style={[
               { borderColor: "#fff", height: 20, width: 20 },
@@ -149,7 +126,6 @@ export class ScanArea extends Component {
             ]}
           />
 
-          {/*扫描框转角-左下角*/}
           <View
             style={[
               { borderColor: "#fff", height: 20, width: 20 },
@@ -161,7 +137,6 @@ export class ScanArea extends Component {
             ]}
           />
 
-          {/*扫描框转角-右下角*/}
           <View
             style={[
               { borderColor: "#fff", height: 20, width: 20 },
@@ -190,7 +165,7 @@ export class ScanArea extends Component {
             { backgroundColor: "rgba(255, 255, 255, 0.5)" },
             styles.leftMask,
             {
-              height: this.getSideMaskHeight() + 0.5,
+              height: 240.5,
               width: this.getSideMaskWidth()
             }
           ]}
@@ -201,7 +176,7 @@ export class ScanArea extends Component {
             { backgroundColor: "rgba(255, 255, 255, 0.5)" },
             styles.rightMask,
             {
-              height: this.getSideMaskHeight() + 0.5,
+              height: 240.5,
               width: this.getSideMaskWidth()
             }
           ]}
