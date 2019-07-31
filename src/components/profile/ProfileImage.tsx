@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { View, Image, Text } from "react-native";
+import PropTypes from "prop-types";
 import { ProfileName } from "./ProfileName";
 import { StateContext } from "../../state";
 import { styles } from "./Styles/ProfileImageStyles";
@@ -34,4 +35,9 @@ export const ProfileImage = ({ recipient, isPreview }) => {
       <View style={styles.margin} />
     </>
   );
+};
+
+ProfileImage.propTypes = {
+  recipient: PropTypes.object,
+  isPreview: PropTypes.bool
 };

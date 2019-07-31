@@ -5,6 +5,7 @@ import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
+import { InvalidQRModal } from "../../components/Modals/InvalidQRModal";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
 import { storeWorkpass } from "../../services/fileSystem";
@@ -20,7 +21,8 @@ class QRScanner extends React.Component<QRScannerProps> {
   state = {
     hasCameraPermission: null,
     isProcessingQr: false,
-    type: Camera.Constants.Type.back
+    type: Camera.Constants.Type.back,
+    invalidQR: false
   };
 
   componentDidMount() {
@@ -71,8 +73,17 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   render() {
-    const { hasCameraPermission } = this.state;
+    const { hasCameraPermission, invalidQR } = this.state;
     const isFocused = this.props.navigation.isFocused();
+
+    if (invalidQR) {
+      return (
+        <InvalidQRModal
+          handleCloseModal={() => this.setState({ invalidQR: false })}
+          showModal={invalidQR}
+        />
+      );
+    }
 
     if (hasCameraPermission && isFocused) {
       return (
@@ -111,7 +122,7 @@ class QRScanner extends React.Component<QRScannerProps> {
         this.handleProfileView(document);
       }
     } catch (e) {
-      Alert.alert("ERROR", "INVALID QR");
+      this.setState({ invalidQR: true, isProcessingQr: false });
     }
   };
 }

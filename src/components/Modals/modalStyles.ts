@@ -42,6 +42,13 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center"
   },
+  modalSecondaryText: {
+    fontSize: 14,
+    color: "#919191",
+    textAlign: "center",
+    marginTop: 20,
+    paddingHorizontal: 40
+  },
   modalButton: {
     backgroundColor: "#f5f5f5",
     borderRadius: 30,

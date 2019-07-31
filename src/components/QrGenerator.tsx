@@ -26,12 +26,15 @@ interface QrGeneratorModalProps {
 export const QrCodeGenerator = (props: QrGeneratorModalProps) => {
   const [qrText, setQrText] = useState("VIEW");
 
+  let timeCreated = getCurrentDateAndTime();
+
   const handleCancel = () => {
     props.handleCancel();
   };
 
   const refreshQr = () => {
     setQrText(`${qrText} + "placeholder URL"`);
+    timeCreated = getCurrentDateAndTime();
   };
 
   return (
@@ -56,7 +59,7 @@ export const QrCodeGenerator = (props: QrGeneratorModalProps) => {
               <QRCode value={qrText} size={metrics.MODAL_QR} />
             </View>
           </TouchableOpacity>
-          <Text style={styles.dateText}>Created {getCurrentDateAndTime()}</Text>
+          <Text style={styles.dateText}>Created {timeCreated}</Text>
           <Text style={styles.exitText}>Tap anywhere to exit</Text>
         </View>
       </TouchableHighlight>

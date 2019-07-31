@@ -22,7 +22,7 @@ export const fetchDocument = async (uri: string) => {
   return results.data;
 };
 
-export const fetchAndDecrypt = async (uri: string, key: string) => {
+export const fetchAndDecrypt = async (uri: string) => {
   const data = await fetchDocument(uri);
   return data;
 };

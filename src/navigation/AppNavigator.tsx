@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import { createBottomTabNavigator } from "react-navigation";
 import React from "react";
 import { View } from "react-native";
@@ -10,6 +11,7 @@ const AppNavigator = createBottomTabNavigator(
       screen: SettingsTab,
       navigationOptions: {
         tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }) => (
           <Feather
             name="menu"
@@ -23,6 +25,7 @@ const AppNavigator = createBottomTabNavigator(
       screen: CameraTab,
       navigationOptions: {
         tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }) => (
           <FontAwesome
             name="camera"
@@ -36,6 +39,7 @@ const AppNavigator = createBottomTabNavigator(
       screen: ProfileTab,
       navigationOptions: {
         tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }) => (
           <FontAwesome
             name="user-circle"
