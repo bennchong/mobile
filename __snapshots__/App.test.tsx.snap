@@ -94,7 +94,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                       }
                     }
                   >
-                    SETTINGS
+                    Settings
                   </Text>
                 </View>
                 <View
