@@ -5,7 +5,7 @@ import { ProfileName } from "./ProfileName";
 import { StateContext } from "../../state";
 import { styles } from "./Styles/ProfileImageStyles";
 
-export const ProfileImage = ({ recipient, isPreview }) => {
+export const ProfileImage = ({ status, recipient, isPreview }) => {
   const context = useContext(StateContext);
   const data = context[0];
   const { photo, fin, name } = recipient;
@@ -20,6 +20,7 @@ export const ProfileImage = ({ recipient, isPreview }) => {
           )}
         </View>
         <ProfileName
+          status={status}
           photo={photo}
           fin={fin}
           name={name}
@@ -39,5 +40,6 @@ export const ProfileImage = ({ recipient, isPreview }) => {
 
 ProfileImage.propTypes = {
   recipient: PropTypes.object,
-  isPreview: PropTypes.bool
+  isPreview: PropTypes.bool,
+  status: PropTypes.number
 };

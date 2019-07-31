@@ -58,7 +58,11 @@ export const ProfileContainer = ({
         <ValidationBar status={validityStatus} isPreview={isPreview} />
       )}
       {!workpassAccepted && !isPreview && <MessageBar />}
-      <ProfileSection workpass={workpass} isPreview={isPreview} />
+      <ProfileSection
+        status={validityStatus}
+        workpass={workpass}
+        isPreview={isPreview}
+      />
     </View>
   ) : (
     <NoProfile />

@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { QrCodeGenerator } from "../QrGenerator";
 import { styles } from "./Styles/ProfileNameStyles";
 
-export const ProfileName = ({ photo, fin, name, isPreview }) => {
+export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -16,7 +16,7 @@ export const ProfileName = ({ photo, fin, name, isPreview }) => {
     <View style={styles.textContainer}>
       <Text style={styles.fin}>{fin}</Text>
       <Text style={styles.name}>{name}</Text>
-      {isPreview ? null : ( // Is Preview Section
+      {!isPreview && status == 1 ? ( // Is Preview Section
         // Not Preview Section
         <TouchableOpacity
           style={styles.shareContainer}
@@ -32,7 +32,7 @@ export const ProfileName = ({ photo, fin, name, isPreview }) => {
             handleCancel={toggleVisibility}
           />
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 };
@@ -41,5 +41,6 @@ ProfileName.propTypes = {
   fin: PropTypes.string,
   name: PropTypes.string,
   photo: PropTypes.string,
-  isPreview: PropTypes.bool
+  isPreview: PropTypes.bool,
+  status: PropTypes.number
 };
