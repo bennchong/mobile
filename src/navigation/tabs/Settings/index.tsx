@@ -1,19 +1,15 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { useStateValue } from "../../../state";
-import { styles } from "../../../styles";
-import { TitleBar } from "../../../components/TitleBar";
+import { createStackNavigator } from "react-navigation";
+import SettingsTemplate from "../../../components/settings/SettingsTemplate";
+import DevDebug from "../../../components/settings/DevDebug";
 
-const SettingsTab = () => {
-  const [{ certificate }] = useStateValue();
-  return (
-    <View style={styles.page}>
-      <TitleBar text="SETTINGS" />
-      <View style={{ flex: 14 }}>
-        <Text> SETTINGS PAGE </Text>
-      </View>
-    </View>
-  );
-};
+const SettingsTab = createStackNavigator(
+  {
+    SettingsTemplate,
+    DevDebug
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 export { SettingsTab };

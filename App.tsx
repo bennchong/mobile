@@ -1,32 +1,41 @@
 import React from "react";
 import AppContainer from "./src/navigation/AppContainer";
 import NavigationService from "./src/navigation/NavigationService";
-import { StateProvider } from "./src/state";
+/* eslint-disable no-unused-vars */
+import { StateProvider, IContextState } from "./src/state";
+/* eslint-enable */
 
 // TODO https://github.com/piotrwitek/typesafe-actions#1-basic-actions
-const initialState = {
-  certificate: null
+
+const initialState: IContextState = {
+  workpass: null,
+  workpassAccepted: false,
+  timeAccepted: ""
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_WORKPASS":
-      return { ...state, certificate: action.certificate };
+      return { ...state, workpass: action.workpass };
+    case "SET_WORKPASS_ACCEPTED":
+      return { ...state, workpassAccepted: true, timeAccepted: action.time };
+    case "DELETE_WORKPASS":
+      return initialState;
     default:
       return state;
   }
 };
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <StateProvider initialState={initialState} reducer={reducer}>
-        <AppContainer
-          ref={navigatorRef => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
-      </StateProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <AppContainer
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    </StateProvider>
+  );
+};
+
+export default App;

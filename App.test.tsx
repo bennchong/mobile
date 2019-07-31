@@ -1,11 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-
-import SettingsTab from "./src/navigation/tabs/Settings/SettingsTab";
+import { createAppContainer } from "react-navigation";
+import { SettingsTab } from "./src/navigation/tabs/Settings";
 
 describe("<SettingsTab />", () => {
   it("should render without crashing", () => {
-    const tree = renderer.create(<SettingsTab />).toJSON();
+    const WrappedSettings = createAppContainer(SettingsTab);
+    const tree = renderer.create(<WrappedSettings />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
