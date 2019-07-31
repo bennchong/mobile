@@ -9,6 +9,7 @@ import {
 import NavigationService from "../../navigation/NavigationService";
 import { StateContext } from "../../state";
 import { Header } from "../Layout/Header";
+import { CannotScan } from "./CannotScan";
 
 export class ScannerPage extends React.Component {
   state = {
@@ -45,10 +46,9 @@ export class ScannerPage extends React.Component {
       });
     return (
       <View style={{ flex: 1 }}>
-        <Header text="SCAN QR" />
-        <View style={{ flex: 1, marginTop: 60 }}>
-          <QRScanner storeWorkpass={storeWorkpass} />
-        </View>
+        <Header text="Scan QR code" />
+        <QRScanner storeWorkpass={storeWorkpass} />
+        <CannotScan />
       </View>
     );
   }

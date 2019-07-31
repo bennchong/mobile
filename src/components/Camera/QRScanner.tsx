@@ -6,6 +6,7 @@ import { Constants } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
 import { InvalidQRModal } from "../../components/Modals/InvalidQRModal";
+import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
 import { storeWorkpass } from "../../services/fileSystem";
@@ -88,13 +89,17 @@ class QRScanner extends React.Component<QRScannerProps> {
     if (hasCameraPermission && isFocused) {
       return (
         <Camera
-          style={{ ...StyleSheet.absoluteFillObject }}
+          style={{
+            ...StyleSheet.absoluteFillObject
+          }}
           type={this.state.type}
           barCodeScannerSettings={{
             barCodeTypes: [Constants.BarCodeType.qr]
           }}
           onBarCodeScanned={this.handleBarCodeScanned}
-        ></Camera>
+        >
+          <ScanArea />
+        </Camera>
       );
     }
     return (
