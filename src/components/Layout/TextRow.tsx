@@ -15,12 +15,15 @@ const styles = StyleSheet.create({
 });
 
 const TextRow = ({ label, text }) => {
-  return (
-    <View style={styles.textContainer}>
-      <Text style={styles.text}>{label}</Text>
-      <Text style={styles.text}>{text}</Text>
-    </View>
-  );
+  if (text) {
+    return (
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>{label}</Text>
+        <Text style={styles.text}>{text}</Text>
+      </View>
+    );
+  }
+  return null;
 };
 
 export { TextRow };
