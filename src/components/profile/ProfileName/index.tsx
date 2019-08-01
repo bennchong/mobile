@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
-import { QrCodeGenerator } from "../../QrGenerator";
+import { QrCodeGenerator } from "../../QRGenerator/QrGenerator";
 import { styles } from "./ProfileNameStyles";
 
 export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
