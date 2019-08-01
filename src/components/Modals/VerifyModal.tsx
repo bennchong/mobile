@@ -17,13 +17,13 @@ export const VerifyModal = ({
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
           <View style={styles.modal}>
-            <AntDesign name="checkcircle" size={50} color="#32CD32" />
+            <AntDesign name="checkcircle" size={69} color="#5FC660" />
             <Text style={styles.modalText}>Digital work pass saved!</Text>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={handleCloseModal}
+              onPress={() => handleCloseModal()}
             >
-              <Text>View profile</Text>
+              <Text style={styles.closeModalText}>View profile</Text>
             </TouchableOpacity>
           </View>
         </View>

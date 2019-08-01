@@ -6,10 +6,11 @@ import { formatDate } from "../../services/date";
 
 const styles = StyleSheet.create({
   headerContainer: {
-    marginHorizontal: 16,
+    marginHorizontal: 26,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderColor: "#A9A9A9"
+    borderColor: "#A9A9A9",
+    backgroundColor: "#fff"
   },
   header: { color: "#808080", fontWeight: "bold", fontSize: 15 }
 });
@@ -24,7 +25,7 @@ const ProfilePassDetails = ({ pass, employer }) => {
   } = pass;
   const { name, sector } = employer;
   return (
-    <View>
+    <View style={{ backgroundColor: "#fff" }}>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Pass Details</Text>
       </View>

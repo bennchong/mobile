@@ -5,6 +5,8 @@ import { Camera } from "expo-camera";
 import { Constants } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
+import { InvalidQRModal } from "../Modals/InvalidQRModal";
+import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
 import { storeWorkpass } from "../../services/fileSystem";
@@ -20,7 +22,8 @@ class QRScanner extends React.Component<QRScannerProps> {
   state = {
     hasCameraPermission: null,
     isProcessingQr: false,
-    type: Camera.Constants.Type.back
+    type: Camera.Constants.Type.back,
+    invalidQR: false
   };
 
   componentDidMount() {
@@ -71,19 +74,32 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   render() {
-    const { hasCameraPermission } = this.state;
+    const { hasCameraPermission, invalidQR } = this.state;
     const isFocused = this.props.navigation.isFocused();
+
+    if (invalidQR) {
+      return (
+        <InvalidQRModal
+          handleCloseModal={() => this.setState({ invalidQR: false })}
+          showModal={invalidQR}
+        />
+      );
+    }
 
     if (hasCameraPermission && isFocused) {
       return (
         <Camera
-          style={{ ...StyleSheet.absoluteFillObject }}
+          style={{
+            ...StyleSheet.absoluteFillObject
+          }}
           type={this.state.type}
           barCodeScannerSettings={{
             barCodeTypes: [Constants.BarCodeType.qr]
           }}
           onBarCodeScanned={this.handleBarCodeScanned}
-        ></Camera>
+        >
+          <ScanArea />
+        </Camera>
       );
     }
     return (
@@ -111,7 +127,7 @@ class QRScanner extends React.Component<QRScannerProps> {
         this.handleProfileView(document);
       }
     } catch (e) {
-      Alert.alert("ERROR", "INVALID QR");
+      this.setState({ invalidQR: true, isProcessingQr: false });
     }
   };
 }

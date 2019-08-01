@@ -23,18 +23,19 @@ const styles = StyleSheet.create({
   acknowledgeText: {
     textAlign: "center",
     fontWeight: "bold",
-    color: "#808080"
+    fontSize: 13,
+    color: "#404040"
   },
   button: {
-    backgroundColor: "#32CD32",
-    borderRadius: 30,
+    backgroundColor: "#5FC660",
+    borderRadius: 14,
     paddingHorizontal: 40,
     paddingVertical: 5,
     marginTop: 10,
     alignItems: "center",
     justifyContent: "center"
   },
-  buttonText: { color: "#fff", fontWeight: "bold" },
+  buttonText: { color: "#fff", fontWeight: "bold", fontSize: 13 },
   modalContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
   modal: {
     width: (2 * metrics.DEVICE_WIDTH) / 3,

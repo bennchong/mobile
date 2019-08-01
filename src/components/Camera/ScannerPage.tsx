@@ -8,6 +8,7 @@ import {
 import NavigationService from "../../navigation/NavigationService";
 import { useStateValue } from "../../state";
 import { Header } from "../Layout/Header";
+import { CannotScan } from "./CannotScan";
 
 const checkForStoredWorkpass = async onResult => {
   if (await checkStoredWorkpassExists()) {
@@ -37,10 +38,9 @@ export const ScannerPage = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Header text="SCAN QR" />
-      <View style={{ flex: 1, marginTop: 60 }}>
-        <QRScanner storeWorkpass={updateWorkpassDispatch} />
-      </View>
+      <Header text="Scan QR code" />
+      <QRScanner storeWorkpass={updateWorkpassDispatch} />
+      <CannotScan />
     </View>
   );
 };

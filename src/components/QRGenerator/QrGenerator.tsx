@@ -1,48 +1,70 @@
 import React, { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
-
 import {
-  Dimensions,
   View,
   Modal,
   Text,
   TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
-
 import { styles } from "./QrGeneratorStyles";
+import metrics from "../../config/metrics";
+import { getCurrentDateAndTime } from "../../services/date";
+
+const imageSource = require("../../assets/blur2.jpg");
 
 // https://github.com/dumbest/react-native-qrcode-svg-expo
 
 interface QrGeneratorModalProps {
   isVisible: boolean;
-  handleCancel: () => any;
+  handleCancel: Function;
+  photo: string;
+  name: string;
+  fin: string;
 }
 
-const QrCodeGenerator = (props: QrGeneratorModalProps) => {
+export const QrCodeGenerator = (props: QrGeneratorModalProps) => {
   const [qrText, setQrText] = useState("VIEW");
+
+  let timeCreated = getCurrentDateAndTime();
+
+  const handleCancel = () => {
+    props.handleCancel();
+  };
 
   const refreshQr = () => {
     setQrText(`${qrText} + "placeholder URL"`);
+    timeCreated = getCurrentDateAndTime();
   };
 
   return (
     <Modal animationType="fade" transparent={true} visible={props.isVisible}>
-      <TouchableHighlight onPress={props.handleCancel} style={styles.touchable}>
+      <Image source={imageSource} style={{ resizeMode: "cover" }} />
+      <Text style={styles.text}>Ask requestor to scan QR code</Text>
+
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.image}
+          source={{ uri: `data:image/gif;base64,${props.photo}` }}
+        />
+      </View>
+
+      <TouchableHighlight onPress={handleCancel} style={styles.touchable}>
         <View style={styles.box}>
-          <Text style={styles.text}>Share Workpass</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.fin}>{props.fin}</Text>
+            <Text style={styles.name}>{props.name}</Text>
+          </View>
           <TouchableOpacity onPress={refreshQr}>
-            <QRCode
-              value={qrText}
-              size={Dimensions.get("screen").width * 0.6}
-            />
+            <View style={styles.qrContainer}>
+              <QRCode value={qrText} size={metrics.MODAL_QR} />
+            </View>
           </TouchableOpacity>
-          <Text style={styles.smallText}>tap the qr to refresh</Text>
-          <Text style={styles.smallText}>tap anywhere to exit</Text>
+          <Text style={styles.dateText}>Created {timeCreated}</Text>
+          <Text style={styles.exitText}>Tap anywhere to exit</Text>
         </View>
       </TouchableHighlight>
     </Modal>
   );
 };
-
-export { QrCodeGenerator };

@@ -7,7 +7,7 @@ import { formatDate } from "../../services/date";
 
 export const ProfileBasicDetails = ({ recipient }) => {
   return (
-    <View>
+    <View style={{ backgroundColor: "#fff" }}>
       <TextRow label="Country of Residence" text={recipient.country} />
       <TextRow label="Gender" text="Female" />
       <TextRow label="Date of Birth" text={formatDate(recipient.dob)} />

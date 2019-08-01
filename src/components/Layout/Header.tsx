@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -7,20 +8,16 @@ const styles = StyleSheet.create({
     top: 0,
     width: "100%",
     height: 60,
-    backgroundColor: "gray",
-    justifyContent: "flex-end",
-    opacity: 0.8,
-    display: "flex"
+    backgroundColor: "rgba(0,0,0,0.5)",
+    zIndex: 999
   },
   headerText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 16,
     opacity: 1,
-    fontWeight: "bold",
     textAlign: "center",
-    textAlignVertical: "center",
-    justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 55 - Constants.statusBarHeight
   }
 });
 

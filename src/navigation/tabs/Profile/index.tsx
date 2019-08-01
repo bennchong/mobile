@@ -4,9 +4,7 @@ import { ProfileContainer } from "../../../components/profile/ProfileContainer";
 
 const ProfileTab = () => {
   const [{ workpass }] = useStateValue();
-  return (
-    <ProfileContainer isPreview={false} workpass={workpass} navigation={null} />
-  );
+  return <ProfileContainer isPreview={false} workpass={workpass} />;
 };
 
 export { ProfileTab };

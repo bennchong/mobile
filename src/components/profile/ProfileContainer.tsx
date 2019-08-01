@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 interface ProfileContainerProps {
-  navigation: any;
   workpass: object;
   isPreview: boolean;
 }
@@ -27,7 +26,6 @@ const getTimeAccepted = async onGetTimeAccepted => {
 };
 
 export const ProfileContainer = ({
-  navigation,
   workpass,
   isPreview
 }: ProfileContainerProps) => {
@@ -56,11 +54,13 @@ export const ProfileContainer = ({
 
   return workpass ? (
     <View style={styles.container}>
-      {workpassAccepted && <ValidationBar status={validityStatus} />}
-      {!workpassAccepted && <MessageBar />}
+      {(workpassAccepted || isPreview) && (
+        <ValidationBar status={validityStatus} isPreview={isPreview} />
+      )}
+      {!workpassAccepted && !isPreview && <MessageBar />}
       <ProfileSection
+        status={validityStatus}
         workpass={workpass}
-        navigation={navigation}
         isPreview={isPreview}
       />
     </View>

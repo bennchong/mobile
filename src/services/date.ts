@@ -11,8 +11,10 @@ export const formatDate = dateString => {
 };
 
 export const getCurrentDateAndTime = () => {
-  const now = new Date().getTime();
-  return tz(now, TIMEZONE).format("DD/MM/YYYY HH:mm");
+  const dateString: string = tz(Date.now(), TIMEZONE).format(
+    "DD/MM/YYYY HH:mm"
+  );
+  return dateString;
 };
 
 export const checkIfExpired = dateString => {
