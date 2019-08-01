@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  AsyncStorage
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { useStateValue } from "../../state";
 import metrics from "../../config/metrics";
 import { getCurrentDateAndTime } from "../../services/date";
+import { storeTime } from "../../services/fileSystem";
 
 const styles = StyleSheet.create({
   container: {
@@ -71,7 +66,7 @@ const VerifyProfile = ({ isPreview, handleShowModal }) => {
 
   const handleWorkpassConfirmation = async () => {
     handleShowModal();
-    await AsyncStorage.setItem("@storedTimeAccepted", getCurrentDateAndTime());
+    await storeTime();
     dispatch({
       type: "SET_WORKPASS_ACCEPTED",
       time: getCurrentDateAndTime()

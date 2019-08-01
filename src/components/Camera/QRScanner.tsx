@@ -65,7 +65,7 @@ class QRScanner extends React.Component<QRScannerProps> {
             updateworkpass(document);
             this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem
-            NavigationService.navigate("Profile", { workpass: document });
+            NavigationService.navigate("Profile");
           }
         }
       ],

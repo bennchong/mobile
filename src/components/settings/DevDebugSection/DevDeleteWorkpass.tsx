@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
-import {
-  AsyncStorage,
-  View,
-  TouchableOpacity,
-  Alert,
-  Text
-} from "react-native";
+import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { Foundation, AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
-import { deleteStoredWorkpass } from "../../../services/fileSystem";
+import {
+  deleteStoredWorkpass,
+  deleteStoredTime
+} from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { StateContext } from "../../../state";
 
@@ -44,7 +41,7 @@ const DevDeleteWorkpass = props => {
                       "Dev Info",
                       "Workpass in the filesystem is successfully deleted"
                     );
-                    await AsyncStorage.removeItem("@storedTimeAccepted");
+                    await deleteStoredTime();
                   } catch (e) {
                     Alert.alert(
                       "Dev Info",
@@ -69,7 +66,6 @@ const DevDeleteWorkpass = props => {
                 onPress: async () => {
                   dispatch({ type: "DELETE_WORKPASS" });
                   try {
-                    // await AsyncStorage.removeItem("@storedTimeAccepted");
                     Alert.alert(
                       "Dev Info",
                       "Workpass has been deleted from state!"

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { StateContext } from "../../../state";
 import { styles } from "../styles";
-import { resetTimeAccepted } from "../../../services/fileSystem";
+import { deleteStoredTime } from "../../../services/fileSystem";
 
 const DeleteWorkPassFromState = () => {
   const context = useContext(StateContext);
@@ -22,7 +22,7 @@ const DeleteWorkPassFromState = () => {
               text: "Yes",
               onPress: async () => {
                 context[1]({ type: "DELETE_WORKPASS" });
-                await resetTimeAccepted();
+                await deleteStoredTime();
                 // eslint-disable-next-line no-alert
                 Alert.alert(
                   "Dev Info",

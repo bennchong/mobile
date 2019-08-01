@@ -1,4 +1,6 @@
 import * as FileSystem from "expo-file-system";
+import { AsyncStorage } from "react-native";
+import { getCurrentDateAndTime } from "./date";
 
 const DEFAULT_FILE_NAME = `${FileSystem.documentDirectory}workpass`;
 
@@ -25,19 +27,20 @@ export const deleteStoredWorkpass = () => {
   return FileSystem.deleteAsync(DEFAULT_FILE_NAME);
 };
 
-const TIME_ACCEPTED_FILE_NAME = "@storedTimeAccepted";
+const TIME_ACCEPTED_KEY = "@storedTimeAccepted";
 
-export const setTimeAccepted = time => {
-  return FileSystem.writeAsStringAsync(TIME_ACCEPTED_FILE_NAME, time);
+export const storeTime = () => {
+  return AsyncStorage.setItem(TIME_ACCEPTED_KEY, getCurrentDateAndTime());
 };
 
-export const getTimeAccepted = () => {
-  return FileSystem.readAsStringAsync(TIME_ACCEPTED_FILE_NAME);
+export const getStoredTime = () => {
+  return AsyncStorage.getItem(TIME_ACCEPTED_KEY);
 };
 
-export const resetTimeAccepted = () => {
-  return FileSystem.deleteAsync(TIME_ACCEPTED_FILE_NAME);
+export const deleteStoredTime = () => {
+  return AsyncStorage.removeItem(TIME_ACCEPTED_KEY);
 };
+
 export const getStoredWorkpassIfExists = async () => {
   try {
     const documentJSON = await getStoredWorkpass();
