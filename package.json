@@ -17,6 +17,7 @@
     "@babel/types": "^7.5.0",
     "@expo/vector-icons": "^10.0.3",
     "@govtechsg/open-attestation": "^1.1.39",
+    "@govtechsg/opencerts-encryption": "^1.0.0",
     "@types/node": "^12.6.3",
     "@types/react-native-vector-icons": "^6.4.1",
     "@types/react-navigation": "^3.0.7",
