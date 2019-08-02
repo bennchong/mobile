@@ -6,15 +6,18 @@ import { Margin } from "../Layout/Margin";
 import { TextRow } from "../Layout/TextRow";
 import { formatDate } from "../../services/date";
 
-export const ProfileDetails = ({ cleanDocument }) => {
-  const { pass, recipient, employer } = cleanDocument;
+export const ProfileDetails = ({ workpass }) => {
+  const { pass, recipient, employer } = workpass;
   const {
     applicationDate,
     expiryDate,
     issueDate,
+    legalTillDate,
+    renewalDate,
     isMultipleJourney,
     type
   } = pass;
+  const { country, dob, maritalStatus, address } = recipient;
   const { name, sector } = employer;
 
   let multipleJourney;
@@ -32,9 +35,14 @@ export const ProfileDetails = ({ cleanDocument }) => {
   return (
     <View>
       <DetailSection title="Personal Particulars">
-        <TextRow label="Country of Residence" text={recipient.country} />
+        <TextRow label="Country of Residence" text={country} />
         <TextRow label="Gender" text="Female" />
-        <TextRow label="Date of Birth" text={formatDate(recipient.dob)} />
+        <TextRow label="Date of Birth" text={formatDate(dob)} />
+        <TextRow label="Marital Status" text={maritalStatus} />
+        <TextRow
+          label="Address"
+          text={`${address.streetAddress} ${address.postOfficeBoxNumber}, S${address.postalCode}`}
+        />
         <Margin />
       </DetailSection>
 
@@ -46,6 +54,8 @@ export const ProfileDetails = ({ cleanDocument }) => {
           text={formatDate(applicationDate)}
         />
         <TextRow label="Issued On" text={formatDate(issueDate)} />
+        <TextRow label="Entry Valid Till" text={formatDate(legalTillDate)} />
+        <TextRow label="Renewal Date" text={formatDate(renewalDate)} />
         <TextRow label="Employer" text={name} />
         <TextRow label="Sector" text={sector} />
         <TextRow label="Multiple Journey Visa" text={multipleJourney} />
@@ -55,5 +65,5 @@ export const ProfileDetails = ({ cleanDocument }) => {
 };
 
 ProfileDetails.propTypes = {
-  cleanDocument: PropTypes.object
+  workpass: PropTypes.object
 };

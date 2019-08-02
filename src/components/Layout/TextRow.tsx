@@ -11,14 +11,21 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "#fff"
   },
-  text: { color: "#808080", fontSize: 13 }
+  label: { color: "#808080", fontSize: 13, flex: 3 },
+  text: {
+    color: "#808080",
+    fontSize: 13,
+    flex: 4,
+    textAlign: "right",
+    flexWrap: "wrap"
+  }
 });
 
 const TextRow = ({ label, text }) => {
   if (text) {
     return (
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{label}</Text>
+        <Text style={styles.label}>{label}</Text>
         <Text style={styles.text}>{text}</Text>
       </View>
     );

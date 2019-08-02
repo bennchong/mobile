@@ -9,7 +9,7 @@ import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
-import { storeWorkpass } from "../../services/fileSystem";
+import { storeWorkpass, deleteStoredTime } from "../../services/fileSystem";
 import { decryptFromPayload } from "../../services/crypto";
 
 interface QRScannerProps {
@@ -64,9 +64,10 @@ class QRScanner extends React.Component<QRScannerProps> {
           onPress: async () => {
             await storeWorkpass(document);
             updateworkpass(document);
-            this.setState({ isProcessingQr: false });
+            await deleteStoredTime();
+            await this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem
-            NavigationService.navigate("Profile");
+            NavigationService.navigate("Profile", {});
           }
         }
       ],
