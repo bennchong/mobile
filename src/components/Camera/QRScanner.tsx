@@ -67,11 +67,11 @@ class QRScanner extends React.Component<QRScannerProps> {
         {
           text: "Yes",
           onPress: async () => {
+            dispatch({ type: "DELETE_WORKPASS" });
             await storeWorkpass(document);
             updateworkpass(document);
             await deleteStoredTime();
             await deleteStoredTimeVerified();
-            dispatch({ type: "DELETE_WORKPASS" });
             this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem
             NavigationService.navigate("Profile", {});
