@@ -1,22 +1,34 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 import { ProfileName } from "../ProfileName";
-import { StateContext } from "../../../state";
+import { useStateValue } from "../../../state";
 import { styles } from "./ProfileImageStyles";
 
-export const ProfileImage = ({ status, recipient, isPreview }) => {
-  const context = useContext(StateContext);
-  const data = context[0];
+export const ProfileImage = ({
+  status,
+  recipient,
+  isPreview,
+  previewTimeVerified
+}) => {
+  const [{ timeVerified }] = useStateValue();
   const { photo, fin, name } = recipient;
+
+  let timeShown;
+  switch (isPreview) {
+    case true:
+      timeShown = previewTimeVerified;
+      break;
+    default:
+      timeShown = timeVerified;
+  }
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {data.timeAccepted.length === 0 ? null : (
-            <Text style={styles.verifiedText}>
-              Verified on {data.timeAccepted}
-            </Text>
+          {timeShown.length === 0 ? null : (
+            <Text style={styles.verifiedText}>Last verified {timeShown}</Text>
           )}
         </View>
         <ProfileName
@@ -41,5 +53,6 @@ export const ProfileImage = ({ status, recipient, isPreview }) => {
 ProfileImage.propTypes = {
   recipient: PropTypes.object,
   isPreview: PropTypes.bool,
-  status: PropTypes.number
+  status: PropTypes.number,
+  previewTimeVerified: PropTypes.string
 };

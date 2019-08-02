@@ -4,7 +4,8 @@ import { Foundation, AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import {
   deleteStoredWorkpass,
-  deleteStoredTime
+  deleteStoredTime,
+  deleteStoredTimeVerified
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { StateContext } from "../../../state";
@@ -37,11 +38,12 @@ const DevDeleteWorkpass = props => {
                 onPress: async () => {
                   try {
                     await deleteStoredWorkpass();
+                    await deleteStoredTime();
+                    await deleteStoredTimeVerified();
                     Alert.alert(
                       "Dev Info",
                       "Workpass in the filesystem is successfully deleted"
                     );
-                    await deleteStoredTime();
                   } catch (e) {
                     Alert.alert(
                       "Dev Info",

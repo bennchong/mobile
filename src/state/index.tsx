@@ -5,6 +5,7 @@ export interface IContextState {
   workpass: any;
   workpassAccepted: boolean;
   timeAccepted: string;
+  timeVerified: string;
 }
 
 export const StateContext = createContext({});

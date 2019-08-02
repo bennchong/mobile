@@ -9,7 +9,11 @@ import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
-import { storeWorkpass, deleteStoredTime } from "../../services/fileSystem";
+import {
+  storeWorkpass,
+  deleteStoredTime,
+  deleteStoredTimeVerified
+} from "../../services/fileSystem";
 import { decryptFromPayload } from "../../services/crypto";
 
 interface QRScannerProps {
@@ -57,7 +61,8 @@ class QRScanner extends React.Component<QRScannerProps> {
       "Do you want to overwrite your current profile?",
       [
         {
-          text: "No"
+          text: "No",
+          onPress: () => this.setState({ isProcessingQr: false })
         },
         {
           text: "Yes",
@@ -65,7 +70,9 @@ class QRScanner extends React.Component<QRScannerProps> {
             await storeWorkpass(document);
             updateworkpass(document);
             await deleteStoredTime();
-            await this.setState({ isProcessingQr: false });
+            await deleteStoredTimeVerified();
+            dispatch({ type: "DELETE_WORKPASS" });
+            this.setState({ isProcessingQr: false });
             // TODO, change flow if downloading, read directly from Filesytem
             NavigationService.navigate("Profile", {});
           }

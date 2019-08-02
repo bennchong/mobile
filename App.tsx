@@ -10,7 +10,8 @@ import { StateProvider, IContextState } from "./src/state";
 const initialState: IContextState = {
   workpass: null,
   workpassAccepted: false,
-  timeAccepted: ""
+  timeAccepted: "",
+  timeVerified: ""
 };
 
 const reducer = (state, action) => {
@@ -19,6 +20,8 @@ const reducer = (state, action) => {
       return { ...state, workpass: action.workpass };
     case "SET_WORKPASS_ACCEPTED":
       return { ...state, workpassAccepted: true, timeAccepted: action.time };
+    case "SET_WORKPASS_VERIFIED":
+      return { ...state, timeVerified: action.time };
     case "DELETE_WORKPASS":
       return initialState;
     default:

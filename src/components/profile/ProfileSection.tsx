@@ -7,17 +7,24 @@ import { VerifyProfile } from "./VerifyProfile";
 import { VerifyModal } from "../Modals/VerifyModal";
 import { ProfileDetails } from "./ProfileDetails";
 
-const ProfileSection = ({ status, workpass, isPreview }) => {
+const ProfileSection = ({
+  status,
+  workpass,
+  isPreview,
+  previewTimeVerified
+}) => {
   const cleanWorkpass = getData(workpass);
   const { recipient } = cleanWorkpass;
 
   const [modal, setModal] = useState(false);
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <ProfileImage
         status={status}
         recipient={recipient}
         isPreview={isPreview}
+        previewTimeVerified={previewTimeVerified}
       />
       <ProfileDetails workpass={cleanWorkpass} />
       <VerifyProfile
@@ -34,5 +41,6 @@ export { ProfileSection };
 ProfileSection.propTypes = {
   workpass: PropTypes.object,
   isPreview: PropTypes.bool,
-  status: PropTypes.number
+  status: PropTypes.number,
+  previewTimeVerified: PropTypes.string
 };

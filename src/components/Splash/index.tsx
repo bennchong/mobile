@@ -5,7 +5,8 @@ import { useStateValue } from "../../state";
 import {
   checkStoredWorkpassExists,
   getStoredWorkpass,
-  getStoredTime
+  getStoredTime,
+  getStoredTimeVerified
 } from "../../services/fileSystem";
 
 const imageSource = require("../../assets/splash.png");
@@ -20,6 +21,16 @@ export const SplashScreen = props => {
       dispatch({
         type: "SET_WORKPASS_ACCEPTED",
         time: storedTimeAccepted
+      });
+    }
+  };
+
+  const loadVerifiedTimeIntoContext = async () => {
+    const storedTimeVerified = await getStoredTimeVerified();
+    if (storedTimeVerified) {
+      dispatch({
+        type: "SET_WORKPASS_VERIFIED",
+        time: storedTimeVerified
       });
     }
   };
@@ -40,6 +51,7 @@ export const SplashScreen = props => {
 
   useEffect(() => {
     loadAcceptedTimeIntoContext();
+    loadVerifiedTimeIntoContext();
     loadWorkpassIntoContext();
   }, []);
 
