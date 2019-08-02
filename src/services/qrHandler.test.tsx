@@ -16,6 +16,7 @@ describe("getActionFromQR", () => {
     expect(action).toEqual({
       action: "VIEW",
       uri: "https://something.com/get/resourceId",
+      type: undefined,
       key: undefined
     });
   });
@@ -27,17 +28,19 @@ describe("getActionFromQR", () => {
     expect(action).toEqual({
       action: "STORE",
       uri: "https://something.com/get/resourceId",
+      type: undefined,
       key: undefined
     });
   });
 
   it("should work with valid QR code with key", () => {
     const action = getActionFromQR(
-      "VIEW;https://something.com/get/resourceId;key"
+      "VIEW;https://something.com/get/resourceId;type;key"
     );
     expect(action).toEqual({
       action: "VIEW",
       uri: "https://something.com/get/resourceId",
+      type: "type",
       key: "key"
     });
   });

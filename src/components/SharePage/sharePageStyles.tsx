@@ -122,6 +122,13 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     color: "#414141"
   },
+  infoText: {
+    textAlign: "center",
+    marginTop: 10,
+    marginBottom: 5,
+    color: "#707070",
+    fontSize: 11
+  },
 
   flatList: { paddingHorizontal: 10 },
   separator: {
@@ -136,5 +143,12 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 16
   },
-  generateButton: { padding: 10, alignSelf: "center" }
+  generateButton: {
+    padding: 10,
+    alignSelf: "center",
+    backgroundColor: "#063444",
+    marginVertical: 5,
+    borderRadius: 20
+  },
+  generateText: { color: "#fff", fontWeight: "bold" }
 });

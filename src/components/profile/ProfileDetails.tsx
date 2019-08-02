@@ -17,6 +17,18 @@ export const ProfileDetails = ({ cleanDocument }) => {
   } = pass;
   const { name, sector } = employer;
 
+  let multipleJourney;
+  switch (isMultipleJourney) {
+    case true:
+      multipleJourney = "Issued";
+      break;
+    case false:
+      multipleJourney = "Not Issued";
+      break;
+    default:
+      multipleJourney = null;
+  }
+
   return (
     <View>
       <DetailSection title="Personal Particulars">
@@ -36,10 +48,7 @@ export const ProfileDetails = ({ cleanDocument }) => {
         <TextRow label="Issued On" text={formatDate(issueDate)} />
         <TextRow label="Employer" text={name} />
         <TextRow label="Sector" text={sector} />
-        <TextRow
-          label="Multiple Journey Visa"
-          text={isMultipleJourney ? "Issued" : "Not Issued"}
-        />
+        <TextRow label="Multiple Journey Visa" text={multipleJourney} />
       </DetailSection>
     </View>
   );

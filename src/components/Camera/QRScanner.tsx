@@ -10,6 +10,7 @@ import { ScanArea } from "./ScanArea";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
 import { storeWorkpass } from "../../services/fileSystem";
+import { decryptFromPayload } from "../../services/crypto";
 
 interface QRScannerProps {
   storeWorkpass: (cert) => {};
@@ -116,15 +117,17 @@ class QRScanner extends React.Component<QRScannerProps> {
     this.setState({ isProcessingQr: true });
 
     try {
-      const { action, uri, key } = await getActionFromQR(data);
-      const document = await fetchDocument(uri, key);
+      const { action, uri, type, key } = await getActionFromQR(data);
+      const document = await fetchDocument(uri);
 
       // TODO NEED TO VERIFY DOCUMENT
+      // Decrypt Here
 
+      const decryptedDocument = decryptFromPayload(document, { key, type });
       if (action === "STORE") {
-        this.handleProfileStorage(document);
+        this.handleProfileStorage(decryptedDocument);
       } else {
-        this.handleProfileView(document);
+        this.handleProfileView(decryptedDocument);
       }
     } catch (e) {
       this.setState({ invalidQR: true, isProcessingQr: false });

@@ -24,6 +24,19 @@ const ProfilePassDetails = ({ pass, employer }) => {
     type
   } = pass;
   const { name, sector } = employer;
+
+  let multipleJourney;
+  switch (isMultipleJourney) {
+    case true:
+      multipleJourney = "Issued";
+      break;
+    case false:
+      multipleJourney = "Not Issued";
+      break;
+    default:
+      multipleJourney = null;
+  }
+
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <View style={styles.headerContainer}>
@@ -35,10 +48,7 @@ const ProfilePassDetails = ({ pass, employer }) => {
       <TextRow label="Issued On" text={formatDate(issueDate)} />
       <TextRow label="Employer" text={name} />
       <TextRow label="Sector" text={sector} />
-      <TextRow
-        label="Multiple Journey Visa"
-        text={isMultipleJourney ? "Issued" : "Not Issued"}
-      />
+      <TextRow label="Multiple Journey Visa" text={multipleJourney} />
     </View>
   );
 };

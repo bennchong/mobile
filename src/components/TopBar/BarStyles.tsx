@@ -10,13 +10,13 @@ export const styles = StyleSheet.create({
     paddingBottom: 5
   },
   validating: {
-    backgroundColor: "#DAA520"
+    backgroundColor: "#EDB854"
   },
   verified: {
-    backgroundColor: "#32CD32"
+    backgroundColor: "#3FA540"
   },
   invalid: {
-    backgroundColor: "#B22222"
+    backgroundColor: "#D52D2D"
   },
   verify: {
     backgroundColor: "#f5f5f5"

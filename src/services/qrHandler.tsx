@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getActionFromQR = (qrData: string) => {
-  const [action, uri, key] = qrData.split(";");
+  const [action, uri, type, key] = qrData.split(";");
   const actionRegex = /(VIEW)|(STORE)/;
   const uriRegex = /https:\/\/.*/;
 
@@ -12,6 +12,7 @@ export const getActionFromQR = (qrData: string) => {
   return {
     action,
     uri,
+    type,
     key
   };
 };

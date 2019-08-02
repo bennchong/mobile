@@ -12,7 +12,6 @@ import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { StateContext } from "../../state";
 import { QrGenerator } from "./QrGenerator";
 import { obfuscateFields } from "./obfuscateFields";
-import { getCurrentDateAndTime } from "../../services/date";
 import { styles } from "./sharePageStyles";
 
 /* eslint-disable global-require */
@@ -36,23 +35,15 @@ export class SharePageContainer extends React.Component<
   static contextType = StateContext;
 
   state = {
-    qrText: "VIEW",
     obfuscateDetails: [],
     fields: obfuscateFields,
-    timeCreated: getCurrentDateAndTime(),
-    showQR: false
+    showQR: false,
+    workpass: null
   };
 
   handleCancel = () => {
     this.props.handleCancel();
-    this.setState({ obfuscateDetails: [], qrText: "VIEW", showQR: false });
-  };
-
-  refreshQr = () => {
-    this.setState({
-      qrText: `${this.state.qrText} + "placeholder URL"`,
-      timeCreated: getCurrentDateAndTime()
-    });
+    this.setState({ obfuscateDetails: [], showQR: false });
   };
 
   selectItem = item => {
@@ -75,13 +66,19 @@ export class SharePageContainer extends React.Component<
       style={[
         {
           backgroundColor: this.state.obfuscateDetails.includes(item)
-            ? "#FA7B5F"
+            ? "#D52D2D"
             : "#f5f5f5"
         },
         styles.obfuscateContainer
       ]}
     >
-      <Text>{item.title}</Text>
+      <Text
+        style={{
+          color: this.state.obfuscateDetails.includes(item) ? "#fff" : "#000"
+        }}
+      >
+        {item.title}
+      </Text>
     </TouchableOpacity>
   );
 
@@ -92,7 +89,7 @@ export class SharePageContainer extends React.Component<
     this.state.obfuscateDetails.forEach(item => {
       obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
     });
-    this.setState({ showQR: true });
+    this.setState({ showQR: true, workpass: obfuscatedDoc });
   };
 
   render() {
@@ -122,12 +119,9 @@ export class SharePageContainer extends React.Component<
               <Text style={styles.name}>{this.props.name}</Text>
             </View>
 
+            <Text style={styles.infoText}>Tap on a field to hide it!</Text>
             {this.state.showQR ? (
-              <QrGenerator
-                refreshQr={this.refreshQr}
-                qrText={this.state.qrText}
-                timeCreated={this.state.timeCreated}
-              />
+              <QrGenerator obfuscatedWorkpass={this.state.workpass} />
             ) : (
               <>
                 <FlatList
@@ -143,7 +137,7 @@ export class SharePageContainer extends React.Component<
                   style={styles.generateButton}
                   onPress={this.handleObfuscation}
                 >
-                  <Text>Genereate QR Code</Text>
+                  <Text style={styles.generateText}>Genereate QR Code</Text>
                 </TouchableOpacity>
               </>
             )}

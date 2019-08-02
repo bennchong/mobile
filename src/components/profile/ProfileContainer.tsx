@@ -29,9 +29,11 @@ export const ProfileContainer = ({
 
   useEffect(() => {
     // verify workpass once
-    verifyWorkpassBoolean(workpass).then(isValid => {
-      setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
-    });
+    if (workpass) {
+      verifyWorkpassBoolean(workpass).then(isValid => {
+        setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
+      });
+    }
   }, []);
 
   return workpass ? (

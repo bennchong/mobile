@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 
 const uploadEndpoint = "https://api-ropsten.opencerts.io/storage/create";
 
@@ -9,7 +9,7 @@ export const uploadWorkpass = async workpass => {
     document: workpass
   };
 
-  const response = await Axios.post(uploadEndpoint, JSON.stringify(content));
+  const response = await axios.post(uploadEndpoint, JSON.stringify(content));
 
   const responseJSON = await response.data;
   return responseJSON;
