@@ -41,7 +41,11 @@ export const ProfileDetails = ({ workpass }) => {
         <TextRow label="Marital Status" text={maritalStatus} />
         <TextRow
           label="Address"
-          text={`${address.streetAddress} ${address.postOfficeBoxNumber}, S${address.postalCode}`}
+          text={
+            address
+              ? `${address.streetAddress} ${address.postOfficeBoxNumber}, S${address.postalCode}`
+              : null
+          }
         />
         <Margin />
       </DetailSection>
