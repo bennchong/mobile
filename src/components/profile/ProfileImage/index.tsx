@@ -11,7 +11,7 @@ export const ProfileImage = ({
   isPreview,
   previewTimeVerified
 }) => {
-  const [{ timeVerified }] = useStateValue();
+  const [{ timeVerified, workpassAccepted }] = useStateValue();
   const { photo, fin, name } = recipient;
 
   let timeShown;
@@ -23,11 +23,15 @@ export const ProfileImage = ({
       timeShown = timeVerified;
   }
 
+  const showTimeVerified =
+    (!isPreview && !workpassAccepted && timeShown.length === 0) ||
+    (isPreview && timeShown.length === 0);
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {timeShown.length === 0 ? null : (
+          {showTimeVerified ? null : (
             <Text style={styles.verifiedText}>Last verified {timeShown}</Text>
           )}
         </View>
