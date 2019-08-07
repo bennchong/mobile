@@ -2,11 +2,12 @@ import * as React from "react";
 import { Alert, View, StyleSheet, Text } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-import { Constants } from "expo-barcode-scanner";
+import { BarCodeScanner } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
 import { StateContext } from "../../state";
 import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
+import { CannotScan } from "./CannotScan";
 import NavigationService from "../../navigation/NavigationService";
 import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
 import {
@@ -41,9 +42,10 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   handleProfileView = workpass => {
-    this.setState({ isProcessingQr: false });
-    NavigationService.navigate("ProfilePreview", {
-      workpass
+    this.setState({ isProcessingQr: false }, () => {
+      NavigationService.navigate("ProfilePreview", {
+        workpass
+      });
     });
   };
 
@@ -72,9 +74,10 @@ class QRScanner extends React.Component<QRScannerProps> {
             updateworkpass(document);
             await deleteStoredTime();
             await deleteStoredTimeVerified();
-            this.setState({ isProcessingQr: false });
+            this.setState({ isProcessingQr: false }, () => {
+              NavigationService.navigate("Profile", {});
+            });
             // TODO, change flow if downloading, read directly from Filesytem
-            NavigationService.navigate("Profile", {});
           }
         }
       ],
@@ -97,18 +100,21 @@ class QRScanner extends React.Component<QRScannerProps> {
 
     if (hasCameraPermission && isFocused) {
       return (
-        <Camera
-          style={{
-            ...StyleSheet.absoluteFillObject
-          }}
-          type={this.state.type}
-          barCodeScannerSettings={{
-            barCodeTypes: [Constants.BarCodeType.qr]
-          }}
-          onBarCodeScanned={this.handleBarCodeScanned}
-        >
-          <ScanArea />
-        </Camera>
+        <>
+          <Camera
+            style={{
+              ...StyleSheet.absoluteFillObject
+            }}
+            type={this.state.type}
+            barCodeScannerSettings={{
+              barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr]
+            }}
+            onBarCodeScanned={this.handleBarCodeScanned}
+          >
+            <ScanArea />
+          </Camera>
+          <CannotScan />
+        </>
       );
     }
     return (
@@ -118,19 +124,19 @@ class QRScanner extends React.Component<QRScannerProps> {
     );
   }
 
+  setStateAsync = newState => {
+    return new Promise(resolve => this.setState(newState, resolve));
+  };
+
   handleBarCodeScanned = async ({ data }) => {
     const { isProcessingQr } = this.state;
-
     if (isProcessingQr) return;
-    this.setState({ isProcessingQr: true });
-
+    // Need to wait for isProcessingQr to be set to true before executing the rest of the functions,
+    // otherwise it might be set to false, then true preventing QR codes from being scanned.
+    await this.setStateAsync({ isProcessingQr: true });
     try {
       const { action, uri, type, key } = await getActionFromQR(data);
       const document = await fetchDocument(uri);
-
-      // TODO NEED TO VERIFY DOCUMENT
-      // Decrypt Here
-
       const decryptedDocument = decryptFromPayload(document, { key, type });
       if (action === "STORE") {
         this.handleProfileStorage(decryptedDocument);

@@ -24,16 +24,18 @@ export const ProfileImage = ({
   }
 
   const showTimeVerified =
-    (!isPreview && !workpassAccepted && timeShown.length === 0) ||
-    (isPreview && timeShown.length === 0);
+    (!isPreview && workpassAccepted && timeShown.length !== 0) ||
+    (isPreview && timeShown.length !== 0);
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {showTimeVerified ? null : (
-            <Text style={styles.verifiedText}>Last verified {timeShown}</Text>
-          )}
+          {showTimeVerified ? (
+            <Text style={styles.verifiedText}>
+              System last verified: {timeShown}
+            </Text>
+          ) : null}
         </View>
         <ProfileName
           status={status}

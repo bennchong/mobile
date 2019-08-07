@@ -1,25 +1,8 @@
 import React from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
-
-const styles = StyleSheet.create({
-  baseBar: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    paddingBottom: 5
-  },
-  text: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 18
-  },
-  icon: {
-    marginBottom: 4,
-    marginLeft: 5
-  }
-});
+import { styles } from "./BarStyles";
 
 /* eslint-disable no-unused-vars */
 export enum statusEnum {
@@ -37,21 +20,25 @@ interface ValidationBarProps {
 // presentation component, only switch according to props
 export const ValidationBar = (props: ValidationBarProps) => {
   let barColor;
-  let icon;
+  let BarIcon;
   let text;
   switch (props.status) {
     case statusEnum.VALIDATING:
       barColor = { backgroundColor: "#EDB854" };
-      icon = <ActivityIndicator size="small" color="white" />;
+      // eslint-disable-next-line react/display-name
+      BarIcon = () => (
+        <ActivityIndicator size="small" color="white" style={styles.icon} />
+      );
       text = "VERIFYING";
       break;
     case statusEnum.VALID:
       barColor = { backgroundColor: "#3FA540" };
-      icon = (
+      // eslint-disable-next-line react/display-name
+      BarIcon = () => (
         <AntDesign
           name="checkcircle"
           color="#fff"
-          size={15}
+          size={18}
           style={styles.icon}
         />
       );
@@ -59,11 +46,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       break;
     default:
       barColor = { backgroundColor: "#D52D2D" };
-      icon = (
+      // eslint-disable-next-line react/display-name
+      BarIcon = () => (
         <AntDesign
           name="closecircle"
           color="#fff"
-          size={15}
+          size={18}
           style={styles.icon}
         />
       );
@@ -80,7 +68,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
       ]}
     >
       <Text style={styles.text}>{text}</Text>
-      {icon}
+      <BarIcon />
     </View>
   );
 };

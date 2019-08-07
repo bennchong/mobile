@@ -74,9 +74,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                   style={
                     Object {
                       "backgroundColor": "rgba(0,0,0,0.5)",
-                      "height": 60,
-                      "position": "absolute",
-                      "top": 0,
+                      "height": 50,
                       "width": "100%",
                       "zIndex": 999,
                     }
@@ -85,10 +83,9 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                   <Text
                     style={
                       Object {
-                        "alignItems": "center",
                         "color": "white",
                         "fontSize": 16,
-                        "marginTop": 35,
+                        "marginTop": 25,
                         "opacity": 1,
                         "textAlign": "center",
                       }
@@ -100,7 +97,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                 <View
                   style={
                     Object {
-                      "marginTop": 60,
+                      "marginTop": 5,
                     }
                   }
                 >

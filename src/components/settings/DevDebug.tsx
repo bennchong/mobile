@@ -15,10 +15,8 @@ const DevDebug = (props: IDevDebugProps) => {
     <ScrollView
       contentContainerStyle={{ marginTop: Constants.statusBarHeight }}
     >
-      <DevStoreWorkPass source="filesystem" />
-      <DevDeleteWorkpass source="filesystem" />
-      <DevStoreWorkPass source="state" />
-      <DevDeleteWorkpass source="state" />
+      <DevStoreWorkPass />
+      <DevDeleteWorkpass />
       <Button title="Go Back to Settings Page" onPress={goBack} />
     </ScrollView>
   );

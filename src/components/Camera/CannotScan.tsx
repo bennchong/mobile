@@ -9,7 +9,8 @@ export const CannotScan = () => {
         bottom: "5%",
         alignSelf: "center",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        zIndex: 99
       }}
     >
       <Text style={{ color: "#414141", fontSize: 12 }}>Can&apos;t Scan?</Text>

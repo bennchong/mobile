@@ -6,17 +6,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     height: Constants.statusBarHeight + 35,
     justifyContent: "center",
-    alignItems: "flex-end",
-    paddingBottom: 5
-  },
-  validating: {
-    backgroundColor: "#EDB854"
-  },
-  verified: {
-    backgroundColor: "#3FA540"
-  },
-  invalid: {
-    backgroundColor: "#D52D2D"
+    paddingBottom: 5,
+    alignItems: "flex-end"
   },
   verify: {
     backgroundColor: "#f5f5f5"
@@ -30,7 +21,6 @@ export const styles = StyleSheet.create({
     fontSize: 18
   },
   icon: {
-    marginBottom: 4,
     marginLeft: 5
   }
 });

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     width: metrics.MODAL,
     height: "75%",
     position: "absolute",
-    top: Constants.statusBarHeight + 15 + metrics.RADIUS,
+    top: Constants.statusBarHeight + 35 + metrics.RADIUS,
     zIndex: 2,
     borderWidth: 1,
     borderColor: "#fff",
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
       width: 5
     }
   },
+  overlay: { resizeMode: "cover", height: "100%" },
 
   input: {
     height: 40,
@@ -86,7 +87,7 @@ export const styles = StyleSheet.create({
     height: metrics.DIAMETER,
     borderRadius: metrics.RADIUS,
     alignSelf: "center",
-    top: metrics.RADIUS - 20,
+    top: Constants.statusBarHeight + 40,
     position: "absolute",
     zIndex: 98,
     shadowColor: "#000000",
@@ -104,6 +105,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#434343",
     position: "absolute",
+    top: Constants.statusBarHeight,
     zIndex: 99
   },
   textContainer: {
@@ -113,13 +115,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  fin: {
+
+  name: {
     fontWeight: "bold",
     fontSize: 18,
-    color: "#414141"
-  },
-  name: {
-    fontSize: 13,
     color: "#414141"
   },
   infoText: {

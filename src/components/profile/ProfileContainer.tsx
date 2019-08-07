@@ -13,7 +13,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderColor: "#F5F5F5",
+    elevation: 5,
+    shadowColor: "#000000",
+    shadowOpacity: 0.85,
+    shadowRadius: 10,
+    shadowOffset: {
+      height: 5,
+      width: 5
+    }
   }
 });
 

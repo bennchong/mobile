@@ -1,49 +1,57 @@
 import { createBottomTabNavigator } from "react-navigation";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { View } from "react-native";
+import { FontAwesome, Feather } from "@expo/vector-icons";
 import { SettingsTab, CameraTab, ProfileTab } from "./tabs";
 
-// eslint-disable-next-line no-unused-vars
-import { Navigation } from "./types";
-
-interface getTabBarIconProps {
-  navigation: Navigation;
-  tintColor: string;
+interface tabBarIconProps {
+  focused: any;
 }
-
-const getTabBarIcon = ({ navigation, tintColor }: getTabBarIconProps) => {
-  const { routeName } = navigation.state;
-  let iconName;
-  if (routeName === "Camera") {
-    iconName = `ios-qr-scanner`;
-    // Sometimes we want to add badges to some icons.
-    // You can check the implementation below.
-    // IconComponent = HomeIconWithBadge;
-  } else if (routeName === "Settings") {
-    iconName = `ios-settings`;
-  } else if (routeName === "Profile") {
-    iconName = `ios-person`;
-  }
-  // You can return any component that you like here!
-  return <Ionicons name={iconName} size={25} color={tintColor} />;
-};
 
 export const BottomTabNavigator = createBottomTabNavigator(
   {
-    Settings: SettingsTab,
-    Camera: CameraTab,
-    Profile: ProfileTab
-  },
-  {
-    initialRouteName: "Camera",
-
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ tintColor }) => getTabBarIcon({ navigation, tintColor })
-    }),
-
-    tabBarOptions: {
-      activeTintColor: "tomato",
-      inactiveTintColor: "gray"
+    Settings: {
+      screen: SettingsTab,
+      navigationOptions: {
+        tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
+        tabBarIcon: ({ focused }: tabBarIconProps) => (
+          <Feather
+            name="menu"
+            size={26}
+            color={focused ? "#5D5D5D" : "#E2E2E2"}
+          />
+        )
+      }
+    },
+    Camera: {
+      screen: CameraTab,
+      navigationOptions: {
+        tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
+        tabBarIcon: ({ focused }: tabBarIconProps) => (
+          <FontAwesome
+            name="camera"
+            size={26}
+            color={focused ? "#5D5D5D" : "#E2E2E2"}
+          />
+        )
+      }
+    },
+    Profile: {
+      screen: ProfileTab,
+      navigationOptions: {
+        tabBarLabel: <View />,
+        // eslint-disable-next-line react/display-name
+        tabBarIcon: ({ focused }: tabBarIconProps) => (
+          <FontAwesome
+            name="user-circle"
+            size={26}
+            color={focused ? "#5D5D5D" : "#E2E2E2"}
+          />
+        )
+      }
     }
-  }
+  },
+  { initialRouteName: "Camera" }
 );

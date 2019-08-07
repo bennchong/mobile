@@ -41,7 +41,7 @@ const SettingsTemplate = props => {
   return (
     <ScrollView>
       <Header text={"Settings"} />
-      <View style={{ marginTop: 60 }}>
+      <View style={{ marginTop: 5 }}>
         {tabs.map(tab => (
           <TouchableOpacity
             style={styles.container}

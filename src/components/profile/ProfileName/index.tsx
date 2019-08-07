@@ -29,7 +29,6 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
           <SharePageContainer
             photo={photo}
             name={name}
-            fin={fin}
             isVisible={isDialogVisible}
             handleCancel={toggleVisibility}
           />

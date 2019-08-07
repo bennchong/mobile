@@ -9,7 +9,10 @@ const imageSource = require("../../assets/blur.jpg");
 export const InvalidQRModal = ({ handleCloseModal, showModal }) => {
   return (
     <>
-      <Image source={imageSource} style={{ resizeMode: "cover" }} />
+      <Image
+        source={imageSource}
+        style={{ resizeMode: "cover", height: "100%" }}
+      />
       <Modal visible={showModal} transparent={true} animationType="fade">
         <View style={styles.overlay}>
           <View style={styles.modalContainer}>

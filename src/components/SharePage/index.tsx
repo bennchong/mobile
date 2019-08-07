@@ -26,7 +26,6 @@ interface SharePageContainerProps {
   handleCancel: Function;
   photo: string;
   name: string;
-  fin: string;
 }
 
 export class SharePageContainer extends React.Component<
@@ -35,7 +34,7 @@ export class SharePageContainer extends React.Component<
   static contextType = StateContext;
 
   state = {
-    obfuscateDetails: [],
+    detailsShown: [],
     fields: obfuscateFields,
     showQR: false,
     workpass: null
@@ -43,21 +42,21 @@ export class SharePageContainer extends React.Component<
 
   handleCancel = () => {
     this.props.handleCancel();
-    this.setState({ obfuscateDetails: [], showQR: false });
+    this.setState({ detailsShown: [], showQR: false });
   };
 
   selectItem = item => {
-    const { obfuscateDetails } = this.state;
+    const { detailsShown } = this.state;
     let newArray;
-    if (obfuscateDetails.includes(item)) {
-      newArray = obfuscateDetails.filter(c => {
+    if (detailsShown.includes(item)) {
+      newArray = detailsShown.filter(c => {
         return c !== item;
       });
     } else {
-      obfuscateDetails.push(item);
-      newArray = obfuscateDetails;
+      detailsShown.push(item);
+      newArray = detailsShown;
     }
-    this.setState({ obfuscateDetails: newArray });
+    this.setState({ detailsShown: newArray });
   };
 
   renderItem = ({ item }) => (
@@ -65,7 +64,7 @@ export class SharePageContainer extends React.Component<
       onPress={() => this.selectItem(item)}
       style={[
         {
-          backgroundColor: this.state.obfuscateDetails.includes(item)
+          backgroundColor: this.state.detailsShown.includes(item)
             ? "#D52D2D"
             : "#f5f5f5"
         },
@@ -74,7 +73,7 @@ export class SharePageContainer extends React.Component<
     >
       <Text
         style={{
-          color: this.state.obfuscateDetails.includes(item) ? "#fff" : "#000"
+          color: this.state.detailsShown.includes(item) ? "#fff" : "#000"
         }}
       >
         {item.title}
@@ -85,10 +84,18 @@ export class SharePageContainer extends React.Component<
   handleObfuscation = () => {
     const [{ workpass }] = this.context;
 
+    const obfuscatedDetails = [];
+    this.state.fields.forEach(item => {
+      if (!this.state.detailsShown.includes(item)) {
+        obfuscatedDetails.push(item);
+      }
+    });
+
     let obfuscatedDoc = workpass;
-    this.state.obfuscateDetails.forEach(item => {
+    obfuscatedDetails.forEach(item => {
       obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
     });
+
     this.setState({ showQR: true, workpass: obfuscatedDoc });
   };
 
@@ -99,7 +106,7 @@ export class SharePageContainer extends React.Component<
         transparent={true}
         visible={this.props.isVisible}
       >
-        <Image source={imageSource} style={{ resizeMode: "cover" }} />
+        <Image source={imageSource} style={styles.overlay} />
         <Text style={styles.text}>Ask requestor to scan QR code</Text>
 
         <View style={styles.imageContainer}>
@@ -115,15 +122,16 @@ export class SharePageContainer extends React.Component<
         >
           <View style={styles.box}>
             <View style={styles.textContainer}>
-              <Text style={styles.fin}>{this.props.fin}</Text>
               <Text style={styles.name}>{this.props.name}</Text>
             </View>
 
-            <Text style={styles.infoText}>Tap on a field to hide it!</Text>
             {this.state.showQR ? (
               <QrGenerator obfuscatedWorkpass={this.state.workpass} />
             ) : (
               <>
+                <Text style={styles.infoText}>
+                  Select fields to share below
+                </Text>
                 <FlatList
                   style={styles.flatList}
                   ItemSeparatorComponent={() => (
@@ -137,7 +145,7 @@ export class SharePageContainer extends React.Component<
                   style={styles.generateButton}
                   onPress={this.handleObfuscation}
                 >
-                  <Text style={styles.generateText}>Genereate QR Code</Text>
+                  <Text style={styles.generateText}>Generate QR Code</Text>
                 </TouchableOpacity>
               </>
             )}

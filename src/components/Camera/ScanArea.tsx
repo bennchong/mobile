@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     right: 0,
-    left: 0
+    left: 0,
+    zIndex: 1
   },
   viewfinder: {
     alignItems: "center",
@@ -18,12 +19,14 @@ const styles = StyleSheet.create({
   topLeftCorner: {
     position: "absolute",
     top: 0,
-    left: 0
+    left: 0,
+    zIndex: 1
   },
   topRightCorner: {
     position: "absolute",
     top: 0,
-    right: 0
+    right: 0,
+    zIndex: 1
   },
   bottomLeftCorner: {
     position: "absolute",
@@ -33,23 +36,28 @@ const styles = StyleSheet.create({
   bottomRightCorner: {
     position: "absolute",
     bottom: 0,
-    right: 0
+    right: 0,
+    zIndex: 1
   },
   topMask: {
     position: "absolute",
-    top: 0
+    top: 0,
+    zIndex: 1
   },
   leftMask: {
     position: "absolute",
-    left: 0
+    left: 0,
+    zIndex: 1
   },
   rightMask: {
     position: "absolute",
-    right: 0
+    right: 0,
+    zIndex: 1
   },
   bottomMask: {
     position: "absolute",
-    bottom: 0
+    bottom: 0,
+    zIndex: 1
   }
 });
 

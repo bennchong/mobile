@@ -49,7 +49,7 @@ export const QrGenerator = (props: QrGeneratorProps) => {
       <TouchableOpacity onPress={refreshQr}>
         <View style={styles.qrContainer}>
           {isUploading ? (
-            <ActivityIndicator size={160} />
+            <ActivityIndicator size="large" />
           ) : (
             <QRCode
               value={qrText}

@@ -4,10 +4,8 @@ import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   headerContainer: {
-    position: "absolute",
-    top: 0,
     width: "100%",
-    height: 60,
+    height: Constants.statusBarHeight * 2 + 10,
     backgroundColor: "rgba(0,0,0,0.5)",
     zIndex: 999
   },
@@ -16,8 +14,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     opacity: 1,
     textAlign: "center",
-    alignItems: "center",
-    marginTop: 55 - Constants.statusBarHeight
+    marginTop: Constants.statusBarHeight + 5
   }
 });
 
