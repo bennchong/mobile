@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, NetInfo } from "react-native";
-import { ValidationBar, MessageBar, NoWifiBar, statusEnum } from "../TopBar";
+import { ValidationBar, MessageBar, NoWifiBar } from "../TopBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile/NoProfile";
 import { NoWifiModal } from "../Modals/NoWifiModal";
-import { verifyWorkpassBoolean } from "../../services/verificationService";
 import { useStateValue } from "../../state";
 import { storeTimeVerified } from "../../services/fileSystem";
 import { getCurrentDateAndTime } from "../../services/date";
+import {
+  verificationStatusEnum,
+  verifyWorkpass
+} from "../../services/verificationService";
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +39,9 @@ export const ProfileContainer = ({
   isPreview
 }: ProfileContainerProps) => {
   const [{ workpassAccepted }, dispatch] = useStateValue();
-  const [validityStatus, setValidityStatus] = useState(statusEnum.VALIDATING);
+  const [validityStatus, setValidityStatus] = useState(
+    verificationStatusEnum.VALIDATING
+  );
   const [previewTimeVerified, setPreviewTime] = useState("");
   const [internetConnected, setConnected] = useState(true);
   const [showModal, setShowModal] = useState(!internetConnected);
@@ -67,11 +72,11 @@ export const ProfileContainer = ({
 
     // verify workpass once
     if (workpass) {
-      verifyWorkpassBoolean(workpass).then(isValid => {
-        setValidityStatus(isValid ? statusEnum.VALID : statusEnum.INVALID);
-        if (isValid && !isPreview) {
+      verifyWorkpass(workpass).then(status => {
+        setValidityStatus(status);
+        if (status && !isPreview) {
           storeTime();
-        } else if (isValid && isPreview) {
+        } else if (status && isPreview) {
           setPreviewTime(getCurrentDateAndTime());
         }
       });

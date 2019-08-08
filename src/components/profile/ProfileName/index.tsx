@@ -5,6 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
+import { verificationStatusEnum } from "../../../services/verificationService";
 
 export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
@@ -18,8 +19,9 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
     <View style={styles.textContainer}>
       <Text style={styles.fin}>{fin}</Text>
       <Text style={styles.name}>{name}</Text>
-      {!isPreview && status === 1 && timeAccepted.length !== 0 ? ( // Is Preview Section
-        // Not Preview Section
+      {!isPreview &&
+      status === verificationStatusEnum.VALID &&
+      timeAccepted.length !== 0 ? (
         <TouchableOpacity
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
