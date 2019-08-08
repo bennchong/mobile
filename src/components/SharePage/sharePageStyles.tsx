@@ -135,6 +135,18 @@ export const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "rgba(255,255,255,0.8)"
   },
+
+  profileSelector: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    backgroundColor: "#f5f5f5",
+    marginBottom: 10
+  },
+  profileSelectorText: {
+    fontWeight: "bold"
+  },
   obfuscateContainer: {
     width: "100%",
     justifyContent: "center",
