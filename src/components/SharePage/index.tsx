@@ -112,20 +112,17 @@ export const SharePageContainer = ({
         </>
       );
   }
-  ModalBody.displayName = "ModalBody";
 
   return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <Image source={imageSource} style={styles.overlay} />
       <Text style={styles.text}>Ask requestor to scan QR code</Text>
-
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{ uri: `data:image/gif;base64,${photo}` }}
         />
       </View>
-
       <TouchableOpacity onPress={closeModal} style={styles.touchable}>
         <View style={styles.box}>
           <View style={styles.textContainer}>
