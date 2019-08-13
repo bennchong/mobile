@@ -25,7 +25,6 @@ export const ValidationBar = (props: ValidationBarProps) => {
   switch (props.status) {
     case statusEnum.VALIDATING:
       barColor = { backgroundColor: "#EDB854" };
-      // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <ActivityIndicator size="small" color="white" style={styles.icon} />
       );
@@ -33,7 +32,6 @@ export const ValidationBar = (props: ValidationBarProps) => {
       break;
     case statusEnum.VALID:
       barColor = { backgroundColor: "#3FA540" };
-      // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="checkcircle"
@@ -46,7 +44,6 @@ export const ValidationBar = (props: ValidationBarProps) => {
       break;
     default:
       barColor = { backgroundColor: "#D52D2D" };
-      // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="closecircle"

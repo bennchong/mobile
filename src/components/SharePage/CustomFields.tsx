@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { obfuscateFields } from "./obfuscateFields";
 import { styles } from "./sharePageStyles";
@@ -13,6 +13,10 @@ global.Buffer = global.Buffer || require("buffer").Buffer;
 interface CustomFieldsProps {
   showQR: any;
   workpass: object;
+}
+
+interface renderItemProps {
+  item: any;
 }
 
 export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
@@ -32,7 +36,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
     setDetailsShown(newArray);
     setRefresh(!refresh);
   };
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: renderItemProps) => (
     <TouchableOpacity
       onPress={() => selectItem(item)}
       style={[
@@ -53,16 +57,34 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
   );
 
   const handleObfuscation = () => {
-    const obfuscatedDetails = obfuscateFields.filter(o => {
-      return !detailsShown.some(o2 => o.title == o2.title);
-    });
+    const details = [];
+    detailsShown.forEach(i => details.push(i.title));
+    const detailsString = details.join(", ");
 
-    let obfuscatedDoc = workpass;
-    obfuscatedDetails.forEach(item => {
-      obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
-    });
+    Alert.alert(
+      "Are you sure you want to share the following details:",
+      `${detailsString}`,
+      [
+        {
+          text: "No"
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            const obfuscatedDetails = obfuscateFields.filter(o => {
+              return !detailsShown.some(o2 => o.title === o2.title);
+            });
+            let obfuscatedDoc = workpass;
+            obfuscatedDetails.forEach(item => {
+              obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
+            });
 
-    showQR(obfuscatedDoc);
+            showQR(obfuscatedDoc);
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
   return (

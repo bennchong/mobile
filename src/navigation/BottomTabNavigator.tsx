@@ -14,7 +14,6 @@ export const BottomTabNavigator = createBottomTabNavigator(
       screen: SettingsTab,
       navigationOptions: {
         tabBarLabel: <View />,
-        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }: tabBarIconProps) => (
           <Feather
             name="menu"
@@ -28,7 +27,6 @@ export const BottomTabNavigator = createBottomTabNavigator(
       screen: CameraTab,
       navigationOptions: {
         tabBarLabel: <View />,
-        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }: tabBarIconProps) => (
           <FontAwesome
             name="camera"
@@ -42,7 +40,6 @@ export const BottomTabNavigator = createBottomTabNavigator(
       screen: ProfileTab,
       navigationOptions: {
         tabBarLabel: <View />,
-        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused }: tabBarIconProps) => (
           <FontAwesome
             name="user-circle"

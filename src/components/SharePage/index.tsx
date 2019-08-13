@@ -7,19 +7,17 @@ import {
   Image,
   Alert
 } from "react-native";
+import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { QrGenerator } from "./QrGenerator";
 import { CustomFields } from "./CustomFields";
 import { styles } from "./sharePageStyles";
 import { obfuscateFields, profileSelector } from "./obfuscateFields";
-import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { useStateValue } from "../../state";
 
 /* eslint-disable global-require */
 const imageSource = require("../../assets/blur2.jpg");
 global.Buffer = global.Buffer || require("buffer").Buffer;
 /* eslint-enable global-require */
-
-// https://github.com/dumbest/react-native-qrcode-svg-expo
 
 interface SharePageContainerProps {
   isVisible: boolean;
@@ -65,7 +63,7 @@ export const SharePageContainer = ({
           text: "Yes",
           onPress: () => {
             const obfuscatedDetails = obfuscateFields.filter(o => {
-              return !detailsShown.some(o2 => o.title == o2.title);
+              return !detailsShown.some(o2 => o.title === o2.title);
             });
             let obfuscatedDoc = workpass;
             obfuscatedDetails.forEach(item => {
@@ -114,6 +112,7 @@ export const SharePageContainer = ({
         </>
       );
   }
+  ModalBody.displayName = "ModalBody";
 
   return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
