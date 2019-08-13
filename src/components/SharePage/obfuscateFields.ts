@@ -1,4 +1,5 @@
 export const obfuscateFields = [
+  { title: "FIN", key: "recipient.fin" },
   { title: "Country of Residence", key: "recipient.country" },
   { title: "Date of Birth", key: "recipient.dob" },
   { title: "Address", key: "recipient.address" },
@@ -29,6 +30,7 @@ export const profileSelector = [
   {
     profile: "Telco",
     detailsShown: [
+      { title: "FIN", key: "recipient.fin" },
       { title: "Country of Residence", key: "recipient.country" },
       { title: "Date of Birth", key: "recipient.dob" },
       { title: "Address", key: "recipient.address" },
@@ -38,6 +40,7 @@ export const profileSelector = [
   {
     profile: "Police",
     detailsShown: [
+      { title: "FIN", key: "recipient.fin" },
       { title: "Country of Residence", key: "recipient.country" },
       { title: "Date of Birth", key: "recipient.dob" },
       { title: "Address", key: "recipient.address" },

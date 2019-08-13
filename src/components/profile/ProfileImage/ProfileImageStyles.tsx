@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     position: "absolute",
     shadowColor: "#000000",
     shadowOpacity: 0.15,
-    shadowRadius: 3,
     shadowOffset: {
       height: 5,
       width: 5

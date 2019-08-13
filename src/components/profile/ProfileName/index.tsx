@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
 import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
+
+const imageSource = require("../../../assets/blurredtext.jpeg");
 
 export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
   const [isDialogVisible, setVisible] = useState(false);
@@ -16,7 +18,14 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
 
   return (
     <View style={styles.textContainer}>
-      <Text style={styles.fin}>{fin}</Text>
+      {fin ? (
+        <Text style={styles.fin}>{fin}</Text>
+      ) : (
+        <Image
+          source={imageSource}
+          style={{ height: 15, width: 100, marginBottom: 5 }}
+        />
+      )}
       <Text style={styles.name}>{name}</Text>
       {!isPreview && status === 1 && timeAccepted.length !== 0 ? ( // Is Preview Section
         // Not Preview Section

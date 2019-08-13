@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
     zIndex: 99
   },
   textContainer: {
-    paddingTop: metrics.RADIUS + 5,
+    paddingTop: metrics.RADIUS + 10,
     backgroundColor: "#fff",
     width: "100%",
     alignItems: "center",
@@ -138,15 +138,19 @@ export const styles = StyleSheet.create({
 
   profileSelector: {
     width: "100%",
-    justifyContent: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // paddingVertical: 10,
+    // backgroundColor: "#f5f5f5",
+    // marginBottom: 10,
+    padding: 10,
     alignItems: "center",
-    paddingVertical: 10,
-    backgroundColor: "#f5f5f5",
-    marginBottom: 10
+    justifyContent: "center",
+    backgroundColor: "#063444",
+    marginVertical: 5,
+    borderRadius: 20
   },
-  profileSelectorText: {
-    fontWeight: "bold"
-  },
+  profileSelectorText: { color: "#fff", fontWeight: "bold" },
   obfuscateContainer: {
     width: "100%",
     justifyContent: "center",
@@ -154,12 +158,12 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 16
   },
-  generateButton: {
+  button: {
     padding: 10,
     alignSelf: "center",
     backgroundColor: "#063444",
     marginVertical: 5,
     borderRadius: 20
   },
-  generateText: { color: "#fff", fontWeight: "bold" }
+  buttonText: { color: "#fff", fontWeight: "bold" }
 });

@@ -3,7 +3,7 @@ import metrics from "../../../config/metrics";
 
 export const styles = StyleSheet.create({
   textContainer: {
-    paddingTop: metrics.RADIUS + 5,
+    paddingTop: metrics.RADIUS + 10,
     backgroundColor: "#fff",
     width: "100%",
     alignItems: "center",

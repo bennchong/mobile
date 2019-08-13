@@ -62,7 +62,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
     const detailsString = details.join(", ");
 
     Alert.alert(
-      "Are you sure you want to share the following details:",
+      "Are you sure you want to share the following details",
       `${detailsString}`,
       [
         {
@@ -97,11 +97,8 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
         extraData={refresh}
         renderItem={renderItem}
       />
-      <TouchableOpacity
-        style={styles.generateButton}
-        onPress={handleObfuscation}
-      >
-        <Text style={styles.generateText}>Generate QR Code</Text>
+      <TouchableOpacity style={styles.button} onPress={handleObfuscation}>
+        <Text style={styles.buttonText}>Generate QR Code</Text>
       </TouchableOpacity>
     </>
   );

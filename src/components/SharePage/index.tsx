@@ -53,8 +53,8 @@ export const SharePageContainer = ({
     const detailsString = details.join(", ");
 
     Alert.alert(
-      `Sharing profile with ${profile}`,
-      `You will be sharing the following details: ${detailsString}`,
+      `Share the following details with ${profile}`,
+      `${detailsString}`,
       [
         {
           text: "No"
