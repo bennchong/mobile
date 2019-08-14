@@ -52,14 +52,8 @@ class QRScanner extends React.Component<QRScannerProps> {
     });
   };
 
-  handleProfileStorage = document => {
+  handleProfileStorage = workpass => {
     const [, dispatch] = this.context;
-    const updateworkpass = workpass => {
-      dispatch({
-        type: "UPDATE_WORKPASS",
-        workpass
-      });
-    };
 
     Alert.alert(
       "Profile detected",
@@ -73,8 +67,11 @@ class QRScanner extends React.Component<QRScannerProps> {
           text: "Yes",
           onPress: async () => {
             dispatch({ type: "DELETE_WORKPASS" });
-            await storeWorkpass(document);
-            updateworkpass(document);
+            await storeWorkpass(workpass);
+            dispatch({
+              type: "UPDATE_WORKPASS",
+              workpass
+            });
             await deleteStoredTime();
             await deleteStoredTimeVerified();
             this.setState({ isProcessingQr: false }, () => {
@@ -140,11 +137,18 @@ class QRScanner extends React.Component<QRScannerProps> {
     try {
       const { action, uri, type, key } = await getActionFromQR(data);
       const document = await fetchDocument(uri);
-      const decryptedDocument = decryptFromPayload(document, { key, type });
-      if (action === "STORE") {
-        this.handleProfileStorage(decryptedDocument);
+
+      let workpass;
+      if (!type && !key) {
+        workpass = document;
       } else {
-        this.handleProfileView(decryptedDocument);
+        workpass = decryptFromPayload(document, { key, type });
+      }
+
+      if (action === "STORE") {
+        this.handleProfileStorage(workpass);
+      } else {
+        this.handleProfileView(workpass);
       }
     } catch (e) {
       this.setState({ invalidQR: true, isProcessingQr: false });
