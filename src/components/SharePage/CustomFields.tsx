@@ -5,6 +5,8 @@ import { obfuscateFields } from "./obfuscateFields";
 import { styles } from "./sharePageStyles";
 
 /* eslint-disable global-require */
+// Global buffer is needed to handle the binary data when obfuscating a certain field
+// and converting it to a hash using the obfuscateDocument method
 global.Buffer = global.Buffer || require("buffer").Buffer;
 /* eslint-enable global-require */
 
