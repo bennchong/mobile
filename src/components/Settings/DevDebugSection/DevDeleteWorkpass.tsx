@@ -31,8 +31,8 @@ const DevDeleteWorkpass = () => {
                   await deleteStoredWorkpass();
                   await deleteStoredTime();
                   await deleteStoredTimeVerified();
-                  dispatch({ type: "DELETE_WORKPASS" });
                   Alert.alert("Dev Info", "Workpass is successfully deleted");
+                  dispatch({ type: "DELETE_WORKPASS" });
                 } catch (e) {
                   Alert.alert(
                     "Dev Info",

@@ -12,14 +12,12 @@ import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { StateContext } from "../../state";
 import { QrGenerator } from "./QrGenerator";
 import { obfuscateFields } from "./obfuscateFields";
-import { styles } from "./sharePageStyles";
+import { styles } from "./SharePageStyles";
 
 /* eslint-disable global-require */
 const imageSource = require("../../assets/blur2.jpg");
 global.Buffer = global.Buffer || require("buffer").Buffer;
 /* eslint-enable global-require */
-
-// https://github.com/dumbest/react-native-qrcode-svg-expo
 
 interface SharePageContainerProps {
   isVisible: boolean;

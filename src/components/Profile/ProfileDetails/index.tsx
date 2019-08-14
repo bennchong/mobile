@@ -1,12 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 import { DetailSection } from "./DetailSection";
-import { Margin } from "../Layout/Margin";
-import { TextRow } from "../Layout/TextRow";
-import { formatDate } from "../../services/date";
+import { Margin } from "../../Layout/Margin";
+import { TextRow } from "../../Layout/TextRow";
+import { formatDate } from "../../../services/date/date";
 
-export const ProfileDetails = ({ workpass }) => {
+interface ProfileDetailsProps {
+  workpass: any;
+}
+
+export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
   const { pass, recipient, employer } = workpass;
   const {
     applicationDate,
@@ -66,8 +69,4 @@ export const ProfileDetails = ({ workpass }) => {
       </DetailSection>
     </View>
   );
-};
-
-ProfileDetails.propTypes = {
-  workpass: PropTypes.object
 };

@@ -1,12 +1,19 @@
 import React from "react";
 import { Image, View, Text, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import PropTypes from "prop-types";
 import { styles } from "./modalStyles";
 
 const imageSource = require("../../assets/blur.jpg");
 
-export const InvalidQRModal = ({ handleCloseModal, showModal }) => {
+interface InvalidQRModalProps {
+  handleCloseModal: Function;
+  showModal: boolean;
+}
+
+export const InvalidQRModal = ({
+  handleCloseModal,
+  showModal
+}: InvalidQRModalProps) => {
   return (
     <>
       <Image
@@ -34,9 +41,4 @@ export const InvalidQRModal = ({ handleCloseModal, showModal }) => {
       </Modal>
     </>
   );
-};
-
-InvalidQRModal.propTypes = {
-  handleCloseModal: PropTypes.func,
-  showModal: PropTypes.bool
 };

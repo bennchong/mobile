@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { View, Image } from "react-native";
-import PropTypes from "prop-types";
 import { useStateValue } from "../../state";
 import {
   checkStoredWorkpassExists,
@@ -11,7 +10,11 @@ import {
 
 const imageSource = require("../../assets/splash.png");
 
-export const SplashScreen = props => {
+interface SplashScreenProps {
+  navigation: any;
+}
+
+export const SplashScreen = (props: SplashScreenProps) => {
   const [, dispatch] = useStateValue();
   const { navigate } = props.navigation;
 
@@ -60,8 +63,4 @@ export const SplashScreen = props => {
       <Image source={imageSource} style={{ resizeMode: "center" }} />
     </View>
   );
-};
-
-SplashScreen.propTypes = {
-  navigation: PropTypes.any
 };

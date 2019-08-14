@@ -173,7 +173,7 @@ export class ScanArea extends Component {
             { backgroundColor: "rgba(255, 255, 255, 0.5)" },
             styles.leftMask,
             {
-              height: 240.5,
+              height: 240.1,
               width: this.getSideMaskWidth()
             }
           ]}
@@ -184,7 +184,7 @@ export class ScanArea extends Component {
             { backgroundColor: "rgba(255, 255, 255, 0.5)" },
             styles.rightMask,
             {
-              height: 240.5,
+              height: 240.1,
               width: this.getSideMaskWidth()
             }
           ]}

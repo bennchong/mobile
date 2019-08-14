@@ -1,16 +1,22 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
-import PropTypes from "prop-types";
 import { ProfileName } from "../ProfileName";
 import { useStateValue } from "../../../state";
 import { styles } from "./ProfileImageStyles";
+
+interface ProfileImageProps {
+  status: number;
+  recipient: any;
+  isPreview: boolean;
+  previewTimeVerified: string;
+}
 
 export const ProfileImage = ({
   status,
   recipient,
   isPreview,
   previewTimeVerified
-}) => {
+}: ProfileImageProps) => {
   const [{ timeVerified, workpassAccepted }] = useStateValue();
   const { photo, fin, name } = recipient;
 
@@ -54,11 +60,4 @@ export const ProfileImage = ({
       <View style={styles.margin} />
     </>
   );
-};
-
-ProfileImage.propTypes = {
-  recipient: PropTypes.object,
-  isPreview: PropTypes.bool,
-  status: PropTypes.number,
-  previewTimeVerified: PropTypes.string
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getData } from "@govtechsg/open-attestation";
-import { checkIfExpired } from "./date";
+import { checkIfExpired } from "../date/date";
 
 // is this a secret?
 const url = "https://api-ropsten.opencerts.io/verify";

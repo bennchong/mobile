@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { ScrollView } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { ProfileImage } from "./ProfileImage";
@@ -7,12 +6,19 @@ import { VerifyProfile } from "./VerifyProfile";
 import { VerifyModal } from "../Modals/VerifyModal";
 import { ProfileDetails } from "./ProfileDetails";
 
+interface ProfileSectionProps {
+  status: number;
+  workpass: any;
+  isPreview: boolean;
+  previewTimeVerified: string;
+}
+
 const ProfileSection = ({
   status,
   workpass,
   isPreview,
   previewTimeVerified
-}) => {
+}: ProfileSectionProps) => {
   const cleanWorkpass = getData(workpass);
   const { recipient } = cleanWorkpass;
 
@@ -37,10 +43,3 @@ const ProfileSection = ({
 };
 
 export { ProfileSection };
-
-ProfileSection.propTypes = {
-  workpass: PropTypes.object,
-  isPreview: PropTypes.bool,
-  status: PropTypes.number,
-  previewTimeVerified: PropTypes.string
-};

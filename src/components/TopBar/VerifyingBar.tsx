@@ -2,7 +2,7 @@ import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
-import { verificationStatusEnum } from "../../services/verificationService";
+import { verificationStatusEnum } from "../../services/verificationService/verificationService";
 import { styles } from "./BarStyles";
 
 interface ValidationBarProps {

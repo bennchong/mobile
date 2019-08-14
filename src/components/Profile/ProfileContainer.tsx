@@ -6,26 +6,23 @@ import { NoProfile } from "./NoProfile/NoProfile";
 import { NoWifiModal } from "../Modals/NoWifiModal";
 import { useStateValue } from "../../state";
 import { storeTimeVerified } from "../../services/fileSystem";
-import { getCurrentDateAndTime } from "../../services/date";
+import { getCurrentDateAndTime } from "../../services/date/date";
 import {
   verificationStatusEnum,
   verifyWorkpass
-} from "../../services/verificationService";
+} from "../../services/verificationService/verificationService";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
-    justifyContent: "center",
-    borderColor: "#F5F5F5",
+    justifyContent: "center"
+  },
+  shadow: {
+    borderColor: "#fff",
     elevation: 5,
     shadowColor: "#000000",
-    shadowOpacity: 0.85,
-    shadowRadius: 10,
-    shadowOffset: {
-      height: 5,
-      width: 5
-    }
+    shadowOpacity: 0.85
   }
 });
 
@@ -84,7 +81,7 @@ export const ProfileContainer = ({
   }, [internetConnected, workpass]);
 
   return workpass ? (
-    <View style={styles.container}>
+    <View style={[styles.container, isPreview ? styles.shadow : null]}>
       {!internetConnected && <NoWifiBar />}
       {(workpassAccepted || isPreview) && internetConnected && (
         <ValidationBar status={validityStatus} isPreview={isPreview} />

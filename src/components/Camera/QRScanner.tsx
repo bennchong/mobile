@@ -9,13 +9,16 @@ import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import { CannotScan } from "./CannotScan";
 import NavigationService from "../../navigation/NavigationService";
-import { fetchDocument, getActionFromQR } from "../../services/qrHandler";
+import {
+  fetchDocument,
+  getActionFromQR
+} from "../../services/qrHandler/qrHandler";
 import {
   storeWorkpass,
   deleteStoredTime,
   deleteStoredTimeVerified
 } from "../../services/fileSystem";
-import { decryptFromPayload } from "../../services/crypto";
+import { decryptFromPayload } from "../../services/crypto/crypto";
 
 interface QRScannerProps {
   storeWorkpass: (cert) => {};

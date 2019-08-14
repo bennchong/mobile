@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { storeWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
-import { fetchDocument } from "../../../services/qrHandler";
+import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { StateContext } from "../../../state";
 
 const DevStoreWorkPass = () => {

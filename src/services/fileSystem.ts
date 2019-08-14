@@ -1,6 +1,6 @@
 import * as FileSystem from "expo-file-system";
 import { AsyncStorage } from "react-native";
-import { getCurrentDateAndTime } from "./date";
+import { getCurrentDateAndTime } from "./date/date";
 
 const DEFAULT_FILE_NAME = `${FileSystem.documentDirectory}workpass`;
 

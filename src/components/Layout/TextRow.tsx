@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, View, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -21,9 +20,14 @@ const styles = StyleSheet.create({
   }
 });
 
+interface TextRowProps {
+  label: string;
+  text: string;
+}
+
 const imageSource = require("../../assets/blurredtext.jpeg");
 
-const TextRow = ({ label, text }) => {
+export const TextRow = ({ label, text }: TextRowProps) => {
   return (
     <View style={styles.textContainer}>
       <Text style={styles.label}>{label}</Text>
@@ -34,11 +38,4 @@ const TextRow = ({ label, text }) => {
       )}
     </View>
   );
-};
-
-export { TextRow };
-
-TextRow.propTypes = {
-  label: PropTypes.string,
-  text: PropTypes.string
 };

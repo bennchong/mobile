@@ -1,6 +1,6 @@
 import React from "react";
 import { useStateValue } from "../../../state";
-import { ProfileContainer } from "../../../components/profile/ProfileContainer";
+import { ProfileContainer } from "../../../components/Profile/ProfileContainer";
 
 const ProfileTab = () => {
   const [{ workpass }] = useStateValue();

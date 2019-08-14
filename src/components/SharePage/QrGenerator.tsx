@@ -7,9 +7,9 @@ import {
   ActivityIndicator,
   Dimensions
 } from "react-native";
-import { styles } from "./sharePageStyles";
-import { getCurrentDateAndTime } from "../../services/date";
-import { uploadWorkpass } from "../../services/transferAPI";
+import { styles } from "./SharePageStyles";
+import { getCurrentDateAndTime } from "../../services/date/date";
+import { uploadWorkpass } from "../../services/transferAPI/transferAPI";
 
 interface QrGeneratorProps {
   obfuscatedWorkpass: object;
