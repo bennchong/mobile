@@ -22,11 +22,12 @@ export const QrGenerator = (props: QrGeneratorProps) => {
 
   useEffect(() => {
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
-      setQrText(
-        `${"VIEW;https://api-ropsten.opencerts.io/storage/get/"}${res.id};${
-          res.type
-        };${res.key}`
-      );
+      const payload = {
+        uri: `https://api-ropsten.opencerts.io/storage/get/${res.id}`,
+        type: res.type,
+        key: res.key
+      };
+      setQrText(`VIEW;${JSON.stringify(payload)}`);
       toggleIsUploading(false);
     });
   }, []);
@@ -34,11 +35,12 @@ export const QrGenerator = (props: QrGeneratorProps) => {
   const refreshQr = () => {
     toggleIsUploading(true);
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
-      setQrText(
-        `${"VIEW;https://api-ropsten.opencerts.io/storage/get/"}${res.id};${
-          res.type
-        };${res.key}`
-      );
+      const payload = {
+        uri: `https://api-ropsten.opencerts.io/storage/get/${res.id}`,
+        type: res.type,
+        key: res.key
+      };
+      setQrText(`VIEW;${JSON.stringify(payload)}`);
       toggleIsUploading(false);
     });
     updateTimeCreated(getCurrentDateAndTime());

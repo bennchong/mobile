@@ -53,8 +53,8 @@ export const SharePageContainer = ({
     });
 
     const details = [];
-    obfuscateFields.map(o => {
-      detailsShown.some(o2 => {
+    obfuscateFields.forEach(o => {
+      detailsShown.forEach(o2 => {
         if (o.key === o2) {
           details.push(o.title);
         }
