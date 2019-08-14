@@ -1,11 +1,18 @@
 import React from "react";
 import { View, Modal, SafeAreaView } from "react-native";
-import PropTypes from "prop-types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { ProfileContainer } from "../profile/ProfileContainer";
-import { styles } from "./previewContainerStyles";
+import { ProfileContainer } from "../Profile/ProfileContainer";
+import { styles } from "./PreviewContainerStyles";
 
-export const PreviewContainer = ({ navigation, workpass }) => {
+interface PreviewContainerProps {
+  navigation: any;
+  workpass: any;
+}
+
+export const PreviewContainer = ({
+  navigation,
+  workpass
+}: PreviewContainerProps) => {
   const goBack = () => navigation.goBack();
 
   return (
@@ -24,9 +31,4 @@ export const PreviewContainer = ({ navigation, workpass }) => {
       </SafeAreaView>
     </Modal>
   );
-};
-
-PreviewContainer.propTypes = {
-  navigation: PropTypes.any,
-  workpass: PropTypes.object
 };

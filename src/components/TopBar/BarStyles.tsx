@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     height: Constants.statusBarHeight + 35,
     justifyContent: "center",
-    paddingBottom: 5,
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+    paddingBottom: 5
   },
   verify: {
     backgroundColor: "#f5f5f5"

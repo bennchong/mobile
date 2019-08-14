@@ -7,11 +7,13 @@ import {
   Image,
   Alert
 } from "react-native";
-import { obfuscateDocument } from "@govtechsg/open-attestation";
 import { QrGenerator } from "./QrGenerator";
 import { CustomFields } from "./CustomFields";
-import { styles } from "./sharePageStyles";
-import { obfuscateFields, profileSelector } from "./obfuscateFields";
+import { styles } from "./SharePageStyles";
+import {
+  handleObfuscation,
+  profileSelector
+} from "../../services/obfuscation/obfuscationHandler";
 import { useStateValue } from "../../state";
 
 /* eslint-disable global-require */
@@ -26,41 +28,40 @@ interface SharePageContainerProps {
   name: string;
 }
 
+/* eslint-disable no-unused-vars */
+enum pageEnum {
+  PROFILE_SELECTOR,
+  CUSTOM_FIELDS,
+  QR_GENERATOR
+}
+/* eslint-enable */
+
 export const SharePageContainer = ({
   isVisible,
   handleCancel,
   photo,
   name
 }: SharePageContainerProps) => {
-  const [page, setPage] = useState(0); // Profile Selector: 0, Custom: 1, QR: 2
+  const [page, setPage] = useState(pageEnum.PROFILE_SELECTOR);
   const [{ workpass }] = useStateValue();
   const [obfuscatedWorkpass, setWorkpass] = useState(workpass);
   let ModalBody;
 
   const closeModal = () => {
     handleCancel();
-    setPage(0);
+    setPage(pageEnum.PROFILE_SELECTOR);
   };
 
   const showQR = doc => {
     setWorkpass(doc);
-    setPage(2);
+    setPage(pageEnum.QR_GENERATOR);
   };
 
-  const handleObfuscation = (profile, detailsShown) => {
-    const obfuscatedDetails = obfuscateFields.filter(o => {
-      return !detailsShown.some(o2 => o.key === o2);
-    });
-
-    const details = [];
-    obfuscateFields.forEach(o => {
-      detailsShown.forEach(o2 => {
-        if (o.key === o2) {
-          details.push(o.title);
-        }
-      });
-    });
-    const detailsString = details.join(", ");
+  const handleProfileSelector = (profile, detailsShown) => {
+    const { obfuscatedDoc, detailsString } = handleObfuscation(
+      detailsShown,
+      workpass
+    );
 
     Alert.alert(
       `Share the following details with ${profile}`,
@@ -72,11 +73,6 @@ export const SharePageContainer = ({
         {
           text: "Yes",
           onPress: () => {
-            let obfuscatedDoc = workpass;
-            obfuscatedDetails.forEach(item => {
-              obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
-            });
-
             showQR(obfuscatedDoc);
           }
         }
@@ -102,7 +98,7 @@ export const SharePageContainer = ({
                 key={item.profile}
                 style={styles.profileSelector}
                 onPress={() => {
-                  handleObfuscation(item.profile, item.detailsShown);
+                  handleProfileSelector(item.profile, item.detailsShown);
                 }}
               >
                 <Text style={styles.profileSelectorText}>{item.profile}</Text>
@@ -111,7 +107,7 @@ export const SharePageContainer = ({
 
             <TouchableOpacity
               style={styles.profileSelector}
-              onPress={() => setPage(1)}
+              onPress={() => setPage(pageEnum.CUSTOM_FIELDS)}
             >
               <Text style={styles.profileSelectorText}>Custom</Text>
             </TouchableOpacity>

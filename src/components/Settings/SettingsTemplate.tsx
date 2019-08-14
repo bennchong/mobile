@@ -1,8 +1,8 @@
 import React from "react";
 import { View, ScrollView, TouchableOpacity, Text } from "react-native";
 import { withNavigation } from "react-navigation";
-import PropTypes from "prop-types";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import { Header } from "../Layout/Header";
 import { styles } from "./styles";
 
@@ -36,12 +36,16 @@ const tabs = [
   }
 ];
 
-const SettingsTemplate = props => {
+interface SettingsTemplateProps {
+  navigation: any;
+}
+
+const SettingsTemplate = (props: SettingsTemplateProps) => {
   const { navigate } = props.navigation;
   return (
     <ScrollView>
       <Header text={"Settings"} />
-      <View style={{ marginTop: 5 }}>
+      <View style={{ marginTop: Constants.statusBarHeight + 35 }}>
         {tabs.map(tab => (
           <TouchableOpacity
             style={styles.container}
@@ -66,7 +70,3 @@ const SettingsTemplate = props => {
 };
 
 export default withNavigation(SettingsTemplate);
-
-SettingsTemplate.propTypes = {
-  navigation: PropTypes.any
-};

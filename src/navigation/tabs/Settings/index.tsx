@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
-import SettingsTemplate from "../../../components/settings/SettingsTemplate";
-import DevDebug from "../../../components/settings/DevDebug";
+import SettingsTemplate from "../../../components/Settings/SettingsTemplate";
+import DevDebug from "../../../components/Settings/DevDebug";
 
 const SettingsTab = createStackNavigator(
   {

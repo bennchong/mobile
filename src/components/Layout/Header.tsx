@@ -5,16 +5,18 @@ import Constants from "expo-constants";
 const styles = StyleSheet.create({
   headerContainer: {
     width: "100%",
-    height: Constants.statusBarHeight * 2 + 10,
+    position: "absolute",
+    top: Constants.statusBarHeight,
+    height: 30,
     backgroundColor: "rgba(0,0,0,0.5)",
-    zIndex: 999
+    zIndex: 999,
+    justifyContent: "center"
   },
   headerText: {
     color: "white",
     fontSize: 16,
     opacity: 1,
-    textAlign: "center",
-    marginTop: Constants.statusBarHeight + 5
+    textAlign: "center"
   }
 });
 

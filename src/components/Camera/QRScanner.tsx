@@ -14,8 +14,8 @@ import {
   storeService,
   fetchDocument,
   getActionFromQR
-} from "../../services/qrHandler";
-import { decryptFromPayload } from "../../services/crypto";
+} from "../../services/qrHandler/qrHandler";
+import { decryptFromPayload } from "../../services/crypto/crypto";
 
 interface QRScannerProps {
   storeWorkpass: (cert) => {};
@@ -53,13 +53,17 @@ class QRScanner extends React.Component<QRScannerProps> {
   handleProfileView = async payload => {
     const { uri, key, type } = JSON.parse(payload);
     const encryptedDocument = await fetchDocument(uri);
-    const decryptedDocument = decryptFromPayload(encryptedDocument, {
-      key,
-      type
-    });
+
+    let workpass;
+    if (!type && !key) {
+      workpass = encryptedDocument;
+    } else {
+      workpass = decryptFromPayload(encryptedDocument, { key, type });
+    }
+
     this.setState({ isProcessingQr: false }, () => {
       NavigationService.navigate("ProfilePreview", {
-        workpass: decryptedDocument
+        workpass
       });
     });
   };

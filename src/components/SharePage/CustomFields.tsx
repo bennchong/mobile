@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
-import { obfuscateDocument } from "@govtechsg/open-attestation";
-import { obfuscateFields } from "./obfuscateFields";
-import { styles } from "./sharePageStyles";
+import {
+  obfuscateFields,
+  handleObfuscation
+} from "../../services/obfuscation/obfuscationHandler";
+import { styles } from "./SharePageStyles";
 
 /* eslint-disable global-require */
 // Global buffer is needed to handle the binary data when obfuscating a certain field
@@ -38,6 +40,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
     setDetailsShown(newArray);
     setRefresh(!refresh);
   };
+
   const renderItem = ({ item }: renderItemProps) => (
     <TouchableOpacity
       onPress={() => selectItem(item.key)}
@@ -60,20 +63,11 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
     </TouchableOpacity>
   );
 
-  const handleObfuscation = () => {
-    const obfuscatedDetails = obfuscateFields.filter(o => {
-      return !detailsShown.some(o2 => o.key === o2);
-    });
-
-    const details = [];
-    obfuscateFields.forEach(o => {
-      detailsShown.forEach(o2 => {
-        if (o.key === o2) {
-          details.push(o.title);
-        }
-      });
-    });
-    const detailsString = details.join(", ");
+  const handleCustomFields = () => {
+    const { obfuscatedDoc, detailsString } = handleObfuscation(
+      detailsShown,
+      workpass
+    );
 
     Alert.alert(
       "Are you sure you want to share the following details",
@@ -85,11 +79,6 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
         {
           text: "Yes",
           onPress: () => {
-            let obfuscatedDoc = workpass;
-            obfuscatedDetails.forEach(item => {
-              obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
-            });
-
             showQR(obfuscatedDoc);
           }
         }
@@ -108,7 +97,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
         extraData={refresh}
         renderItem={renderItem}
       />
-      <TouchableOpacity style={styles.button} onPress={handleObfuscation}>
+      <TouchableOpacity style={styles.button} onPress={handleCustomFields}>
         <Text style={styles.buttonText}>Generate QR Code</Text>
       </TouchableOpacity>
     </>

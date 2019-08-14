@@ -1,3 +1,5 @@
+import { obfuscateDocument } from "@govtechsg/open-attestation";
+
 export const obfuscateFields = [
   { title: "FIN", key: "recipient.fin" },
   { title: "Country of Residence", key: "recipient.country" },
@@ -73,3 +75,33 @@ export const profileSelector = [
     ]
   }
 ];
+
+/* Accepts detailsShown which is an array of keys to show and a workpass on which the 
+ obfuscateDocument function will obfuscate fields from.
+
+ Returns an array of titles to display on the Alert component to inform users which
+ details they will be sharing; as well as a obfuscatedDoc which contains the obfuscated
+ fields as hashes.
+*/
+
+export const handleObfuscation = (detailsShown, workpass) => {
+  const details = [];
+  obfuscateFields.forEach(o => {
+    detailsShown.forEach(o2 => {
+      if (o.key === o2) {
+        details.push(o.title);
+      }
+    });
+  });
+  const detailsString = details.join(", ");
+
+  const obfuscatedDetails = obfuscateFields.filter(o => {
+    return !detailsShown.some(o2 => o.key === o2);
+  });
+  let obfuscatedDoc = workpass;
+  obfuscatedDetails.forEach(item => {
+    obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
+  });
+
+  return { obfuscatedDoc, detailsString };
+};

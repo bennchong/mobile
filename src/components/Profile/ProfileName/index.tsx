@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
 import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
+import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 
 const imageSource = require("../../../assets/blurredtext.jpeg");
 
-export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
+interface ProfileNameProps {
+  status: number;
+  photo: string;
+  fin: string;
+  name: string;
+  isPreview: boolean;
+}
+
+export const ProfileName = ({
+  status,
+  photo,
+  fin,
+  name,
+  isPreview
+}: ProfileNameProps) => {
   const [isDialogVisible, setVisible] = useState(false);
   const [{ timeAccepted }] = useStateValue();
 
@@ -27,8 +41,9 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
         />
       )}
       <Text style={styles.name}>{name}</Text>
-      {!isPreview && status === 1 && timeAccepted.length !== 0 ? ( // Is Preview Section
-        // Not Preview Section
+      {!isPreview &&
+      status === verificationStatusEnum.VALID &&
+      timeAccepted.length !== 0 ? (
         <TouchableOpacity
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
@@ -45,12 +60,4 @@ export const ProfileName = ({ status, photo, fin, name, isPreview }) => {
       ) : null}
     </View>
   );
-};
-
-ProfileName.propTypes = {
-  fin: PropTypes.string,
-  name: PropTypes.string,
-  photo: PropTypes.string,
-  isPreview: PropTypes.bool,
-  status: PropTypes.number
 };

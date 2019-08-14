@@ -138,11 +138,6 @@ export const styles = StyleSheet.create({
 
   profileSelector: {
     width: "100%",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // paddingVertical: 10,
-    // backgroundColor: "#f5f5f5",
-    // marginBottom: 10,
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
