@@ -23,14 +23,14 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
   const [detailsShown, setDetailsShown] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-  const selectItem = item => {
+  const selectItem = key => {
     let newArray;
-    if (detailsShown.includes(item)) {
+    if (detailsShown.includes(key)) {
       newArray = detailsShown.filter(c => {
-        return c !== item;
+        return c !== key;
       });
     } else {
-      detailsShown.push(item);
+      detailsShown.push(key);
       newArray = detailsShown;
     }
     setDetailsShown(newArray);
@@ -38,17 +38,19 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
   };
   const renderItem = ({ item }: renderItemProps) => (
     <TouchableOpacity
-      onPress={() => selectItem(item)}
+      onPress={() => selectItem(item.key)}
       style={[
         {
-          backgroundColor: detailsShown.includes(item) ? "#D52D2D" : "#f5f5f5"
+          backgroundColor: detailsShown.includes(item.key)
+            ? "#D52D2D"
+            : "#f5f5f5"
         },
         styles.obfuscateContainer
       ]}
     >
       <Text
         style={{
-          color: detailsShown.includes(item) ? "#fff" : "#000"
+          color: detailsShown.includes(item.key) ? "#fff" : "#000"
         }}
       >
         {item.title}
@@ -57,8 +59,18 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
   );
 
   const handleObfuscation = () => {
+    const obfuscatedDetails = obfuscateFields.filter(o => {
+      return !detailsShown.some(o2 => o.key === o2);
+    });
+
     const details = [];
-    detailsShown.forEach(i => details.push(i.title));
+    obfuscateFields.map(o => {
+      detailsShown.some(o2 => {
+        if (o.key === o2) {
+          details.push(o.title);
+        }
+      });
+    });
     const detailsString = details.join(", ");
 
     Alert.alert(
@@ -71,9 +83,6 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
         {
           text: "Yes",
           onPress: () => {
-            const obfuscatedDetails = obfuscateFields.filter(o => {
-              return !detailsShown.some(o2 => o.title === o2.title);
-            });
             let obfuscatedDoc = workpass;
             obfuscatedDetails.forEach(item => {
               obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);

@@ -48,8 +48,18 @@ export const SharePageContainer = ({
   };
 
   const handleObfuscation = (profile, detailsShown) => {
+    const obfuscatedDetails = obfuscateFields.filter(o => {
+      return !detailsShown.some(o2 => o.key === o2);
+    });
+
     const details = [];
-    detailsShown.forEach(i => details.push(i.title));
+    obfuscateFields.map(o => {
+      detailsShown.some(o2 => {
+        if (o.key === o2) {
+          details.push(o.title);
+        }
+      });
+    });
     const detailsString = details.join(", ");
 
     Alert.alert(
@@ -62,9 +72,6 @@ export const SharePageContainer = ({
         {
           text: "Yes",
           onPress: () => {
-            const obfuscatedDetails = obfuscateFields.filter(o => {
-              return !detailsShown.some(o2 => o.title === o2.title);
-            });
             let obfuscatedDoc = workpass;
             obfuscatedDetails.forEach(item => {
               obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);
