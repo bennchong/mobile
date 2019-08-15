@@ -1,8 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useStateValue } from "../../../state";
-import { getCurrentDateAndTime } from "../../../services/date/date";
-import { storeTime } from "../../../services/fileSystem";
 import { styles } from "./VerifyProfileStyles";
 
 interface VerifyProfileProps {
@@ -13,15 +11,6 @@ interface VerifyProfileProps {
 const VerifyProfile = ({ isPreview, handleShowModal }: VerifyProfileProps) => {
   const [{ workpassAccepted }, dispatch] = useStateValue();
 
-  const handleWorkpassConfirmation = async () => {
-    handleShowModal();
-    await storeTime();
-    dispatch({
-      type: "SET_WORKPASS_ACCEPTED",
-      time: getCurrentDateAndTime()
-    });
-  };
-
   if (!workpassAccepted && !isPreview) {
     return (
       <View style={styles.container}>
@@ -30,7 +19,7 @@ const VerifyProfile = ({ isPreview, handleShowModal }: VerifyProfileProps) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={handleWorkpassConfirmation}
+          onPress={() => handleShowModal()}
         >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, KeyboardAvoidingView } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { ProfileImage } from "./ProfileImage";
 import { VerifyProfile } from "./VerifyProfile";
@@ -25,20 +25,25 @@ const ProfileSection = ({
   const [modal, setModal] = useState(false);
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ProfileImage
-        status={status}
-        recipient={recipient}
-        isPreview={isPreview}
-        previewTimeVerified={previewTimeVerified}
-      />
-      <ProfileDetails workpass={cleanWorkpass} />
-      <VerifyProfile
-        isPreview={isPreview}
-        handleShowModal={() => setModal(true)}
-      />
-      <VerifyModal showModal={modal} handleCloseModal={() => setModal(false)} />
-    </ScrollView>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
+      <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+        <ProfileImage
+          status={status}
+          recipient={recipient}
+          isPreview={isPreview}
+          previewTimeVerified={previewTimeVerified}
+        />
+        <ProfileDetails workpass={cleanWorkpass} />
+        <VerifyProfile
+          isPreview={isPreview}
+          handleShowModal={() => setModal(true)}
+        />
+        <VerifyModal
+          showModal={modal}
+          handleCloseModal={() => setModal(false)}
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

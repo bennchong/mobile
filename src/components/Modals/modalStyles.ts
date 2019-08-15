@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import metrics from "../../config/metrics";
+import Constants from "expo-constants";
 
 export const styles = StyleSheet.create({
   container: {
@@ -64,5 +65,11 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.4)"
+  },
+  closeIcon: {
+    position: "absolute",
+    top: Constants.statusBarHeight,
+    right: 20,
+    zIndex: 1000
   }
 });

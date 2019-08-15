@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { DetailSection } from "./DetailSection";
+import { DetailSection, DetailSectionSecret } from "./DetailSection";
 import { Margin } from "../../Layout/Margin";
 import { TextRow } from "../../Layout/TextRow";
 import { formatDate } from "../../../services/date/date";
@@ -66,7 +66,7 @@ export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
       ) : null}
 
       {showPassDetails ? (
-        <DetailSection title="Pass Details">
+        <DetailSectionSecret title="Pass Details">
           <TextRow label="Pass Type" text={type} />
           <TextRow label="Pass Expires On" text={formatDate(expiryDate)} />
           <TextRow
@@ -79,7 +79,7 @@ export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
           <TextRow label="Employer" text={name} />
           <TextRow label="Sector" text={sector} />
           <TextRow label="Multiple Journey Visa" text={multipleJourney} />
-        </DetailSection>
+        </DetailSectionSecret>
       ) : null}
     </View>
   );

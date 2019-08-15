@@ -1,20 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./modalStyles";
+import { RegisterPassCode } from "../Profile/VerifyProfile/RegisterPassCode";
 
 interface IVerifyModalProps {
   showModal: boolean;
   handleCloseModal: () => any;
 }
 
+/* eslint-disable no-unused-vars */
+enum pageEnum {
+  FINGERPRINT,
+  PASSCODE,
+  SUCCESS_MODAL
+}
+/* eslint-enable */
+
 export const VerifyModal = ({
   handleCloseModal,
   showModal
 }: IVerifyModalProps) => {
-  return (
-    <Modal visible={showModal} transparent={true} animationType="fade">
-      <View style={styles.overlay}>
+  const [page, setPage] = useState(pageEnum.PASSCODE);
+
+  const showSuccess = () => {
+    setPage(pageEnum.SUCCESS_MODAL);
+  };
+
+  let ModalBody;
+  switch (page) {
+    case pageEnum.PASSCODE:
+      ModalBody = () => (
+        <>
+          <AntDesign
+            name="close"
+            size={30}
+            color="#000"
+            style={styles.closeIcon}
+            onPress={() => handleCloseModal()}
+          />
+          <RegisterPassCode showSuccess={showSuccess} />
+        </>
+      );
+      break;
+    default:
+      ModalBody = () => (
         <View style={styles.modalContainer}>
           <View style={styles.modal}>
             <AntDesign name="checkcircle" size={69} color="#5FC660" />
@@ -27,6 +57,13 @@ export const VerifyModal = ({
             </TouchableOpacity>
           </View>
         </View>
+      );
+  }
+
+  return (
+    <Modal visible={showModal} transparent={true} animationType="fade">
+      <View style={styles.overlay}>
+        <ModalBody />
       </View>
     </Modal>
   );

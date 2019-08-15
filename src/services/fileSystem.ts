@@ -64,3 +64,17 @@ export const getStoredWorkpassIfExists = async () => {
     throw e;
   }
 };
+
+const PASSCODE = "@passcode";
+
+export const storePasscode = code => {
+  return AsyncStorage.setItem(PASSCODE, code);
+};
+
+export const getPasscode = () => {
+  return AsyncStorage.getItem(PASSCODE);
+};
+
+export const deletePasscode = () => {
+  return AsyncStorage.removeItem(PASSCODE);
+};

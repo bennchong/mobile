@@ -1,5 +1,9 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useStateValue } from "../../../state";
+import { AntDesign } from "@expo/vector-icons";
+import { VerifyPassCode } from "./VerifyPassCode";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -7,9 +11,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderColor: "#A9A9A9",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  header: { color: "#808080", fontWeight: "bold", fontSize: 13 }
+  header: { color: "#808080", fontWeight: "bold", fontSize: 13 },
+  closeIcon: {
+    position: "absolute",
+    top: Constants.statusBarHeight,
+    right: 20,
+    zIndex: 1000
+  }
 });
 
 interface DetailSectionProps {
@@ -17,26 +29,53 @@ interface DetailSectionProps {
   children: any;
 }
 
-interface DetailSectionHeaderProps {
+interface DetailSectionSecretProps {
   title: string;
+  children: any;
 }
 
-const DetailSectionHeader = (props: DetailSectionHeaderProps) => {
-  if (props.title) {
-    return (
-      <View style={styles.headerContainer}>
-        <Text style={styles.header}>{props.title}</Text>
-      </View>
-    );
-  }
-  return null;
-};
+const handleShow = () => {};
 
 export const DetailSection = (props: DetailSectionProps) => {
   return (
     <View style={{ backgroundColor: "#fff" }}>
-      <DetailSectionHeader title={props.title} />
+      {props.title ? (
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>{props.title}</Text>
+        </View>
+      ) : null}
       {props.children}
     </View>
+  );
+};
+
+export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
+  const [show, setShow] = useState(false);
+  const [{ workpassAccepted }] = useStateValue();
+
+  const handleShow = () => {
+    setShow(!show);
+  };
+
+  return (
+    <>
+      <View style={{ backgroundColor: "#fff" }}>
+        {props.title ? (
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>{props.title}</Text>
+            {workpassAccepted ? (
+              <TouchableOpacity onPress={handleShow}>
+                <Text style={styles.header}>{show ? "Hide" : null}</Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        ) : null}
+        {show || !workpassAccepted ? (
+          props.children
+        ) : (
+          <VerifyPassCode showSuccess={() => setShow(true)} />
+        )}
+      </View>
+    </>
   );
 };
