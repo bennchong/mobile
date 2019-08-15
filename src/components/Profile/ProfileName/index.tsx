@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
-
-const imageSource = require("../../../assets/blurredtext.jpeg");
 
 interface ProfileNameProps {
   status: number;
@@ -32,14 +30,7 @@ export const ProfileName = ({
 
   return (
     <View style={styles.textContainer}>
-      {fin ? (
-        <Text style={styles.fin}>{fin}</Text>
-      ) : (
-        <Image
-          source={imageSource}
-          style={{ height: 15, width: 100, marginBottom: 5 }}
-        />
-      )}
+      {fin ? <Text style={styles.fin}>{fin}</Text> : null}
       <Text style={styles.name}>{name}</Text>
       {!isPreview &&
       status === verificationStatusEnum.VALID &&

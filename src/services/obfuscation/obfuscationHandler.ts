@@ -27,7 +27,10 @@ export const profileSelector = [
       "recipient.dob",
       "recipient.address",
       "recipient.maritalStatus",
-      "recipient.occupation"
+      "recipient.occupation",
+      "pass.expiryDate",
+      "pass.legalTillDate",
+      "pass.applicationDate"
     ]
   },
   {

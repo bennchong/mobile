@@ -48,7 +48,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
           style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Expired without Legal Stay";
+      text = "EXPIRED WITHOUT LEGAL STAY";
       break;
     case verificationStatusEnum.EXPIREDWITHLEGALSTAY:
       barColor = { backgroundColor: "orange" };
@@ -61,7 +61,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
           style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Expired with Legal Stay";
+      text = "EXPIRED WITH LEGAL STAY";
       break;
     case verificationStatusEnum.TAMPERED:
       barColor = { backgroundColor: "red" };
@@ -74,7 +74,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
           style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Tampered";
+      text = "TAMPERED";
       break;
     case verificationStatusEnum.REVOKED:
       barColor = { backgroundColor: "red" };
@@ -87,7 +87,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
           style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Revoked";
+      text = "REVOKED";
       break;
     default:
       barColor = { backgroundColor: "#D52D2D" };
