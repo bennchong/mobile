@@ -1,4 +1,5 @@
 import { obfuscateDocument } from "@govtechsg/open-attestation";
+import { intersectionWith, filter } from "lodash";
 
 export const obfuscateFields = [
   { title: "FIN", key: "recipient.fin" },
@@ -83,21 +84,20 @@ export const profileSelector = [
  details they will be sharing; as well as a obfuscatedDoc which contains the obfuscated
  fields as hashes.
 */
-
 export const handleObfuscation = (detailsShown, workpass) => {
-  const details = [];
-  obfuscateFields.forEach(o => {
-    detailsShown.forEach(o2 => {
-      if (o.key === o2) {
-        details.push(o.title);
-      }
-    });
-  });
-  const detailsString = details.join(", ");
+  const detailsString = intersectionWith(
+    obfuscateFields,
+    detailsShown,
+    (field, key) => field.key === key
+  )
+    .map(object => object.title)
+    .join(", ");
 
-  const obfuscatedDetails = obfuscateFields.filter(o => {
-    return !detailsShown.some(o2 => o.key === o2);
-  });
+  const obfuscatedDetails = filter(
+    obfuscateFields,
+    field => !detailsShown.includes(field.key)
+  );
+
   let obfuscatedDoc = workpass;
   obfuscatedDetails.forEach(item => {
     obfuscatedDoc = obfuscateDocument(obfuscatedDoc, item.key);

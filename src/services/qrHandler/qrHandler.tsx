@@ -52,9 +52,7 @@ export const pushService = async (workpass, payload, setProcessingQr) => {
       },
       {
         text: "Yes",
-        onPress: async () => {
-          await handlePushWorkpass();
-        }
+        onPress: handlePushWorkpass
       }
     ],
     { cancelable: false }
@@ -99,9 +97,7 @@ export const storeService = async ({
       },
       {
         text: "Yes",
-        onPress: async () => {
-          await handleStoreWorkpass();
-        }
+        onPress: handleStoreWorkpass
       }
     ],
     { cancelable: false }

@@ -81,39 +81,47 @@ export const SharePageContainer = ({
     );
   };
 
+  const QrAsModal = () => (
+    <QrGenerator obfuscatedWorkpass={obfuscatedWorkpass} />
+  );
+  const CustomFieldsAsModal = () => (
+    <CustomFields showQR={showQR} workpass={workpass} />
+  );
+  const ProfileSelectorAsModal = () => (
+    <>
+      <Text style={styles.infoText}>Select profile to share with</Text>
+      <View style={{ padding: 16 }}>
+        {profileSelector.map(item => (
+          <TouchableOpacity
+            key={item.profile}
+            style={styles.profileSelector}
+            onPress={() => {
+              handleProfileSelector(item.profile, item.detailsShown);
+            }}
+          >
+            <Text style={styles.profileSelectorText}>{item.profile}</Text>
+          </TouchableOpacity>
+        ))}
+
+        <TouchableOpacity
+          style={styles.profileSelector}
+          onPress={() => setPage(pageEnum.CUSTOM_FIELDS)}
+        >
+          <Text style={styles.profileSelectorText}>Custom</Text>
+        </TouchableOpacity>
+      </View>
+    </>
+  );
+
   switch (page) {
-    case 2:
-      ModalBody = () => <QrGenerator obfuscatedWorkpass={obfuscatedWorkpass} />;
+    case pageEnum.QR_GENERATOR:
+      ModalBody = QrAsModal;
       break;
-    case 1:
-      ModalBody = () => <CustomFields showQR={showQR} workpass={workpass} />;
+    case pageEnum.CUSTOM_FIELDS:
+      ModalBody = CustomFieldsAsModal;
       break;
     default:
-      ModalBody = () => (
-        <>
-          <Text style={styles.infoText}>Select profile to share with</Text>
-          <View style={{ padding: 16 }}>
-            {profileSelector.map(item => (
-              <TouchableOpacity
-                key={item.profile}
-                style={styles.profileSelector}
-                onPress={() => {
-                  handleProfileSelector(item.profile, item.detailsShown);
-                }}
-              >
-                <Text style={styles.profileSelectorText}>{item.profile}</Text>
-              </TouchableOpacity>
-            ))}
-
-            <TouchableOpacity
-              style={styles.profileSelector}
-              onPress={() => setPage(pageEnum.CUSTOM_FIELDS)}
-            >
-              <Text style={styles.profileSelectorText}>Custom</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      );
+      ModalBody = ProfileSelectorAsModal;
   }
 
   return (

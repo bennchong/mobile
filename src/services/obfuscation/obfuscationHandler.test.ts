@@ -1,12 +1,9 @@
 import { handleObfuscation } from "./obfuscationHandler";
-import { fetchDocument } from "../qrHandler/qrHandler";
 
-const URI =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid_new.json";
+const workpass = require("../../test/fixtures/validCert.json");
 
 describe("handleObfuscation", () => {
   it("should obfuscate no fields", async () => {
-    const workpass = await fetchDocument(URI);
     const { obfuscatedDoc } = handleObfuscation(
       [
         "recipient.fin",
@@ -32,7 +29,6 @@ describe("handleObfuscation", () => {
   });
 
   it("should obfuscate two fields", async () => {
-    const workpass = await fetchDocument(URI);
     const { obfuscatedDoc } = handleObfuscation(
       [
         "recipient.dob",

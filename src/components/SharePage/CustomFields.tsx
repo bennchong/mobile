@@ -12,8 +12,6 @@ import { styles } from "./SharePageStyles";
 global.Buffer = global.Buffer || require("buffer").Buffer;
 /* eslint-enable global-require */
 
-// https://github.com/dumbest/react-native-qrcode-svg-expo
-
 interface CustomFieldsProps {
   showQR: any;
   workpass: object;

@@ -1,34 +1,13 @@
-import axios from "axios";
 import {
   verificationStatusEnum,
   verifyWorkpass,
   verifyWorkpassBoolean
 } from "./verificationService";
 
-const fetch = async url => {
-  const results = await axios.get(url, { responseType: "json" });
-  return results.data;
-};
-
-const validURL =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json";
-const tamperedURL =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_tampered.json";
-const revokedURL =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_revoked.json";
-const expiredURL =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_expired.json";
-
-let validDocument;
-let expiredDocument;
-let tamperedDocument;
-let revokedDocument;
-beforeAll(async () => {
-  validDocument = await fetch(validURL);
-  expiredDocument = await fetch(expiredURL);
-  tamperedDocument = await fetch(tamperedURL);
-  revokedDocument = await fetch(revokedURL);
-});
+const validDocument = require("../../test/fixtures/validCert.json");
+const expiredDocument = require("../../test/fixtures/expiredCert.json");
+const tamperedDocument = require("../../test/fixtures/tamperedCert.json");
+const revokedDocument = require("../../test/fixtures/revokedCert.json");
 
 describe("verificationService", () => {
   it("should return valid for a valid cert", async () => {
