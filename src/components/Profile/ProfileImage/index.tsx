@@ -30,11 +30,7 @@ export const ProfileImage = ({
       timeShown = timeVerified;
   }
   const showTimeVerified =
-    (!isPreview &&
-      workpassAccepted &&
-      timeShown.length !== 0 &&
-      (status === verificationStatusEnum.VALID ||
-        status === verificationStatusEnum.VALIDATING)) ||
+    (!isPreview && workpassAccepted && timeShown.length !== 0) ||
     (isPreview && timeShown.length !== 0);
 
   return (
