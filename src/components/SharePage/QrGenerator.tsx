@@ -10,6 +10,7 @@ import {
 import { styles } from "./SharePageStyles";
 import { getCurrentDateAndTime } from "../../services/date/date";
 import { uploadWorkpass } from "../../services/transferAPI/transferAPI";
+import { globalDownloadEndpoint } from "../../config/endpoints";
 
 interface QrGeneratorProps {
   obfuscatedWorkpass: object;
@@ -23,7 +24,7 @@ export const QrGenerator = (props: QrGeneratorProps) => {
   useEffect(() => {
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
       const payload = {
-        uri: `https://api-ropsten.opencerts.io/storage/get/${res.id}`,
+        uri: `${globalDownloadEndpoint}/${res.id}`,
         type: res.type,
         key: res.key
       };
@@ -36,7 +37,7 @@ export const QrGenerator = (props: QrGeneratorProps) => {
     toggleIsUploading(true);
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
       const payload = {
-        uri: `https://api-ropsten.opencerts.io/storage/get/${res.id}`,
+        uri: `${globalDownloadEndpoint}/${res.id}`,
         type: res.type,
         key: res.key
       };

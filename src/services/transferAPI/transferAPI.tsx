@@ -1,6 +1,7 @@
 import axios from "axios";
+import { globalUploadEndpoint } from "../../config/endpoints";
 
-const uploadEndpoint = "https://api-ropsten.opencerts.io/storage/create";
+const uploadEndpoint = globalUploadEndpoint;
 
 // Returns promise that resolves to json object with id, ttl, key and type fields
 export const uploadWorkpass = async workpass => {
