@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import metrics from "../../config/metrics";
 import Constants from "expo-constants";
+import metrics from "../../config/metrics";
 
 export const styles = StyleSheet.create({
   container: {

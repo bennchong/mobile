@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useStateValue } from "../../../state";
-import { AntDesign } from "@expo/vector-icons";
-import { VerifyPassCode } from "./VerifyPassCode";
 import Constants from "expo-constants";
+import { useStateValue } from "../../../state";
+import { VerifyPassCode } from "./VerifyPassCode";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -34,8 +33,6 @@ interface DetailSectionSecretProps {
   children: any;
 }
 
-const handleShow = () => {};
-
 export const DetailSection = (props: DetailSectionProps) => {
   return (
     <View style={{ backgroundColor: "#fff" }}>
@@ -53,10 +50,6 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
   const [show, setShow] = useState(false);
   const [{ workpassAccepted }] = useStateValue();
 
-  const handleShow = () => {
-    setShow(!show);
-  };
-
   return (
     <>
       <View style={{ backgroundColor: "#fff" }}>
@@ -64,7 +57,11 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
           <View style={styles.headerContainer}>
             <Text style={styles.header}>{props.title}</Text>
             {workpassAccepted ? (
-              <TouchableOpacity onPress={handleShow}>
+              <TouchableOpacity
+                onPress={() => {
+                  setShow(!show);
+                }}
+              >
                 <Text style={styles.header}>{show ? "Hide" : null}</Text>
               </TouchableOpacity>
             ) : null}

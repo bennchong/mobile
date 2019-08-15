@@ -3,7 +3,6 @@ import { View, Image, Text } from "react-native";
 import { ProfileName } from "../ProfileName";
 import { useStateValue } from "../../../state";
 import { styles } from "./ProfileImageStyles";
-import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 
 interface ProfileImageProps {
   status: number;

@@ -27,37 +27,41 @@ export const VerifyModal = ({
     setPage(pageEnum.SUCCESS_MODAL);
   };
 
+  const PassCode = () => (
+    <>
+      <AntDesign
+        name="close"
+        size={30}
+        color="#000"
+        style={styles.closeIcon}
+        onPress={() => handleCloseModal()}
+      />
+      <RegisterPassCode showSuccess={showSuccess} />
+    </>
+  );
+
+  const SuccessMessage = () => (
+    <View style={styles.modalContainer}>
+      <View style={styles.modal}>
+        <AntDesign name="checkcircle" size={69} color="#5FC660" />
+        <Text style={styles.modalText}>Digital work pass saved!</Text>
+        <TouchableOpacity
+          style={styles.modalButton}
+          onPress={() => handleCloseModal()}
+        >
+          <Text style={styles.closeModalText}>View profile</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
   let ModalBody;
   switch (page) {
     case pageEnum.PASSCODE:
-      ModalBody = () => (
-        <>
-          <AntDesign
-            name="close"
-            size={30}
-            color="#000"
-            style={styles.closeIcon}
-            onPress={() => handleCloseModal()}
-          />
-          <RegisterPassCode showSuccess={showSuccess} />
-        </>
-      );
+      ModalBody = PassCode;
       break;
     default:
-      ModalBody = () => (
-        <View style={styles.modalContainer}>
-          <View style={styles.modal}>
-            <AntDesign name="checkcircle" size={69} color="#5FC660" />
-            <Text style={styles.modalText}>Digital work pass saved!</Text>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => handleCloseModal()}
-            >
-              <Text style={styles.closeModalText}>View profile</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
+      ModalBody = SuccessMessage;
   }
 
   return (

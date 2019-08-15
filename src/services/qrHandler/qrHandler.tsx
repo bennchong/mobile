@@ -5,7 +5,8 @@ import { decryptFromPayload } from "../crypto/crypto";
 import {
   storeWorkpass,
   deleteStoredTime,
-  deleteStoredTimeVerified
+  deleteStoredTimeVerified,
+  deletePasscode
 } from "../fileSystem";
 
 export const getActionFromQR = (qrData: string) => {
@@ -79,6 +80,7 @@ export const storeService = async ({
     dispatch({ type: "DELETE_WORKPASS" });
     await deleteStoredTime();
     await deleteStoredTimeVerified();
+    await deletePasscode();
     await storeWorkpass(workpass);
     dispatch({
       type: "UPDATE_WORKPASS",

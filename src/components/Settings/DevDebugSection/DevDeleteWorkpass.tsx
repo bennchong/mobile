@@ -4,7 +4,8 @@ import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import {
   deleteStoredWorkpass,
   deleteStoredTime,
-  deleteStoredTimeVerified
+  deleteStoredTimeVerified,
+  deletePasscode
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { StateContext } from "../../../state";
@@ -31,6 +32,7 @@ const DevDeleteWorkpass = () => {
                   await deleteStoredWorkpass();
                   await deleteStoredTime();
                   await deleteStoredTimeVerified();
+                  await deletePasscode();
                   Alert.alert("Dev Info", "Workpass is successfully deleted");
                   dispatch({ type: "DELETE_WORKPASS" });
                 } catch (e) {

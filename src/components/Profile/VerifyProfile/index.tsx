@@ -9,7 +9,7 @@ interface VerifyProfileProps {
 }
 
 const VerifyProfile = ({ isPreview, handleShowModal }: VerifyProfileProps) => {
-  const [{ workpassAccepted }, dispatch] = useStateValue();
+  const [{ workpassAccepted }] = useStateValue();
 
   if (!workpassAccepted && !isPreview) {
     return (
