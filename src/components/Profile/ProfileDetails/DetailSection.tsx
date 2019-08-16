@@ -89,10 +89,12 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
 
   return (
     <>
-      <FingerprintModal
-        handleCloseModal={() => setShowModal(false)}
-        showModal={showModal}
-      />
+      {Platform.OS === "android" ? (
+        <FingerprintModal
+          handleCloseModal={() => setShowModal(false)}
+          showModal={showModal}
+        />
+      ) : null}
       <View style={{ backgroundColor: "#fff" }}>
         {props.title ? (
           <View style={styles.headerContainer}>
