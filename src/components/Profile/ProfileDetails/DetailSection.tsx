@@ -101,7 +101,7 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
               <TouchableOpacity
                 onPress={() => {
                   setAttempts(0);
-                  setShow(!show);
+                  setShow(false);
                 }}
               >
                 <Text style={styles.header}>{show ? "Hide" : null}</Text>
