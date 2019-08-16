@@ -8,6 +8,8 @@ export const ACTIVE_CELL_BG_COLOR = "#f7fafe";
 
 export default StyleSheet.create({
   inputWrapper: {
+    width: "100%",
+    height: "100%",
     backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -24,10 +26,7 @@ export default StyleSheet.create({
   },
 
   icon: {
-    width: 217 / 2.4,
-    height: 158 / 2.4,
-    marginLeft: "auto",
-    marginRight: "auto"
+    alignSelf: "center"
   },
   inputSubLabel: {
     paddingTop: 30,

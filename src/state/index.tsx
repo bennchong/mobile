@@ -5,6 +5,7 @@ export interface IContextState {
   workpassAccepted: boolean;
   timeAccepted: string;
   timeVerified: string;
+  fingerprintAvailable: boolean;
 }
 
 export const StateContext = createContext({});

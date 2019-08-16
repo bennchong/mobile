@@ -11,7 +11,8 @@ const initialState: IContextState = {
   workpass: null,
   workpassAccepted: false,
   timeAccepted: "",
-  timeVerified: ""
+  timeVerified: "",
+  fingerprintAvailable: false
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
       return { ...state, workpassAccepted: true, timeAccepted: action.time };
     case "SET_WORKPASS_VERIFIED":
       return { ...state, timeVerified: action.time };
+    case "SET_FINGERPRINT_AVAILABLE":
+      return { ...state, fingerprintAvailable: action.compatible };
     case "DELETE_WORKPASS":
       return initialState;
     default:

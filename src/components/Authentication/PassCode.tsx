@@ -14,7 +14,7 @@ import styles, {
   CELL_SIZE,
   DEFAULT_CELL_BG_COLOR,
   NOT_EMPTY_CELL_BG_COLOR
-} from "./PassCodeStyles";
+} from "./AuthenticationStyles";
 
 interface PassCodeProps {
   showSuccess: any;
@@ -97,6 +97,7 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
     const storedCode = await getPasscode();
 
     if (storedCode !== code) {
+      codeInputRef.current.clear();
       return Alert.alert("Invalid passcode", "Try again", [{ text: "OK" }], {
         cancelable: false
       });
@@ -111,6 +112,7 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
       return setShowSecond(true);
     }
     if (firstCode !== code) {
+      codeInputRef.current.clear();
       return Alert.alert("Codes do not match", "Try again", [{ text: "OK" }], {
         cancelable: false
       });
@@ -143,7 +145,10 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
   return (
     <View style={styles.inputWrapper}>
       {register ? <Text style={styles.inputLabel}>Verification</Text> : null}
-      <Image style={styles.icon} source={source} />
+      <Image
+        style={[styles.icon, { width: 217 / 2.4, height: 158 / 2.4 }]}
+        source={source}
+      />
       <Text style={styles.inputSubLabel}>{subLabel}</Text>
       <CodeFiled
         ref={codeInputRef}

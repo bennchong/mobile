@@ -1,8 +1,18 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  Alert,
+  Platform,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import Constants from "expo-constants";
 import { useStateValue } from "../../../state";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { PassCode } from "../../Authentication/PassCode";
+import { FingerprintModal } from "../../Modals/FingerprintModal";
+import * as LocalAuthentication from "expo-local-authentication";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -20,6 +30,15 @@ const styles = StyleSheet.create({
     top: Constants.statusBarHeight,
     right: 20,
     zIndex: 1000
+  },
+
+  icon: {
+    alignSelf: "center"
+  },
+  inputSubLabel: {
+    paddingTop: 30,
+    color: "#000",
+    textAlign: "center"
   }
 });
 
@@ -48,10 +67,32 @@ export const DetailSection = (props: DetailSectionProps) => {
 
 export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
   const [show, setShow] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [showModal, setShowModal] = useState(false);
   const [{ workpassAccepted }] = useStateValue();
+
+  const scanFingerprint = async () => {
+    setShowModal(true);
+
+    let { error, success } = await LocalAuthentication.authenticateAsync();
+
+    console.log(error, success);
+
+    if (!success && attempts < 4) {
+      setAttempts(attempts + 1);
+    } else if (success && attempts < 4) {
+      setAttempts(4);
+      setShow(true);
+      setShowModal(false);
+    }
+  };
 
   return (
     <>
+      <FingerprintModal
+        handleCloseModal={() => setShowModal(false)}
+        showModal={showModal}
+      />
       <View style={{ backgroundColor: "#fff" }}>
         {props.title ? (
           <View style={styles.headerContainer}>
@@ -59,6 +100,7 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
             {workpassAccepted ? (
               <TouchableOpacity
                 onPress={() => {
+                  setAttempts(0);
                   setShow(!show);
                 }}
               >
@@ -70,7 +112,20 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
         {show || !workpassAccepted ? (
           props.children
         ) : (
-          <PassCode showSuccess={() => setShow(true)} register={false} />
+          <View style={{ paddingVertical: 20 }}>
+            <MaterialCommunityIcons
+              name="fingerprint"
+              size={80}
+              color="#3557b7"
+              style={styles.icon}
+            />
+            <TouchableOpacity onPress={scanFingerprint}>
+              <Text style={styles.inputSubLabel}>
+                Scan fingerprint to unlock information
+              </Text>
+            </TouchableOpacity>
+          </View>
+          // <PassCode showSuccess={() => setShow(true)} register={false} />
         )}
       </View>
     </>
