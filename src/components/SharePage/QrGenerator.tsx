@@ -10,6 +10,7 @@ import {
 import { styles } from "./SharePageStyles";
 import { getCurrentDateAndTime } from "../../services/date/date";
 import { uploadWorkpass } from "../../services/transferAPI/transferAPI";
+import { globalDownloadEndpoint } from "../../config/endpoints";
 
 interface QrGeneratorProps {
   obfuscatedWorkpass: object;
@@ -22,11 +23,12 @@ export const QrGenerator = (props: QrGeneratorProps) => {
 
   useEffect(() => {
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
-      setQrText(
-        `${"VIEW;https://api-ropsten.opencerts.io/storage/get/"}${res.id};${
-          res.type
-        };${res.key}`
-      );
+      const payload = {
+        uri: `${globalDownloadEndpoint}/${res.id}`,
+        type: res.type,
+        key: res.key
+      };
+      setQrText(`VIEW;${JSON.stringify(payload)}`);
       toggleIsUploading(false);
     });
   }, []);
@@ -34,11 +36,12 @@ export const QrGenerator = (props: QrGeneratorProps) => {
   const refreshQr = () => {
     toggleIsUploading(true);
     uploadWorkpass(props.obfuscatedWorkpass).then(res => {
-      setQrText(
-        `${"VIEW;https://api-ropsten.opencerts.io/storage/get/"}${res.id};${
-          res.type
-        };${res.key}`
-      );
+      const payload = {
+        uri: `${globalDownloadEndpoint}/${res.id}`,
+        type: res.type,
+        key: res.key
+      };
+      setQrText(`VIEW;${JSON.stringify(payload)}`);
       toggleIsUploading(false);
     });
     updateTimeCreated(getCurrentDateAndTime());

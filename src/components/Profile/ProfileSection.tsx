@@ -25,7 +25,7 @@ const ProfileSection = ({
   const [modal, setModal] = useState(false);
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ProfileImage
         status={status}
         recipient={recipient}

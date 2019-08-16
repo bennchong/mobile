@@ -28,7 +28,6 @@ export const ProfileImage = ({
     default:
       timeShown = timeVerified;
   }
-
   const showTimeVerified =
     (!isPreview && workpassAccepted && timeShown.length !== 0) ||
     (isPreview && timeShown.length !== 0);

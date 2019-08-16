@@ -43,12 +43,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       BarIcon = () => (
         <AntDesign
           name="calendar"
-          color="#000"
-          size={15}
-          style={[styles.icon, { marginBottom: 5 }]}
+          color="#fff"
+          size={18}
+          style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Expired WITHOUT Legal Stay";
+      text = "EXPIRED WITHOUT LEGAL STAY";
       break;
     case verificationStatusEnum.EXPIREDWITHLEGALSTAY:
       barColor = { backgroundColor: "orange" };
@@ -56,12 +56,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       BarIcon = () => (
         <AntDesign
           name="infocirlce"
-          color="#000"
+          color="#fff"
           size={15}
-          style={[styles.icon, { marginBottom: 5 }]}
+          style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Expired with Legal Stay";
+      text = "EXPIRED WITH LEGAL STAY";
       break;
     case verificationStatusEnum.TAMPERED:
       barColor = { backgroundColor: "red" };
@@ -71,10 +71,10 @@ export const ValidationBar = (props: ValidationBarProps) => {
           name="exclamationcircle"
           color="#fff"
           size={15}
-          style={[styles.icon, { marginBottom: 4 }]}
+          style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Tampered";
+      text = "TAMPERED";
       break;
     case verificationStatusEnum.REVOKED:
       barColor = { backgroundColor: "red" };
@@ -84,10 +84,10 @@ export const ValidationBar = (props: ValidationBarProps) => {
           name="warning"
           color="#fff"
           size={15}
-          style={[styles.icon, { marginBottom: 4 }]}
+          style={[styles.icon, { marginBottom: 3 }]}
         />
       );
-      text = "Revoked";
+      text = "REVOKED";
       break;
     default:
       barColor = { backgroundColor: "#D52D2D" };
@@ -97,7 +97,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
           name="closecircle"
           color="#fff"
           size={18}
-          style={styles.icon}
+          style={[styles.icon, { marginBottom: 3 }]}
         />
       );
       text = "INVALID";

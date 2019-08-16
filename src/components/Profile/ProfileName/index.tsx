@@ -30,7 +30,7 @@ export const ProfileName = ({
 
   return (
     <View style={styles.textContainer}>
-      <Text style={styles.fin}>{fin}</Text>
+      {fin ? <Text style={styles.fin}>{fin}</Text> : null}
       <Text style={styles.name}>{name}</Text>
       {!isPreview &&
       status === verificationStatusEnum.VALID &&

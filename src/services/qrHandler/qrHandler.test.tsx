@@ -12,48 +12,60 @@ describe("fetchDocument", () => {
 
 describe("getActionFromQR", () => {
   it("should work with valid VIEW QR code without key", () => {
-    const action = getActionFromQR("VIEW;https://something.com/get/resourceId");
+    const action = getActionFromQR(
+      `VIEW;${JSON.stringify({ uri: "https://something.com/get/resourceId" })}`
+    );
     expect(action).toEqual({
       action: "VIEW",
-      uri: "https://something.com/get/resourceId",
-      type: undefined,
-      key: undefined
+      payload: '{"uri":"https://something.com/get/resourceId"}'
     });
   });
 
   it("should work with valid STORE QR code", () => {
     const action = getActionFromQR(
-      "STORE;https://something.com/get/resourceId"
+      `STORE;${JSON.stringify({ uri: "https://something.com/get/resourceId" })}`
     );
     expect(action).toEqual({
       action: "STORE",
-      uri: "https://something.com/get/resourceId",
-      type: undefined,
-      key: undefined
+      payload: '{"uri":"https://something.com/get/resourceId"}'
     });
   });
 
   it("should work with valid QR code with key", () => {
     const action = getActionFromQR(
-      "VIEW;https://something.com/get/resourceId;type;key"
+      `VIEW;${JSON.stringify({
+        uri: "https://something.com/get/resourceId",
+        type: "type",
+        key: "key"
+      })}`
     );
     expect(action).toEqual({
       action: "VIEW",
-      uri: "https://something.com/get/resourceId",
-      type: "type",
-      key: "key"
+      payload:
+        '{"uri":"https://something.com/get/resourceId","type":"type","key":"key"}'
     });
   });
 
   it("should not work with invalid action", () => {
     const action = () =>
-      getActionFromQR("MOO;https://something.com/get/resourceId;key");
+      getActionFromQR(
+        `MOO;${JSON.stringify({
+          uri: "https://something.com/get/resourceId",
+          type: "type",
+          key: "key"
+        })}`
+      );
     expect(action).toThrowError("invalid");
   });
 
   it("should not work with invalid uri", () => {
     const action = () =>
-      getActionFromQR("VIEW;http://something.com/get/resourceId;key");
+      getActionFromQR(
+        `VIEW;${JSON.stringify({
+          uri: "http://something.com/get/resourceId",
+          key: "key"
+        })}`
+      );
     expect(action).toThrowError("invalid");
   });
 });

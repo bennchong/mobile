@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -25,17 +25,12 @@ interface TextRowProps {
   text: string;
 }
 
-const imageSource = require("../../assets/blurredtext.jpeg");
-
 export const TextRow = ({ label, text }: TextRowProps) => {
-  return (
+  return text ? (
     <View style={styles.textContainer}>
       <Text style={styles.label}>{label}</Text>
-      {text ? (
-        <Text style={styles.text}>{text}</Text>
-      ) : (
-        <Image source={imageSource} style={{ height: 15, width: 100 }} />
-      )}
+
+      <Text style={styles.text}>{text}</Text>
     </View>
-  );
+  ) : null;
 };

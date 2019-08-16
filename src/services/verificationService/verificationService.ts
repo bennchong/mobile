@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getData } from "@govtechsg/open-attestation";
 import { checkIfExpired } from "../date/date";
+import { globalVerifyEndpoint } from "../../config/endpoints";
 
-// is this a secret?
-const url = "https://api-ropsten.opencerts.io/verify";
+const url = globalVerifyEndpoint;
 const addresses = ["0x590F8DFFdb113e1Dcf4974DEaA9b52A8251cec29"];
 // extended status enums in anticipation of future changes
 /* eslint-disable no-unused-vars */

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Alert, View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -10,14 +10,11 @@ import { ScanArea } from "./ScanArea";
 import { CannotScan } from "./CannotScan";
 import NavigationService from "../../navigation/NavigationService";
 import {
+  pushService,
+  storeService,
   fetchDocument,
   getActionFromQR
 } from "../../services/qrHandler/qrHandler";
-import {
-  storeWorkpass,
-  deleteStoredTime,
-  deleteStoredTimeVerified
-} from "../../services/fileSystem";
 import { decryptFromPayload } from "../../services/crypto/crypto";
 
 interface QRScannerProps {
@@ -44,7 +41,26 @@ class QRScanner extends React.Component<QRScannerProps> {
     this.setState({ hasCameraPermission: status === "granted" });
   };
 
-  handleProfileView = workpass => {
+  handleProfilePush = async payload => {
+    const [{ workpass }] = this.context;
+    const setProcessingQr = () => this.setState({ isProcessingQr: false });
+
+    if (workpass) {
+      await pushService(workpass, payload, setProcessingQr);
+    }
+  };
+
+  handleProfileView = async payload => {
+    const { uri, key, type } = JSON.parse(payload);
+    const encryptedDocument = await fetchDocument(uri);
+
+    let workpass;
+    if (!type && !key) {
+      workpass = encryptedDocument;
+    } else {
+      workpass = decryptFromPayload(encryptedDocument, { key, type });
+    }
+
     this.setState({ isProcessingQr: false }, () => {
       NavigationService.navigate("ProfilePreview", {
         workpass
@@ -52,37 +68,20 @@ class QRScanner extends React.Component<QRScannerProps> {
     });
   };
 
-  handleProfileStorage = workpass => {
+  handleProfileStorage = async payload => {
+    const setProcessingQr = () => this.setState({ isProcessingQr: false });
+    const navigateToProfile = () =>
+      this.setState({ isProcessingQr: false }, () => {
+        NavigationService.navigate("Profile", {});
+      });
     const [, dispatch] = this.context;
 
-    Alert.alert(
-      "Profile detected",
-      "Do you want to overwrite your current profile?",
-      [
-        {
-          text: "No",
-          onPress: () => this.setState({ isProcessingQr: false })
-        },
-        {
-          text: "Yes",
-          onPress: async () => {
-            dispatch({ type: "DELETE_WORKPASS" });
-            await storeWorkpass(workpass);
-            dispatch({
-              type: "UPDATE_WORKPASS",
-              workpass
-            });
-            await deleteStoredTime();
-            await deleteStoredTimeVerified();
-            this.setState({ isProcessingQr: false }, () => {
-              NavigationService.navigate("Profile", {});
-            });
-            // TODO, change flow if downloading, read directly from Filesytem
-          }
-        }
-      ],
-      { cancelable: false }
-    );
+    await storeService({
+      payload,
+      dispatch,
+      setProcessingQr,
+      navigateToProfile
+    });
   };
 
   render() {
@@ -135,20 +134,17 @@ class QRScanner extends React.Component<QRScannerProps> {
     // otherwise it might be set to false, then true preventing QR codes from being scanned.
     await this.setStateAsync({ isProcessingQr: true });
     try {
-      const { action, uri, type, key } = await getActionFromQR(data);
-      const document = await fetchDocument(uri);
+      const { action, payload } = await getActionFromQR(data);
 
-      let workpass;
-      if (!type && !key) {
-        workpass = document;
-      } else {
-        workpass = decryptFromPayload(document, { key, type });
-      }
-
-      if (action === "STORE") {
-        this.handleProfileStorage(workpass);
-      } else {
-        this.handleProfileView(workpass);
+      switch (action) {
+        case "STORE":
+          await this.handleProfileStorage(payload);
+          break;
+        case "VIEW":
+          await this.handleProfileView(payload);
+          break;
+        default:
+          await this.handleProfilePush(payload);
       }
     } catch (e) {
       this.setState({ invalidQR: true, isProcessingQr: false });
