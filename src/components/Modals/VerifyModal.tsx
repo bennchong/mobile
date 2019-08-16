@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./modalStyles";
-import { RegisterPassCode } from "../Profile/VerifyProfile/RegisterPassCode";
+import { PassCode } from "../Authentication/PassCode";
 
 interface IVerifyModalProps {
   showModal: boolean;
@@ -27,7 +27,7 @@ export const VerifyModal = ({
     setPage(pageEnum.SUCCESS_MODAL);
   };
 
-  const PassCode = () => (
+  const EnterPassCode = () => (
     <>
       <AntDesign
         name="close"
@@ -36,7 +36,7 @@ export const VerifyModal = ({
         style={styles.closeIcon}
         onPress={() => handleCloseModal()}
       />
-      <RegisterPassCode showSuccess={showSuccess} />
+      <PassCode showSuccess={showSuccess} register={true} />
     </>
   );
 
@@ -58,7 +58,7 @@ export const VerifyModal = ({
   let ModalBody;
   switch (page) {
     case pageEnum.PASSCODE:
-      ModalBody = PassCode;
+      ModalBody = EnterPassCode;
       break;
     default:
       ModalBody = SuccessMessage;

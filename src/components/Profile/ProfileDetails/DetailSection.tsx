@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Constants from "expo-constants";
 import { useStateValue } from "../../../state";
-import { VerifyPassCode } from "./VerifyPassCode";
+import { PassCode } from "../../Authentication/PassCode";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -70,7 +70,7 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
         {show || !workpassAccepted ? (
           props.children
         ) : (
-          <VerifyPassCode showSuccess={() => setShow(true)} />
+          <PassCode showSuccess={() => setShow(true)} register={false} />
         )}
       </View>
     </>
