@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  Alert,
   Platform,
   View,
   Text,
@@ -9,10 +8,8 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import { useStateValue } from "../../../state";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { PassCode } from "../../Authentication/PassCode";
 import { FingerprintModal } from "../../Modals/FingerprintModal";
-import * as LocalAuthentication from "expo-local-authentication";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -67,25 +64,63 @@ export const DetailSection = (props: DetailSectionProps) => {
 
 export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
   const [show, setShow] = useState(false);
-  const [attempts, setAttempts] = useState(0);
+  // const [showPassCode, setShowPassCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [{ workpassAccepted }] = useStateValue();
 
-  const scanFingerprint = async () => {
-    setShowModal(true);
+  // const scanFingerprint = async () => {
+  //   setShowModal(true);
 
-    let { error, success } = await LocalAuthentication.authenticateAsync();
+  //   const options = { promptMessage: "Scan", fallbackLabel: "" };
 
-    console.log(error, success);
+  //   let { error, success } = await LocalAuthentication.authenticateAsync(
+  //     options
+  //   );
 
-    if (!success && attempts < 4) {
-      setAttempts(attempts + 1);
-    } else if (success && attempts < 4) {
-      setAttempts(4);
-      setShow(true);
-      setShowModal(false);
-    }
-  };
+  //   console.log(error, success);
+
+  //   if (error === "lockout") {
+  //     setShowModal(false);
+  //     return Alert.alert(
+  //       "Locked out",
+  //       "Try using passcode instead",
+  //       [{ text: "Use passcode", onPress: () => setShowPassCode(true) }],
+  //       { cancelable: false }
+  //     );
+  //   }
+
+  //   if (!success) {
+  //     setShowModal(false);
+  //   }
+
+  //   if (success) {
+  //     setShow(true);
+  //     setShowModal(false);
+  //   }
+  // };
+
+  // let TempBody;
+  // if (showPassCode)
+  //   TempBody = () => (
+  //     <PassCode showSuccess={() => setShow(true)} register={false} />
+  //   );
+  // else {
+  //   TempBody = () => (
+  //     <View style={{ paddingVertical: 20 }}>
+  //       <MaterialCommunityIcons
+  //         name="fingerprint"
+  //         size={80}
+  //         color="#3557b7"
+  //         style={styles.icon}
+  //       />
+  //       <TouchableOpacity onPress={scanFingerprint}>
+  //         <Text style={styles.inputSubLabel}>
+  //           Scan fingerprint to unlock information
+  //         </Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
 
   return (
     <>
@@ -102,7 +137,6 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
             {workpassAccepted ? (
               <TouchableOpacity
                 onPress={() => {
-                  setAttempts(0);
                   setShow(false);
                 }}
               >
@@ -114,20 +148,7 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
         {show || !workpassAccepted ? (
           props.children
         ) : (
-          <View style={{ paddingVertical: 20 }}>
-            <MaterialCommunityIcons
-              name="fingerprint"
-              size={80}
-              color="#3557b7"
-              style={styles.icon}
-            />
-            <TouchableOpacity onPress={scanFingerprint}>
-              <Text style={styles.inputSubLabel}>
-                Scan fingerprint to unlock information
-              </Text>
-            </TouchableOpacity>
-          </View>
-          // <PassCode showSuccess={() => setShow(true)} register={false} />
+          <PassCode showSuccess={() => setShow(true)} register={false} />
         )}
       </View>
     </>

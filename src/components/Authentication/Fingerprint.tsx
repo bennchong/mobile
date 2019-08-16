@@ -1,13 +1,8 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useStateValue } from "../../state";
 import styles from "./AuthenticationStyles";
-
-const source = {
-  uri:
-    "https://user-images.githubusercontent.com/4661784/56352614-4631a680-61d8-11e9-880d-86ecb053413d.png"
-};
 
 interface FingerprintProps {
   nextPage: any;
@@ -24,8 +19,7 @@ export const Fingerprint = ({ nextPage }: FingerprintProps) => {
         size={80}
         color="#3557b7"
         style={styles.icon}
-      />
-      {/* <Image style={styles.icon} source={source} /> */}
+      />{" "}
       <Text style={styles.inputSubLabel}>
         Enable fingerprint for future authentication?
       </Text>

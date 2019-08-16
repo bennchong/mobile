@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./modalStyles";
 import { PassCode } from "../Authentication/PassCode";
 import { Fingerprint } from "../Authentication/Fingerprint";
-import * as LocalAuthentication from "expo-local-authentication";
-import { useStateValue } from "../../state";
 
 interface IVerifyModalProps {
   showModal: boolean;
@@ -25,21 +23,20 @@ export const VerifyModal = ({
   showModal
 }: IVerifyModalProps) => {
   const [page, setPage] = useState(pageEnum.PASSCODE);
-  const [, dispatch] = useStateValue();
 
-  const checkForAuthenticationCompatibility = async () => {
-    //  A value of 1 indicates Fingerprint support and 2 indicates Facial Recognition support.
-    // Eg: [1,2] means the device has both types supported.
-    const supportedHardware = await LocalAuthentication.supportedAuthenticationTypesAsync();
-    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
-    if (supportedHardware.includes(1) && isEnrolled) {
-      setPage(pageEnum.FINGERPRINT);
-    }
-  };
+  // const checkForAuthenticationCompatibility = async () => {
+  //   //  A value of 1 indicates Fingerprint support and 2 indicates Facial Recognition support.
+  //   // Eg: [1,2] means the device has both types supported.
+  //   const supportedHardware = await LocalAuthentication.supportedAuthenticationTypesAsync();
+  //   const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+  //   if (supportedHardware.includes(1) && isEnrolled) {
+  //     setPage(pageEnum.FINGERPRINT);
+  //   }
+  // };
 
-  useEffect(() => {
-    checkForAuthenticationCompatibility();
-  }, []);
+  // useEffect(() => {
+  //   checkForAuthenticationCompatibility();
+  // }, []);
 
   const showSuccess = () => {
     setPage(pageEnum.SUCCESS_MODAL);
