@@ -25,7 +25,7 @@ describe("handleObfuscation", () => {
       workpass
     );
     expect(obfuscatedDoc).toBeTruthy();
-    expect(obfuscatedDoc.privacy.obfuscatedData.length === 0);
+    expect(obfuscatedDoc.privacy.obfuscatedData === undefined);
   });
 
   it("should obfuscate two fields", async () => {
