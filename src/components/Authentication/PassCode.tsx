@@ -33,6 +33,10 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
   const [firstCode, setFirstCode] = useState("");
   const [showSecondCode, setShowSecond] = useState(false);
 
+  const containerProps = { style: styles.inputWrapStyle };
+
+  const codeInputRef = createRef();
+
   const animationsColor = [...new Array(codeLength)].map(
     () => new Animated.Value(0)
   );
@@ -97,7 +101,7 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
         cancelable: false
       });
     }
-    showSuccess();
+    return showSuccess();
   };
 
   const handleWorkpassConfirmation = async code => {
@@ -117,7 +121,7 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
       type: "SET_WORKPASS_ACCEPTED",
       time: getCurrentDateAndTime()
     });
-    showSuccess();
+    return showSuccess();
   };
 
   const enterCode = async code => {
@@ -126,10 +130,6 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
     }
     return unlockInfo(code);
   };
-
-  const containerProps = { style: styles.inputWrapStyle };
-
-  const codeInputRef = createRef();
 
   let subLabel;
   if (register && !showSecondCode) {
