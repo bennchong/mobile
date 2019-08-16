@@ -7,6 +7,7 @@ describe("handleObfuscation", () => {
     const { obfuscatedDoc } = handleObfuscation(
       [
         "recipient.fin",
+        "recipient.gender",
         "recipient.country",
         "recipient.dob",
         "recipient.address",
@@ -31,6 +32,7 @@ describe("handleObfuscation", () => {
   it("should obfuscate two fields", async () => {
     const { obfuscatedDoc } = handleObfuscation(
       [
+        "recipient.gender",
         "recipient.dob",
         "recipient.address",
         "recipient.maritalStatus",

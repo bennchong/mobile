@@ -20,7 +20,7 @@ export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
     isMultipleJourney,
     type
   } = pass;
-  const { country, dob, maritalStatus, address } = recipient;
+  const { country, dob, maritalStatus, address, gender } = recipient;
   const { name, sector } = employer;
 
   let multipleJourney;
@@ -35,7 +35,8 @@ export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
       multipleJourney = null;
   }
 
-  const showPersonalDetails = country || dob || maritalStatus || address;
+  const showPersonalDetails =
+    country || dob || maritalStatus || address || gender;
   const showPassDetails =
     type ||
     expiryDate ||
@@ -50,7 +51,7 @@ export const ProfileDetails = ({ workpass }: ProfileDetailsProps) => {
       {showPersonalDetails ? (
         <DetailSection title="Personal Particulars">
           <TextRow label="Country of Residence" text={country} />
-          <TextRow label="Gender" text="Female" />
+          <TextRow label="Gender" text={gender} />
           <TextRow label="Date of Birth" text={formatDate(dob)} />
           <TextRow label="Marital Status" text={maritalStatus} />
           <TextRow
