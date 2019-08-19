@@ -4,7 +4,7 @@ import { checkIfExpired } from "../date/date";
 import { globalVerifyEndpoint } from "../../config/endpoints";
 
 const url = globalVerifyEndpoint;
-const addresses = ["0x590F8DFFdb113e1Dcf4974DEaA9b52A8251cec29"];
+const addresses = ["0x2E78f5B281db0326F287241c6CADc2BB8A9F735f"];
 // extended status enums in anticipation of future changes
 /* eslint-disable no-unused-vars */
 export enum verificationStatusEnum {

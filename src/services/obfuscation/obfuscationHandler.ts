@@ -3,6 +3,7 @@ import { intersectionWith, filter } from "lodash";
 
 export const obfuscateFields = [
   { title: "FIN", key: "recipient.fin" },
+  { title: "Gender", key: "recipient.gender" },
   { title: "Country of Residence", key: "recipient.country" },
   { title: "Date of Birth", key: "recipient.dob" },
   { title: "Address", key: "recipient.address" },
@@ -24,6 +25,7 @@ export const profileSelector = [
     profile: "Landlord",
     detailsShown: [
       "recipient.country",
+      "recipient.gender",
       "recipient.dob",
       "recipient.address",
       "recipient.maritalStatus",
@@ -37,6 +39,7 @@ export const profileSelector = [
     profile: "Telco",
     detailsShown: [
       "recipient.fin",
+      "recipient.gender",
       "recipient.country",
       "recipient.dob",
       "recipient.address",
@@ -47,6 +50,7 @@ export const profileSelector = [
     profile: "Police",
     detailsShown: [
       "recipient.fin",
+      "recipient.gender",
       "recipient.country",
       "recipient.dob",
       "recipient.address",
