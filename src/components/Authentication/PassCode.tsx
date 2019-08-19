@@ -21,7 +21,7 @@ interface PassCodeProps {
   register: boolean;
 }
 
-const codeLength = 4;
+const codeLength = 6;
 
 const source = {
   uri:
