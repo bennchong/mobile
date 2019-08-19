@@ -7,7 +7,7 @@ const fetch = async url => {
 };
 
 const validURL =
-  "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json";
+  "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid.json";
 
 let validFormatWorkpass;
 let invalidFormatWorkpass;

@@ -4,7 +4,7 @@ describe("fetchDocument", () => {
   it("should fetch the document from the uri", async () => {
     // TODO This test could be stubbed instead of making an actual API call.
     const fetchedDocument = await fetchDocument(
-      "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json"
+      "https://raw.githubusercontent.com/sgworkpass/demo/master/encrypted_pass/cert_valid.json"
     );
     expect(fetchedDocument).toBeTruthy();
   });

@@ -26,7 +26,7 @@ const DevStoreWorkPass = () => {
               onPress: async () => {
                 try {
                   const workpass = await fetchDocument(
-                    "https://raw.githubusercontent.com/sgworkpass/demo/master/cert_valid.json",
+                    "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid.json",
                     "key"
                   );
                   await storeWorkpass(workpass);
