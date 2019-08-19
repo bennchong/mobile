@@ -66,5 +66,16 @@ export default StyleSheet.create({
 
     // Android
     elevation: 3
-  }
+  },
+
+  button: {
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: "#3557b7",
+    width: 300,
+    borderRadius: 30,
+    padding: 10,
+    margin: 20
+  },
+  buttonText: { color: "#fff", fontWeight: "bold" }
 });

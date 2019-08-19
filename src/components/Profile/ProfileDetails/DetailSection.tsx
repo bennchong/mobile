@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   View,
   Text,
   StyleSheet,
   TouchableOpacity
 } from "react-native";
+import * as LocalAuthentication from "expo-local-authentication";
 import Constants from "expo-constants";
 import { useStateValue } from "../../../state";
+import { Fingerprint } from "../../Authentication/Fingerprint";
 import { PassCode } from "../../Authentication/PassCode";
 import { FingerprintModal } from "../../Modals/FingerprintModal";
 
@@ -27,15 +30,6 @@ const styles = StyleSheet.create({
     top: Constants.statusBarHeight,
     right: 20,
     zIndex: 1000
-  },
-
-  icon: {
-    alignSelf: "center"
-  },
-  inputSubLabel: {
-    paddingTop: 30,
-    color: "#000",
-    textAlign: "center"
   }
 });
 
@@ -64,63 +58,51 @@ export const DetailSection = (props: DetailSectionProps) => {
 
 export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
   const [show, setShow] = useState(false);
-  // const [showPassCode, setShowPassCode] = useState(false);
+  const [showPassCode, setShowPassCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [{ workpassAccepted }] = useStateValue();
+  const [{ workpassAccepted, fingerprintAvailable }] = useStateValue();
 
-  // const scanFingerprint = async () => {
-  //   setShowModal(true);
+  const scanFingerprint = async () => {
+    setShowModal(true);
 
-  //   const options = { promptMessage: "Scan", fallbackLabel: "" };
+    const { error, success } = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Authenticate"
+    });
 
-  //   let { error, success } = await LocalAuthentication.authenticateAsync(
-  //     options
-  //   );
+    // eslint-disable-next-line no-console
+    console.log(error, success);
+    // eslint-enable-next-line no-console
 
-  //   console.log(error, success);
+    if (error === "lockout") {
+      setShowModal(false);
+      return Alert.alert(
+        "Locked out",
+        "Use passcode instead",
+        [{ text: "Use passcode", onPress: () => setShowPassCode(true) }],
+        { cancelable: false }
+      );
+    }
+    if (!success) {
+      return setShowModal(false);
+    }
+    setShow(true);
+    return setShowModal(false);
+  };
 
-  //   if (error === "lockout") {
-  //     setShowModal(false);
-  //     return Alert.alert(
-  //       "Locked out",
-  //       "Try using passcode instead",
-  //       [{ text: "Use passcode", onPress: () => setShowPassCode(true) }],
-  //       { cancelable: false }
-  //     );
-  //   }
+  const ScanFingerprint = () => (
+    <Fingerprint scanFingerprint={scanFingerprint} />
+  );
 
-  //   if (!success) {
-  //     setShowModal(false);
-  //   }
+  const PassCodeAndroid = () => (
+    <PassCode showSuccess={() => setShow(true)} register={false} />
+  );
 
-  //   if (success) {
-  //     setShow(true);
-  //     setShowModal(false);
-  //   }
-  // };
-
-  // let TempBody;
-  // if (showPassCode)
-  //   TempBody = () => (
-  //     <PassCode showSuccess={() => setShow(true)} register={false} />
-  //   );
-  // else {
-  //   TempBody = () => (
-  //     <View style={{ paddingVertical: 20 }}>
-  //       <MaterialCommunityIcons
-  //         name="fingerprint"
-  //         size={80}
-  //         color="#3557b7"
-  //         style={styles.icon}
-  //       />
-  //       <TouchableOpacity onPress={scanFingerprint}>
-  //         <Text style={styles.inputSubLabel}>
-  //           Scan fingerprint to unlock information
-  //         </Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // }
+  let AuthBody;
+  if (!showPassCode && fingerprintAvailable) {
+    AuthBody = ScanFingerprint;
+  } else {
+    AuthBody = PassCodeAndroid;
+  }
 
   return (
     <>
@@ -145,11 +127,7 @@ export const DetailSectionSecret = (props: DetailSectionSecretProps) => {
             ) : null}
           </View>
         ) : null}
-        {show || !workpassAccepted ? (
-          props.children
-        ) : (
-          <PassCode showSuccess={() => setShow(true)} register={false} />
-        )}
+        {show || !workpassAccepted ? props.children : <AuthBody />}
       </View>
     </>
   );

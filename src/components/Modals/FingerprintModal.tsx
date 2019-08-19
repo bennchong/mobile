@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "./modalStyles";
 
 interface FingerprintModalProps {
-  handleCloseModal: Function;
+  handleCloseModal: any;
   showModal: boolean;
 }
 
@@ -23,12 +23,9 @@ export const FingerprintModal = ({
               color="#3557b7"
             />
             <Text style={styles.modalText}>Scan Fingerprint</Text>
-            {/* <Text style={styles.modalSecondaryText}>
-              Ensure you are scanning a MOM work pass ID QR code
-            </Text> */}
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => handleCloseModal()}
+              onPress={handleCloseModal}
             >
               <Text style={styles.closeModalText}>Cancel</Text>
             </TouchableOpacity>

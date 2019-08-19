@@ -18,7 +18,7 @@ export const NoWifiModal = ({ handleCloseModal, showModal }) => {
             </Text>
             <TouchableOpacity
               style={[styles.modalButton, { backgroundColor: "#5D5D5D" }]}
-              onPress={() => handleCloseModal()}
+              onPress={handleCloseModal}
             >
               <Text style={[styles.closeModalText, { color: "#fff" }]}>
                 View Offline

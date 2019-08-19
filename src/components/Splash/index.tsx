@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Image } from "react-native";
+import * as LocalAuthentication from "expo-local-authentication";
 import { useStateValue } from "../../state";
 import {
   checkStoredWorkpassExists,
@@ -52,10 +53,23 @@ export const SplashScreen = (props: SplashScreenProps) => {
     }
   };
 
+  const checkForAuthenticationCompatibility = async () => {
+    //  A value of 1 indicates Fingerprint support and 2 indicates Facial Recognition support.
+    // Eg: [1,2] means the device has both types supported.
+    const supportedHardware = await LocalAuthentication.supportedAuthenticationTypesAsync();
+    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+    if (supportedHardware.includes(1) && isEnrolled) {
+      dispatch({ type: "SET_FINGERPRINT_AVAILABLE", compatible: true });
+    } else {
+      dispatch({ type: "SET_FINGERPRINT_AVAILABLE", compatible: false });
+    }
+  };
+
   useEffect(() => {
     loadAcceptedTimeIntoContext();
     loadVerifiedTimeIntoContext();
     loadWorkpassIntoContext();
+    checkForAuthenticationCompatibility();
   }, []);
 
   return (

@@ -117,8 +117,8 @@ export const PassCode = ({ showSuccess, register }: PassCodeProps) => {
         cancelable: false
       });
     }
-    await storeTime();
     await storePasscode(code);
+    await storeTime();
     dispatch({
       type: "SET_WORKPASS_ACCEPTED",
       time: getCurrentDateAndTime()

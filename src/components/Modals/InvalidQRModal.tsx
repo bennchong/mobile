@@ -6,7 +6,7 @@ import { styles } from "./modalStyles";
 const imageSource = require("../../assets/blur.jpg");
 
 interface InvalidQRModalProps {
-  handleCloseModal: Function;
+  handleCloseModal: any;
   showModal: boolean;
 }
 
@@ -31,7 +31,7 @@ export const InvalidQRModal = ({
               </Text>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleCloseModal()}
+                onPress={handleCloseModal}
               >
                 <Text style={styles.closeModalText}>Try Again</Text>
               </TouchableOpacity>
