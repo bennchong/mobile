@@ -5,6 +5,7 @@ import { ProfileImage } from "./ProfileImage";
 import { VerifyProfile } from "./VerifyProfile";
 import { VerifyModal } from "../Modals/VerifyModal";
 import { ProfileDetails } from "./ProfileDetails";
+import { white } from "../../themeColors";
 
 interface ProfileSectionProps {
   status: number;
@@ -25,7 +26,7 @@ const ProfileSection = ({
   const [modal, setModal] = useState(false);
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: white }}>
       <ProfileImage
         status={status}
         recipient={recipient}

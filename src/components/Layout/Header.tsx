@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { white } from "../../themeColors";
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   headerText: {
-    color: "white",
+    color: white,
     fontSize: 16,
     opacity: 1,
     textAlign: "center"

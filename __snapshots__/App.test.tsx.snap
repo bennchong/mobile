@@ -86,7 +86,7 @@ exports[`<SettingsTab /> should render without crashing 1`] = `
                   <Text
                     style={
                       Object {
-                        "color": "white",
+                        "color": "#FFF",
                         "fontSize": 16,
                         "opacity": 1,
                         "textAlign": "center",

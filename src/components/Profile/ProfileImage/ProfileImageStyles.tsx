@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import metrics from "../../../config/metrics";
+import { white, lighterGrey, midLightGrey, black } from "../../../themeColors";
 
 export const styles = StyleSheet.create({
   container: { alignItems: "center" },
@@ -8,7 +9,7 @@ export const styles = StyleSheet.create({
     height: metrics.DIAMETER,
     borderRadius: metrics.RADIUS,
     borderWidth: 3,
-    borderColor: "#fff",
+    borderColor: white,
     alignSelf: "center"
   },
   imageContainer: {
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     alignContent: "center",
     marginTop: metrics.RADIUS,
     position: "absolute",
-    shadowColor: "#000000",
+    shadowColor: black,
     shadowOpacity: 0.15,
     shadowOffset: {
       height: 5,
@@ -27,19 +28,19 @@ export const styles = StyleSheet.create({
     elevation: 10
   },
   background: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: lighterGrey,
     height: metrics.DIAMETER,
     width: "100%",
     alignItems: "center"
   },
   margin: {
-    backgroundColor: "#fff",
+    backgroundColor: white,
     width: "100%",
     height: 55
   },
   verifiedText: {
     paddingTop: 5,
-    color: "#707070",
+    color: midLightGrey,
     fontSize: 9
   }
 });

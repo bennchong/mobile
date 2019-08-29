@@ -4,6 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { verificationStatusEnum } from "../../services/verificationService/verificationService";
 import { styles } from "./BarStyles";
+import { white, midGreen, midYellow, darkRed, red } from "../../themeColors";
 
 interface ValidationBarProps {
   status: verificationStatusEnum;
@@ -17,20 +18,20 @@ export const ValidationBar = (props: ValidationBarProps) => {
   let text;
   switch (props.status) {
     case verificationStatusEnum.VALIDATING:
-      barColor = { backgroundColor: "#EDB854" };
+      barColor = { backgroundColor: midYellow };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
-        <ActivityIndicator size="small" color="white" style={styles.icon} />
+        <ActivityIndicator size="small" color={white} style={styles.icon} />
       );
       text = "VERIFYING";
       break;
     case verificationStatusEnum.VALID:
-      barColor = { backgroundColor: "#3FA540" };
+      barColor = { backgroundColor: midGreen };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="checkcircle"
-          color="#fff"
+          color={white}
           size={18}
           style={[styles.icon, { marginBottom: 3 }]}
         />
@@ -38,12 +39,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "VALID";
       break;
     case verificationStatusEnum.EXPIRED:
-      barColor = { backgroundColor: "red" };
+      barColor = { backgroundColor: red };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="calendar"
-          color="#fff"
+          color={white}
           size={18}
           style={[styles.icon, { marginBottom: 3 }]}
         />
@@ -56,7 +57,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
       BarIcon = () => (
         <AntDesign
           name="infocirlce"
-          color="#fff"
+          color={white}
           size={15}
           style={[styles.icon, { marginBottom: 3 }]}
         />
@@ -64,12 +65,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "EXPIRED WITH LEGAL STAY";
       break;
     case verificationStatusEnum.TAMPERED:
-      barColor = { backgroundColor: "red" };
+      barColor = { backgroundColor: red };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="exclamationcircle"
-          color="#fff"
+          color={white}
           size={15}
           style={[styles.icon, { marginBottom: 3 }]}
         />
@@ -77,12 +78,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "TAMPERED";
       break;
     case verificationStatusEnum.REVOKED:
-      barColor = { backgroundColor: "red" };
+      barColor = { backgroundColor: red };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="warning"
-          color="#fff"
+          color={white}
           size={15}
           style={[styles.icon, { marginBottom: 3 }]}
         />
@@ -90,12 +91,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "REVOKED";
       break;
     default:
-      barColor = { backgroundColor: "#D52D2D" };
+      barColor = { backgroundColor: darkRed };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
           name="closecircle"
-          color="#fff"
+          color={white}
           size={18}
           style={[styles.icon, { marginBottom: 3 }]}
         />

@@ -1,29 +1,33 @@
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { darkGrey, white } from "../../themeColors";
+
+const styles = StyleSheet.create({
+  view: {
+    position: "absolute",
+    bottom: "5%",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 99
+  },
+  message: { color: darkGrey, fontSize: 12 },
+  button: {
+    marginTop: 10,
+    borderRadius: 10,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    paddingVertical: 10,
+    paddingHorizontal: 15
+  },
+  buttonText: { color: white }
+});
 
 export const CannotScan = () => {
   return (
-    <View
-      style={{
-        position: "absolute",
-        bottom: "5%",
-        alignSelf: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 99
-      }}
-    >
-      <Text style={{ color: "#414141", fontSize: 12 }}>Can&apos;t Scan?</Text>
-      <TouchableOpacity
-        style={{
-          marginTop: 10,
-          borderRadius: 10,
-          backgroundColor: "rgba(0,0,0,0.5)",
-          paddingVertical: 10,
-          paddingHorizontal: 15
-        }}
-      >
-        <Text style={{ color: "#fff" }}>Use Card Serial No.</Text>
+    <View style={styles.view}>
+      <Text style={styles.message}>Can&apos;t Scan?</Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Use Card Serial No.</Text>
       </TouchableOpacity>
     </View>
   );

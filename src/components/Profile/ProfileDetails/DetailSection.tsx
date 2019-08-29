@@ -1,15 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { white, lightGrey, midGrey } from "../../../themeColors";
 
 const styles = StyleSheet.create({
   headerContainer: {
     marginHorizontal: 26,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderColor: "#A9A9A9",
-    backgroundColor: "#fff"
+    borderColor: lightGrey,
+    backgroundColor: white
   },
-  header: { color: "#808080", fontWeight: "bold", fontSize: 13 }
+  header: { color: midGrey, fontWeight: "bold", fontSize: 13 }
 });
 
 interface DetailSectionProps {
@@ -34,7 +35,7 @@ const DetailSectionHeader = (props: DetailSectionHeaderProps) => {
 
 export const DetailSection = (props: DetailSectionProps) => {
   return (
-    <View style={{ backgroundColor: "#fff" }}>
+    <View style={{ backgroundColor: white }}>
       <DetailSectionHeader title={props.title} />
       {props.children}
     </View>

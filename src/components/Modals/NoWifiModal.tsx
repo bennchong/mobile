@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { styles } from "./modalStyles";
+import { white, midDarkGrey } from "../../themeColors";
 
 export const NoWifiModal = ({ handleCloseModal, showModal }) => {
   return (
@@ -17,10 +18,10 @@ export const NoWifiModal = ({ handleCloseModal, showModal }) => {
               refresh.
             </Text>
             <TouchableOpacity
-              style={[styles.modalButton, { backgroundColor: "#5D5D5D" }]}
+              style={[styles.modalButton, { backgroundColor: midDarkGrey }]}
               onPress={() => handleCloseModal()}
             >
-              <Text style={[styles.closeModalText, { color: "#fff" }]}>
+              <Text style={[styles.closeModalText, { color: white }]}>
                 View Offline
               </Text>
             </TouchableOpacity>

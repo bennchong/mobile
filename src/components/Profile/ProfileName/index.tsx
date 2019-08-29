@@ -5,6 +5,7 @@ import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
+import { midGrey } from "../../../themeColors";
 
 interface ProfileNameProps {
   status: number;
@@ -39,7 +40,7 @@ export const ProfileName = ({
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
         >
-          <AntDesign name="qrcode" size={15} color="#808080" />
+          <AntDesign name="qrcode" size={15} color={midGrey} />
           <Text style={styles.shareText}>SHARE ID</Text>
           <SharePageContainer
             photo={photo}

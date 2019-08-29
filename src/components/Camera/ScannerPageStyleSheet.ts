@@ -1,5 +1,6 @@
 import Constants from "expo-constants";
 import { StyleSheet } from "react-native";
+import { midGrey, lighterGrey, white } from "../../themeColors";
 
 const ScannerPageStyleSheet = StyleSheet.create({
   page: {
@@ -10,7 +11,7 @@ const ScannerPageStyleSheet = StyleSheet.create({
     marginTop: Constants.statusBarHeight
   },
   titleBar: {
-    color: "white",
+    color: white,
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
@@ -20,11 +21,11 @@ const ScannerPageStyleSheet = StyleSheet.create({
   },
   camera: {
     flex: 15,
-    backgroundColor: "whitesmoke"
+    backgroundColor: lighterGrey
   },
   titleBarContainer: {
     flex: 1,
-    backgroundColor: "gray",
+    backgroundColor: midGrey,
     justifyContent: "center",
     opacity: 0.8
   }

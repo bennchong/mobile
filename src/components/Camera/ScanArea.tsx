@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
+import { white } from "../../themeColors";
 
 const styles = StyleSheet.create({
   container: {
@@ -114,7 +115,7 @@ export class ScanArea extends Component {
 
           <View
             style={[
-              { borderColor: "#fff", height: 20, width: 20 },
+              { borderColor: white, height: 20, width: 20 },
               styles.topLeftCorner,
               {
                 borderLeftWidth: 4,
@@ -125,7 +126,7 @@ export class ScanArea extends Component {
 
           <View
             style={[
-              { borderColor: "#fff", height: 20, width: 20 },
+              { borderColor: white, height: 20, width: 20 },
               styles.topRightCorner,
               {
                 borderRightWidth: 4,
@@ -136,7 +137,7 @@ export class ScanArea extends Component {
 
           <View
             style={[
-              { borderColor: "#fff", height: 20, width: 20 },
+              { borderColor: white, height: 20, width: 20 },
               styles.bottomLeftCorner,
               {
                 borderLeftWidth: 4,
@@ -147,7 +148,7 @@ export class ScanArea extends Component {
 
           <View
             style={[
-              { borderColor: "#fff", height: 20, width: 20 },
+              { borderColor: white, height: 20, width: 20 },
               styles.bottomRightCorner,
               {
                 borderRightWidth: 4,

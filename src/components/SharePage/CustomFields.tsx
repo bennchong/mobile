@@ -5,6 +5,7 @@ import {
   handleObfuscation
 } from "../../services/obfuscation/obfuscationHandler";
 import { styles } from "./SharePageStyles";
+import { white, black, lighterGrey, darkRed } from "../../themeColors";
 
 /* eslint-disable global-require */
 // Global buffer is needed to handle the binary data when obfuscating a certain field
@@ -45,15 +46,15 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
       style={[
         {
           backgroundColor: detailsShown.includes(item.key)
-            ? "#D52D2D"
-            : "#f5f5f5"
+            ? darkRed
+            : lighterGrey
         },
         styles.obfuscateContainer
       ]}
     >
       <Text
         style={{
-          color: detailsShown.includes(item.key) ? "#fff" : "#000"
+          color: detailsShown.includes(item.key) ? white : black
         }}
       >
         {item.title}

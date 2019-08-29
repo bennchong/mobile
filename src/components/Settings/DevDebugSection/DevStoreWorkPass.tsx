@@ -5,6 +5,7 @@ import { storeWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { StateContext } from "../../../state";
+import { red, black } from "../../../themeColors";
 
 const DevStoreWorkPass = () => {
   const context = useContext(StateContext);
@@ -50,10 +51,10 @@ const DevStoreWorkPass = () => {
       }}
     >
       <View style={styles.iconContainer}>
-        <MaterialIcons name="sd-storage" size={30} color="red" />
+        <MaterialIcons name="sd-storage" size={30} color={red} />
         <Text style={styles.textContainer}>Store valid workpass</Text>
       </View>
-      <AntDesign name="right" size={20} color="black" style={styles.right} />
+      <AntDesign name="right" size={20} color={black} style={styles.right} />
     </TouchableOpacity>
   );
 };

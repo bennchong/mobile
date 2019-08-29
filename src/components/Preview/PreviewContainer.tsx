@@ -3,6 +3,7 @@ import { View, Modal, SafeAreaView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ProfileContainer } from "../Profile/ProfileContainer";
 import { styles } from "./PreviewContainerStyles";
+import { white } from "../../themeColors";
 
 interface PreviewContainerProps {
   navigation: any;
@@ -22,7 +23,7 @@ export const PreviewContainer = ({
           <MaterialCommunityIcons
             name="close-circle"
             size={30}
-            color="#fff"
+            color={white}
             style={styles.closeIcon}
             onPress={goBack}
           />

@@ -11,6 +11,7 @@ import {
   verificationStatusEnum,
   verifyWorkpass
 } from "../../services/verificationService/verificationService";
+import { white, black } from "../../themeColors";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,9 +20,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   shadow: {
-    borderColor: "#fff",
+    borderColor: white,
     elevation: 5,
-    shadowColor: "#000000",
+    shadowColor: black,
     shadowOpacity: 0.85
   }
 });

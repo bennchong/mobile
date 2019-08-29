@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { white, lighterGrey, midGrey } from "../../themeColors";
 
 export const styles = StyleSheet.create({
   baseBar: {
@@ -10,13 +11,13 @@ export const styles = StyleSheet.create({
     paddingBottom: 5
   },
   verify: {
-    backgroundColor: "#f5f5f5"
+    backgroundColor: lighterGrey
   },
   verifyText: {
-    color: "#808080"
+    color: midGrey
   },
   text: {
-    color: "#fff",
+    color: white,
     fontWeight: "bold",
     fontSize: 18
   },

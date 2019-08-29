@@ -1,19 +1,28 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import {
+  black,
+  midDarkGrey,
+  darkGrey,
+  midLightGrey,
+  white,
+  darkestBlue,
+  red
+} from "../../themeColors";
 import metrics from "../../config/metrics";
 
 export const styles = StyleSheet.create({
   box: {
-    backgroundColor: "white",
+    backgroundColor: white,
     width: metrics.MODAL,
     height: "75%",
     position: "absolute",
     top: Constants.statusBarHeight + 35 + metrics.RADIUS,
     zIndex: 2,
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: white,
     elevation: 10,
-    shadowColor: "#000000",
+    shadowColor: black,
     shadowOpacity: 0.85,
     shadowRadius: 10,
     shadowOffset: {
@@ -32,20 +41,20 @@ export const styles = StyleSheet.create({
     padding: 5
   },
   qrCode: {
-    backgroundColor: "red",
-    borderColor: "black",
+    backgroundColor: red,
+    borderColor: black,
     borderWidth: 20
   },
   dateText: {
     marginTop: 10,
     fontSize: 10,
-    color: "#707070",
+    color: midLightGrey,
     fontWeight: "100",
     alignSelf: "center"
   },
   exitText: {
     fontSize: 14,
-    color: "#838383",
+    color: midDarkGrey,
     textAlign: "center",
     marginTop: 20
   },
@@ -53,9 +62,9 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     width: metrics.MODAL_QR_CONTAINER,
     height: metrics.MODAL_QR_CONTAINER,
-    backgroundColor: "#fff",
+    backgroundColor: white,
     marginTop: 20,
-    shadowColor: "#000",
+    shadowColor: black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -79,7 +88,7 @@ export const styles = StyleSheet.create({
     zIndex: 99,
 
     borderWidth: 3,
-    borderColor: "#fff",
+    borderColor: white,
     alignSelf: "center"
   },
   imageContainer: {
@@ -90,7 +99,7 @@ export const styles = StyleSheet.create({
     top: Constants.statusBarHeight + 40,
     position: "absolute",
     zIndex: 98,
-    shadowColor: "#000000",
+    shadowColor: black,
     shadowOpacity: 0.15,
     shadowRadius: 3,
     shadowOffset: {
@@ -103,14 +112,14 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 14,
     fontWeight: "bold",
-    color: "#434343",
+    color: darkGrey,
     position: "absolute",
     top: Constants.statusBarHeight,
     zIndex: 99
   },
   textContainer: {
     paddingTop: metrics.RADIUS + 10,
-    backgroundColor: "#fff",
+    backgroundColor: white,
     width: "100%",
     alignItems: "center",
     justifyContent: "center"
@@ -119,13 +128,13 @@ export const styles = StyleSheet.create({
   name: {
     fontWeight: "bold",
     fontSize: 18,
-    color: "#414141"
+    color: darkGrey
   },
   infoText: {
     textAlign: "center",
     marginTop: 10,
     marginBottom: 5,
-    color: "#707070",
+    color: midLightGrey,
     fontSize: 11
   },
 
@@ -141,11 +150,11 @@ export const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#063444",
+    backgroundColor: darkestBlue,
     marginVertical: 5,
     borderRadius: 20
   },
-  profileSelectorText: { color: "#fff", fontWeight: "bold" },
+  profileSelectorText: { color: white, fontWeight: "bold" },
   obfuscateContainer: {
     width: "100%",
     justifyContent: "center",
@@ -156,9 +165,9 @@ export const styles = StyleSheet.create({
   button: {
     padding: 10,
     alignSelf: "center",
-    backgroundColor: "#063444",
+    backgroundColor: darkestBlue,
     marginVertical: 5,
     borderRadius: 20
   },
-  buttonText: { color: "#fff", fontWeight: "bold" }
+  buttonText: { color: white, fontWeight: "bold" }
 });

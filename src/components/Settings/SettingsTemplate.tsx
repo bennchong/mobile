@@ -5,10 +5,11 @@ import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { Header } from "../Layout/Header";
 import { styles } from "./styles";
+import { cyan, white, blue, yellow, black } from "../../themeColors";
 
 const tabs = [
   {
-    icon: <AntDesign name="edit" size={30} color="#ffdd42" />,
+    icon: <AntDesign name="edit" size={30} color={yellow} />,
     title: "Dev Settings",
     link: "DevDebug"
   },
@@ -22,15 +23,15 @@ const tabs = [
       <MaterialCommunityIcons
         name="shield"
         size={30}
-        color="#fff"
-        style={{ backgroundColor: "#2cae", borderRadius: 5 }}
+        color={white}
+        style={{ backgroundColor: cyan, borderRadius: 5 }}
       />
     ),
     title: "Privacy Policy",
     link: null
   },
   {
-    icon: <AntDesign name="infocirlce" size={30} color="#2C85DE" />,
+    icon: <AntDesign name="infocirlce" size={30} color={blue} />,
     title: "About Us",
     link: null
   }
@@ -59,7 +60,7 @@ const SettingsTemplate = (props: SettingsTemplateProps) => {
             <AntDesign
               name="right"
               size={20}
-              color="black"
+              color={black}
               style={styles.right}
             />
           </TouchableOpacity>

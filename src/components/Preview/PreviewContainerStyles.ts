@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { lighterGrey } from "../../themeColors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: Constants.statusBarHeight,
-    backgroundColor: "#f5f5f5"
+    backgroundColor: lighterGrey
   },
   closeIcon: {
     position: "absolute",

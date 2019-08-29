@@ -134,7 +134,7 @@ class QRScanner extends React.Component<QRScannerProps> {
     // otherwise it might be set to false, then true preventing QR codes from being scanned.
     await this.setStateAsync({ isProcessingQr: true });
     try {
-      const { action, payload } = await getActionFromQR(data);
+      const { action, payload } = getActionFromQR(data);
 
       switch (action) {
         case "STORE":

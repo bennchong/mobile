@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import metrics from "../../config/metrics";
+import { white, midGrey, green, lighterGrey } from "../../themeColors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -13,10 +14,10 @@ export const styles = StyleSheet.create({
   acknowledgeText: {
     textAlign: "center",
     fontWeight: "bold",
-    color: "#808080"
+    color: midGrey
   },
   button: {
-    backgroundColor: "#5FC660",
+    backgroundColor: green,
     borderRadius: 30,
     paddingHorizontal: 40,
     paddingVertical: 5,
@@ -24,7 +25,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  buttonText: { color: "#fff", fontWeight: "bold" },
+  image: {
+    resizeMode: "cover",
+    height: "100%"
+  },
+  buttonText: { color: white, fontWeight: "bold" },
   modalContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
   modal: {
     width: metrics.DEVICE_WIDTH - 50,
@@ -33,7 +38,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: white
   },
   modalText: {
     fontWeight: "bold",
@@ -50,7 +55,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   modalButton: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: lighterGrey,
     borderRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 5,

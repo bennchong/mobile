@@ -1,10 +1,16 @@
 import { StyleSheet } from "react-native";
 import metrics from "../../../config/metrics";
+import {
+  darkGrey,
+  white,
+  midLightGrey,
+  lightestGrey
+} from "../../../themeColors";
 
 export const styles = StyleSheet.create({
   textContainer: {
     paddingTop: metrics.RADIUS + 10,
-    backgroundColor: "#fff",
+    backgroundColor: white,
     width: "100%",
     alignItems: "center",
     justifyContent: "center"
@@ -12,11 +18,11 @@ export const styles = StyleSheet.create({
   fin: {
     fontWeight: "bold",
     fontSize: 18,
-    color: "#414141"
+    color: darkGrey
   },
   name: {
     fontSize: 13,
-    color: "#414141"
+    color: darkGrey
   },
   shareContainer: {
     marginTop: 5,
@@ -24,12 +30,12 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F4F4F4"
+    backgroundColor: lightestGrey
   },
   shareText: {
     marginLeft: 5,
     fontWeight: "bold",
-    color: "#707070",
+    color: midLightGrey,
     fontSize: 11
   }
 });

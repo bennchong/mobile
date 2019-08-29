@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { white, midGrey } from "../../themeColors";
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -8,11 +9,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 26,
     marginVertical: 10,
-    backgroundColor: "#fff"
+    backgroundColor: white
   },
-  label: { color: "#808080", fontSize: 13, flex: 3 },
+  label: { color: midGrey, fontSize: 13, flex: 3 },
   text: {
-    color: "#808080",
+    color: midGrey,
     fontSize: 13,
     flex: 4,
     textAlign: "right",
