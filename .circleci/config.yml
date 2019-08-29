@@ -27,7 +27,7 @@ jobs:
           command: expo login -u $EXPO_USERNAME --non-interactive
       - run:
           name: expo_publish_channel
-          command: expo publish --non-interactive --release-channel $(echo $CI_PULL_REQUEST | cut -c 43-)
+          command: EXPO_GIT_COMMIT=$CIRCLE_SHA1 expo publish --non-interactive --release-channel $(echo $CI_PULL_REQUEST | cut -c 43-)
       - run:
           name: github_comment_published_link
           command: ./scripts/commenter.sh
@@ -44,7 +44,7 @@ jobs:
           command: expo login -u $EXPO_USERNAME --non-interactive
       - run:
           name: expo_publish_channel
-          command: expo publish --non-interactive --release-channel default
+          command: EXPO_GIT_COMMIT=$CIRCLE_SHA1 expo publish --non-interactive --release-channel default
 workflows:
   version: 2
   test_and_publish:
