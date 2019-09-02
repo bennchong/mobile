@@ -27,12 +27,12 @@ const tabs = [
       />
     ),
     title: "Privacy Policy",
-    link: null
+    link: "PrivacyPage"
   },
   {
     icon: <AntDesign name="infocirlce" size={30} color="#2C85DE" />,
     title: "About Us",
-    link: null
+    link: "AboutPage"
   }
 ];
 
