@@ -6,6 +6,9 @@ import Constants from "expo-constants";
 import { Header } from "../Layout/Header";
 import { styles } from "./styles";
 
+const PrivacyPDF = require("../../assets/PDFs/sgworkpass-privacy-statement.pdf");
+const TermsPDF = require("../../assets/PDFs/sgworkpass-terms-of-use.pdf");
+
 const tabs = [
   {
     icon: <AntDesign name="edit" size={30} color="#ffdd42" />,
@@ -15,7 +18,7 @@ const tabs = [
   {
     icon: <AntDesign name="questioncircle" size={30} color="#000" />,
     title: "Terms & Conditions",
-    link: null
+    link: TermsPDF
   },
   {
     icon: (
@@ -27,7 +30,7 @@ const tabs = [
       />
     ),
     title: "Privacy Policy",
-    link: "PrivacyPage"
+    link: PrivacyPDF
   },
   {
     icon: <AntDesign name="infocirlce" size={30} color="#2C85DE" />,
