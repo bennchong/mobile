@@ -6,6 +6,7 @@ import Constants from "expo-constants";
 import { styles } from "./styles";
 import { StateContext } from "../../state";
 import * as Font from 'expo-font';
+import Hyperlink from 'react-native-hyperlink';
 
 const imageSource = require("../../assets/rsz_mom-logo-share-hd.png");
 
@@ -36,9 +37,9 @@ const AboutPage = (props: IAboutPageProps) => {
           Brought to you by{'\n'}
           <Image source={imageSource} style={{ resizeMode: "center" }}/>{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}
           SGWorkPass is a free service by the Singapore{'\n'}Government for users to check the validity of passes{'\n'}issued by the Ministry of Manpower.{'\n'}{'\n'}
-          To give us feedback, visit <Text accessible={true} onPress={this._onPress} accessibilityRole="link">https://www.mom.gov.sg/contact</Text>{'\n'}{'\n'}
+          To give us feedback, visit </Text><Hyperlink linkDefault={true} linkStyle={ { color: '#2963b9', fontSize: 16, fontFamily: 'calibri-regular' } }><Text>https://www.mom.gov.sg/contact</Text></Hyperlink><Text>{'\n'}{'\n'}
           {'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}
-          <Text style={{color: '#D3D3D3'}}>
+          <Text style={{color: '#D3D3D3', fontSize: 16, fontFamily: 'calibri-regular', textAlign: 'center'}}>
             &copy; 2019 Ministry of Manpower (MOM).{'\n'}
             All rights reserved.
           </Text>
