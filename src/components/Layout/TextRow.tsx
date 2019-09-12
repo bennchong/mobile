@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     flex: 4,
     textAlign: "right",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    textTransform: "capitalize"
   }
 });
 

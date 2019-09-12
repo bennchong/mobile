@@ -1,4 +1,5 @@
 import { tz } from "moment-timezone";
+import moment from "moment";
 
 export const TIMEZONE = "Asia/Singapore";
 
@@ -16,7 +17,14 @@ export const getCurrentDateAndTime = () => {
 };
 
 export const checkIfExpired = dateString => {
-  const expiryDate = new Date(dateString);
-  const now = new Date();
-  return expiryDate.getTime() < now.getTime();
+  const expiryDate = moment(new Date(dateString));
+  const now = moment(new Date());
+  return now.isAfter(expiryDate);
+};
+
+export const checkIfLessThan = (dateString, noOfDays) => {
+  const revokeDate = moment(new Date(dateString));
+  const now = moment(new Date());
+  const diffInDays = now.diff(revokeDate, "days");
+  return diffInDays <= noOfDays;
 };

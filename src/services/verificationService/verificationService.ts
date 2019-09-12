@@ -1,10 +1,13 @@
 import axios from "axios";
 import { getData } from "@govtechsg/open-attestation";
-import { checkIfExpired } from "../date/date";
-import { globalVerifyEndpoint } from "../../config/endpoints";
+import { checkIfExpired, checkIfLessThan } from "../date/date";
+import {
+  globalVerifyEndpoint,
+  legalStayDays,
+  issueAddress
+} from "../../config/constants";
 
 const url = globalVerifyEndpoint;
-const addresses = ["0x2E78f5B281db0326F287241c6CADc2BB8A9F735f"];
 // extended status enums in anticipation of future changes
 /* eslint-disable no-unused-vars */
 export enum verificationStatusEnum {
@@ -14,6 +17,7 @@ export enum verificationStatusEnum {
   EXPIREDWITHLEGALSTAY,
   TAMPERED,
   REVOKED,
+  REVOKEDWITHLEGALSTAY,
   INVALID_ISSUER,
   INVALID
 }
@@ -33,16 +37,20 @@ export const verifyWorkpass = async document => {
 
   // then check tampered n revoked
   const result = await axios.post(url, { document });
-  if (result.data.message) {
-    return verificationStatusEnum.INVALID;
-  }
+
+  if (result.data.message) return verificationStatusEnum.INVALID;
   if (!result.data.hash.valid) return verificationStatusEnum.TAMPERED;
-  if (!result.data.revoked.valid) return verificationStatusEnum.REVOKED;
+  const revokeDate = "2021-08-21T00:00:00+08:00"; // Replace this with the new API call
+  if (!result.data.revoked.valid) {
+    return checkIfLessThan(revokeDate, legalStayDays)
+      ? verificationStatusEnum.REVOKEDWITHLEGALSTAY
+      : verificationStatusEnum.REVOKED;
+  }
 
   // check issuer
   let isAllIssuerValid = true;
   Object.keys(result.data.issued.issued).forEach(key => {
-    isAllIssuerValid = isAllIssuerValid && addresses.includes(key);
+    isAllIssuerValid = isAllIssuerValid && issueAddress.includes(key);
   });
 
   if (!isAllIssuerValid || !result.data.issued.valid)

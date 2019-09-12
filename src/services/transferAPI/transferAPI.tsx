@@ -1,5 +1,5 @@
 import axios from "axios";
-import { globalUploadEndpoint } from "../../config/endpoints";
+import { globalUploadEndpoint } from "../../config/constants";
 
 const uploadEndpoint = globalUploadEndpoint;
 

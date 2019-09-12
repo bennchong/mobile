@@ -25,9 +25,9 @@ describe("verificationService", () => {
     expect(result).toBe(verificationStatusEnum.TAMPERED);
   });
 
-  it("should return revoked for a revoked cert", async () => {
+  it("should return revoked with legal stay for a revoked cert", async () => {
     const result = await verifyWorkpass(revokedDocument);
-    expect(result).toBe(verificationStatusEnum.REVOKED);
+    expect(result).toBe(verificationStatusEnum.REVOKEDWITHLEGALSTAY);
   });
 
   it("should return invalid for anything else", async () => {

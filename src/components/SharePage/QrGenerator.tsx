@@ -10,7 +10,7 @@ import {
 import { styles } from "./SharePageStyles";
 import { getCurrentDateAndTime } from "../../services/date/date";
 import { uploadWorkpass } from "../../services/transferAPI/transferAPI";
-import { globalDownloadEndpoint } from "../../config/endpoints";
+import { globalDownloadEndpoint } from "../../config/constants";
 
 interface QrGeneratorProps {
   obfuscatedWorkpass: object;
