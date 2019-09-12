@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
   },
 })
 
-const PrivacyPage = (props: IPrivacyPageProps) => {
+const TermsPage = (props: IPrivacyPageProps) => {
   const goBack = () => props.navigation.goBack();
   return (
     <View style={styles.container}>
       <PDFReader
           source={{
-            uri: 'https://github.com/sgworkpass/mobile/raw/about_button/src/assets/PDFs/sgworkpass-privacy-statement.pdf',
+            uri: 'https://github.com/sgworkpass/mobile/raw/about_button/src/assets/PDFs/sgworkpass-terms-of-use.pdf',
           }}
         />
       <Button title="Go Back to Settings Page" onPress={goBack} />
@@ -30,4 +30,4 @@ const PrivacyPage = (props: IPrivacyPageProps) => {
   );
 };
 
-export default withNavigation(PrivacyPage);
+export default withNavigation(TermsPage);

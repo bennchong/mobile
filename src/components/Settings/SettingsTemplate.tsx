@@ -18,7 +18,7 @@ const tabs = [
   {
     icon: <AntDesign name="questioncircle" size={30} color="#000" />,
     title: "Terms & Conditions",
-    link: TermsPDF
+    link: "TermsPage"
   },
   {
     icon: (
@@ -30,7 +30,7 @@ const tabs = [
       />
     ),
     title: "Privacy Policy",
-    link: PrivacyPDF
+    link: "PrivacyPage"
   },
   {
     icon: <AntDesign name="infocirlce" size={30} color="#2C85DE" />,
