@@ -17,7 +17,8 @@ const DevDebug = (props: IDevDebugProps) => {
       contentContainerStyle={{ marginTop: Constants.statusBarHeight }}
     >
       <View style={{ padding: 20 }}>
-        <Text>Version: {VERSION}</Text>
+        <Text>Version: {JSON.stringify(VERSION.revisionId)}</Text>
+        <Text> {JSON.stringify(VERSION.publishedTime)} </Text>
       </View>
       <DevStoreWorkPass />
       <DevDeleteWorkpass />
