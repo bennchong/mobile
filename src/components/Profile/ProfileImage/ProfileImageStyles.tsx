@@ -12,11 +12,35 @@ export const styles = StyleSheet.create({
     borderColor: white,
     alignSelf: "center"
   },
-  imageContainer: {
+  imageLeftContainer: {
+    right: metrics.DEVICE_WIDTH / 1.15,
+    position: "absolute",
+    zIndex: 10
+  },
+  imageLeft: {
     width: metrics.DIAMETER,
     height: metrics.DIAMETER,
     borderRadius: metrics.RADIUS,
+    borderWidth: 3,
+    borderColor: "#fff",
+    opacity: 0.4
+  },
+  imageRightContainer: {
+    left: metrics.DEVICE_WIDTH / 1.15,
+    position: "absolute",
+    zIndex: 10
+  },
+  imageRight: {
+    width: metrics.DIAMETER,
+    height: metrics.DIAMETER,
+    borderRadius: metrics.RADIUS,
+    borderWidth: 3,
+    borderColor: "#fff",
+    opacity: 0.4
+  },
+  imageContainer: {
     alignContent: "center",
+    width: metrics.DEVICE_WIDTH,
     marginTop: metrics.RADIUS,
     position: "absolute",
     shadowColor: black,

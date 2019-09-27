@@ -14,6 +14,9 @@ export const styles = StyleSheet.create({
     backgroundColor: lighterGrey
   },
   verifyText: {
+    textAlign: "center",
+    marginRight: 5,
+    marginLeft: 5,
     color: midGrey
   },
   text: {

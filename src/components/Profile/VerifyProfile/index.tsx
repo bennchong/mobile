@@ -2,27 +2,42 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useStateValue } from "../../../state";
 import { getCurrentDateAndTime } from "../../../services/date/date";
-import { storeTime } from "../../../services/fileSystem";
+import { storeTimeAccepted } from "../../../services/fileSystem";
 import { styles } from "./VerifyProfileStyles";
 
 interface VerifyProfileProps {
   handleShowModal: Function;
   isPreview: boolean;
+  profileSelected: number;
 }
 
-const VerifyProfile = ({ isPreview, handleShowModal }: VerifyProfileProps) => {
-  const [{ workpassAccepted }, dispatch] = useStateValue();
+const VerifyProfile = ({
+  isPreview,
+  handleShowModal,
+  profileSelected
+}: VerifyProfileProps) => {
+  const [
+    { workpassAcceptedBooleanArray, timeAcceptedArray },
+    dispatch
+  ] = useStateValue();
 
   const handleWorkpassConfirmation = async () => {
+    const newTimeAccepted = [...timeAcceptedArray];
     handleShowModal();
-    await storeTime();
+    newTimeAccepted[profileSelected] = getCurrentDateAndTime();
+    await storeTimeAccepted(newTimeAccepted);
+    workpassAcceptedBooleanArray[profileSelected] = true;
     dispatch({
       type: "SET_WORKPASS_ACCEPTED",
-      time: getCurrentDateAndTime()
+      workpassAcceptedBooleanArray
+    });
+    dispatch({
+      type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
+      timeAcceptedArray: newTimeAccepted
     });
   };
 
-  if (!workpassAccepted && !isPreview) {
+  if (!workpassAcceptedBooleanArray[profileSelected] && !isPreview) {
     return (
       <View style={styles.container}>
         <Text style={styles.acknowledgeText}>

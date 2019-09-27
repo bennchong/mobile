@@ -26,6 +26,7 @@ interface SharePageContainerProps {
   handleCancel: Function;
   photo: string;
   name: string;
+  profileSelected: number;
 }
 
 /* eslint-disable no-unused-vars */
@@ -40,11 +41,16 @@ export const SharePageContainer = ({
   isVisible,
   handleCancel,
   photo,
-  name
+  name,
+  profileSelected
 }: SharePageContainerProps) => {
   const [page, setPage] = useState(pageEnum.PROFILE_SELECTOR);
-  const [{ workpass }] = useStateValue();
+  const [{ workpass, dpWorkpassArray }] = useStateValue();
   const [obfuscatedWorkpass, setWorkpass] = useState(workpass);
+  let selectedWorkpass = workpass;
+  if (profileSelected > 0) {
+    selectedWorkpass = dpWorkpassArray[profileSelected - 1];
+  }
   let ModalBody;
 
   const closeModal = () => {
@@ -60,7 +66,7 @@ export const SharePageContainer = ({
   const handleProfileSelector = (profile, detailsShown) => {
     const { obfuscatedDoc, detailsString } = handleObfuscation(
       detailsShown,
-      workpass
+      selectedWorkpass
     );
 
     Alert.alert(
@@ -85,7 +91,7 @@ export const SharePageContainer = ({
     <QrGenerator obfuscatedWorkpass={obfuscatedWorkpass} />
   );
   const CustomFieldsAsModal = () => (
-    <CustomFields showQR={showQR} workpass={workpass} />
+    <CustomFields showQR={showQR} workpass={selectedWorkpass} />
   );
   const ProfileSelectorAsModal = () => (
     <>
@@ -107,7 +113,9 @@ export const SharePageContainer = ({
           style={styles.profileSelector}
           onPress={() => setPage(pageEnum.CUSTOM_FIELDS)}
         >
-          <Text style={styles.profileSelectorText}>Custom</Text>
+          <Text style={styles.profileSelectorText}>
+            Select customized field
+          </Text>
         </TouchableOpacity>
       </View>
     </>

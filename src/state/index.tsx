@@ -2,9 +2,12 @@ import React, { createContext, useContext, useReducer } from "react";
 
 export interface IContextState {
   workpass: any;
-  workpassAccepted: boolean;
-  timeAccepted: string;
-  timeVerified: string;
+  dpWorkpassArray: any;
+  workpassAcceptedBooleanArray: object;
+  timeAcceptedArray: object;
+  timeVerifiedArray: object;
+  numberOfProfiles: number;
+  sessionValidatedArray: object;
 }
 
 export const StateContext = createContext({});

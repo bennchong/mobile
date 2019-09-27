@@ -4,8 +4,10 @@ import { useStateValue } from "../../state";
 import {
   checkStoredWorkpassExists,
   getStoredWorkpass,
-  getStoredTime,
-  getStoredTimeVerified
+  getStoredTimeVerified,
+  checkStoredDPWorkpassExists,
+  getStoredDPWorkpass,
+  checkNumberOfProfiles
 } from "../../services/fileSystem";
 
 const imageSource = require("../../assets/splash.png");
@@ -19,43 +21,70 @@ export const SplashScreen = (props: SplashScreenProps) => {
   const { navigate } = props.navigation;
 
   const loadAcceptedTimeIntoContext = async () => {
-    const storedTimeAccepted = await getStoredTime();
-    if (storedTimeAccepted) {
-      dispatch({
-        type: "SET_WORKPASS_ACCEPTED",
-        time: storedTimeAccepted
-      });
-    }
+    // const storedTimeAcceptedArrayString = await getStoredTimeAccepted();
+    // let storedTimeAcceptedArray;
+    // try {
+    //   storedTimeAcceptedArray = JSON.parse(storedTimeAcceptedArrayString);
+    // } catch (e) {
+    //   storedTimeAcceptedArray = [""];
+    // }
+    const numberOfProfiles = await checkNumberOfProfiles();
+    dispatch({
+      type: "SET_NUMBER_PROFILES",
+      numberOfProfiles
+    });
+    const workpassAcceptedBooleanArray = new Array(numberOfProfiles).fill(true);
+    dispatch({
+      type: "SET_WORKPASS_ACCEPTED",
+      workpassAcceptedBooleanArray
+    });
   };
 
   const loadVerifiedTimeIntoContext = async () => {
-    const storedTimeVerified = await getStoredTimeVerified();
-    if (storedTimeVerified) {
-      dispatch({
-        type: "SET_WORKPASS_VERIFIED",
-        time: storedTimeVerified
-      });
+    const storedTimeVerifiedString = await getStoredTimeVerified();
+    let storedTimeVerified;
+    try {
+      storedTimeVerified = JSON.parse(storedTimeVerifiedString);
+      // Exception when storeTimeVerified is null
+      if (storedTimeVerified[0] === null) throw Error("I was null!");
+    } catch (e) {
+      const numberOfProfiles = await checkNumberOfProfiles();
+      storedTimeVerified = new Array(numberOfProfiles).fill("");
     }
+    dispatch({
+      type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
+      timeVerifiedArray: storedTimeVerified
+    });
   };
 
   const loadWorkpassIntoContext = async () => {
     const workpassExist = await checkStoredWorkpassExists();
-    if (!workpassExist) {
+    const DPWorkpassExist = await checkStoredDPWorkpassExists();
+    if (!workpassExist && !DPWorkpassExist) {
       navigate("Camera");
     } else {
-      const workpass = await getStoredWorkpass();
-      dispatch({
-        type: "UPDATE_WORKPASS",
-        workpass
-      });
+      if (workpassExist) {
+        const workpass = await getStoredWorkpass();
+        dispatch({
+          type: "UPDATE_WORKPASS",
+          workpass
+        });
+      }
+      if (DPWorkpassExist) {
+        const dpWorkpassArray = await getStoredDPWorkpass();
+        dispatch({
+          type: "UPDATE_DP_WORKPASS_ARRAY",
+          dpWorkpassArray
+        });
+      }
       navigate("Profile");
     }
   };
-
   useEffect(() => {
-    loadAcceptedTimeIntoContext();
-    loadVerifiedTimeIntoContext();
-    loadWorkpassIntoContext();
+    loadAcceptedTimeIntoContext()
+      .then(loadVerifiedTimeIntoContext)
+      .then(loadWorkpassIntoContext);
+    // .catch(e => {Alert.alert("Loading of Data Error", e)})
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -18,7 +18,6 @@ import {
 import { decryptFromPayload } from "../../services/crypto/crypto";
 
 interface QRScannerProps {
-  storeWorkpass: (cert) => {};
   navigation: any;
 }
 
@@ -47,6 +46,9 @@ class QRScanner extends React.Component<QRScannerProps> {
 
     if (workpass) {
       await pushService(workpass, payload, setProcessingQr);
+    } else {
+      Alert.alert("Cannot find a main pass to send to access control");
+      setProcessingQr();
     }
   };
 
@@ -74,13 +76,29 @@ class QRScanner extends React.Component<QRScannerProps> {
       this.setState({ isProcessingQr: false }, () => {
         NavigationService.navigate("Profile", {});
       });
-    const [, dispatch] = this.context;
+    const [
+      {
+        dpWorkpassArray,
+        workpassAcceptedBooleanArray,
+        timeAcceptedArray,
+        timeVerifiedArray,
+        workpass,
+        sessionValidatedArray
+      },
+      dispatch
+    ] = this.context;
 
     await storeService({
       payload,
       dispatch,
       setProcessingQr,
-      navigateToProfile
+      navigateToProfile,
+      dpWorkpassArray,
+      workpassAcceptedBooleanArray,
+      timeAcceptedArray,
+      timeVerifiedArray,
+      workpass,
+      sessionValidatedArray
     });
   };
 

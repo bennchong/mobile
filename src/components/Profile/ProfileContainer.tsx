@@ -30,25 +30,37 @@ const styles = StyleSheet.create({
 interface ProfileContainerProps {
   workpass: object;
   isPreview: boolean;
+  profileSelected: number;
+  changeProfileSelected: Function;
 }
 
 export const ProfileContainer = ({
   workpass,
-  isPreview
+  isPreview,
+  profileSelected,
+  changeProfileSelected
 }: ProfileContainerProps) => {
-  const [{ workpassAccepted }, dispatch] = useStateValue();
-  const [validityStatus, setValidityStatus] = useState(
-    verificationStatusEnum.VALIDATING
+  const [
+    { workpassAcceptedBooleanArray, timeVerifiedArray, sessionValidatedArray },
+    dispatch
+  ] = useStateValue();
+  const [validityStatusArray, setValidityStatus] = useState(
+    isPreview
+      ? [false]
+      : new Array(workpassAcceptedBooleanArray.length).fill(
+          verificationStatusEnum.VALIDATING
+        )
   );
   const [previewTimeVerified, setPreviewTime] = useState("");
   const [internetConnected, setConnected] = useState(true);
   const [showModal, setShowModal] = useState(!internetConnected);
 
   const storeTime = async () => {
-    await storeTimeVerified();
+    timeVerifiedArray[profileSelected] = getCurrentDateAndTime();
+    await storeTimeVerified(timeVerifiedArray);
     dispatch({
-      type: "SET_WORKPASS_VERIFIED",
-      time: getCurrentDateAndTime()
+      type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
+      timeVerifiedArray
     });
   };
 
@@ -67,32 +79,50 @@ export const ProfileContainer = ({
       }
     });
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
-
     // verify workpass once
-    if (workpass) {
+    if (isPreview || (workpass && !sessionValidatedArray[profileSelected])) {
+      const newValidityStatusArray = validityStatusArray;
+      newValidityStatusArray[profileSelected] =
+        verificationStatusEnum.VALIDATING;
+      setValidityStatus(newValidityStatusArray);
+      sessionValidatedArray[profileSelected] = true;
+      dispatch({
+        type: "UPDATE_SESSION_ARRAY",
+        sessionValidatedArray
+      });
       verifyWorkpass(workpass).then(status => {
-        setValidityStatus(status);
+        newValidityStatusArray[profileSelected] = status;
+        setValidityStatus(newValidityStatusArray);
         if (status && !isPreview) {
           storeTime();
         } else if (status && isPreview) {
           setPreviewTime(getCurrentDateAndTime());
+          sessionValidatedArray[profileSelected] = false;
         }
       });
     }
-  }, [internetConnected, workpass]);
+  }, [internetConnected, profileSelected, workpass]);
 
   return workpass ? (
     <View style={[styles.container, isPreview ? styles.shadow : null]}>
       {!internetConnected && <NoWifiBar />}
-      {(workpassAccepted || isPreview) && internetConnected && (
-        <ValidationBar status={validityStatus} isPreview={isPreview} />
+      {(workpassAcceptedBooleanArray[profileSelected] || isPreview) &&
+        internetConnected && (
+          <ValidationBar
+            status={validityStatusArray[profileSelected]}
+            isPreview={isPreview}
+          />
+        )}
+      {!workpassAcceptedBooleanArray[profileSelected] && !isPreview && (
+        <MessageBar />
       )}
-      {!workpassAccepted && !isPreview && <MessageBar />}
       <ProfileSection
-        status={validityStatus}
+        status={validityStatusArray[profileSelected]}
         workpass={workpass}
         isPreview={isPreview}
         previewTimeVerified={previewTimeVerified}
+        profileSelected={profileSelected}
+        changeProfileSelected={changeProfileSelected}
       />
       <NoWifiModal
         handleCloseModal={() => setShowModal(false)}

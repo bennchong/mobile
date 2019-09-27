@@ -27,7 +27,11 @@ export const PreviewContainer = ({
             style={styles.closeIcon}
             onPress={goBack}
           />
-          <ProfileContainer workpass={workpass} isPreview={true} />
+          <ProfileContainer
+            workpass={workpass}
+            isPreview={true}
+            profileSelected={0}
+          />
         </View>
       </SafeAreaView>
     </Modal>

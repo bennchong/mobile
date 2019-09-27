@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { storeWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
-import { StateContext } from "../../../state";
+import { useStateValue } from "../../../state";
 import { red, black } from "../../../themeColors";
 
 const DevStoreWorkPass = () => {
-  const context = useContext(StateContext);
-  const dispatch = context[1];
+  const [
+    { workpassAcceptedBooleanArray, timeAcceptedArray, timeVerifiedArray },
+    dispatch
+  ] = useStateValue();
 
   return (
     <TouchableOpacity
@@ -29,10 +31,26 @@ const DevStoreWorkPass = () => {
                   const workpass = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid.json"
                   );
+                  workpassAcceptedBooleanArray.unshift(true);
+                  timeVerifiedArray.unshift("");
+                  timeAcceptedArray.unshift("");
                   await storeWorkpass(workpass);
                   dispatch({
                     type: "UPDATE_WORKPASS",
                     workpass
+                  });
+                  dispatch({ type: "NUMBER_PROFILES_PLUS_ONE" });
+                  dispatch({
+                    type: "SET_WORKPASS_ACCEPTED",
+                    workpassAcceptedBooleanArray
+                  });
+                  dispatch({
+                    type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
+                    timeAcceptedArray
+                  });
+                  dispatch({
+                    type: "SET_WORKPASS_VERIFIED",
+                    timeVerifiedArray
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(

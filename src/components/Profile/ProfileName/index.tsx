@@ -13,6 +13,7 @@ interface ProfileNameProps {
   fin: string;
   name: string;
   isPreview: boolean;
+  profileSelected: number;
 }
 
 export const ProfileName = ({
@@ -20,10 +21,11 @@ export const ProfileName = ({
   photo,
   fin,
   name,
-  isPreview
+  isPreview,
+  profileSelected
 }: ProfileNameProps) => {
   const [isDialogVisible, setVisible] = useState(false);
-  const [{ timeAccepted }] = useStateValue();
+  const [{ workpassAcceptedBooleanArray }] = useStateValue();
 
   const toggleVisibility = () => {
     setVisible(!isDialogVisible);
@@ -35,7 +37,7 @@ export const ProfileName = ({
       <Text style={styles.name}>{name}</Text>
       {!isPreview &&
       status === verificationStatusEnum.VALID &&
-      timeAccepted.length !== 0 ? (
+      workpassAcceptedBooleanArray[profileSelected] ? (
         <TouchableOpacity
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
@@ -47,6 +49,7 @@ export const ProfileName = ({
             name={name}
             isVisible={isDialogVisible}
             handleCancel={toggleVisibility}
+            profileSelected={profileSelected}
           />
         </TouchableOpacity>
       ) : null}

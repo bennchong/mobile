@@ -6,7 +6,8 @@ export const MessageBar = () => {
   return (
     <View style={[styles.baseBar, styles.verify]}>
       <Text style={styles.verifyText}>
-        Please verify your ID and accept it below
+        Please confirm your details and press the save button at the bottom of
+        this screen
       </Text>
     </View>
   );

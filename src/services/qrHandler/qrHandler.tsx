@@ -1,11 +1,13 @@
 import axios from "axios";
 import { Alert } from "react-native";
+import { getData } from "@govtechsg/open-attestation";
 import { handleObfuscation } from "../obfuscation/obfuscationHandler";
 import { decryptFromPayload } from "../crypto/crypto";
 import {
   storeWorkpass,
-  deleteStoredTime,
-  deleteStoredTimeVerified
+  storeDPWorkpass,
+  storeTimeVerified,
+  storeTimeAccepted
 } from "../fileSystem";
 
 export const getActionFromQR = (qrData: string) => {
@@ -66,33 +68,118 @@ export const storeService = async ({
   payload,
   dispatch,
   setProcessingQr,
-  navigateToProfile
+  navigateToProfile,
+  dpWorkpassArray,
+  workpassAcceptedBooleanArray,
+  timeAcceptedArray,
+  timeVerifiedArray,
+  workpass,
+  sessionValidatedArray
 }) => {
   const { uri, key, type } = JSON.parse(payload);
   const encryptedDocument = await fetchDocument(uri);
 
-  let workpass;
+  // Ability to scan non-encrypted workpass in the format "VIEW,URI"
+  let newWorkpass;
   if (!type && !key) {
-    workpass = encryptedDocument;
+    newWorkpass = encryptedDocument;
   } else {
-    workpass = decryptFromPayload(encryptedDocument, { key, type });
+    newWorkpass = decryptFromPayload(encryptedDocument, { key, type });
   }
+  const cleanWorkpass = getData(newWorkpass);
 
   const handleStoreWorkpass = async () => {
-    dispatch({ type: "DELETE_WORKPASS" });
-    await deleteStoredTime();
-    await deleteStoredTimeVerified();
-    await storeWorkpass(workpass);
-    dispatch({
-      type: "UPDATE_WORKPASS",
-      workpass
-    });
+    // Checks if pass is dependent
+    if (cleanWorkpass.pass.sponsoringPass) {
+      // Update filesystem and app context for dpWorkpass array
+      dpWorkpassArray.push(newWorkpass);
+      await storeDPWorkpass(dpWorkpassArray);
+      dispatch({
+        type: "UPDATE_DP_WORKPASS_ARRAY",
+        dpWorkpassArray
+      });
+      // Update app context to include one more state for workpass accepted
+      // Temporary true here, refer to new PR for refactoring of acceptance/rejection
+      workpassAcceptedBooleanArray.push(true);
+      dispatch({
+        type: "SET_WORKPASS_ACCEPTED",
+        workpassAcceptedBooleanArray
+      });
+      timeAcceptedArray.push("");
+      dispatch({
+        type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
+        timeAcceptedArray
+      });
+      storeTimeAccepted(timeAcceptedArray);
+      // Update filesystem and app context for number of elements in timeVerifiedArray
+      timeVerifiedArray.push("");
+      await storeTimeVerified(timeVerifiedArray);
+      dispatch({
+        type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
+        timeVerifiedArray
+      });
+      dispatch({
+        type: "NUMBER_PROFILES_PLUS_ONE"
+      });
+    } else {
+      // A main pass scanned
+      if (workpass === null) {
+        workpassAcceptedBooleanArray.unshift(true);
+        timeVerifiedArray.unshift("");
+        timeAcceptedArray.unshift("");
+        // Updates app state
+        dispatch({
+          type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
+          timeAcceptedArray
+        });
+        dispatch({
+          type: "SET_WORKPASS_VERIFIED",
+          timeVerifiedArray
+        });
+      }
+
+      dispatch({
+        type: "UPDATE_WORKPASS",
+        workpass: newWorkpass
+      });
+      await storeWorkpass(newWorkpass);
+    }
+
     navigateToProfile();
   };
 
+  // Change alert message if workpass is null
+  let alertMessage;
+  if (cleanWorkpass.pass.sponsoringPass !== "") {
+    alertMessage = "Do you want to add this Dependent Pass?";
+    sessionValidatedArray.push(false);
+    dispatch({
+      type: "UPDATE_SESSION_ARRAY",
+      sessionValidatedArray
+    });
+  } else if (workpass === null) {
+    alertMessage = "Do you want to add this Main Pass?";
+    sessionValidatedArray.unshift(false);
+    dispatch({
+      type: "UPDATE_SESSION_ARRAY",
+      sessionValidatedArray
+    });
+    dispatch({
+      type: "NUMBER_PROFILES_PLUS_ONE"
+    });
+  } else {
+    alertMessage = "Do you want to overwrite your Main Pass?";
+    // For profilecontainer to revalidate the main pass
+    // eslint-disable-next-line no-param-reassign
+    sessionValidatedArray[0] = false;
+    dispatch({
+      type: "UPDATE_SESSION_ARRAY",
+      sessionValidatedArray
+    });
+  }
   Alert.alert(
     "New profile detected",
-    "Do you want to overwrite your current profile?",
+    alertMessage,
     [
       {
         text: "No",

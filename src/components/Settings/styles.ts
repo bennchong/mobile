@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: 26
   },
-  textContainer: { marginLeft: 26 },
+  textContainer: { marginLeft: 26, flexDirection: "column" },
   right: {
     marginRight: 26
   }
