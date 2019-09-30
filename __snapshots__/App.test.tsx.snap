@@ -396,6 +396,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -433,6 +434,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -470,6 +472,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -507,6 +510,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -544,6 +548,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -622,6 +627,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -659,6 +665,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -696,6 +703,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -733,6 +741,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -770,6 +779,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -807,6 +817,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -844,6 +855,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -881,6 +893,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -918,6 +931,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1316,6 +1330,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1353,6 +1368,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1390,6 +1406,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1427,6 +1444,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1464,6 +1482,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1542,6 +1561,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1579,6 +1599,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1616,6 +1637,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1653,6 +1675,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1690,6 +1713,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1727,6 +1751,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1764,6 +1789,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1801,6 +1827,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
@@ -1838,6 +1865,7 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                       "flexWrap": "wrap",
                       "fontSize": 13,
                       "textAlign": "right",
+                      "textTransform": "capitalize",
                     }
                   }
                 >
