@@ -42,7 +42,7 @@ export const ProfileName = ({
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
         >
-          <AntDesign name="qrcode" size={15} color={midGrey} />
+          <AntDesign name="qrcode" size={30} color={midGrey} />
           <Text style={styles.shareText}>SHARE ID</Text>
           <SharePageContainer
             photo={photo}
