@@ -52,7 +52,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "EXPIRED";
       break;
     case verificationStatusEnum.EXPIREDWITHLEGALSTAY:
-      barColor = { backgroundColor: "orange" };
+      barColor = { backgroundColor: "red" };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
@@ -91,7 +91,7 @@ export const ValidationBar = (props: ValidationBarProps) => {
       text = "REVOKED";
       break;
     case verificationStatusEnum.REVOKEDWITHLEGALSTAY:
-      barColor = { backgroundColor: "orange" };
+      barColor = { backgroundColor: "red" };
       // eslint-disable-next-line react/display-name
       BarIcon = () => (
         <AntDesign
