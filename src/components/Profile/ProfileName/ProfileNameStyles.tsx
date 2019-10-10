@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     backgroundColor: white,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   fin: {
     fontWeight: "bold",

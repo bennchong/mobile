@@ -1,19 +1,31 @@
-import React from "react"
-import { verificationStatusEnum } from "../../../services/verificationService/verificationService"
+import React from "react";
 import { View, Text } from "react-native";
+import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { styles } from "./ProfileNameStyles";
 
-export const ShowTampered = ({status, fin, name}) => {
-  
+interface showTamperedProps {
+  status: any;
+  fin: string;
+  name: string;
+}
+
+// If tampered, indicate that profile is tampered
+export const ShowTampered = ({ status, fin, name }: showTamperedProps) => {
   const isTampered = status === verificationStatusEnum.TAMPERED;
 
-  return(
-    <View style={{ alignItems: 'center'}}>
-      { isTampered ? <Text style={{fontSize: 16}}> This is tampered! Report immediately to relevant authorities </Text> :
-      <View>
-        {fin ? <Text style={styles.fin}>{fin}</Text> : null}
-        <Text style={styles.name}>{name}</Text>
-      </View> }
+  return (
+    <View>
+      {isTampered ? (
+        <Text style={styles.name}>
+          {" "}
+          This is tampered! Report immediately to relevant authorities{" "}
+        </Text>
+      ) : (
+        <View>
+          {fin ? <Text style={styles.fin}>{fin}</Text> : null}
+          <Text style={styles.name}>{name}</Text>
+        </View>
+      )}
     </View>
-  )
-}
+  );
+};

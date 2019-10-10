@@ -59,7 +59,7 @@ const ProfileSection = ({
       <GestureRecognizer
         onSwipe={direction => onSwipe(direction)}
         config={config}
-        style={{ flex: 1}}
+        style={{ flex: 1 }}
       >
         <ProfileImage
           status={status}
@@ -70,7 +70,7 @@ const ProfileSection = ({
           onSwipe={onSwipe}
         />
       </GestureRecognizer>
-      <View style={{ flex: 1}}>
+      <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1, backgroundColor: white }}>
           <ProfileDetails workpass={cleanWorkpass} status={status} />
           {/* <VerifyProfile

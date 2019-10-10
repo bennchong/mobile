@@ -73,7 +73,6 @@ export const ProfileDetails = ({ workpass, status }: ProfileDetailsProps) => {
           {showPassDetails ? (
             <DetailSection title="Pass Details">
               <TextRow label="Pass Type" text={type} />
-              <TextRow label="Pass Expires On" text={formatDate(expiryDate)} />
               <TextRow
                 label="Date of Application"
                 text={formatDate(applicationDate)}
@@ -83,6 +82,7 @@ export const ProfileDetails = ({ workpass, status }: ProfileDetailsProps) => {
                 label="Entry Valid Till"
                 text={formatDate(legalTillDate)}
               />
+              <TextRow label="Pass Expires On" text={formatDate(expiryDate)} />
               <TextRow label="Renewal Date" text={formatDate(renewalDate)} />
               <TextRow label="Employer" text={name} />
               <TextRow label="Sector" text={sector} />

@@ -34,7 +34,7 @@ export const ProfileName = ({
 
   return (
     <View style={styles.textContainer}>
-      <ShowTampered status={status} fin={fin} name={name}/>
+      <ShowTampered status={status} fin={fin} name={name} />
       {!isPreview &&
       status === verificationStatusEnum.VALID &&
       workpassAcceptedBooleanArray[profileSelected] ? (
