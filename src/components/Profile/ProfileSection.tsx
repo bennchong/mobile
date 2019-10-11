@@ -6,7 +6,6 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 import { ProfileImage } from "./ProfileImage";
 import { ProfileDetails } from "./ProfileDetails";
-import { useStateValue } from "../../state";
 import { white } from "../../themeColors";
 
 interface ProfileSectionProps {
@@ -30,18 +29,16 @@ const ProfileSection = ({
   const { recipient } = cleanWorkpass;
 
   // const [modal, setModal] = useState(false);
-  const [{ dpWorkpassArray }] = useStateValue();
 
   const onSwipe = gestureName => {
     const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
     if (status !== 0) {
       switch (gestureName) {
         case SWIPE_RIGHT:
-          if (profileSelected > 0) changeProfileSelected(profileSelected - 1);
+          changeProfileSelected("prev");
           break;
         case SWIPE_LEFT:
-          if (profileSelected < dpWorkpassArray.length)
-            changeProfileSelected(profileSelected + 1);
+          changeProfileSelected("next");
           break;
         default:
           break;

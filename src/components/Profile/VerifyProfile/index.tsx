@@ -35,6 +35,11 @@ const VerifyProfile = ({
       type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
       timeAcceptedArray: newTimeAccepted
     });
+    // Refactor action below
+    dispatch({
+      type: "SET_TIME_ACCEPTED",
+      profileSelected
+    });
   };
 
   if (!workpassAcceptedBooleanArray[profileSelected] && !isPreview) {

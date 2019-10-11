@@ -9,20 +9,29 @@ import {
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { useStateValue } from "../../../state";
+// eslint-disable-next-line no-unused-vars
+import { IProfileObject, IContextState } from "../../../state/interfaces";
 import { red, black } from "../../../themeColors";
 
 const DevDeleteWorkpasses = () => {
   const [, dispatch] = useStateValue();
-  const initialState = {
+  const profileObjectInit: IProfileObject = {
+    workpass: null,
+    timeAccepted: null,
+    timeLastVerified: null,
+    validatedThisSession: null
+  };
+
+  const initialState: IContextState = {
     workpass: null,
     dpWorkpassArray: [],
     workpassAcceptedBooleanArray: [],
     timeAcceptedArray: [],
     timeVerifiedArray: [],
     numberOfProfiles: 0,
-    sessionValidatedArray: []
+    sessionValidatedArray: [],
+    profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
   };
-
   return (
     <TouchableOpacity
       style={styles.container}

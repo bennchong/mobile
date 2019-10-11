@@ -23,7 +23,8 @@ const DevDebug = (props: IDevDebugProps) => {
       workpassAcceptedBooleanArray,
       timeAcceptedArray,
       timeVerifiedArray,
-      numberOfProfiles
+      numberOfProfiles,
+      profilesArray
     }
   ] = useStateValue();
 
@@ -60,13 +61,13 @@ const DevDebug = (props: IDevDebugProps) => {
       <DevStoreWorkPass />
       <DevStoreDPWorkPassArray />
       <DevDeleteWorkpasses />
-      <DevAppStateText> Workpass name: {shownWorkpass}</DevAppStateText>
+      <DevAppStateText>Workpass name: {shownWorkpass}</DevAppStateText>
       <DevAppStateText>
         dpWorkpassArrays names: {JSON.stringify(dpArrayNames)}
       </DevAppStateText>
       <DevAppStateText>Number of profiles: {numberOfProfiles}</DevAppStateText>
       <DevAppStateText>
-        workpassAcceptedBooleanArray:
+        workpassAcceptedBooleanArray:{" "}
         {JSON.stringify(workpassAcceptedBooleanArray)}
       </DevAppStateText>
       <DevAppStateText>
@@ -74,6 +75,12 @@ const DevDebug = (props: IDevDebugProps) => {
       </DevAppStateText>
       <DevAppStateText>
         TimeVerifiedArray: {JSON.stringify(timeVerifiedArray)}
+      </DevAppStateText>
+      <DevAppStateText>
+        profilesArray Length: {profilesArray.length}
+      </DevAppStateText>
+      <DevAppStateText>
+        profilesArray: {JSON.stringify(profilesArray)}
       </DevAppStateText>
       <Button title="Go Back to Settings Page" onPress={goBack} />
     </ScrollView>

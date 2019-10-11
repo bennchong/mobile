@@ -49,6 +49,15 @@ const DevStoreDPWorkPassArray = () => {
                     type: "UPDATE_DP_WORKPASS_ARRAY",
                     dpWorkpassArray
                   });
+                  // Refactor action below
+                  dispatch({
+                    type: "ADD_DPPASS",
+                    workpass
+                  });
+                  dispatch({
+                    type: "ADD_DPPASS",
+                    workpass: workpass1
+                  });
                   await storeDPWorkpass(dpWorkpassArray);
                   let i;
                   for (i = 0; i <= 1; i += 1) {

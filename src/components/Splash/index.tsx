@@ -7,7 +7,9 @@ import {
   getStoredTimeVerified,
   checkStoredDPWorkpassExists,
   getStoredDPWorkpass,
-  checkNumberOfProfiles
+  checkNumberOfProfiles,
+  checkProfilesArrayExists,
+  getProfilesArray
 } from "../../services/fileSystem";
 
 const imageSource = require("../../assets/splash.png");
@@ -60,6 +62,18 @@ export const SplashScreen = (props: SplashScreenProps) => {
   const loadWorkpassIntoContext = async () => {
     const workpassExist = await checkStoredWorkpassExists();
     const DPWorkpassExist = await checkStoredDPWorkpassExists();
+    // Refactor code
+    const profilesArrayExist = await checkProfilesArrayExists();
+    if (profilesArrayExist) {
+      const profilesArray = await getProfilesArray();
+      // Resets verification boolean to false for each session
+      // eslint-disable-next-line no-return-assign
+      profilesArray.map(profile => (profile.validatedThisSession = false)); // eslint-disable-line no-param-reassign
+      dispatch({
+        type: "LOAD_PROFILESARRAY_FROM_FS",
+        profilesArray
+      });
+    }
     if (!workpassExist && !DPWorkpassExist) {
       navigate("Camera");
     } else {

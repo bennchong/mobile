@@ -62,6 +62,11 @@ export const ProfileContainer = ({
       type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
       timeVerifiedArray
     });
+    // Refactor function below
+    dispatch({
+      type: "SET_TIME_VERIFIED",
+      profileIndex: profileSelected
+    });
   };
 
   const handleConnectivityChange = () => {
@@ -86,11 +91,16 @@ export const ProfileContainer = ({
         verificationStatusEnum.VALIDATING;
       setValidityStatus(newValidityStatusArray);
       sessionValidatedArray[profileSelected] = true;
-      dispatch({
-        type: "UPDATE_SESSION_ARRAY",
-        sessionValidatedArray
-      });
       verifyWorkpass(workpass).then(status => {
+        dispatch({
+          type: "UPDATE_SESSION_ARRAY",
+          sessionValidatedArray
+        });
+        // Refator action below
+        dispatch({
+          type: "VALIDATED_SESSION",
+          profileIndex: profileSelected
+        });
         newValidityStatusArray[profileSelected] = status;
         setValidityStatus(newValidityStatusArray);
         if (status && !isPreview) {

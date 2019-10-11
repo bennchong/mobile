@@ -39,6 +39,11 @@ const DevStoreWorkPass = () => {
                     type: "UPDATE_WORKPASS",
                     workpass
                   });
+                  // Refactored action below
+                  dispatch({
+                    type: "ADD_MAINPASS",
+                    workpass
+                  });
                   dispatch({ type: "NUMBER_PROFILES_PLUS_ONE" });
                   dispatch({
                     type: "SET_WORKPASS_ACCEPTED",

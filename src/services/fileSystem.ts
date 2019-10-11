@@ -3,6 +3,8 @@ import { AsyncStorage } from "react-native";
 
 const MAIN_PASS_DIRECTORY = `${FileSystem.documentDirectory}mainWorkpass`;
 const DEPENDENT_PASS_DIRECTORY = `${FileSystem.documentDirectory}DPWorkpass`;
+// Refactor code below
+const PROFILES_ARRAY_DIRECTORY = `${FileSystem.documentDirectory}profilesArray`;
 
 export const checkStoredWorkpassExists = async () => {
   const info = await FileSystem.getInfoAsync(MAIN_PASS_DIRECTORY);
@@ -49,6 +51,32 @@ export const deleteStoredDPWorkpass = () => {
 export const deleteStoredWorkpass = () => {
   return FileSystem.deleteAsync(MAIN_PASS_DIRECTORY);
 };
+
+// Refactor code below
+export const storeProfilesArray = profilesArray => {
+  return FileSystem.writeAsStringAsync(
+    PROFILES_ARRAY_DIRECTORY,
+    JSON.stringify(profilesArray)
+  );
+};
+
+export const getProfilesArray = async () => {
+  const arrayAsString = await FileSystem.readAsStringAsync(
+    PROFILES_ARRAY_DIRECTORY
+  );
+  return JSON.parse(arrayAsString);
+};
+
+export const deleteProfilesArray = () => {
+  return FileSystem.deleteAsync(PROFILES_ARRAY_DIRECTORY);
+};
+
+export const checkProfilesArrayExists = async () => {
+  const info = await FileSystem.getInfoAsync(PROFILES_ARRAY_DIRECTORY);
+  return info.exists;
+};
+
+// Refactor code ends
 
 const TIME_ACCEPTED_KEY = "@storedTimeAccepted";
 
