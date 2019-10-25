@@ -71,8 +71,7 @@ export const storeService = async ({
   dpWorkpassArray,
   workpassAcceptedBooleanArray,
   timeAcceptedArray,
-  workpass,
-  sessionValidatedArray
+  workpass
 }) => {
   const { uri, key, type } = JSON.parse(payload);
   const encryptedDocument = await fetchDocument(uri);
@@ -148,18 +147,8 @@ export const storeService = async ({
   let alertMessage;
   if (cleanWorkpass.pass.sponsoringPass !== "") {
     alertMessage = "Do you want to add this Dependent Pass?";
-    sessionValidatedArray.push(false);
-    dispatch({
-      type: "UPDATE_SESSION_ARRAY",
-      sessionValidatedArray
-    });
   } else if (workpass === null) {
     alertMessage = "Do you want to add this Main Pass?";
-    sessionValidatedArray.unshift(false);
-    dispatch({
-      type: "UPDATE_SESSION_ARRAY",
-      sessionValidatedArray
-    });
     dispatch({
       type: "NUMBER_PROFILES_PLUS_ONE"
     });
@@ -167,10 +156,10 @@ export const storeService = async ({
     alertMessage = "Do you want to overwrite your Main Pass?";
     // For profilecontainer to revalidate the main pass
     // eslint-disable-next-line no-param-reassign
-    sessionValidatedArray[0] = false;
     dispatch({
-      type: "UPDATE_SESSION_ARRAY",
-      sessionValidatedArray
+      type: "VALIDATED_SESSION",
+      profileIndex: 0,
+      boolean: false
     });
   }
   Alert.alert(

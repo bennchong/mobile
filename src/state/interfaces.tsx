@@ -4,7 +4,6 @@ export interface IContextState {
   workpassAcceptedBooleanArray: object;
   timeAcceptedArray: object;
   numberOfProfiles: number;
-  sessionValidatedArray: object;
   profilesArray: object;
 }
 

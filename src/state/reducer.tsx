@@ -24,7 +24,7 @@ export const reducer = (state, action) => {
       return { ...state, profilesArray: modifiedProfileArray };
     case "VALIDATED_SESSION":
       newProfileObject = cloneDeep(state.profilesArray[action.profileIndex]); // Access correct profile index
-      newProfileObject.validatedThisSession = true;
+      newProfileObject.validatedThisSession = action.boolean;
       modifiedProfileArray[action.profileIndex] = newProfileObject;
       storeProfilesArray(modifiedProfileArray);
       return { ...state, profilesArray: modifiedProfileArray };
@@ -48,8 +48,6 @@ export const reducer = (state, action) => {
       return { ...state, workpass: action.workpass };
     case "UPDATE_DP_WORKPASS_ARRAY":
       return { ...state, dpWorkpassArray: action.dpWorkpassArray };
-    case "UPDATE_SESSION_ARRAY":
-      return { ...state, sessionValidatedArray: action.sessionValidatedArray };
     case "SET_WORKPASS_ACCEPTED":
       return {
         ...state,

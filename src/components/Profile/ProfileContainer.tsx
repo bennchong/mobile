@@ -40,7 +40,7 @@ export const ProfileContainer = ({
   changeProfileSelected
 }: ProfileContainerProps) => {
   const [
-    { workpassAcceptedBooleanArray, sessionValidatedArray },
+    { workpassAcceptedBooleanArray, profilesArray },
     dispatch
   ] = useStateValue();
   const [validityStatusArray, setValidityStatus] = useState(
@@ -78,29 +78,24 @@ export const ProfileContainer = ({
     });
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
     // verify workpass once
-    if (isPreview || (workpass && !sessionValidatedArray[profileSelected])) {
+    if (isPreview || (workpass && !profilesArray[profileSelected].validatedThisSession)) {
       const newValidityStatusArray = validityStatusArray;
       newValidityStatusArray[profileSelected] =
         verificationStatusEnum.VALIDATING;
       setValidityStatus(newValidityStatusArray);
-      sessionValidatedArray[profileSelected] = true;
-      verifyWorkpass(workpass).then(status => {
-        dispatch({
-          type: "UPDATE_SESSION_ARRAY",
-          sessionValidatedArray
-        });
-        // Refator action below
-        dispatch({
-          type: "VALIDATED_SESSION",
-          profileIndex: profileSelected
-        });
+      verifyWorkpass(workpass).then(status => {        
         newValidityStatusArray[profileSelected] = status;
         setValidityStatus(newValidityStatusArray);
         if (status && !isPreview) {
           storeTime();
+          // Refator action below
+          dispatch({
+            type: "VALIDATED_SESSION",
+            profileIndex: profileSelected,
+            boolean: true
+          });
         } else if (status && isPreview) {
           setPreviewTime(getCurrentDateAndTime());
-          sessionValidatedArray[profileSelected] = false;
         }
       });
     }

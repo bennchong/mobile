@@ -4,7 +4,6 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import {
   storeDPWorkpass,
   storeTimeAccepted,
-  storeTimeVerified
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
