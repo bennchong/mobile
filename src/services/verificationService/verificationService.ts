@@ -38,22 +38,16 @@ export const verifyWorkpass = async document => {
   // then check tampered n revoked
   const result = await axios.post(url, { document });
 
-  if (result.data.message) return verificationStatusEnum.INVALID;
-  if (!result.data.hash.valid) return verificationStatusEnum.TAMPERED;
+  if (!result.data.hash.checksumMatch) return verificationStatusEnum.TAMPERED;
   const revokeDate = "2021-08-21T00:00:00+08:00"; // Replace this with the new API call
-  if (!result.data.revoked.valid) {
+  if (result.data.revoked.revokedOnAny) {
     return checkIfLessThan(revokeDate, legalStayDays)
       ? verificationStatusEnum.REVOKEDWITHLEGALSTAY
       : verificationStatusEnum.REVOKED;
   }
 
-  // check issuer
-  let isAllIssuerValid = true;
-  Object.keys(result.data.issued.issued).forEach(key => {
-    isAllIssuerValid = isAllIssuerValid && issueAddress.includes(key);
-  });
-
-  if (!isAllIssuerValid || !result.data.issued.valid)
+  // check issuer whether its the correct store
+  if (result.data.issued.details[0].address !== issueAddress)
     return verificationStatusEnum.INVALID_ISSUER;
 
   if (result.data.valid) return verificationStatusEnum.VALID;
