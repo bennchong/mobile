@@ -78,12 +78,15 @@ export const ProfileContainer = ({
     });
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
     // verify workpass once
-    if (isPreview || (workpass && !profilesArray[profileSelected].validatedThisSession)) {
+    if (
+      isPreview ||
+      (workpass && !profilesArray[profileSelected].validatedThisSession)
+    ) {
       const newValidityStatusArray = validityStatusArray;
       newValidityStatusArray[profileSelected] =
         verificationStatusEnum.VALIDATING;
       setValidityStatus(newValidityStatusArray);
-      verifyWorkpass(workpass).then(status => {        
+      verifyWorkpass(workpass).then(status => {
         newValidityStatusArray[profileSelected] = status;
         setValidityStatus(newValidityStatusArray);
         if (status && !isPreview) {

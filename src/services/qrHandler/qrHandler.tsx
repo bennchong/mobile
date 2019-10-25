@@ -3,11 +3,7 @@ import { Alert } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { handleObfuscation } from "../obfuscation/obfuscationHandler";
 import { decryptFromPayload } from "../crypto/crypto";
-import {
-  storeWorkpass,
-  storeDPWorkpass,
-  storeTimeAccepted
-} from "../fileSystem";
+import { storeWorkpass, storeDPWorkpass } from "../fileSystem";
 
 export const getActionFromQR = (qrData: string) => {
   const [action, payload] = qrData.split(";");
@@ -70,7 +66,6 @@ export const storeService = async ({
   navigateToProfile,
   dpWorkpassArray,
   workpassAcceptedBooleanArray,
-  timeAcceptedArray,
   workpass
 }) => {
   const { uri, key, type } = JSON.parse(payload);
@@ -107,12 +102,6 @@ export const storeService = async ({
         type: "SET_WORKPASS_ACCEPTED",
         workpassAcceptedBooleanArray
       });
-      timeAcceptedArray.push("");
-      dispatch({
-        type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-        timeAcceptedArray
-      });
-      storeTimeAccepted(timeAcceptedArray);
       dispatch({
         type: "NUMBER_PROFILES_PLUS_ONE"
       });
@@ -120,12 +109,6 @@ export const storeService = async ({
       // A main pass scanned
       if (workpass === null) {
         workpassAcceptedBooleanArray.unshift(true);
-        timeAcceptedArray.unshift("");
-        // Updates app state
-        dispatch({
-          type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-          timeAcceptedArray
-        });
       }
 
       dispatch({

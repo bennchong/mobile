@@ -1,5 +1,4 @@
 import * as FileSystem from "expo-file-system";
-import { AsyncStorage } from "react-native";
 
 const MAIN_PASS_DIRECTORY = `${FileSystem.documentDirectory}mainWorkpass`;
 const DEPENDENT_PASS_DIRECTORY = `${FileSystem.documentDirectory}DPWorkpass`;
@@ -77,24 +76,6 @@ export const checkProfilesArrayExists = async () => {
 };
 
 // Refactor code ends
-
-const TIME_ACCEPTED_KEY = "@storedTimeAccepted";
-
-export const storeTimeAccepted = timeAcceptedArray => {
-  return AsyncStorage.setItem(
-    TIME_ACCEPTED_KEY,
-    JSON.stringify(timeAcceptedArray)
-  );
-};
-
-export const getStoredTimeAccepted = async () => {
-  const arrayAsString = await AsyncStorage.getItem(TIME_ACCEPTED_KEY);
-  return arrayAsString;
-};
-
-export const deleteStoredTimeAccepted = () => {
-  return AsyncStorage.removeItem(TIME_ACCEPTED_KEY);
-};
 
 export const getStoredWorkpassIfExists = async () => {
   try {

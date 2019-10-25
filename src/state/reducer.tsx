@@ -53,8 +53,6 @@ export const reducer = (state, action) => {
         ...state,
         workpassAcceptedBooleanArray: action.workpassAcceptedBooleanArray
       };
-    case "SET_WORKPASS_TIME_ACCEPTED_ARRAY":
-      return { ...state, timeAcceptedArray: action.timeAcceptedArray };
     case "SET_NUMBER_PROFILES":
       return { ...state, numberOfProfiles: action.numberOfProfiles };
     case "NUMBER_PROFILES_PLUS_ONE":

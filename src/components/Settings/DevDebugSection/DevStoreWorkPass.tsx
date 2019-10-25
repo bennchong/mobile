@@ -8,10 +8,7 @@ import { useStateValue } from "../../../state";
 import { red, black } from "../../../themeColors";
 
 const DevStoreWorkPass = () => {
-  const [
-    { workpassAcceptedBooleanArray, timeAcceptedArray},
-    dispatch
-  ] = useStateValue();
+  const [{ workpassAcceptedBooleanArray }, dispatch] = useStateValue();
 
   return (
     <TouchableOpacity
@@ -32,7 +29,6 @@ const DevStoreWorkPass = () => {
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid.json"
                   );
                   workpassAcceptedBooleanArray.unshift(true);
-                  timeAcceptedArray.unshift("");
                   await storeWorkpass(workpass);
                   dispatch({
                     type: "UPDATE_WORKPASS",
@@ -47,10 +43,6 @@ const DevStoreWorkPass = () => {
                   dispatch({
                     type: "SET_WORKPASS_ACCEPTED",
                     workpassAcceptedBooleanArray
-                  });
-                  dispatch({
-                    type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-                    timeAcceptedArray
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(

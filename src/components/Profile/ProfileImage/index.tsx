@@ -73,8 +73,7 @@ export const ProfileImage = ({
       timeShown = profilesArray[profileSelected].timeLastVerified;
   }
   const showTimeVerified =
-    (!isPreview &&
-      workpassAcceptedBooleanArray[profileSelected]) ||
+    (!isPreview && workpassAcceptedBooleanArray[profileSelected]) ||
     (isPreview && timeShown.length !== 0);
 
   return (

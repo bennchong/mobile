@@ -3,8 +3,6 @@ import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import {
   deleteStoredWorkpass,
-  deleteStoredTimeAccepted,
-  deleteStoredTimeVerified,
   deleteStoredDPWorkpass
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
@@ -26,7 +24,6 @@ const DevDeleteWorkpasses = () => {
     workpass: null,
     dpWorkpassArray: [],
     workpassAcceptedBooleanArray: [],
-    timeAcceptedArray: [],
     numberOfProfiles: 0,
     profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
   };
@@ -53,9 +50,6 @@ const DevDeleteWorkpasses = () => {
                   await deleteStoredDPWorkpass();
                 } catch (e) {
                   await deleteStoredDPWorkpass();
-                } finally {
-                  await deleteStoredTimeAccepted();
-                  await deleteStoredTimeVerified();
                 }
                 Alert.alert("Dev Info", "Workpass is successfully deleted");
               }

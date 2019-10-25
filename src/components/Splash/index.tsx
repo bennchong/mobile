@@ -77,8 +77,7 @@ export const SplashScreen = (props: SplashScreenProps) => {
     }
   };
   useEffect(() => {
-    loadAcceptedTimeIntoContext()
-      .then(loadWorkpassIntoContext);
+    loadAcceptedTimeIntoContext().then(loadWorkpassIntoContext);
     // .catch(e => {Alert.alert("Loading of Data Error", e)})
   }, []);
 

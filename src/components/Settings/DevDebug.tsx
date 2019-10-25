@@ -21,7 +21,6 @@ const DevDebug = (props: IDevDebugProps) => {
       workpass,
       dpWorkpassArray,
       workpassAcceptedBooleanArray,
-      timeAcceptedArray,
       numberOfProfiles,
       profilesArray
     }
@@ -68,9 +67,6 @@ const DevDebug = (props: IDevDebugProps) => {
       <DevAppStateText>
         workpassAcceptedBooleanArray:{" "}
         {JSON.stringify(workpassAcceptedBooleanArray)}
-      </DevAppStateText>
-      <DevAppStateText>
-        TimeAcceptedArray: {JSON.stringify(timeAcceptedArray)}
       </DevAppStateText>
       <DevAppStateText>
         profilesArray Length: {profilesArray.length}

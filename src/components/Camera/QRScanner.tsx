@@ -77,12 +77,7 @@ class QRScanner extends React.Component<QRScannerProps> {
         NavigationService.navigate("Profile", {});
       });
     const [
-      {
-        dpWorkpassArray,
-        workpassAcceptedBooleanArray,
-        timeAcceptedArray,
-        workpass,
-      },
+      { dpWorkpassArray, workpassAcceptedBooleanArray, workpass },
       dispatch
     ] = this.context;
 
@@ -93,7 +88,6 @@ class QRScanner extends React.Component<QRScannerProps> {
       navigateToProfile,
       dpWorkpassArray,
       workpassAcceptedBooleanArray,
-      timeAcceptedArray,
       workpass
     });
   };

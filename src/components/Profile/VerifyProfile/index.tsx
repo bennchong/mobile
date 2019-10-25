@@ -1,8 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useStateValue } from "../../../state";
-import { getCurrentDateAndTime } from "../../../services/date/date";
-import { storeTimeAccepted } from "../../../services/fileSystem";
 import { styles } from "./VerifyProfileStyles";
 
 interface VerifyProfileProps {
@@ -16,24 +14,14 @@ const VerifyProfile = ({
   handleShowModal,
   profileSelected
 }: VerifyProfileProps) => {
-  const [
-    { workpassAcceptedBooleanArray, timeAcceptedArray },
-    dispatch
-  ] = useStateValue();
+  const [{ workpassAcceptedBooleanArray }, dispatch] = useStateValue();
 
   const handleWorkpassConfirmation = async () => {
-    const newTimeAccepted = [...timeAcceptedArray];
     handleShowModal();
-    newTimeAccepted[profileSelected] = getCurrentDateAndTime();
-    await storeTimeAccepted(newTimeAccepted);
     workpassAcceptedBooleanArray[profileSelected] = true;
     dispatch({
       type: "SET_WORKPASS_ACCEPTED",
       workpassAcceptedBooleanArray
-    });
-    dispatch({
-      type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-      timeAcceptedArray: newTimeAccepted
     });
     // Refactor action below
     dispatch({

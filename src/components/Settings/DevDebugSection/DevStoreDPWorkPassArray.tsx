@@ -1,22 +1,14 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import {
-  storeDPWorkpass,
-  storeTimeAccepted,
-} from "../../../services/fileSystem";
+import { storeDPWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { useStateValue } from "../../../state";
 
 const DevStoreDPWorkPassArray = () => {
   const [
-    {
-      dpWorkpassArray,
-      numberOfProfiles,
-      timeAcceptedArray,
-      workpassAcceptedBooleanArray
-    },
+    { dpWorkpassArray, numberOfProfiles, workpassAcceptedBooleanArray },
     dispatch
   ] = useStateValue();
 
@@ -59,7 +51,6 @@ const DevStoreDPWorkPassArray = () => {
                   await storeDPWorkpass(dpWorkpassArray);
                   let i;
                   for (i = 0; i <= 1; i += 1) {
-                    timeAcceptedArray.push("");
                     workpassAcceptedBooleanArray.push(true);
                   }
 
@@ -67,11 +58,6 @@ const DevStoreDPWorkPassArray = () => {
                     type: "SET_WORKPASS_ACCEPTED",
                     workpassAcceptedBooleanArray
                   });
-                  dispatch({
-                    type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-                    timeAcceptedArray
-                  });
-                  await storeTimeAccepted(timeAcceptedArray);
                   dispatch({
                     type: "SET_NUMBER_PROFILES",
                     numberOfProfiles: numberOfProfiles + 2
