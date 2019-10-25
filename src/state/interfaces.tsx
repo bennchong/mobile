@@ -3,7 +3,6 @@ export interface IContextState {
   dpWorkpassArray: any;
   workpassAcceptedBooleanArray: object;
   timeAcceptedArray: object;
-  timeVerifiedArray: object;
   numberOfProfiles: number;
   sessionValidatedArray: object;
   profilesArray: object;

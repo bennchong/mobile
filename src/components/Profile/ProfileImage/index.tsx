@@ -24,7 +24,7 @@ export const ProfileImage = ({
   profileSelected,
   onSwipe
 }: ProfileImageProps) => {
-  const [{ timeVerifiedArray, workpassAcceptedBooleanArray }] = useStateValue();
+  const [{ profilesArray, workpassAcceptedBooleanArray }] = useStateValue();
   const [{ dpWorkpassArray, workpass }] = useStateValue();
   const { photo, fin, name } = recipient;
   const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
@@ -70,12 +70,11 @@ export const ProfileImage = ({
       timeShown = previewTimeVerified;
       break;
     default:
-      timeShown = timeVerifiedArray[profileSelected];
+      timeShown = profilesArray[profileSelected].timeLastVerified;
   }
   const showTimeVerified =
     (!isPreview &&
-      workpassAcceptedBooleanArray[profileSelected] &&
-      timeShown.length !== 0) ||
+      workpassAcceptedBooleanArray[profileSelected]) ||
     (isPreview && timeShown.length !== 0);
 
   return (

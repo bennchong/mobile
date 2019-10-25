@@ -4,7 +4,6 @@ import { useStateValue } from "../../state";
 import {
   checkStoredWorkpassExists,
   getStoredWorkpass,
-  getStoredTimeVerified,
   checkStoredDPWorkpassExists,
   getStoredDPWorkpass,
   checkNumberOfProfiles,
@@ -39,23 +38,6 @@ export const SplashScreen = (props: SplashScreenProps) => {
     dispatch({
       type: "SET_WORKPASS_ACCEPTED",
       workpassAcceptedBooleanArray
-    });
-  };
-
-  const loadVerifiedTimeIntoContext = async () => {
-    const storedTimeVerifiedString = await getStoredTimeVerified();
-    let storedTimeVerified;
-    try {
-      storedTimeVerified = JSON.parse(storedTimeVerifiedString);
-      // Exception when storeTimeVerified is null
-      if (storedTimeVerified[0] === null) throw Error("I was null!");
-    } catch (e) {
-      const numberOfProfiles = await checkNumberOfProfiles();
-      storedTimeVerified = new Array(numberOfProfiles).fill("");
-    }
-    dispatch({
-      type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
-      timeVerifiedArray: storedTimeVerified
     });
   };
 
@@ -96,7 +78,6 @@ export const SplashScreen = (props: SplashScreenProps) => {
   };
   useEffect(() => {
     loadAcceptedTimeIntoContext()
-      .then(loadVerifiedTimeIntoContext)
       .then(loadWorkpassIntoContext);
     // .catch(e => {Alert.alert("Loading of Data Error", e)})
   }, []);

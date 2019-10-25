@@ -16,8 +16,7 @@ const DevStoreDPWorkPassArray = () => {
       dpWorkpassArray,
       numberOfProfiles,
       timeAcceptedArray,
-      workpassAcceptedBooleanArray,
-      timeVerifiedArray
+      workpassAcceptedBooleanArray
     },
     dispatch
   ] = useStateValue();
@@ -63,7 +62,6 @@ const DevStoreDPWorkPassArray = () => {
                   for (i = 0; i <= 1; i += 1) {
                     timeAcceptedArray.push("");
                     workpassAcceptedBooleanArray.push(true);
-                    timeVerifiedArray.push("");
                   }
 
                   dispatch({
@@ -75,11 +73,6 @@ const DevStoreDPWorkPassArray = () => {
                     timeAcceptedArray
                   });
                   await storeTimeAccepted(timeAcceptedArray);
-                  dispatch({
-                    type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
-                    timeVerifiedArray
-                  });
-                  await storeTimeVerified(timeVerifiedArray);
                   dispatch({
                     type: "SET_NUMBER_PROFILES",
                     numberOfProfiles: numberOfProfiles + 2

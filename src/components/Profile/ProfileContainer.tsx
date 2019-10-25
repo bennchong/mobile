@@ -5,7 +5,6 @@ import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile/NoProfile";
 import { NoWifiModal } from "../Modals/NoWifiModal";
 import { useStateValue } from "../../state";
-import { storeTimeVerified } from "../../services/fileSystem";
 import { getCurrentDateAndTime } from "../../services/date/date";
 import {
   verificationStatusEnum,
@@ -41,7 +40,7 @@ export const ProfileContainer = ({
   changeProfileSelected
 }: ProfileContainerProps) => {
   const [
-    { workpassAcceptedBooleanArray, timeVerifiedArray, sessionValidatedArray },
+    { workpassAcceptedBooleanArray, sessionValidatedArray },
     dispatch
   ] = useStateValue();
   const [validityStatusArray, setValidityStatus] = useState(
@@ -56,12 +55,6 @@ export const ProfileContainer = ({
   const [showModal, setShowModal] = useState(!internetConnected);
 
   const storeTime = async () => {
-    timeVerifiedArray[profileSelected] = getCurrentDateAndTime();
-    await storeTimeVerified(timeVerifiedArray);
-    dispatch({
-      type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
-      timeVerifiedArray
-    });
     // Refactor function below
     dispatch({
       type: "SET_TIME_VERIFIED",

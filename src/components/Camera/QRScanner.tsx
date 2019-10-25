@@ -81,7 +81,6 @@ class QRScanner extends React.Component<QRScannerProps> {
         dpWorkpassArray,
         workpassAcceptedBooleanArray,
         timeAcceptedArray,
-        timeVerifiedArray,
         workpass,
         sessionValidatedArray
       },
@@ -96,7 +95,6 @@ class QRScanner extends React.Component<QRScannerProps> {
       dpWorkpassArray,
       workpassAcceptedBooleanArray,
       timeAcceptedArray,
-      timeVerifiedArray,
       workpass,
       sessionValidatedArray
     });

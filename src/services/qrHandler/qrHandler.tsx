@@ -6,7 +6,6 @@ import { decryptFromPayload } from "../crypto/crypto";
 import {
   storeWorkpass,
   storeDPWorkpass,
-  storeTimeVerified,
   storeTimeAccepted
 } from "../fileSystem";
 
@@ -72,7 +71,6 @@ export const storeService = async ({
   dpWorkpassArray,
   workpassAcceptedBooleanArray,
   timeAcceptedArray,
-  timeVerifiedArray,
   workpass,
   sessionValidatedArray
 }) => {
@@ -116,13 +114,6 @@ export const storeService = async ({
         timeAcceptedArray
       });
       storeTimeAccepted(timeAcceptedArray);
-      // Update filesystem and app context for number of elements in timeVerifiedArray
-      timeVerifiedArray.push("");
-      await storeTimeVerified(timeVerifiedArray);
-      dispatch({
-        type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
-        timeVerifiedArray
-      });
       dispatch({
         type: "NUMBER_PROFILES_PLUS_ONE"
       });
@@ -130,16 +121,11 @@ export const storeService = async ({
       // A main pass scanned
       if (workpass === null) {
         workpassAcceptedBooleanArray.unshift(true);
-        timeVerifiedArray.unshift("");
         timeAcceptedArray.unshift("");
         // Updates app state
         dispatch({
           type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
           timeAcceptedArray
-        });
-        dispatch({
-          type: "SET_WORKPASS_VERIFIED",
-          timeVerifiedArray
         });
       }
 

@@ -9,7 +9,7 @@ import { red, black } from "../../../themeColors";
 
 const DevStoreWorkPass = () => {
   const [
-    { workpassAcceptedBooleanArray, timeAcceptedArray, timeVerifiedArray },
+    { workpassAcceptedBooleanArray, timeAcceptedArray},
     dispatch
   ] = useStateValue();
 
@@ -32,7 +32,6 @@ const DevStoreWorkPass = () => {
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid.json"
                   );
                   workpassAcceptedBooleanArray.unshift(true);
-                  timeVerifiedArray.unshift("");
                   timeAcceptedArray.unshift("");
                   await storeWorkpass(workpass);
                   dispatch({
@@ -52,10 +51,6 @@ const DevStoreWorkPass = () => {
                   dispatch({
                     type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
                     timeAcceptedArray
-                  });
-                  dispatch({
-                    type: "SET_WORKPASS_VERIFIED",
-                    timeVerifiedArray
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(

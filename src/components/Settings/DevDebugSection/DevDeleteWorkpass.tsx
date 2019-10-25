@@ -27,7 +27,6 @@ const DevDeleteWorkpasses = () => {
     dpWorkpassArray: [],
     workpassAcceptedBooleanArray: [],
     timeAcceptedArray: [],
-    timeVerifiedArray: [],
     numberOfProfiles: 0,
     sessionValidatedArray: [],
     profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass

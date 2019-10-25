@@ -96,23 +96,6 @@ export const deleteStoredTimeAccepted = () => {
   return AsyncStorage.removeItem(TIME_ACCEPTED_KEY);
 };
 
-const TIME_VERIFIED_KEY = "@storedTimeVerified";
-
-export const storeTimeVerified = timeVerifiedArray => {
-  return AsyncStorage.setItem(
-    TIME_VERIFIED_KEY,
-    JSON.stringify(timeVerifiedArray)
-  );
-};
-
-export const getStoredTimeVerified = () => {
-  return AsyncStorage.getItem(TIME_VERIFIED_KEY);
-};
-
-export const deleteStoredTimeVerified = () => {
-  return AsyncStorage.removeItem(TIME_VERIFIED_KEY);
-};
-
 export const getStoredWorkpassIfExists = async () => {
   try {
     const documentJSON = await getStoredWorkpass();
