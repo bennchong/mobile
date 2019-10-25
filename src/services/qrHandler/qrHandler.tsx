@@ -91,6 +91,11 @@ export const storeService = async ({
   const handleStoreWorkpass = async () => {
     // Checks if pass is dependent
     if (cleanWorkpass.pass.sponsoringPass) {
+      // Refactor action below
+      dispatch({
+        type: "ADD_DPPASS",
+        workpass: newWorkpass
+      });
       // Update filesystem and app context for dpWorkpass array
       dpWorkpassArray.push(newWorkpass);
       await storeDPWorkpass(dpWorkpassArray);
@@ -143,6 +148,11 @@ export const storeService = async ({
         workpass: newWorkpass
       });
       await storeWorkpass(newWorkpass);
+      // Refactored action below
+      dispatch({
+        type: "ADD_MAINPASS",
+        workpass: newWorkpass
+      });
     }
 
     navigateToProfile();
