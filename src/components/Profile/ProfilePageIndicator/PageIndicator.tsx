@@ -41,7 +41,8 @@ export const PageIndicator = ({
       {items
         ? items.map((i, index) => {
             // Possible problem when main pass is null
-            return (
+            if(i.workpass === null) return null
+            else { return (
               <View
                 style={
                   index === profileSelected
@@ -50,7 +51,7 @@ export const PageIndicator = ({
                 }
                 key={index}
               />
-            );
+            );}
           })
         : null}
     </View>
