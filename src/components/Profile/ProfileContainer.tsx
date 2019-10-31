@@ -39,14 +39,11 @@ export const ProfileContainer = ({
   profileSelected,
   changeProfileSelected
 }: ProfileContainerProps) => {
-  const [
-    { workpassAcceptedBooleanArray, profilesArray },
-    dispatch
-  ] = useStateValue();
+  const [{ profilesArray }, dispatch] = useStateValue();
   const [validityStatusArray, setValidityStatus] = useState(
     isPreview
       ? [false]
-      : new Array(workpassAcceptedBooleanArray.length).fill(
+      : new Array(profilesArray.length).fill(
           verificationStatusEnum.VALIDATING
         )
   );

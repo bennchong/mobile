@@ -4,7 +4,7 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
-import { StateContext } from "../../state";
+import { useStateValue } from "../../state";
 import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import { CannotScan } from "./CannotScan";
@@ -22,8 +22,6 @@ interface QRScannerProps {
 }
 
 class QRScanner extends React.Component<QRScannerProps> {
-  static contextType = StateContext;
-
   state = {
     hasCameraPermission: null,
     isProcessingQr: false,
@@ -41,11 +39,11 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   handleProfilePush = async payload => {
-    const [{ workpass }] = this.context;
+    const [{ profilesArray }] = useStateValue();
     const setProcessingQr = () => this.setState({ isProcessingQr: false });
 
-    if (workpass) {
-      await pushService(workpass, payload, setProcessingQr);
+    if (profilesArray[0].workpass) {
+      await pushService(profilesArray[0].workpass, payload, setProcessingQr);
     } else {
       Alert.alert("Cannot find a main pass to send to access control");
       setProcessingQr();
@@ -77,18 +75,16 @@ class QRScanner extends React.Component<QRScannerProps> {
         NavigationService.navigate("Profile", {});
       });
     const [
-      { dpWorkpassArray, workpassAcceptedBooleanArray, workpass },
+      { profilesArray },
       dispatch
-    ] = this.context;
+    ] = useStateValue();
 
     await storeService({
       payload,
       dispatch,
       setProcessingQr,
       navigateToProfile,
-      dpWorkpassArray,
-      workpassAcceptedBooleanArray,
-      workpass
+      profilesArray
     });
   };
 

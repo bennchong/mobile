@@ -24,8 +24,7 @@ export const ProfileImage = ({
   profileSelected,
   onSwipe
 }: ProfileImageProps) => {
-  const [{ profilesArray, workpassAcceptedBooleanArray }] = useStateValue();
-  const [{ dpWorkpassArray, workpass }] = useStateValue();
+  const [{ profilesArray }] = useStateValue();
   const { photo, fin, name } = recipient;
   const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
 
@@ -33,61 +32,56 @@ export const ProfileImage = ({
   let leftPhoto;
 
   // If there is a main pass stored in phone
-  if (workpass !== null) {
+  if (profilesArray[0].workpass !== null) {
+    // More than one pass in phone 
     if (
-      dpWorkpassArray.length > 0 &&
-      profileSelected <= dpWorkpassArray.length
+      profilesArray.length > 0 &&
+      profileSelected <= profilesArray.length - 1
     ) {
-      const rightIndex =
-        profileSelected === dpWorkpassArray.length ? -1 : profileSelected;
+      // rightIndex to check whether its last profile selected
+      const rightIndex = (profileSelected + 1) === profilesArray.length ? -1 : profileSelected + 1;
       rightPhoto =
         rightIndex >= 0
-          ? getData(dpWorkpassArray[rightIndex]).recipient.photo
+          ? getData(profilesArray[rightIndex].workpass).recipient.photo
           : null;
 
-      const cleanWorkpass = getData(workpass);
+      const cleanWorkpass = getData(profilesArray[0].workpass);
+      // Case where left is main pass photo
       if (profileSelected === 1) {
-        leftPhoto = cleanWorkpass.recipient.photo; // Case where left is main pass photo
-      } else if (profileSelected > 1) {
-        leftPhoto = getData(dpWorkpassArray[profileSelected - 2]).recipient
-          .photo; // Case where left is from DP Array
+        leftPhoto = cleanWorkpass.recipient.photo; 
+      } else if (profileSelected > 1) { // Case where left not main pass photo
+        leftPhoto = getData(profilesArray[profileSelected - 1].workpass).recipient.photo; 
       }
     }
-  } else if (dpWorkpassArray.length > 1) {
-    // Displaying right photo if its not the last DP in array
-    if (profileSelected < dpWorkpassArray.length - 1) {
-      rightPhoto = getData(dpWorkpassArray[profileSelected + 1]).recipient
-        .photo;
+  } else if (profilesArray.length > 2) { // If no main pass
+    // Displaying right photo if its not the last pass in array
+    if (profileSelected < profilesArray.length - 1) {
+      rightPhoto = getData(profilesArray[profileSelected + 1].workpass).recipient.photo;
     }
     // Displaying left photo
-    if (profileSelected > 0) {
-      leftPhoto = getData(dpWorkpassArray[profileSelected - 1]).recipient.photo;
+    if (profileSelected > 1) {
+      leftPhoto = getData(profilesArray[profileSelected - 1].workpass).recipient.photo;
     }
   }
+
+
   let timeShown;
-  switch (isPreview) {
-    case true:
-      timeShown = previewTimeVerified;
-      break;
-    default:
-      timeShown = profilesArray[profileSelected].timeLastVerified;
+  if (isPreview) {
+    timeShown = previewTimeVerified;
+  } else {
+    timeShown = profilesArray[profileSelected].timeLastVerified;
   }
-  const showTimeVerified =
-    (!isPreview && workpassAcceptedBooleanArray[profileSelected]) ||
-    (isPreview && timeShown.length !== 0);
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          {showTimeVerified ? (
-            <Text style={styles.verifiedText}>
-              System last checked: {timeShown}
-            </Text>
-          ) : null}
+          <Text style={styles.verifiedText}>
+            System last checked: {timeShown}
+          </Text>
           {!isPreview ? (
             <PageIndicator
-              items={workpassAcceptedBooleanArray}
+              items={profilesArray}
               profileSelected={profileSelected}
             />
           ) : null}
@@ -117,7 +111,7 @@ export const ProfileImage = ({
               />
             </TouchableOpacity>
           ) : null}
-          {!isPreview && profileSelected < dpWorkpassArray.length ? (
+          {!isPreview && profileSelected + 1 < profilesArray.length ? (
             <TouchableOpacity
               style={styles.imageRightContainer}
               onPress={() => onSwipe(SWIPE_LEFT)}

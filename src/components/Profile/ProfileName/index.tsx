@@ -26,7 +26,6 @@ export const ProfileName = ({
   profileSelected
 }: ProfileNameProps) => {
   const [isDialogVisible, setVisible] = useState(false);
-  const [{ workpassAcceptedBooleanArray }] = useStateValue();
 
   const toggleVisibility = () => {
     setVisible(!isDialogVisible);

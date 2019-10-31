@@ -1,10 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import {
-  deleteStoredWorkpass,
-  deleteStoredDPWorkpass
-} from "../../../services/fileSystem";
+import { deleteProfilesArray, storeProfilesArray } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { useStateValue } from "../../../state";
 // eslint-disable-next-line no-unused-vars
@@ -21,9 +18,6 @@ const DevDeleteWorkpasses = () => {
   };
 
   const initialState: IContextState = {
-    workpass: null,
-    dpWorkpassArray: [],
-    workpassAcceptedBooleanArray: [],
     profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
   };
   return (
@@ -45,10 +39,10 @@ const DevDeleteWorkpasses = () => {
                   resetState: initialState
                 });
                 try {
-                  await deleteStoredWorkpass();
-                  await deleteStoredDPWorkpass();
+                  await deleteProfilesArray();
+                  await storeProfilesArray(initialState.profilesArray);
                 } catch (e) {
-                  await deleteStoredDPWorkpass();
+                  Alert.alert("Dev Info", e);
                 }
                 Alert.alert("Dev Info", "Workpass is successfully deleted");
               }

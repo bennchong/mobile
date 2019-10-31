@@ -1,14 +1,12 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { storeDPWorkpass } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { useStateValue } from "../../../state";
 
 const DevStoreDPWorkPassArray = () => {
-  const [
-    { dpWorkpassArray, workpassAcceptedBooleanArray },
+  const [,
     dispatch
   ] = useStateValue();
 
@@ -30,15 +28,9 @@ const DevStoreDPWorkPassArray = () => {
                   const workpass = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid_dependent.json"
                   );
-                  dpWorkpassArray.push(workpass);
                   const workpass1 = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid_ltvp.json"
                   );
-                  dpWorkpassArray.push(workpass1);
-                  dispatch({
-                    type: "UPDATE_DP_WORKPASS_ARRAY",
-                    dpWorkpassArray
-                  });
                   // Refactor action below
                   dispatch({
                     type: "ADD_DPPASS",
@@ -47,16 +39,6 @@ const DevStoreDPWorkPassArray = () => {
                   dispatch({
                     type: "ADD_DPPASS",
                     workpass: workpass1
-                  });
-                  await storeDPWorkpass(dpWorkpassArray);
-                  let i;
-                  for (i = 0; i <= 1; i += 1) {
-                    workpassAcceptedBooleanArray.push(true);
-                  }
-
-                  dispatch({
-                    type: "SET_WORKPASS_ACCEPTED",
-                    workpassAcceptedBooleanArray
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(

@@ -16,36 +16,15 @@ interface IDevDebugProps {
 
 const DevDebug = (props: IDevDebugProps) => {
   const goBack = () => props.navigation.goBack();
-  const [
-    {
-      workpass,
-      dpWorkpassArray,
-      workpassAcceptedBooleanArray,
-      profilesArray
-    }
-  ] = useStateValue();
+  const [{ profilesArray }] = useStateValue();
 
   let shownWorkpass;
-  if (workpass === null) {
+  if (profilesArray[0].workpass === null) {
     shownWorkpass = "Workpass is null";
   } else {
-    const cleanWorkpass = getData(workpass);
+    const cleanWorkpass = getData(profilesArray[0].workpass);
     shownWorkpass = cleanWorkpass.recipient.name;
   }
-  const dpArrayNames = [];
-  dpWorkpassArray.forEach(dp => {
-    const cleanDP = getData(dp);
-    dpArrayNames.push(cleanDP.recipient.name);
-  });
-
-  // eslint-disable-next-line no-unused-vars
-  // Only call this when you have to reset the entire file-system
-  // const clearAppMemory = () => {
-  //   deleteStoredTimeAccepted();
-  //   deleteStoredTimeVerified();
-  //   deleteStoredDPWorkpass();
-  //   deleteStoredWorkpass();
-  // };
 
   return (
     <ScrollView
@@ -58,14 +37,7 @@ const DevDebug = (props: IDevDebugProps) => {
       <DevStoreWorkPass />
       <DevStoreDPWorkPassArray />
       <DevDeleteWorkpasses />
-      <DevAppStateText>Workpass name: {shownWorkpass}</DevAppStateText>
-      <DevAppStateText>
-        dpWorkpassArrays names: {JSON.stringify(dpArrayNames)}
-      </DevAppStateText>
-      <DevAppStateText>
-        workpassAcceptedBooleanArray:{" "}
-        {JSON.stringify(workpassAcceptedBooleanArray)}
-      </DevAppStateText>
+      <DevAppStateText>Main workpass name: {shownWorkpass}</DevAppStateText>
       <DevAppStateText>
         profilesArray Length: {profilesArray.length}
       </DevAppStateText>

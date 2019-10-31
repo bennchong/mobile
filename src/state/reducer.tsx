@@ -42,17 +42,6 @@ export const reducer = (state, action) => {
       return { ...state, profilesArray: modifiedProfileArray };
     case "LOAD_PROFILESARRAY_FROM_FS":
       return { ...state, profilesArray: action.profilesArray };
-
-    // Old version
-    case "UPDATE_WORKPASS":
-      return { ...state, workpass: action.workpass };
-    case "UPDATE_DP_WORKPASS_ARRAY":
-      return { ...state, dpWorkpassArray: action.dpWorkpassArray };
-    case "SET_WORKPASS_ACCEPTED":
-      return {
-        ...state,
-        workpassAcceptedBooleanArray: action.workpassAcceptedBooleanArray
-      };
     case "DELETE_WORKPASS":
       return { ...action.resetState };
     default:

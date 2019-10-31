@@ -3,7 +3,6 @@ import { Alert } from "react-native";
 import { getData } from "@govtechsg/open-attestation";
 import { handleObfuscation } from "../obfuscation/obfuscationHandler";
 import { decryptFromPayload } from "../crypto/crypto";
-import { storeWorkpass, storeDPWorkpass } from "../fileSystem";
 
 export const getActionFromQR = (qrData: string) => {
   const [action, payload] = qrData.split(";");
@@ -64,9 +63,7 @@ export const storeService = async ({
   dispatch,
   setProcessingQr,
   navigateToProfile,
-  dpWorkpassArray,
-  workpassAcceptedBooleanArray,
-  workpass
+  profilesArray
 }) => {
   const { uri, key, type } = JSON.parse(payload);
   const encryptedDocument = await fetchDocument(uri);
@@ -88,31 +85,8 @@ export const storeService = async ({
         type: "ADD_DPPASS",
         workpass: newWorkpass
       });
-      // Update filesystem and app context for dpWorkpass array
-      dpWorkpassArray.push(newWorkpass);
-      await storeDPWorkpass(dpWorkpassArray);
-      dispatch({
-        type: "UPDATE_DP_WORKPASS_ARRAY",
-        dpWorkpassArray
-      });
-      // Update app context to include one more state for workpass accepted
-      // Temporary true here, refer to new PR for refactoring of acceptance/rejection
-      workpassAcceptedBooleanArray.push(true);
-      dispatch({
-        type: "SET_WORKPASS_ACCEPTED",
-        workpassAcceptedBooleanArray
-      });
     } else {
       // A main pass scanned
-      if (workpass === null) {
-        workpassAcceptedBooleanArray.unshift(true);
-      }
-
-      dispatch({
-        type: "UPDATE_WORKPASS",
-        workpass: newWorkpass
-      });
-      await storeWorkpass(newWorkpass);
       // Refactored action below
       dispatch({
         type: "ADD_MAINPASS",
@@ -127,7 +101,7 @@ export const storeService = async ({
   let alertMessage;
   if (cleanWorkpass.pass.sponsoringPass !== "") {
     alertMessage = "Do you want to add this Dependent Pass?";
-  } else if (workpass === null) {
+  } else if (profilesArray[0].workpass === null) {
     alertMessage = "Do you want to add this Main Pass?";
   } else {
     alertMessage = "Do you want to overwrite your Main Pass?";

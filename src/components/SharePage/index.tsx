@@ -45,12 +45,9 @@ export const SharePageContainer = ({
   profileSelected
 }: SharePageContainerProps) => {
   const [page, setPage] = useState(pageEnum.PROFILE_SELECTOR);
-  const [{ workpass, dpWorkpassArray }] = useStateValue();
-  const [obfuscatedWorkpass, setWorkpass] = useState(workpass);
-  let selectedWorkpass = workpass;
-  if (profileSelected > 0) {
-    selectedWorkpass = dpWorkpassArray[profileSelected - 1];
-  }
+  const [{ profilesArray }] = useStateValue();
+  const [obfuscatedWorkpass, setWorkpass] = useState(profilesArray[0].workpass);
+  let selectedWorkpass = profilesArray[profileSelected].workpass;
   let ModalBody;
 
   const closeModal = () => {

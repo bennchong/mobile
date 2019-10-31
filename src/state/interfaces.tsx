@@ -1,7 +1,4 @@
 export interface IContextState {
-  workpass: any;
-  dpWorkpassArray: any;
-  workpassAcceptedBooleanArray: object;
   profilesArray: object;
 }
 
