@@ -5,8 +5,6 @@ import NavigationService from "./src/navigation/NavigationService";
 import { StateProvider, IContextState } from "./src/state";
 /* eslint-enable */
 
-// TODO https://github.com/piotrwitek/typesafe-actions#1-basic-actions
-
 const initialState: IContextState = {
   workpass: null,
   dpWorkpassArray: [],

@@ -23,7 +23,8 @@ const DevDebug = (props: IDevDebugProps) => {
       workpassAcceptedBooleanArray,
       timeAcceptedArray,
       timeVerifiedArray,
-      numberOfProfiles
+      numberOfProfiles,
+      sessionValidatedArray
     }
   ] = useStateValue();
 
@@ -74,6 +75,9 @@ const DevDebug = (props: IDevDebugProps) => {
       </DevAppStateText>
       <DevAppStateText>
         TimeVerifiedArray: {JSON.stringify(timeVerifiedArray)}
+      </DevAppStateText>
+      <DevAppStateText>
+        Session Validated Array: {JSON.stringify(sessionValidatedArray)}
       </DevAppStateText>
       <Button title="Go Back to Settings Page" onPress={goBack} />
     </ScrollView>

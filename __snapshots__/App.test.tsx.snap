@@ -129,46 +129,62 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
   }
 >
   <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "flex-end",
-          "flexDirection": "row",
-          "height": 55,
-          "justifyContent": "center",
-          "paddingBottom": 5,
-        },
-        Object {
-          "backgroundColor": "#EDB854",
-        },
-        Object {
-          "height": 55,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
-        Object {
-          "color": "#FFF",
-          "fontSize": 18,
-          "fontWeight": "bold",
-        }
+        Array [
+          Object {
+            "alignItems": "flex-end",
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "center",
+            "paddingBottom": 5,
+          },
+          Object {
+            "backgroundColor": "#EDB854",
+          },
+          Object {
+            "height": 55,
+          },
+        ]
       }
     >
-      VERIFYING
-    </Text>
-    <ActivityIndicator
-      animating={true}
-      color="#FFF"
-      hidesWhenStopped={true}
-      size="small"
-      style={
-        Object {
-          "marginLeft": 5,
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontSize": 18,
+            "fontWeight": "bold",
+          }
         }
-      }
-    />
+      >
+        VERIFYING
+      </Text>
+      <ActivityIndicator
+        animating={true}
+        color="#FFF"
+        hidesWhenStopped={true}
+        size="small"
+        style={
+          Object {
+            "marginLeft": 5,
+          }
+        }
+      />
+    </View>
   </View>
   <View
     config={
@@ -248,27 +264,31 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "color": "#414141",
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          G9999999A
-        </Text>
-        <Text
-          style={
-            Object {
-              "color": "#414141",
-              "fontSize": 13,
-            }
-          }
-        >
-          John Demos
-        </Text>
+        <View>
+          <View>
+            <Text
+              style={
+                Object {
+                  "color": "#414141",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              G9999999A
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#414141",
+                  "fontSize": 13,
+                }
+              }
+            >
+              John Demos
+            </Text>
+          </View>
+        </View>
       </View>
       <View
         style={
@@ -320,7 +340,6 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
     style={
       Object {
         "flex": 1,
-        "flexGrow": 1.5,
       }
     }
   >
@@ -655,44 +674,6 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                     }
                   }
                 >
-                  Pass Expires On
-                </Text>
-                <Text
-                  style={
-                    Object {
-                      "color": "#808080",
-                      "flex": 4,
-                      "flexWrap": "wrap",
-                      "fontSize": 13,
-                      "textAlign": "right",
-                      "textTransform": "capitalize",
-                    }
-                  }
-                >
-                  14-11-2020
-                </Text>
-              </View>
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#FFF",
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                    "marginVertical": 10,
-                    "paddingHorizontal": 26,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    Object {
-                      "color": "#808080",
-                      "flex": 3,
-                      "fontSize": 13,
-                    }
-                  }
-                >
                   Date of Application
                 </Text>
                 <Text
@@ -770,6 +751,44 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
                   }
                 >
                   Entry Valid Till
+                </Text>
+                <Text
+                  style={
+                    Object {
+                      "color": "#808080",
+                      "flex": 4,
+                      "flexWrap": "wrap",
+                      "fontSize": 13,
+                      "textAlign": "right",
+                      "textTransform": "capitalize",
+                    }
+                  }
+                >
+                  14-11-2020
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "marginVertical": 10,
+                    "paddingHorizontal": 26,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#808080",
+                      "flex": 3,
+                      "fontSize": 13,
+                    }
+                  }
+                >
+                  Pass Expires On
                 </Text>
                 <Text
                   style={
@@ -1182,27 +1201,31 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "color": "#414141",
-              "fontSize": 18,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          G9999999A
-        </Text>
-        <Text
-          style={
-            Object {
-              "color": "#414141",
-              "fontSize": 13,
-            }
-          }
-        >
-          John Demos
-        </Text>
+        <View>
+          <View>
+            <Text
+              style={
+                Object {
+                  "color": "#414141",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              G9999999A
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#414141",
+                  "fontSize": 13,
+                }
+              }
+            >
+              John Demos
+            </Text>
+          </View>
+        </View>
       </View>
       <View
         style={
@@ -1254,7 +1277,6 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
     style={
       Object {
         "flex": 1,
-        "flexGrow": 1.5,
       }
     }
   >
@@ -1589,44 +1611,6 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                     }
                   }
                 >
-                  Pass Expires On
-                </Text>
-                <Text
-                  style={
-                    Object {
-                      "color": "#808080",
-                      "flex": 4,
-                      "flexWrap": "wrap",
-                      "fontSize": 13,
-                      "textAlign": "right",
-                      "textTransform": "capitalize",
-                    }
-                  }
-                >
-                  14-11-2020
-                </Text>
-              </View>
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#FFF",
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                    "marginVertical": 10,
-                    "paddingHorizontal": 26,
-                  }
-                }
-              >
-                <Text
-                  style={
-                    Object {
-                      "color": "#808080",
-                      "flex": 3,
-                      "fontSize": 13,
-                    }
-                  }
-                >
                   Date of Application
                 </Text>
                 <Text
@@ -1704,6 +1688,44 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
                   }
                 >
                   Entry Valid Till
+                </Text>
+                <Text
+                  style={
+                    Object {
+                      "color": "#808080",
+                      "flex": 4,
+                      "flexWrap": "wrap",
+                      "fontSize": 13,
+                      "textAlign": "right",
+                      "textTransform": "capitalize",
+                    }
+                  }
+                >
+                  14-11-2020
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "marginVertical": 10,
+                    "paddingHorizontal": 26,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#808080",
+                      "flex": 3,
+                      "fontSize": 13,
+                    }
+                  }
+                >
+                  Pass Expires On
                 </Text>
                 <Text
                   style={

@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   shareContainer: {
     marginTop: 5,
+    marginBottom: 5,
     padding: 5,
     borderRadius: 4,
     flexDirection: "row",
@@ -36,6 +37,6 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     fontWeight: "bold",
     color: midLightGrey,
-    fontSize: 11
+    fontSize: 16
   }
 });

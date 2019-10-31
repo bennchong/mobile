@@ -6,6 +6,7 @@ import { styles } from "./ProfileNameStyles";
 import { useStateValue } from "../../../state";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { midGrey } from "../../../themeColors";
+import { ShowTampered } from "./ShowTampered";
 
 interface ProfileNameProps {
   status: number;
@@ -33,8 +34,7 @@ export const ProfileName = ({
 
   return (
     <View style={styles.textContainer}>
-      {fin ? <Text style={styles.fin}>{fin}</Text> : null}
-      <Text style={styles.name}>{name}</Text>
+      <ShowTampered status={status} fin={fin} name={name} />
       {!isPreview &&
       status === verificationStatusEnum.VALID &&
       workpassAcceptedBooleanArray[profileSelected] ? (
@@ -42,7 +42,7 @@ export const ProfileName = ({
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}
         >
-          <AntDesign name="qrcode" size={15} color={midGrey} />
+          <AntDesign name="qrcode" size={30} color={midGrey} />
           <Text style={styles.shareText}>SHARE ID</Text>
           <SharePageContainer
             photo={photo}

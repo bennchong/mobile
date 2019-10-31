@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, NetInfo } from "react-native";
+import { View, StyleSheet, NetInfo, TouchableOpacity } from "react-native";
 import { ValidationBar, MessageBar, NoWifiBar } from "../TopBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile/NoProfile";
@@ -101,17 +101,32 @@ export const ProfileContainer = ({
         }
       });
     }
-  }, [internetConnected, profileSelected, workpass]);
+  }, [
+    internetConnected,
+    profileSelected,
+    workpass,
+    sessionValidatedArray[profileSelected]
+  ]);
+
+  const resetSession = () => {
+    sessionValidatedArray[profileSelected] = false;
+    dispatch({
+      type: "UPDATE_SESSION_ARRAY",
+      sessionValidatedArray
+    });
+  };
 
   return workpass ? (
     <View style={[styles.container, isPreview ? styles.shadow : null]}>
       {!internetConnected && <NoWifiBar />}
       {(workpassAcceptedBooleanArray[profileSelected] || isPreview) &&
         internetConnected && (
-          <ValidationBar
-            status={validityStatusArray[profileSelected]}
-            isPreview={isPreview}
-          />
+          <TouchableOpacity onPress={resetSession}>
+            <ValidationBar
+              status={validityStatusArray[profileSelected]}
+              isPreview={isPreview}
+            />
+          </TouchableOpacity>
         )}
       {!workpassAcceptedBooleanArray[profileSelected] && !isPreview && (
         <MessageBar />
