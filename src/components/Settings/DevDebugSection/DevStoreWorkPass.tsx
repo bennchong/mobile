@@ -39,7 +39,6 @@ const DevStoreWorkPass = () => {
                     type: "ADD_MAINPASS",
                     workpass
                   });
-                  dispatch({ type: "NUMBER_PROFILES_PLUS_ONE" });
                   dispatch({
                     type: "SET_WORKPASS_ACCEPTED",
                     workpassAcceptedBooleanArray

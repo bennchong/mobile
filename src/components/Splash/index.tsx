@@ -6,7 +6,6 @@ import {
   getStoredWorkpass,
   checkStoredDPWorkpassExists,
   getStoredDPWorkpass,
-  checkNumberOfProfiles,
   checkProfilesArrayExists,
   getProfilesArray
 } from "../../services/fileSystem";
@@ -29,16 +28,6 @@ export const SplashScreen = (props: SplashScreenProps) => {
     // } catch (e) {
     //   storedTimeAcceptedArray = [""];
     // }
-    const numberOfProfiles = await checkNumberOfProfiles();
-    dispatch({
-      type: "SET_NUMBER_PROFILES",
-      numberOfProfiles
-    });
-    const workpassAcceptedBooleanArray = new Array(numberOfProfiles).fill(true);
-    dispatch({
-      type: "SET_WORKPASS_ACCEPTED",
-      workpassAcceptedBooleanArray
-    });
   };
 
   const loadWorkpassIntoContext = async () => {

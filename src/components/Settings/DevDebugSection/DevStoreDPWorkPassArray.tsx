@@ -8,7 +8,7 @@ import { useStateValue } from "../../../state";
 
 const DevStoreDPWorkPassArray = () => {
   const [
-    { dpWorkpassArray, numberOfProfiles, workpassAcceptedBooleanArray },
+    { dpWorkpassArray, workpassAcceptedBooleanArray },
     dispatch
   ] = useStateValue();
 
@@ -57,10 +57,6 @@ const DevStoreDPWorkPassArray = () => {
                   dispatch({
                     type: "SET_WORKPASS_ACCEPTED",
                     workpassAcceptedBooleanArray
-                  });
-                  dispatch({
-                    type: "SET_NUMBER_PROFILES",
-                    numberOfProfiles: numberOfProfiles + 2
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(

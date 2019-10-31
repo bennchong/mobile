@@ -17,8 +17,7 @@ export const ShowTampered = ({ status, fin, name }: showTamperedProps) => {
     <View>
       {isTampered ? (
         <Text style={styles.name}>
-          {" "}
-          This is tampered! Report immediately to relevant authorities{" "}
+          This is tampered! Report immediately to relevant authorities
         </Text>
       ) : (
         <View>

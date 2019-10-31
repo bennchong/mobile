@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, NetInfo } from "react-native";
-import { ValidationBar, MessageBar, NoWifiBar } from "../TopBar";
+import { ValidationBar, NoWifiBar } from "../TopBar";
 import { ProfileSection } from "./ProfileSection";
 import { NoProfile } from "./NoProfile/NoProfile";
 import { NoWifiModal } from "../Modals/NoWifiModal";
@@ -107,16 +107,11 @@ export const ProfileContainer = ({
   return workpass ? (
     <View style={[styles.container, isPreview ? styles.shadow : null]}>
       {!internetConnected && <NoWifiBar />}
-      {(workpassAcceptedBooleanArray[profileSelected] || isPreview) &&
-        internetConnected && (
+      { internetConnected && (
           <ValidationBar
             status={validityStatusArray[profileSelected]}
             isPreview={isPreview}
-          />
-        )}
-      {!workpassAcceptedBooleanArray[profileSelected] && !isPreview && (
-        <MessageBar />
-      )}
+          />)}
       <ProfileSection
         status={validityStatusArray[profileSelected]}
         workpass={workpass}

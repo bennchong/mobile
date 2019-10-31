@@ -102,9 +102,6 @@ export const storeService = async ({
         type: "SET_WORKPASS_ACCEPTED",
         workpassAcceptedBooleanArray
       });
-      dispatch({
-        type: "NUMBER_PROFILES_PLUS_ONE"
-      });
     } else {
       // A main pass scanned
       if (workpass === null) {
@@ -132,9 +129,6 @@ export const storeService = async ({
     alertMessage = "Do you want to add this Dependent Pass?";
   } else if (workpass === null) {
     alertMessage = "Do you want to add this Main Pass?";
-    dispatch({
-      type: "NUMBER_PROFILES_PLUS_ONE"
-    });
   } else {
     alertMessage = "Do you want to overwrite your Main Pass?";
     // For profilecontainer to revalidate the main pass

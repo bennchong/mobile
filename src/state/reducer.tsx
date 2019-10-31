@@ -53,12 +53,6 @@ export const reducer = (state, action) => {
         ...state,
         workpassAcceptedBooleanArray: action.workpassAcceptedBooleanArray
       };
-    case "SET_NUMBER_PROFILES":
-      return { ...state, numberOfProfiles: action.numberOfProfiles };
-    case "NUMBER_PROFILES_PLUS_ONE":
-      return { ...state, numberOfProfiles: state.numberOfProfiles + 1 };
-    case "NUMBER_PROFILES_MINUS_ONE":
-      return { ...state, numberOfProfiles: state.numberOfProfiles - 1 };
     case "DELETE_WORKPASS":
       return { ...action.resetState };
     default:

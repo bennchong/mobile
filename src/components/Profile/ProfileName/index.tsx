@@ -35,9 +35,7 @@ export const ProfileName = ({
   return (
     <View style={styles.textContainer}>
       <ShowTampered status={status} fin={fin} name={name} />
-      {!isPreview &&
-      status === verificationStatusEnum.VALID &&
-      workpassAcceptedBooleanArray[profileSelected] ? (
+      {!isPreview && status === verificationStatusEnum.VALID ? (
         <TouchableOpacity
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}

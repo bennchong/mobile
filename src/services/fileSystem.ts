@@ -86,13 +86,3 @@ export const getStoredWorkpassIfExists = async () => {
     throw e;
   }
 };
-
-export const checkNumberOfProfiles = async () => {
-  let numberOfProfiles = 0;
-  if (await checkStoredWorkpassExists()) numberOfProfiles += 1;
-  if (await checkStoredDPWorkpassExists()) {
-    const DPWorkpass = await getStoredDPWorkpass();
-    numberOfProfiles += DPWorkpass.length;
-  }
-  return numberOfProfiles;
-};
