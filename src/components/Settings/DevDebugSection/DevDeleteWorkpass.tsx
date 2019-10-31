@@ -1,7 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { deleteProfilesArray, storeProfilesArray } from "../../../services/fileSystem";
+import {
+  deleteProfilesArray,
+  storeProfilesArray
+} from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { useStateValue } from "../../../state";
 // eslint-disable-next-line no-unused-vars

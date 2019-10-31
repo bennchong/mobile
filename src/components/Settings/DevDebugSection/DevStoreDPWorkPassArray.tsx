@@ -6,9 +6,7 @@ import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { useStateValue } from "../../../state";
 
 const DevStoreDPWorkPassArray = () => {
-  const [,
-    dispatch
-  ] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   return (
     <TouchableOpacity

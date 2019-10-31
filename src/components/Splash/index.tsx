@@ -20,8 +20,8 @@ export const SplashScreen = (props: SplashScreenProps) => {
   const [, dispatch] = useStateValue();
   const { navigate } = props.navigation;
 
-  // eslint-disable-next-line no-unused-vars
   // Only call this when you have to reset the entire file-system
+  // eslint-disable-next-line no-unused-vars
   const clearAppMemory = () => {
     deleteProfilesArray();
   };
@@ -38,7 +38,7 @@ export const SplashScreen = (props: SplashScreenProps) => {
         type: "LOAD_PROFILESARRAY_FROM_FS",
         profilesArray
       });
-      if ( checkIfPassExists(profilesArray) >= 0) navigate("Profile");
+      if (checkIfPassExists(profilesArray) >= 0) navigate("Profile");
       else navigate("Camera");
     } else {
       await storeProfilesArray(initialState.profilesArray);
@@ -46,7 +46,9 @@ export const SplashScreen = (props: SplashScreenProps) => {
     }
   };
   useEffect(() => {
-    loadWorkpassIntoContext().catch(e => {Alert.alert("Loading of Data Error", e)})
+    loadWorkpassIntoContext().catch(e => {
+      Alert.alert("Loading of Data Error", e);
+    });
   }, []);
 
   return (

@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
-import { useStateValue } from "../../../state";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { midGrey } from "../../../themeColors";
 import { ShowTampered } from "./ShowTampered";

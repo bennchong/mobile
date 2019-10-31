@@ -39,7 +39,8 @@ export const PageIndicator = ({
   return (
     <View style={styles.background}>
       {items
-        ? items.map((i, index) => { //Possible problem when main pass is null 
+        ? items.map((i, index) => {
+            // Possible problem when main pass is null
             return (
               <View
                 style={

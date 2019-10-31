@@ -74,10 +74,7 @@ class QRScanner extends React.Component<QRScannerProps> {
       this.setState({ isProcessingQr: false }, () => {
         NavigationService.navigate("Profile", {});
       });
-    const [
-      { profilesArray },
-      dispatch
-    ] = useStateValue();
+    const [{ profilesArray }, dispatch] = useStateValue();
 
     await storeService({
       payload,

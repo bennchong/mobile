@@ -43,9 +43,7 @@ export const ProfileContainer = ({
   const [validityStatusArray, setValidityStatus] = useState(
     isPreview
       ? [false]
-      : new Array(profilesArray.length).fill(
-          verificationStatusEnum.VALIDATING
-        )
+      : new Array(profilesArray.length).fill(verificationStatusEnum.VALIDATING)
   );
   const [previewTimeVerified, setPreviewTime] = useState("");
   const [internetConnected, setConnected] = useState(true);
@@ -104,11 +102,12 @@ export const ProfileContainer = ({
   return workpass ? (
     <View style={[styles.container, isPreview ? styles.shadow : null]}>
       {!internetConnected && <NoWifiBar />}
-      { internetConnected && (
-          <ValidationBar
-            status={validityStatusArray[profileSelected]}
-            isPreview={isPreview}
-          />)}
+      {internetConnected && (
+        <ValidationBar
+          status={validityStatusArray[profileSelected]}
+          isPreview={isPreview}
+        />
+      )}
       <ProfileSection
         status={validityStatusArray[profileSelected]}
         workpass={workpass}
