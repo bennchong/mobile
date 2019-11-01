@@ -4,7 +4,7 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
-import { useStateValue } from "../../state";
+import { StateContext  } from "../../state";
 import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import { CannotScan } from "./CannotScan";
@@ -22,6 +22,8 @@ interface QRScannerProps {
 }
 
 class QRScanner extends React.Component<QRScannerProps> {
+  static contextType = StateContext;
+
   state = {
     hasCameraPermission: null,
     isProcessingQr: false,
@@ -39,7 +41,7 @@ class QRScanner extends React.Component<QRScannerProps> {
   };
 
   handleProfilePush = async payload => {
-    const [{ profilesArray }] = useStateValue();
+    const [{ profilesArray }] = this.context;
     const setProcessingQr = () => this.setState({ isProcessingQr: false });
 
     if (profilesArray[0].workpass) {
@@ -74,7 +76,7 @@ class QRScanner extends React.Component<QRScannerProps> {
       this.setState({ isProcessingQr: false }, () => {
         NavigationService.navigate("Profile", {});
       });
-    const [{ profilesArray }, dispatch] = useStateValue();
+    const [{ profilesArray }, dispatch] = this.context;
 
     await storeService({
       payload,
