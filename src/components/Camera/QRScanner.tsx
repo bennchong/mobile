@@ -55,6 +55,7 @@ class QRScanner extends React.Component<QRScannerProps> {
   handleProfileView = async payload => {
     const { uri, key, type } = JSON.parse(payload);
     const encryptedDocument = await fetchDocument(uri);
+    const [, dispatch] = this.context;
 
     let workpass;
     if (!type && !key) {
@@ -62,11 +63,12 @@ class QRScanner extends React.Component<QRScannerProps> {
     } else {
       workpass = decryptFromPayload(encryptedDocument, { key, type });
     }
-
     this.setState({ isProcessingQr: false }, () => {
-      NavigationService.navigate("ProfilePreview", {
-        workpass
+      dispatch({
+        type: "SCANNED_PASS",
+        tempPass: workpass
       });
+      NavigationService.navigate("ProfilePreview", {});
     });
   };
 
@@ -138,7 +140,6 @@ class QRScanner extends React.Component<QRScannerProps> {
     await this.setStateAsync({ isProcessingQr: true });
     try {
       const { action, payload } = getActionFromQR(data);
-
       switch (action) {
         case "STORE":
           await this.handleProfileStorage(payload);

@@ -7,6 +7,7 @@ export const reducer = (state, action) => {
   let newMain;
   let newDPPass;
   let newProfileObject;
+  let tempPass;
   const modifiedProfileArray = cloneDeep(state.profilesArray); // Deep clones only profilesArray within state
   switch (action.type) {
     // Refactor section - adhering to be a pure function
@@ -44,6 +45,8 @@ export const reducer = (state, action) => {
       return { ...state, profilesArray: action.profilesArray };
     case "DELETE_WORKPASS":
       return { ...action.resetState };
+    case "SCANNED_PASS":
+      return { ...state, tempProfile: action.tempPass };
     default:
       return state;
   }

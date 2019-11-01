@@ -9,5 +9,6 @@ export const profileObjectInit: IProfileObject = {
 };
 
 export const initialState: IContextState = {
+  tempProfile: null,
   profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
 };

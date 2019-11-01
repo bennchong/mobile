@@ -93,7 +93,6 @@ export const storeService = async ({
         workpass: newWorkpass
       });
     }
-
     navigateToProfile();
   };
 

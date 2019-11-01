@@ -1,4 +1,5 @@
 export interface IContextState {
+  tempProfile: object;
   profilesArray: object;
 }
 
