@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { useStateValue } from "../../state";
 import { ProfileContainer } from "./ProfileContainer";
+import { profileTypeEnum } from "./profileTypeEnum";
 
-const profileSelector = (profilesArray, profileSelected, changeProfileSelected) => {
+const profileSelector = (
+  profilesArray,
+  profileSelected,
+  changeProfileSelected
+) => {
   // Case when there is no main pass
   if (profilesArray.length === 1 && profilesArray[0].workpass === null) {
     return null;
-  } else if (profilesArray.length > 1 && profilesArray[0].workpass === null && profileSelected === 0) { 
-  // When there are dependent pass and no main pass
+  }
+  if (
+    profilesArray.length > 1 &&
+    profilesArray[0].workpass === null &&
+    profileSelected === 0
+  ) {
+    // When there are dependent pass and no main pass
     changeProfileSelected(1);
     return profilesArray[profileSelected].workpass;
   }
@@ -31,10 +41,14 @@ export const ProfilesState = () => {
     }
   };
 
-  const selectedPass = profileSelector(profilesArray, profileSelected, changeProfileSelected);
+  const selectedPass = profileSelector(
+    profilesArray,
+    profileSelected,
+    changeProfileSelected
+  );
   return (
     <ProfileContainer
-      isPreview={false}
+      workpassType={profileTypeEnum.STORED}
       workpass={selectedPass}
       profileSelected={profileSelected}
       changeProfileSelected={initiateChangeProfileSelected}

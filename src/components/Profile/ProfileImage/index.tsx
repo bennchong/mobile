@@ -6,11 +6,12 @@ import { ProfileName } from "../ProfileName";
 import { useStateValue } from "../../../state";
 import { styles } from "./ProfileImageStyles";
 import { PageIndicator } from "../ProfilePageIndicator/PageIndicator";
+import { profileTypeEnum } from "../profileTypeEnum";
 
 interface ProfileImageProps {
   status: number;
   recipient: any;
-  isPreview: boolean;
+  workpassType: any;
   previewTimeVerified: string;
   profileSelected: number;
   onSwipe: Function;
@@ -19,7 +20,7 @@ interface ProfileImageProps {
 export const ProfileImage = ({
   status,
   recipient,
-  isPreview,
+  workpassType,
   previewTimeVerified,
   profileSelected,
   onSwipe
@@ -71,7 +72,7 @@ export const ProfileImage = ({
   }
 
   let timeShown;
-  if (isPreview) {
+  if (workpassType === profileTypeEnum.PREVIEW) {
     timeShown = previewTimeVerified;
   } else {
     timeShown = profilesArray[profileSelected].timeLastVerified;
@@ -81,22 +82,24 @@ export const ProfileImage = ({
     <>
       <View style={styles.container}>
         <View style={styles.background}>
-          <Text style={styles.verifiedText}>
-            System last checked: {timeShown}
-          </Text>
-          {!isPreview ? (
+          {workpassType !== profileTypeEnum.PREVIEW && (
+            <Text style={styles.verifiedText}>
+              System last checked: {timeShown}
+            </Text>
+          )}
+          {workpassType === profileTypeEnum.STORED && (
             <PageIndicator
               items={profilesArray}
               profileSelected={profileSelected}
             />
-          ) : null}
+          )}
         </View>
         <ProfileName
           status={status}
           photo={photo}
           fin={fin}
           name={name}
-          isPreview={isPreview}
+          workpassType={workpassType}
           profileSelected={profileSelected}
         />
         <View style={styles.imageContainer}>
@@ -116,7 +119,8 @@ export const ProfileImage = ({
               />
             </TouchableOpacity>
           ) : null}
-          {!isPreview && profileSelected + 1 < profilesArray.length ? (
+          {workpassType === profileTypeEnum.STORED &&
+          profileSelected + 1 < profilesArray.length ? (
             <TouchableOpacity
               style={styles.imageRightContainer}
               onPress={() => onSwipe(SWIPE_LEFT)}

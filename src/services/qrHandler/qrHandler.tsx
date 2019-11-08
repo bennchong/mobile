@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Alert } from "react-native";
-import { getData } from "@govtechsg/open-attestation";
 import { handleObfuscation } from "../obfuscation/obfuscationHandler";
 import { decryptFromPayload } from "../crypto/crypto";
 
@@ -58,13 +57,7 @@ export const pushService = async (workpass, payload, setProcessingQr) => {
   );
 };
 
-export const storeService = async ({
-  payload,
-  dispatch,
-  setProcessingQr,
-  navigateToProfile,
-  profilesArray
-}) => {
+export const previewService = async (payload, dispatch) => {
   const { uri, key, type } = JSON.parse(payload);
   const encryptedDocument = await fetchDocument(uri);
 
@@ -75,56 +68,9 @@ export const storeService = async ({
   } else {
     newWorkpass = decryptFromPayload(encryptedDocument, { key, type });
   }
-  const cleanWorkpass = getData(newWorkpass);
 
-  const handleStoreWorkpass = async () => {
-    // Checks if pass is dependent
-    if (cleanWorkpass.pass.sponsoringPass) {
-      // Refactor action below
-      dispatch({
-        type: "ADD_DPPASS",
-        workpass: newWorkpass
-      });
-    } else {
-      // A main pass scanned
-      // Refactored action below
-      dispatch({
-        type: "ADD_MAINPASS",
-        workpass: newWorkpass
-      });
-    }
-    navigateToProfile();
-  };
-
-  // Change alert message if workpass is null
-  let alertMessage;
-  if (cleanWorkpass.pass.sponsoringPass !== "") {
-    alertMessage = "Do you want to add this Dependent Pass?";
-  } else if (profilesArray[0].workpass === null) {
-    alertMessage = "Do you want to add this Main Pass?";
-  } else {
-    alertMessage = "Do you want to overwrite your Main Pass?";
-    // For profilecontainer to revalidate the main pass
-    // eslint-disable-next-line no-param-reassign
-    dispatch({
-      type: "VALIDATED_SESSION",
-      profileIndex: 0,
-      boolean: false
-    });
-  }
-  Alert.alert(
-    "New profile detected",
-    alertMessage,
-    [
-      {
-        text: "No",
-        onPress: setProcessingQr
-      },
-      {
-        text: "Yes",
-        onPress: handleStoreWorkpass
-      }
-    ],
-    { cancelable: false }
-  );
+  dispatch({
+    type: "SCANNED_PASS",
+    tempPass: newWorkpass
+  });
 };

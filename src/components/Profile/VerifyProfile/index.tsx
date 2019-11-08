@@ -1,51 +1,53 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { getData } from "@govtechsg/open-attestation";
 import { useStateValue } from "../../../state";
 import { styles } from "./VerifyProfileStyles";
 
 interface VerifyProfileProps {
   handleShowModal: Function;
-  isPreview: boolean;
-  profileSelected: number;
+  handleExit: Function;
 }
 
-const VerifyProfile = ({
-  isPreview,
-  handleShowModal,
-  profileSelected
-}: VerifyProfileProps) => {
-  const [{ workpassAcceptedBooleanArray }, dispatch] = useStateValue();
+// TO INTEGRATE SOON!!!
+
+const VerifyProfile = ({ handleShowModal, handleExit }: VerifyProfileProps) => {
+  const [{ tempProfile }, dispatch] = useStateValue();
 
   const handleWorkpassConfirmation = async () => {
     handleShowModal();
-    workpassAcceptedBooleanArray[profileSelected] = true;
-    dispatch({
-      type: "SET_WORKPASS_ACCEPTED",
-      workpassAcceptedBooleanArray
-    });
-    // Refactor action below
-    dispatch({
-      type: "SET_TIME_ACCEPTED",
-      profileSelected
-    });
+    const cleanWorkpass = getData(tempProfile);
+    // Checks if pass is dependent
+    if (cleanWorkpass.pass.sponsoringPass) {
+      dispatch({
+        type: "ADD_DPPASS",
+        workpass: tempProfile
+      });
+    } else {
+      // Refactored action below
+      dispatch({
+        type: "ADD_MAINPASS",
+        workpass: tempProfile
+      });
+    }
   };
 
-  if (!workpassAcceptedBooleanArray[profileSelected] && !isPreview) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.acknowledgeText}>
-          I acknowledge that the information above is true
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleWorkpassConfirmation}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-  return null;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.acknowledgeText}>
+        I accept that the information above is true
+      </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleWorkpassConfirmation}
+      >
+        <Text style={styles.buttonText}>Accept to save</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonReject} onPress={handleExit}>
+        <Text style={styles.buttonText}>Reject to rescan</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export { VerifyProfile };

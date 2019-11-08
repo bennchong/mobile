@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import metrics from "../../../config/metrics";
-import { white, lightGrey, darkerGrey, green } from "../../../themeColors";
+import { white, lightGrey, darkerGrey, green, red } from "../../../themeColors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -21,7 +21,16 @@ export const styles = StyleSheet.create({
     backgroundColor: green,
     borderRadius: 14,
     paddingHorizontal: 40,
-    paddingVertical: 5,
+    paddingVertical: 15,
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonReject: {
+    backgroundColor: red,
+    borderRadius: 14,
+    paddingHorizontal: 40,
+    paddingVertical: 15,
     marginTop: 10,
     alignItems: "center",
     justifyContent: "center"

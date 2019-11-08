@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { ScrollView, View } from "react-native";
+import { NavigationContext } from "react-navigation";
 import { getData } from "@govtechsg/open-attestation";
 import GestureRecognizer, {
   swipeDirections
@@ -7,11 +8,14 @@ import GestureRecognizer, {
 import { ProfileImage } from "./ProfileImage";
 import { ProfileDetails } from "./ProfileDetails";
 import { white } from "../../themeColors";
+import { VerifyProfile } from "./VerifyProfile";
+import { VerifyModal } from "../Modals/VerifyModal";
+import { profileTypeEnum } from "./profileTypeEnum";
 
 interface ProfileSectionProps {
   status: number;
   workpass: any;
-  isPreview: boolean;
+  workpassType: any;
   previewTimeVerified: string;
   profileSelected: number;
   changeProfileSelected: Function;
@@ -20,15 +24,16 @@ interface ProfileSectionProps {
 const ProfileSection = ({
   status,
   workpass,
-  isPreview,
+  workpassType,
   previewTimeVerified,
   profileSelected,
   changeProfileSelected
 }: ProfileSectionProps) => {
   const cleanWorkpass = getData(workpass);
   const { recipient } = cleanWorkpass;
+  const navigation = useContext(NavigationContext);
 
-  // const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const onSwipe = gestureName => {
     const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
@@ -61,7 +66,7 @@ const ProfileSection = ({
         <ProfileImage
           status={status}
           recipient={recipient}
-          isPreview={isPreview}
+          workpassType={workpassType}
           previewTimeVerified={previewTimeVerified}
           profileSelected={profileSelected}
           onSwipe={onSwipe}
@@ -70,15 +75,22 @@ const ProfileSection = ({
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1, backgroundColor: white }}>
           <ProfileDetails workpass={cleanWorkpass} status={status} />
-          {/* <VerifyProfile
-            isPreview={isPreview}
-            handleShowModal={() => setModal(true)}
-            profileSelected={profileSelected}
-          />
-          <VerifyModal
-            showModal={modal}
-            handleCloseModal={() => setModal(false)}
-          /> */}
+          {workpassType === profileTypeEnum.PREVIEW && (
+            <View>
+              <VerifyProfile
+                handleShowModal={() => setModal(true)}
+                handleExit={() => navigation.goBack()}
+              />
+              <VerifyModal
+                showModal={modal}
+                handleCloseModal={() => {
+                  setModal(false);
+                  navigation.goBack();
+                  navigation.navigate("Profile", {});
+                }}
+              />
+            </View>
+          )}
         </ScrollView>
       </View>
     </>

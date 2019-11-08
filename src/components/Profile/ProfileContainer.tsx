@@ -11,6 +11,8 @@ import {
   verifyWorkpass
 } from "../../services/verificationService/verificationService";
 import { white, black } from "../../themeColors";
+import { profileTypeEnum } from "./profileTypeEnum";
+import { MessageBar } from "../TopBar/MessageBar";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,20 +30,20 @@ const styles = StyleSheet.create({
 
 interface ProfileContainerProps {
   workpass: object;
-  isPreview: boolean;
+  workpassType: any;
   profileSelected: number;
   changeProfileSelected: Function;
 }
 
 export const ProfileContainer = ({
   workpass,
-  isPreview,
+  workpassType,
   profileSelected,
   changeProfileSelected
 }: ProfileContainerProps) => {
   const [{ profilesArray }, dispatch] = useStateValue();
   const [validityStatusArray, setValidityStatus] = useState(
-    isPreview
+    workpassType !== profileTypeEnum.STORED
       ? [false]
       : new Array(profilesArray.length).fill(verificationStatusEnum.VALIDATING)
   );
@@ -74,7 +76,7 @@ export const ProfileContainer = ({
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
     // verify workpass once
     if (
-      isPreview ||
+      workpassType === profileTypeEnum.PREVIEW ||
       (workpass && !profilesArray[profileSelected].validatedThisSession)
     ) {
       const newValidityStatusArray = validityStatusArray;
@@ -84,7 +86,7 @@ export const ProfileContainer = ({
       verifyWorkpass(workpass).then(status => {
         newValidityStatusArray[profileSelected] = status;
         setValidityStatus(newValidityStatusArray);
-        if (status && !isPreview) {
+        if (status && workpassType === profileTypeEnum.STORED) {
           storeTime();
           // Refator action below
           dispatch({
@@ -92,7 +94,7 @@ export const ProfileContainer = ({
             profileIndex: profileSelected,
             boolean: true
           });
-        } else if (status && isPreview) {
+        } else if (status /* && isPreview IF THIS WORKS REMOVE */) {
           setPreviewTime(getCurrentDateAndTime());
         }
       });
@@ -100,18 +102,24 @@ export const ProfileContainer = ({
   }, [internetConnected, profileSelected, workpass]);
 
   return workpass ? (
-    <View style={[styles.container, isPreview ? styles.shadow : null]}>
+    <View
+      style={[
+        styles.container,
+        workpassType !== profileTypeEnum.STORED ? styles.shadow : null
+      ]}
+    >
       {!internetConnected && <NoWifiBar />}
-      {internetConnected && (
+      {internetConnected && workpassType !== profileTypeEnum.PREVIEW && (
         <ValidationBar
           status={validityStatusArray[profileSelected]}
-          isPreview={isPreview}
+          workpassType={workpassType}
         />
       )}
+      {workpassType === profileTypeEnum.PREVIEW && <MessageBar />}
       <ProfileSection
         status={validityStatusArray[profileSelected]}
         workpass={workpass}
-        isPreview={isPreview}
+        workpassType={workpassType}
         previewTimeVerified={previewTimeVerified}
         profileSelected={profileSelected}
         changeProfileSelected={changeProfileSelected}

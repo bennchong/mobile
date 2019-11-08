@@ -4,18 +4,19 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { withNavigationFocus } from "react-navigation";
-import { StateContext  } from "../../state";
+import { StateContext } from "../../state";
 import { InvalidQRModal } from "../Modals/InvalidQRModal";
 import { ScanArea } from "./ScanArea";
 import { CannotScan } from "./CannotScan";
 import NavigationService from "../../navigation/NavigationService";
 import {
   pushService,
-  storeService,
+  previewService,
   fetchDocument,
   getActionFromQR
 } from "../../services/qrHandler/qrHandler";
 import { decryptFromPayload } from "../../services/crypto/crypto";
+import { profileTypeEnum } from "../Profile/profileTypeEnum";
 
 interface QRScannerProps {
   navigation: any;
@@ -52,7 +53,7 @@ class QRScanner extends React.Component<QRScannerProps> {
     }
   };
 
-  handleProfileView = async payload => {
+  handleProfileShared = async payload => {
     const { uri, key, type } = JSON.parse(payload);
     const encryptedDocument = await fetchDocument(uri);
     const [, dispatch] = this.context;
@@ -68,24 +69,22 @@ class QRScanner extends React.Component<QRScannerProps> {
         type: "SCANNED_PASS",
         tempPass: workpass
       });
-      NavigationService.navigate("ProfilePreview", {});
+      NavigationService.navigate("ProfilePreview", {
+        profileType: profileTypeEnum.SHARED
+      });
     });
   };
 
-  handleProfileStorage = async payload => {
-    const setProcessingQr = () => this.setState({ isProcessingQr: false });
-    const navigateToProfile = () =>
-      this.setState({ isProcessingQr: false }, () => {
-        NavigationService.navigate("Profile", {});
-      });
-    const [{ profilesArray }, dispatch] = this.context;
+  handleProfilePreviewToStore = async payload => {
+    // const setProcessingQr = () => this.setState({ isProcessingQr: false });
+    const [, dispatch] = this.context;
 
-    await storeService({
-      payload,
-      dispatch,
-      setProcessingQr,
-      navigateToProfile,
-      profilesArray
+    await previewService(payload, dispatch);
+
+    this.setState({ isProcessingQr: false }, () => {
+      NavigationService.navigate("ProfilePreview", {
+        profileType: profileTypeEnum.PREVIEW
+      });
     });
   };
 
@@ -142,10 +141,10 @@ class QRScanner extends React.Component<QRScannerProps> {
       const { action, payload } = getActionFromQR(data);
       switch (action) {
         case "STORE":
-          await this.handleProfileStorage(payload);
+          await this.handleProfilePreviewToStore(payload);
           break;
         case "VIEW":
-          await this.handleProfileView(payload);
+          await this.handleProfileShared(payload);
           break;
         default:
           await this.handleProfilePush(payload);

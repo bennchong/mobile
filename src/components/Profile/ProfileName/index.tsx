@@ -6,13 +6,14 @@ import { styles } from "./ProfileNameStyles";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { midGrey } from "../../../themeColors";
 import { ShowTampered } from "./ShowTampered";
+import { profileTypeEnum } from "../profileTypeEnum";
 
 interface ProfileNameProps {
   status: number;
   photo: string;
   fin: string;
   name: string;
-  isPreview: boolean;
+  workpassType: any;
   profileSelected: number;
 }
 
@@ -21,7 +22,7 @@ export const ProfileName = ({
   photo,
   fin,
   name,
-  isPreview,
+  workpassType,
   profileSelected
 }: ProfileNameProps) => {
   const [isDialogVisible, setVisible] = useState(false);
@@ -33,7 +34,8 @@ export const ProfileName = ({
   return (
     <View style={styles.textContainer}>
       <ShowTampered status={status} fin={fin} name={name} />
-      {!isPreview && status === verificationStatusEnum.VALID ? (
+      {workpassType === profileTypeEnum.STORED &&
+      status === verificationStatusEnum.VALID ? (
         <TouchableOpacity
           style={styles.shareContainer}
           onPress={() => setVisible(!isDialogVisible)}

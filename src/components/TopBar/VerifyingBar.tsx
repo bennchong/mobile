@@ -5,10 +5,11 @@ import Constants from "expo-constants";
 import { verificationStatusEnum } from "../../services/verificationService/verificationService";
 import { styles } from "./BarStyles";
 import { white, midGreen, midYellow, darkRed, red } from "../../themeColors";
+import { profileTypeEnum } from "../Profile/profileTypeEnum";
 
 interface ValidationBarProps {
   status: verificationStatusEnum;
-  isPreview: boolean;
+  workpassType: any;
 }
 
 // presentation component, only switch according to props
@@ -123,7 +124,12 @@ export const ValidationBar = (props: ValidationBarProps) => {
       style={[
         styles.baseBar,
         barColor,
-        { height: props.isPreview ? 35 : Constants.statusBarHeight + 35 }
+        {
+          height:
+            props.workpassType === profileTypeEnum.PREVIEW
+              ? 35
+              : Constants.statusBarHeight + 35
+        }
       ]}
     >
       <Text style={styles.text}>{text}</Text>

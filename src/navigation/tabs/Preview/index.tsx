@@ -11,9 +11,16 @@ interface ProfilePreviewPageProps {
 
 const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
   const { navigation } = props;
+  const profileType = navigation.getParam("profileType");
   const [{ tempProfile }] = useStateValue();
 
-  return <PreviewContainer navigation={navigation} workpass={tempProfile} />;
+  return (
+    <PreviewContainer
+      navigation={navigation}
+      workpass={tempProfile}
+      workpassType={profileType}
+    />
+  );
 };
 
 export default withNavigation(ProfilePreviewPage);

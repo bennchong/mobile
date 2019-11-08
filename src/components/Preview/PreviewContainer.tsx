@@ -8,11 +8,13 @@ import { white } from "../../themeColors";
 interface PreviewContainerProps {
   navigation: any;
   workpass: any;
+  workpassType: any;
 }
 
 export const PreviewContainer = ({
   navigation,
-  workpass
+  workpass,
+  workpassType
 }: PreviewContainerProps) => {
   const goBack = () => navigation.goBack();
 
@@ -29,7 +31,7 @@ export const PreviewContainer = ({
           />
           <ProfileContainer
             workpass={workpass}
-            isPreview={true}
+            workpassType={workpassType}
             profileSelected={0}
           />
         </View>
