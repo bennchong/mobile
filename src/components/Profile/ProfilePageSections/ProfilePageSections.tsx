@@ -5,14 +5,14 @@ import { getData } from "@govtechsg/open-attestation";
 import GestureRecognizer, {
   swipeDirections
 } from "react-native-swipe-gestures";
-import { ProfileImage } from "./ProfileImage";
-import { ProfileDetails } from "./ProfileDetails";
-import { white } from "../../themeColors";
-import { VerifyProfile } from "./VerifyProfile";
-import { VerifyModal } from "../Modals/VerifyModal";
-import { profileTypeEnum } from "./profileTypeEnum";
+import { ProfileHeaderContainer } from "./ProfileHeaderContainer";
+import { ProfileDetailSection } from "./ProfileDetailSection";
+import { white } from "../../../themeColors";
+import { VerifyProfile } from "../VerifyProfile";
+import { VerifyModal } from "../../Modals/VerifyModal";
+import { profileTypeEnum } from "../profileTypeEnum";
 
-interface ProfileSectionProps {
+interface ProfilePageSectionsProps {
   status: number;
   workpass: any;
   workpassType: any;
@@ -21,14 +21,14 @@ interface ProfileSectionProps {
   changeProfileSelected: Function;
 }
 
-const ProfileSection = ({
+const ProfilePageSections = ({
   status,
   workpass,
   workpassType,
   previewTimeVerified,
   profileSelected,
   changeProfileSelected
-}: ProfileSectionProps) => {
+}: ProfilePageSectionsProps) => {
   const cleanWorkpass = getData(workpass);
   const { recipient } = cleanWorkpass;
   const navigation = useContext(NavigationContext);
@@ -63,7 +63,7 @@ const ProfileSection = ({
         config={config}
         style={{ flex: 1 }}
       >
-        <ProfileImage
+        <ProfileHeaderContainer
           status={status}
           recipient={recipient}
           workpassType={workpassType}
@@ -74,7 +74,7 @@ const ProfileSection = ({
       </GestureRecognizer>
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1, backgroundColor: white }}>
-          <ProfileDetails workpass={cleanWorkpass} status={status} />
+          <ProfileDetailSection workpass={cleanWorkpass} status={status} />
           {workpassType === profileTypeEnum.PREVIEW && (
             <View>
               <VerifyProfile
@@ -97,4 +97,4 @@ const ProfileSection = ({
   );
 };
 
-export { ProfileSection };
+export { ProfilePageSections };

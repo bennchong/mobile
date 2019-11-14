@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, NetInfo } from "react-native";
-import { ProfileSection } from "./ProfileSection";
+import { ProfilePageSections } from "./ProfilePageSections/ProfilePageSections";
 import { NoWifiModal } from "../Modals/NoWifiModal";
 import { useStateValue } from "../../state";
 import { getCurrentDateAndTime } from "../../services/date/date";
@@ -69,13 +69,14 @@ export const ProfilePage = ({
       }
     });
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
-    // verify workpass once
+    // Verify sharedProfile
     if (workpassType === profileTypeEnum.SHARED) {
       verifyWorkpass(workpass).then(status => {
         setCurrentProfileStatus(status);
         setPreviewTime(getCurrentDateAndTime());
       });
     } else if (
+      //Verifies stored profiles only for one time
       profilesArray[profileSelected].validityStatus ===
       verificationStatusEnum.VALIDATING
     ) {
@@ -92,7 +93,7 @@ export const ProfilePage = ({
         setCurrentProfileStatus(status);
       });
     } else {
-      //For alreaady verified profilesArray
+      //For alreaady verified profiles, when switching around profileSelected
       setCurrentProfileStatus(profilesArray[profileSelected].validityStatus);
     }
   }, [internetConnected, profileSelected, workpass]);
@@ -109,7 +110,7 @@ export const ProfilePage = ({
         workpassType={workpassType}
         status={currentProfileStatus}
       />
-      <ProfileSection
+      <ProfilePageSections
         status={currentProfileStatus}
         workpass={workpass}
         workpassType={workpassType}

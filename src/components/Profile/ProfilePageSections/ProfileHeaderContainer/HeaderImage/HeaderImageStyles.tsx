@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
-import metrics from "../../../config/metrics";
-import { white, lighterGrey, midLightGrey, black } from "../../../themeColors";
+import metrics from "../../../../../config/metrics";
+import {
+  white,
+  lighterGrey,
+  midLightGrey,
+  black
+} from "../../../../../themeColors";
 
 export const styles = StyleSheet.create({
   container: { alignItems: "center" },
@@ -50,21 +55,5 @@ export const styles = StyleSheet.create({
       width: 5
     },
     elevation: 10
-  },
-  background: {
-    backgroundColor: lighterGrey,
-    height: metrics.DIAMETER,
-    width: "100%",
-    alignItems: "center"
-  },
-  margin: {
-    backgroundColor: white,
-    width: "100%",
-    height: 55
-  },
-  verifiedText: {
-    paddingTop: 5,
-    color: midLightGrey,
-    fontSize: 9
   }
 });

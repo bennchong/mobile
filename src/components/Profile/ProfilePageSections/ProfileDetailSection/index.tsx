@@ -1,16 +1,19 @@
 import React from "react";
 import { View } from "react-native";
 import { DetailSection } from "./DetailSection";
-import { Margin } from "../../Layout/Margin";
-import { TextRow } from "../../Layout/TextRow";
-import { formatDate } from "../../../services/date/date";
+import { Margin } from "../../../Layout/Margin";
+import { TextRow } from "../../../Layout/TextRow";
+import { formatDate } from "../../../../services/date/date";
 
-interface ProfileDetailsProps {
+interface ProfileDetailSectionProps {
   workpass: any;
   status: number;
 }
 
-export const ProfileDetails = ({ workpass, status }: ProfileDetailsProps) => {
+export const ProfileDetailSection = ({
+  workpass,
+  status
+}: ProfileDetailSectionProps) => {
   const { pass, recipient, employer } = workpass;
   const {
     applicationDate,

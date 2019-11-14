@@ -27,15 +27,15 @@ const styles = StyleSheet.create({
   }
 });
 
-interface PageIndicatorProps {
+interface ProfileIndicatorProps {
   items: any;
   profileSelected: number;
 }
 
-export const PageIndicator = ({
+export const ProfileIndicator = ({
   items,
   profileSelected
-}: PageIndicatorProps) => {
+}: ProfileIndicatorProps) => {
   return (
     <View style={styles.background}>
       {items

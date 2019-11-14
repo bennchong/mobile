@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
-import metrics from "../../../config/metrics";
+import metrics from "../../../../../config/metrics";
 import {
   darkGrey,
   white,
   midLightGrey,
   lightestGrey
-} from "../../../themeColors";
+} from "../../../../../themeColors";
 
 export const styles = StyleSheet.create({
   textContainer: {

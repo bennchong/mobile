@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
-import { styles } from "./ProfileNameStyles";
+import { verificationStatusEnum } from "../../../../../services/verificationService/verificationService";
+import { styles } from "./HeaderInformationStyles";
 
 interface NameFinProps {
   status: any;
