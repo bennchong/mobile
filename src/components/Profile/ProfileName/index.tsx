@@ -5,7 +5,7 @@ import { SharePageContainer } from "../../SharePage";
 import { styles } from "./ProfileNameStyles";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { midGrey } from "../../../themeColors";
-import { ShowTampered } from "./ShowTampered";
+import { NameFin } from "./NameFin";
 import { profileTypeEnum } from "../profileTypeEnum";
 
 interface ProfileNameProps {
@@ -26,19 +26,17 @@ export const ProfileName = ({
   profileSelected
 }: ProfileNameProps) => {
   const [isDialogVisible, setVisible] = useState(false);
-
-  const toggleVisibility = () => {
-    setVisible(!isDialogVisible);
-  };
+  const showQrCodeBool =
+    workpassType === profileTypeEnum.STORED &&
+    status === verificationStatusEnum.VALID;
 
   return (
     <View style={styles.textContainer}>
-      <ShowTampered status={status} fin={fin} name={name} />
-      {workpassType === profileTypeEnum.STORED &&
-      status === verificationStatusEnum.VALID ? (
+      <NameFin status={status} fin={fin} name={name} />
+      {showQrCodeBool ? (
         <TouchableOpacity
           style={styles.shareContainer}
-          onPress={() => setVisible(!isDialogVisible)}
+          onPress={() => setVisible(true)}
         >
           <AntDesign name="qrcode" size={30} color={midGrey} />
           <Text style={styles.shareText}>SHARE ID</Text>
@@ -46,7 +44,7 @@ export const ProfileName = ({
             photo={photo}
             name={name}
             isVisible={isDialogVisible}
-            handleCancel={toggleVisibility}
+            setVisible={setVisible}
             profileSelected={profileSelected}
           />
         </TouchableOpacity>

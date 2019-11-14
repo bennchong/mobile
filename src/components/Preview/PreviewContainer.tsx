@@ -16,19 +16,10 @@ export const PreviewContainer = ({
   workpass,
   workpassType
 }: PreviewContainerProps) => {
-  const goBack = () => navigation.goBack();
-
   return (
     <Modal animationType="fade" visible={true}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
-          <MaterialCommunityIcons
-            name="close-circle"
-            size={30}
-            color={white}
-            style={styles.closeIcon}
-            onPress={goBack}
-          />
           <ProfileContainer
             workpass={workpass}
             workpassType={workpassType}

@@ -44,7 +44,7 @@ const VerifyProfile = ({ handleShowModal, handleExit }: VerifyProfileProps) => {
         <Text style={styles.buttonText}>Accept to save</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.buttonReject} onPress={handleExit}>
-        <Text style={styles.buttonText}>Reject to rescan</Text>
+        <Text style={styles.buttonText}>Reject</Text>
       </TouchableOpacity>
     </View>
   );

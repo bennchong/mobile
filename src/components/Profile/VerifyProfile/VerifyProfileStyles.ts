@@ -24,7 +24,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderColor: "#000000",
+    borderWidth: 0.5
   },
   buttonReject: {
     backgroundColor: red,
@@ -33,7 +35,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderColor: "#000000",
+    borderWidth: 0.5
   },
   buttonText: { color: white, fontWeight: "bold", fontSize: 13 },
   modalContainer: { flex: 1, alignItems: "center", justifyContent: "center" },

@@ -7,7 +7,7 @@ export const MessageBar = () => {
     <View style={[styles.baseBar, styles.verify]}>
       <Text style={styles.verifyText}>
         Please confirm your details and press the save button at the bottom of
-        this screen if correct
+        this screen if the details are correct
       </Text>
     </View>
   );

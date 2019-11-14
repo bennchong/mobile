@@ -23,7 +23,7 @@ global.Buffer = global.Buffer || require("buffer").Buffer;
 
 interface SharePageContainerProps {
   isVisible: boolean;
-  handleCancel: Function;
+  setVisible: Function;
   photo: string;
   name: string;
   profileSelected: number;
@@ -39,7 +39,7 @@ enum pageEnum {
 
 export const SharePageContainer = ({
   isVisible,
-  handleCancel,
+  setVisible,
   photo,
   name,
   profileSelected
@@ -51,7 +51,7 @@ export const SharePageContainer = ({
   let ModalBody;
 
   const closeModal = () => {
-    handleCancel();
+    setVisible(false);
     setPage(pageEnum.PROFILE_SELECTOR);
   };
 

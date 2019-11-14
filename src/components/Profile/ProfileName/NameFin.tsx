@@ -3,14 +3,14 @@ import { View, Text } from "react-native";
 import { verificationStatusEnum } from "../../../services/verificationService/verificationService";
 import { styles } from "./ProfileNameStyles";
 
-interface showTamperedProps {
+interface NameFinProps {
   status: any;
   fin: string;
   name: string;
 }
 
 // If tampered, indicate that profile is tampered
-export const ShowTampered = ({ status, fin, name }: showTamperedProps) => {
+export const NameFin = ({ status, fin, name }: NameFinProps) => {
   const isTampered = status === verificationStatusEnum.TAMPERED;
 
   return (
