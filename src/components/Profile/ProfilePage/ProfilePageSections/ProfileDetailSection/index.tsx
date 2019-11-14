@@ -1,9 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import { DetailSection } from "./DetailSection";
-import { Margin } from "../../../Layout/Margin";
-import { TextRow } from "../../../Layout/TextRow";
-import { formatDate } from "../../../../services/date/date";
+import { Margin } from "../../../../Layout/Margin";
+import { TextRow } from "../../../../Layout/TextRow";
+import { formatDate } from "../../../../../services/date/date";
 
 interface ProfileDetailSectionProps {
   workpass: any;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { HeaderInformation } from "./HeaderInformation";
-import { useStateValue } from "../../../../state";
+import { useStateValue } from "../../../../../state";
 import { styles } from "./ProfileHeaderContainerStyles";
 import { ProfileIndicator } from "./ProfileIndicator";
-import { profileTypeEnum } from "../../profileTypeEnum";
+import { profileTypeEnum } from "../../../profileTypeEnum";
 import { HeaderImage } from "./HeaderImage";
 import { HeaderImageSelecter } from "./HeaderImageSelecter";
 

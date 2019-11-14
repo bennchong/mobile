@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useStateValue } from "../../state";
-import { ProfilePage } from "./ProfilePage";
+import { ProfilePage } from "./ProfilePage/ProfilePage";
 import { profileTypeEnum } from "./profileTypeEnum";
 import { NoProfile } from "./NoProfile/NoProfile";
 

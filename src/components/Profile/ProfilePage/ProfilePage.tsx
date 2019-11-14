@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, NetInfo } from "react-native";
 import { ProfilePageSections } from "./ProfilePageSections/ProfilePageSections";
-import { NoWifiModal } from "../Modals/NoWifiModal";
-import { useStateValue } from "../../state";
-import { getCurrentDateAndTime } from "../../services/date/date";
+import { NoWifiModal } from "../../Modals/NoWifiModal";
+import { useStateValue } from "../../../state";
+import { getCurrentDateAndTime } from "../../../services/date/date";
 import {
   verificationStatusEnum,
   verifyWorkpass
-} from "../../services/verificationService/verificationService";
-import { white, black } from "../../themeColors";
-import { profileTypeEnum } from "./profileTypeEnum";
-import { ProfilePageBanner } from "./ProfilePageBanner";
+} from "../../../services/verificationService/verificationService";
+import { white, black } from "../../../themeColors";
+import { profileTypeEnum } from "../profileTypeEnum";
+import { ProfilePageBanner } from "../ProfilePageBanner";
 
 const styles = StyleSheet.create({
   container: {

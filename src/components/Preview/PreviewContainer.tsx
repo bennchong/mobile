@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Modal, SafeAreaView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { ProfilePage } from "../Profile/ProfilePage";
+import { ProfilePage } from "../Profile/ProfilePage/ProfilePage";
 import { styles } from "./PreviewContainerStyles";
 import { white } from "../../themeColors";
 import { profileTypeEnum } from "../Profile/profileTypeEnum";

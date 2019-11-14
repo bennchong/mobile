@@ -7,10 +7,10 @@ import GestureRecognizer, {
 } from "react-native-swipe-gestures";
 import { ProfileHeaderContainer } from "./ProfileHeaderContainer";
 import { ProfileDetailSection } from "./ProfileDetailSection";
-import { white } from "../../../themeColors";
-import { VerifyProfile } from "../VerifyProfile";
-import { VerifyModal } from "../../Modals/VerifyModal";
-import { profileTypeEnum } from "../profileTypeEnum";
+import { white } from "../../../../themeColors";
+import { VerifyProfile } from "../../VerifyProfile";
+import { VerifyModal } from "../../../Modals/VerifyModal";
+import { profileTypeEnum } from "../../profileTypeEnum";
 
 interface ProfilePageSectionsProps {
   status: number;

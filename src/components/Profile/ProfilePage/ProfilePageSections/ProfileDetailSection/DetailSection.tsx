@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { white, lightGrey, midGrey } from "../../../../themeColors";
+import { white, lightGrey, midGrey } from "../../../../../themeColors";
 
 const styles = StyleSheet.create({
   headerContainer: {

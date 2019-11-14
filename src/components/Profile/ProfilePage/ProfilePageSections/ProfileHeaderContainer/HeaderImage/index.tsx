@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { styles } from "./HeaderImageStyles";
-import { profileTypeEnum } from "../../../profileTypeEnum";
+import { profileTypeEnum } from "../../../../profileTypeEnum";
 import { swipeDirections } from "react-native-swipe-gestures";
-import { useStateValue } from "../../../../../state";
+import { useStateValue } from "../../../../../../state";
 
 export const HeaderImage = ({
   photo,
