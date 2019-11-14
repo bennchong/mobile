@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useStateValue } from "../../state";
-import { ProfileContainer } from "./ProfileContainer";
+import { ProfilePage } from "./ProfilePage";
 import { profileTypeEnum } from "./profileTypeEnum";
+import { NoProfile } from "./NoProfile/NoProfile";
 
+//Chooses which profile to display downstream from profilesArray
 const profileSelector = (
   profilesArray,
   profileSelected,
@@ -46,12 +48,14 @@ export const ProfilesState = () => {
     profileSelected,
     changeProfileSelected
   );
-  return (
-    <ProfileContainer
+  return selectedPass ? (
+    <ProfilePage
       workpassType={profileTypeEnum.STORED}
       workpass={selectedPass}
       profileSelected={profileSelected}
       changeProfileSelected={initiateChangeProfileSelected}
     />
+  ) : (
+    <NoProfile />
   );
 };

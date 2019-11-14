@@ -17,7 +17,7 @@ const DevDeleteWorkpasses = () => {
     workpass: null,
     timeAccepted: null,
     timeLastVerified: null,
-    validatedThisSession: null
+    validityStatus: null
   };
 
   const initialState: IContextState = {

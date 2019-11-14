@@ -16,9 +16,9 @@ const ProfilePreviewPage = (props: ProfilePreviewPageProps) => {
 
   return (
     <PreviewContainer
-      navigation={navigation}
       workpass={tempProfile}
       workpassType={profileType}
+      navigation={navigation}
     />
   );
 };

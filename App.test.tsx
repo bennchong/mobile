@@ -46,7 +46,7 @@ describe("<ProfileTab />", () => {
     workpass: workpass,
     timeAccepted: null,
     timeLastVerified: null,
-    validatedThisSession: null
+    validityStatus: null
   };
 
   const oneProfileState = {

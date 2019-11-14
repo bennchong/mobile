@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, NetInfo } from "react-native";
-import { ValidationBar, NoWifiBar } from "../TopBar";
 import { ProfileSection } from "./ProfileSection";
-import { NoProfile } from "./NoProfile/NoProfile";
 import { NoWifiModal } from "../Modals/NoWifiModal";
 import { useStateValue } from "../../state";
 import { getCurrentDateAndTime } from "../../services/date/date";
@@ -12,7 +10,7 @@ import {
 } from "../../services/verificationService/verificationService";
 import { white, black } from "../../themeColors";
 import { profileTypeEnum } from "./profileTypeEnum";
-import { MessageBar } from "../TopBar/MessageBar";
+import { ProfilePageBanner } from "./ProfilePageBanner";
 
 const styles = StyleSheet.create({
   container: {
@@ -35,24 +33,21 @@ interface ProfileContainerProps {
   changeProfileSelected: Function;
 }
 
-export const ProfileContainer = ({
+export const ProfilePage = ({
   workpass,
   workpassType,
   profileSelected,
   changeProfileSelected
 }: ProfileContainerProps) => {
   const [{ profilesArray }, dispatch] = useStateValue();
-  const [validityStatusArray, setValidityStatus] = useState(
-    workpassType !== profileTypeEnum.STORED
-      ? [false]
-      : new Array(profilesArray.length).fill(verificationStatusEnum.VALIDATING)
-  );
   const [previewTimeVerified, setPreviewTime] = useState("");
   const [internetConnected, setConnected] = useState(true);
   const [showModal, setShowModal] = useState(!internetConnected);
+  const [currentProfileStatus, setCurrentProfileStatus] = useState(
+    verificationStatusEnum.VALIDATING
+  );
 
-  const storeTime = async () => {
-    // Refactor function below
+  const storeTime = () => {
     dispatch({
       type: "SET_TIME_VERIFIED",
       profileIndex: profileSelected
@@ -75,49 +70,47 @@ export const ProfileContainer = ({
     });
     NetInfo.addEventListener("connectionChange", handleConnectivityChange);
     // verify workpass once
-    if (
-      workpassType === profileTypeEnum.PREVIEW ||
-      (workpass && !profilesArray[profileSelected].validatedThisSession)
-    ) {
-      const newValidityStatusArray = validityStatusArray;
-      newValidityStatusArray[profileSelected] =
-        verificationStatusEnum.VALIDATING;
-      setValidityStatus(newValidityStatusArray);
+    if (workpassType === profileTypeEnum.SHARED) {
       verifyWorkpass(workpass).then(status => {
-        newValidityStatusArray[profileSelected] = status;
-        setValidityStatus(newValidityStatusArray);
+        setCurrentProfileStatus(status);
+        setPreviewTime(getCurrentDateAndTime());
+      });
+    } else if (
+      profilesArray[profileSelected].validityStatus ===
+      verificationStatusEnum.VALIDATING
+    ) {
+      setCurrentProfileStatus(profilesArray[profileSelected].validityStatus);
+      verifyWorkpass(workpass).then(status => {
+        dispatch({
+          type: "UPDATE_VALIDITY",
+          profileIndex: profileSelected,
+          status: status
+        });
         if (status && workpassType === profileTypeEnum.STORED) {
           storeTime();
-          // Refator action below
-          dispatch({
-            type: "VALIDATED_SESSION",
-            profileIndex: profileSelected,
-            boolean: true
-          });
-        } else if (status /* && isPreview IF THIS WORKS REMOVE */) {
-          setPreviewTime(getCurrentDateAndTime());
         }
+        setCurrentProfileStatus(status);
       });
+    } else {
+      //For alreaady verified profilesArray
+      setCurrentProfileStatus(profilesArray[profileSelected].validityStatus);
     }
   }, [internetConnected, profileSelected, workpass]);
 
-  return workpass ? (
+  return (
     <View
       style={[
         styles.container,
         workpassType !== profileTypeEnum.STORED ? styles.shadow : null
       ]}
     >
-      {!internetConnected && <NoWifiBar />}
-      {internetConnected && workpassType !== profileTypeEnum.PREVIEW && (
-        <ValidationBar
-          status={validityStatusArray[profileSelected]}
-          workpassType={workpassType}
-        />
-      )}
-      {workpassType === profileTypeEnum.PREVIEW && <MessageBar />}
+      <ProfilePageBanner
+        internetConnected={internetConnected}
+        workpassType={workpassType}
+        status={currentProfileStatus}
+      />
       <ProfileSection
-        status={validityStatusArray[profileSelected]}
+        status={currentProfileStatus}
         workpass={workpass}
         workpassType={workpassType}
         previewTimeVerified={previewTimeVerified}
@@ -129,13 +122,5 @@ export const ProfileContainer = ({
         showModal={showModal}
       />
     </View>
-  ) : (
-    <>
-      <NoProfile />
-      <NoWifiModal
-        handleCloseModal={() => setShowModal(false)}
-        showModal={showModal}
-      />
-    </>
   );
 };

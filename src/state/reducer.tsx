@@ -22,11 +22,11 @@ export const reducer = (state, action) => {
       modifiedProfileArray.push(newProfileObject);
       storeProfilesArray(modifiedProfileArray);
       return { ...state, profilesArray: modifiedProfileArray };
-    case "VALIDATED_SESSION":
+    case "UPDATE_VALIDITY":
       newProfileObject = cloneDeep(state.profilesArray[action.profileIndex]); // Access correct profile index
-      newProfileObject.validatedThisSession = action.boolean;
+      newProfileObject.validityStatus = action.status;
       modifiedProfileArray[action.profileIndex] = newProfileObject;
-      storeProfilesArray(modifiedProfileArray);
+      //storeProfilesArray(modifiedProfileArray);
       return { ...state, profilesArray: modifiedProfileArray };
     case "SET_TIME_ACCEPTED":
       newProfileObject = cloneDeep(state.profilesArray[action.profileIndex]);

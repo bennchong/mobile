@@ -9,6 +9,7 @@ import {
 } from "../../services/fileSystem";
 import { checkIfPassExists } from "../../helpers/ProfileArray";
 import { initialState } from "../../state/initialState";
+import { verificationStatusEnum } from "../../services/verificationService/verificationService";
 
 const imageSource = require("../../assets/splash.png");
 
@@ -33,7 +34,9 @@ export const SplashScreen = (props: SplashScreenProps) => {
       const profilesArray = await getProfilesArray();
       // Resets verification boolean to false for each session
       // eslint-disable-next-line no-return-assign
-      profilesArray.map(profile => (profile.validatedThisSession = false)); // eslint-disable-line no-param-reassign
+      profilesArray.map(
+        profile => (profile.validityStatus = verificationStatusEnum.VALIDATING)
+      ); // eslint-disable-line no-param-reassign
       dispatch({
         type: "LOAD_PROFILESARRAY_FROM_FS",
         profilesArray

@@ -5,7 +5,7 @@ export const profileObjectInit: IProfileObject = {
   workpass: null,
   timeAccepted: null,
   timeLastVerified: null,
-  validatedThisSession: null
+  validityStatus: null
 };
 
 export const initialState: IContextState = {
