@@ -10,7 +10,7 @@ import {
 } from "../../../services/verificationService/verificationService";
 import { white, black } from "../../../themeColors";
 import { profileTypeEnum } from "../profileTypeEnum";
-import { ProfilePageBanner } from "../ProfilePageBanner";
+import { ProfilePageBanner } from "./ProfilePageBanner";
 
 const styles = StyleSheet.create({
   container: {
