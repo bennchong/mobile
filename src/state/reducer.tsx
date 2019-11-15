@@ -12,7 +12,9 @@ export const reducer = (state, action) => {
     // Refactor section - adhering to be a pure function
     case "ADD_MAINPASS":
       newMain = action.workpass;
-      modifiedProfileArray[0].workpass = newMain;
+      newProfileObject = Object.assign({}, profileObjectInit);
+      newProfileObject.workpass = newMain;
+      modifiedProfileArray[0] = newProfileObject;
       storeProfilesArray(modifiedProfileArray);
       return { ...state, profilesArray: modifiedProfileArray };
     case "ADD_DPPASS":
@@ -26,7 +28,6 @@ export const reducer = (state, action) => {
       newProfileObject = cloneDeep(state.profilesArray[action.profileIndex]); // Access correct profile index
       newProfileObject.validityStatus = action.status;
       modifiedProfileArray[action.profileIndex] = newProfileObject;
-      //storeProfilesArray(modifiedProfileArray);
       return { ...state, profilesArray: modifiedProfileArray };
     case "SET_TIME_ACCEPTED":
       newProfileObject = cloneDeep(state.profilesArray[action.profileIndex]);

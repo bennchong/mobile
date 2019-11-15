@@ -7,16 +7,16 @@ import {
   ActivityIndicator,
   Dimensions
 } from "react-native";
-import { styles } from "./SharePageStyles";
-import { getCurrentDateAndTime } from "../../../../../../../services/date/date";
-import { uploadWorkpass } from "../../../../../../../services/transferAPI/transferAPI";
-import { globalDownloadEndpoint } from "../../../../../../../config/constants";
+import { styles } from "../SharePageStyles";
+import { getCurrentDateAndTime } from "../../../../../../../../services/date/date";
+import { uploadWorkpass } from "../../../../../../../../services/transferAPI/transferAPI";
+import { globalDownloadEndpoint } from "../../../../../../../../config/constants";
 
-interface QrGeneratorProps {
+interface QRModalProps {
   obfuscatedWorkpass: object;
 }
 
-export const QrGenerator = (props: QrGeneratorProps) => {
+export const QRModal = (props: QRModalProps) => {
   const [isUploading, toggleIsUploading] = useState(true);
   const [timeCreated, updateTimeCreated] = useState(getCurrentDateAndTime());
   const [qrText, setQrText] = useState("NULL");

@@ -3,14 +3,14 @@ import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import {
   obfuscateFields,
   handleObfuscation
-} from "../../../../../../../services/obfuscation/obfuscationHandler";
-import { styles } from "./SharePageStyles";
+} from "../../../../../../../../services/obfuscation/obfuscationHandler";
+import { styles } from "../SharePageStyles";
 import {
   white,
   black,
   lighterGrey,
   darkRed
-} from "../../../../../../../themeColors";
+} from "../../../../../../../../themeColors";
 
 /* eslint-disable global-require */
 // Global buffer is needed to handle the binary data when obfuscating a certain field
@@ -27,7 +27,7 @@ interface renderItemProps {
   item: any;
 }
 
-export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
+export const CustomFieldsModal = ({ showQR, workpass }: CustomFieldsProps) => {
   const [detailsShown, setDetailsShown] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -68,7 +68,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
   );
 
   const handleCustomFields = () => {
-    const { obfuscatedDoc, detailsString } = handleObfuscation(
+    const { obfuscatedProfile, detailsString } = handleObfuscation(
       detailsShown,
       workpass
     );
@@ -83,7 +83,7 @@ export const CustomFields = ({ showQR, workpass }: CustomFieldsProps) => {
         {
           text: "Yes",
           onPress: () => {
-            showQR(obfuscatedDoc);
+            showQR(obfuscatedProfile);
           }
         }
       ],

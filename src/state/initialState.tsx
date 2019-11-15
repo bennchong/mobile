@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { IProfileObject, IContextState } from "./interfaces";
+import { verificationStatusEnum } from "../services/verificationService/verificationService";
 
 export const profileObjectInit: IProfileObject = {
   workpass: null,
   timeAccepted: null,
   timeLastVerified: null,
-  validityStatus: null
+  validityStatus: verificationStatusEnum.VALIDATING
 };
 
 export const initialState: IContextState = {

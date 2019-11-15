@@ -152,7 +152,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: darkestBlue,
     marginVertical: 5,
-    borderRadius: 20
+    borderRadius: 20,
+    zIndex: 9999
   },
   profileSelectorText: { color: white, fontWeight: "bold" },
   obfuscateContainer: {

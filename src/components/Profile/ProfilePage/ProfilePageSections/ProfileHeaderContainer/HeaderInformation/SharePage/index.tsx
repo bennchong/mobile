@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  Image,
-  Alert
-} from "react-native";
-import { QrGenerator } from "./QrGenerator";
-import { CustomFields } from "./CustomFields";
+import { View, Modal, Text, TouchableOpacity, Image } from "react-native";
+import { QRModal } from "./QRModal";
+import { CustomFieldsModal } from "./CustomFieldsModal";
 import { styles } from "./SharePageStyles";
-import {
-  handleObfuscation,
-  profileSelector
-} from "../../../../../../../services/obfuscation/obfuscationHandler";
 import { useStateValue } from "../../../../../../../state";
+import { ProfileSelectorModal } from "./ProfileSelectorModal";
 
 /* eslint-disable global-require */
 const imageSource = require("../../../../../../../assets/blur2.jpg");
@@ -30,7 +20,7 @@ interface SharePageContainerProps {
 }
 
 /* eslint-disable no-unused-vars */
-enum pageEnum {
+export enum pageEnum {
   PROFILE_SELECTOR,
   CUSTOM_FIELDS,
   QR_GENERATOR
@@ -55,67 +45,21 @@ export const SharePageContainer = ({
     setPage(pageEnum.PROFILE_SELECTOR);
   };
 
-  const showQR = doc => {
-    setWorkpass(doc);
+  const showQR = profile => {
+    setWorkpass(profile);
     setPage(pageEnum.QR_GENERATOR);
   };
 
-  const handleProfileSelector = (profile, detailsShown) => {
-    const { obfuscatedDoc, detailsString } = handleObfuscation(
-      detailsShown,
-      selectedWorkpass
-    );
-
-    Alert.alert(
-      `Share the following details with ${profile}`,
-      `${detailsString}`,
-      [
-        {
-          text: "No"
-        },
-        {
-          text: "Yes",
-          onPress: () => {
-            showQR(obfuscatedDoc);
-          }
-        }
-      ],
-      { cancelable: false }
-    );
-  };
-
-  const QrAsModal = () => (
-    <QrGenerator obfuscatedWorkpass={obfuscatedWorkpass} />
-  );
+  const QrAsModal = () => <QRModal obfuscatedWorkpass={obfuscatedWorkpass} />;
   const CustomFieldsAsModal = () => (
-    <CustomFields showQR={showQR} workpass={selectedWorkpass} />
+    <CustomFieldsModal showQR={showQR} workpass={selectedWorkpass} />
   );
   const ProfileSelectorAsModal = () => (
-    <>
-      <Text style={styles.infoText}>Select profile to share with</Text>
-      <View style={{ padding: 16 }}>
-        {profileSelector.map(item => (
-          <TouchableOpacity
-            key={item.profile}
-            style={styles.profileSelector}
-            onPress={() => {
-              handleProfileSelector(item.profile, item.detailsShown);
-            }}
-          >
-            <Text style={styles.profileSelectorText}>{item.profile}</Text>
-          </TouchableOpacity>
-        ))}
-
-        <TouchableOpacity
-          style={styles.profileSelector}
-          onPress={() => setPage(pageEnum.CUSTOM_FIELDS)}
-        >
-          <Text style={styles.profileSelectorText}>
-            Select customized field
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </>
+    <ProfileSelectorModal
+      showQR={showQR}
+      setPage={setPage}
+      selectedWorkpass={selectedWorkpass}
+    />
   );
 
   switch (page) {
