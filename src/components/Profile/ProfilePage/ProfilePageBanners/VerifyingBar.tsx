@@ -2,10 +2,16 @@ import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Constants from "expo-constants";
-import { verificationStatusEnum } from "../../services/verificationService/verificationService";
+import { verificationStatusEnum } from "../../../../services/verificationService/verificationService";
 import { styles } from "./BarStyles";
-import { white, midGreen, midYellow, darkRed, red } from "../../themeColors";
-import { profileTypeEnum } from "../Profile/profileTypeEnum";
+import {
+  white,
+  midGreen,
+  midYellow,
+  darkRed,
+  red
+} from "../../../../themeColors";
+import { profileTypeEnum } from "../../profileTypeEnum";
 
 interface ValidationBarProps {
   status: verificationStatusEnum;

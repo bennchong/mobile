@@ -1,7 +1,7 @@
 import React from "react";
-import { NoWifiBar, ValidationBar } from "../../TopBar";
+import { NoWifiBar, ValidationBar } from "./ProfilePageBanners";
 import { profileTypeEnum } from "../profileTypeEnum";
-import { MessageBar } from "../../TopBar/MessageBar";
+import { MessageBar } from "./ProfilePageBanners/MessageBar";
 import { View } from "react-native";
 
 interface ProfilePageBannerProps {

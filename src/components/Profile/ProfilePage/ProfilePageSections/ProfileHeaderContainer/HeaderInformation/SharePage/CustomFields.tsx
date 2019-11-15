@@ -3,9 +3,14 @@ import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import {
   obfuscateFields,
   handleObfuscation
-} from "../../services/obfuscation/obfuscationHandler";
+} from "../../../../../../../services/obfuscation/obfuscationHandler";
 import { styles } from "./SharePageStyles";
-import { white, black, lighterGrey, darkRed } from "../../themeColors";
+import {
+  white,
+  black,
+  lighterGrey,
+  darkRed
+} from "../../../../../../../themeColors";
 
 /* eslint-disable global-require */
 // Global buffer is needed to handle the binary data when obfuscating a certain field

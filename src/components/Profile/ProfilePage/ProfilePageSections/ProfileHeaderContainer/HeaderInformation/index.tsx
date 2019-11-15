@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { SharePageContainer } from "../../../../../SharePage";
+import { SharePageContainer } from "./SharePage";
 import { styles } from "./HeaderInformationStyles";
 import { verificationStatusEnum } from "../../../../../../services/verificationService/verificationService";
 import { midGrey } from "../../../../../../themeColors";

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
-import { white, lighterGrey, midGrey } from "../../themeColors";
+import { white, lighterGrey, midGrey } from "../../../../themeColors";
 
 export const styles = StyleSheet.create({
   baseBar: {

@@ -8,8 +8,8 @@ import {
   white,
   darkestBlue,
   red
-} from "../../themeColors";
-import metrics from "../../config/metrics";
+} from "../../../../../../../themeColors";
+import metrics from "../../../../../../../config/metrics";
 
 export const styles = StyleSheet.create({
   box: {

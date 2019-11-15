@@ -8,9 +8,9 @@ import {
   Dimensions
 } from "react-native";
 import { styles } from "./SharePageStyles";
-import { getCurrentDateAndTime } from "../../services/date/date";
-import { uploadWorkpass } from "../../services/transferAPI/transferAPI";
-import { globalDownloadEndpoint } from "../../config/constants";
+import { getCurrentDateAndTime } from "../../../../../../../services/date/date";
+import { uploadWorkpass } from "../../../../../../../services/transferAPI/transferAPI";
+import { globalDownloadEndpoint } from "../../../../../../../config/constants";
 
 interface QrGeneratorProps {
   obfuscatedWorkpass: object;

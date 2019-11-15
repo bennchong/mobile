@@ -13,11 +13,11 @@ import { styles } from "./SharePageStyles";
 import {
   handleObfuscation,
   profileSelector
-} from "../../services/obfuscation/obfuscationHandler";
-import { useStateValue } from "../../state";
+} from "../../../../../../../services/obfuscation/obfuscationHandler";
+import { useStateValue } from "../../../../../../../state";
 
 /* eslint-disable global-require */
-const imageSource = require("../../assets/blur2.jpg");
+const imageSource = require("../../../../../../../assets/blur2.jpg");
 global.Buffer = global.Buffer || require("buffer").Buffer;
 /* eslint-enable global-require */
 
