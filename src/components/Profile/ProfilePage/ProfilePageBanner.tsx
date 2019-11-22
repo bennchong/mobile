@@ -1,8 +1,8 @@
 import React from "react";
+import { View } from "react-native";
 import { NoWifiBar, ValidationBar } from "./ProfilePageBanners";
 import { profileTypeEnum } from "../profileTypeEnum";
 import { MessageBar } from "./ProfilePageBanners/MessageBar";
-import { View } from "react-native";
 
 interface ProfilePageBannerProps {
   internetConnected: boolean;

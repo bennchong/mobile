@@ -1,14 +1,13 @@
 # Luffy Source code documentation
 
-
-- [Luffy Source code documentation](#luffy-source-code-documentation)
+## 📚 Table of Content
   - [Source Folder](#source-folder)
   - [Overview](#overview)
   - [Navigation Overview](#navigation-overview)
   - [Profile Tab Overview](#profile-tab-overview)
 
 
-## Source Folder 
+## 📁  Source Folder 
 These are the folders within the `src` folder at root 
 - [`assets`](../src/assets) Picture assets that the mobile app uses
 - [`components`](../src/components) React components arranged in navigation format
@@ -19,14 +18,14 @@ These are the folders within the `src` folder at root
 - [`state`](../src/state) Initial state, reducers implemented here using React-Context
 - [`test`](../src/test) Contains test fixtures such as sample certificates
 
-## Overview
+## ☁️ Overview
 
 ![alt text](AppOverview.png "App Overview")
 
-This app injection starts at App.tsx, where it will call App Container with a Higher Order Component (HOC). In this mobile app we are using the two most well used libaries, react-navigation and react-context to give us control over navigating and redux kind of application state management. 
+This app injection starts at App.tsx, where it will call App Container with a Higher Order Component (HOC). In this mobile app we are using the two most well used libaries, `react-navigation` and `react-context` to give us control over navigating and redux kind of application state management. 
 
 
-## Navigation Overview
+## 🗺 Navigation Overview
 
 ![alt text](NavigationOverview.png "App Overview")
 
@@ -34,9 +33,9 @@ The app container contains a bottom tab navigator that is made out of three tabs
 
 Settings and Camera are StackNavigator, allowing them to switch stacks between the above pages, while the profile tab has only just one page. 
 
-To note, PreviewProfile uses components that are common with screens under ProfileTab.
+> Note: PreviewProfile uses components that are common with screens under ProfileTab.
 
-## Profile Tab Overview
+## 👱 Profile Tab Overview
 
 ![alt text](ProfileOverview.png "Profile Overview")
 

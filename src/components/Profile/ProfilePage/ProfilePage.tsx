@@ -76,7 +76,7 @@ export const ProfilePage = ({
         setPreviewTime(getCurrentDateAndTime());
       });
     } else if (
-      //Verifies stored profiles only for one time
+      //  Verifies stored profiles only for one time
       profilesArray[profileSelected].validityStatus ===
       verificationStatusEnum.VALIDATING
     ) {
@@ -85,7 +85,7 @@ export const ProfilePage = ({
         dispatch({
           type: "UPDATE_VALIDITY",
           profileIndex: profileSelected,
-          status: status
+          status
         });
         if (status && workpassType === profileTypeEnum.STORED) {
           storeTime();
@@ -93,7 +93,7 @@ export const ProfilePage = ({
         setCurrentProfileStatus(status);
       });
     } else {
-      //For alreaady verified profiles, when switching around profileSelected
+      //  For alreaady verified profiles, when switching around profileSelected
       setCurrentProfileStatus(profilesArray[profileSelected].validityStatus);
     }
   }, [internetConnected, profileSelected, workpass]);

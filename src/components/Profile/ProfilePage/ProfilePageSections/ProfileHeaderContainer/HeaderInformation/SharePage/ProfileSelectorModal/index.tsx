@@ -1,10 +1,16 @@
 import React from "react";
-import { styles } from "../SharePageStyles";
 import { View, Text, Alert, TouchableOpacity } from "react-native";
+import { styles } from "../SharePageStyles";
 import {
   profileSelector,
   handleObfuscation
 } from "../../../../../../../../services/obfuscation/obfuscationHandler";
+
+interface ProfileSelectorModalProps {
+  setPage: Function;
+  showQR: Function;
+  selectedWorkpass: Object;
+}
 
 const handleProfileSelector = (
   profile,
@@ -43,7 +49,11 @@ export enum pageEnum {
 }
 /* eslint-enable */
 
-export const ProfileSelectorModal = ({ setPage, showQR, selectedWorkpass }) => {
+export const ProfileSelectorModal = ({
+  setPage,
+  showQR,
+  selectedWorkpass
+}: ProfileSelectorModalProps) => {
   return (
     <View>
       <Text style={styles.infoText}>Select profile to share with</Text>

@@ -33,10 +33,10 @@ export const SplashScreen = (props: SplashScreenProps) => {
     if (profilesArrayExist) {
       const profilesArray = await getProfilesArray();
       // Resets verification boolean to false for each session
-      // eslint-disable-next-line no-return-assign
-      profilesArray.map(
+      profilesArray.forEach(
+        // eslint-disable-next-line no-return-assign, no-param-reassign
         profile => (profile.validityStatus = verificationStatusEnum.VALIDATING)
-      ); // eslint-disable-line no-param-reassign
+      );
       dispatch({
         type: "LOAD_PROFILESARRAY_FROM_FS",
         profilesArray

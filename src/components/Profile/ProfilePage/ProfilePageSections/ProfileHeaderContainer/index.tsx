@@ -31,7 +31,7 @@ export const ProfileHeaderContainer = ({
   const [leftPhoto, updateLeftPhoto] = useState();
 
   useEffect(() => {
-    //Chooses left, right photo to display
+    // Chooses left, right photo to display
     HeaderImageSelecter(
       profileSelected,
       profilesArray,

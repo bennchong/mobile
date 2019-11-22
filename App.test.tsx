@@ -44,7 +44,7 @@ describe("<CameraTab />", () => {
 
 describe("<ProfileTab />", () => {
   const profileObjectInit = {
-    workpass: workpass,
+    workpass,
     timeAccepted: null,
     timeLastVerified: null,
     validityStatus: verificationStatusEnum.VALIDATING

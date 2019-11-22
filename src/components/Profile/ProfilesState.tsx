@@ -4,7 +4,7 @@ import { ProfilePage } from "./ProfilePage/ProfilePage";
 import { profileTypeEnum } from "./profileTypeEnum";
 import { NoProfile } from "./NoProfile/NoProfile";
 
-//Chooses which profile to display downstream from profilesArray
+// Chooses which profile to display downstream from profilesArray
 const profileSelector = (
   profilesArray,
   profileSelected,

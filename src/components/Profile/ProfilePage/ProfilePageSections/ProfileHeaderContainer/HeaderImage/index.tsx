@@ -1,9 +1,18 @@
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { swipeDirections } from "react-native-swipe-gestures";
 import { styles } from "./HeaderImageStyles";
 import { profileTypeEnum } from "../../../../profileTypeEnum";
-import { swipeDirections } from "react-native-swipe-gestures";
 import { useStateValue } from "../../../../../../state";
+
+interface HeaderImageProps {
+  photo: string;
+  leftPhoto: string;
+  rightPhoto: string;
+  workpassType: object;
+  profileSelected: number;
+  onSwipe: object;
+}
 
 export const HeaderImage = ({
   photo,
@@ -12,7 +21,7 @@ export const HeaderImage = ({
   workpassType,
   profileSelected,
   onSwipe
-}) => {
+}: HeaderImageProps) => {
   const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
   const [{ profilesArray }] = useStateValue();
 
