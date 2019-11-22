@@ -115,7 +115,7 @@ exports[`<CameraTab /> should render without crashing 1`] = `
 </View>
 `;
 
-exports[`<ProfileTab /> With Profile have confirmed 1`] = `
+exports[`<ProfileTab /> With One Profile 1`] = `
 <View
   style={
     Array [
@@ -128,6 +128,9 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
     ]
   }
 >
+<<<<<<< HEAD
+  <View>
+=======
   <View
     accessible={true}
     isTVSelectable={true}
@@ -143,6 +146,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
       }
     }
   >
+>>>>>>> master
     <View
       style={
         Array [
@@ -229,6 +233,17 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
           }
         }
       >
+        <Text
+          style={
+            Object {
+              "color": "#707070",
+              "fontSize": 9,
+              "paddingTop": 5,
+            }
+          }
+        >
+          System last checked: 
+        </Text>
         <View
           style={
             Object {
@@ -1081,7 +1096,7 @@ exports[`<ProfileTab /> With Profile have confirmed 1`] = `
 </View>
 `;
 
-exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
+exports[`<ProfileTab /> With Two Profiles 1`] = `
 <View
   style={
     Array [
@@ -1094,34 +1109,49 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
     ]
   }
 >
-  <View
-    style={
-      Array [
-        Object {
-          "alignItems": "flex-end",
-          "flexDirection": "row",
-          "height": 55,
-          "justifyContent": "center",
-          "paddingBottom": 5,
-        },
-        Object {
-          "backgroundColor": "#F5F5F5",
-        },
-      ]
-    }
-  >
-    <Text
+  <View>
+    <View
       style={
-        Object {
-          "color": "#808080",
-          "marginLeft": 5,
-          "marginRight": 5,
-          "textAlign": "center",
-        }
+        Array [
+          Object {
+            "alignItems": "flex-end",
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "center",
+            "paddingBottom": 5,
+          },
+          Object {
+            "backgroundColor": "#EDB854",
+          },
+          Object {
+            "height": 55,
+          },
+        ]
       }
     >
-      Please confirm your details and press the save button at the bottom of this screen
-    </Text>
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontSize": 18,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        VERIFYING
+      </Text>
+      <ActivityIndicator
+        animating={true}
+        color="#FFF"
+        hidesWhenStopped={true}
+        size="small"
+        style={
+          Object {
+            "marginLeft": 5,
+          }
+        }
+      />
+    </View>
   </View>
   <View
     config={
@@ -1166,6 +1196,17 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
           }
         }
       >
+        <Text
+          style={
+            Object {
+              "color": "#707070",
+              "fontSize": 9,
+              "paddingTop": 5,
+            }
+          }
+        >
+          System last checked: 
+        </Text>
         <View
           style={
             Object {
@@ -1179,6 +1220,19 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
             style={
               Object {
                 "backgroundColor": "tomato",
+                "borderRadius": 20,
+                "height": 10,
+                "marginRight": 4,
+                "overflow": "hidden",
+                "position": "relative",
+                "width": 10,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ddd",
                 "borderRadius": 20,
                 "height": 10,
                 "marginRight": 4,
@@ -1261,6 +1315,42 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
             }
           }
         />
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "left": 652.1739130434784,
+              "opacity": 1,
+              "position": "absolute",
+              "zIndex": 10,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "uri": "data:image/gif;base64,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",
+              }
+            }
+            style={
+              Object {
+                "borderColor": "#fff",
+                "borderRadius": 112.5,
+                "borderWidth": 3,
+                "height": 225,
+                "opacity": 0.4,
+                "width": 225,
+              }
+            }
+          />
+        </View>
       </View>
     </View>
     <View
@@ -2019,171 +2109,54 @@ exports[`<ProfileTab /> With Profile haven't confirmed 1`] = `
 `;
 
 exports[`<ProfileTab /> Without Profile 1`] = `
-Array [
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
   <View
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
+        "backgroundColor": "#F5F5F5",
+        "borderRadius": 30,
+        "height": 500,
         "justifyContent": "center",
+        "padding": 10,
+        "width": 500,
       }
     }
   >
-    <View
+    <Text />
+    <Text
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#F5F5F5",
-          "borderRadius": 30,
-          "height": 500,
-          "justifyContent": "center",
-          "padding": 10,
-          "width": 500,
+          "color": "#FF0000",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "marginTop": 10,
         }
       }
     >
-      <Text />
-      <Text
-        style={
-          Object {
-            "color": "#FF0000",
-            "fontSize": 20,
-            "fontWeight": "bold",
-            "marginTop": 10,
-          }
-        }
-      >
-        No Profile Detected
-      </Text>
-      <Text
-        style={
-          Object {
-            "fontSize": 15,
-            "marginTop": 10,
-            "textAlign": "center",
-          }
-        }
-      >
-        Scan a valid Ministry of Manpower QR code to download your digital work pass!
-      </Text>
-    </View>
-  </View>,
-  <Modal
-    animationType="fade"
-    hardwareAccelerated={false}
-    transparent={true}
-    visible={false}
-  >
-    <View
+      No Profile Detected
+    </Text>
+    <Text
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(0,0,0,0.4)",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
+          "fontSize": 15,
+          "marginTop": 10,
+          "textAlign": "center",
         }
       }
     >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#FFF",
-              "borderRadius": 10,
-              "height": 700,
-              "justifyContent": "center",
-              "padding": 10,
-              "width": 700,
-            }
-          }
-        >
-          <Text />
-          <Text
-            style={
-              Object {
-                "color": "#4E4C4C",
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "marginTop": 20,
-                "textAlign": "center",
-              }
-            }
-          >
-            No Internet Connection
-          </Text>
-          <Text
-            style={
-              Object {
-                "color": "#919191",
-                "fontSize": 14,
-                "marginTop": 20,
-                "paddingHorizontal": 20,
-                "textAlign": "center",
-              }
-            }
-          >
-            Can't update pass status.
-            
-
-             Check your connection and refresh.
-          </Text>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#838383",
-                "borderRadius": 30,
-                "justifyContent": "center",
-                "marginTop": 20,
-                "opacity": 1,
-                "paddingHorizontal": 20,
-                "paddingVertical": 5,
-              }
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "#4E4C4C",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                  },
-                  Object {
-                    "color": "#FFF",
-                  },
-                ]
-              }
-            >
-              View Offline
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  </Modal>,
-]
+      Scan a valid Ministry of Manpower QR code to download your digital work pass!
+    </Text>
+  </View>
+</View>
 `;
 
 exports[`<SettingsTab /> should render without crashing 1`] = `

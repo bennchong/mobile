@@ -5,6 +5,9 @@ import { SettingsTab } from "./src/navigation/tabs/Settings";
 import { CameraTab } from "./src/navigation/tabs/Camera";
 import { ProfileTab } from "./src/navigation/tabs/Profile";
 import { StateProvider } from "./src/state";
+import { initialState } from "./src/state/initialState";
+import { reducer } from "./src/state/reducer";
+import { verificationStatusEnum } from "./src/services/verificationService/verificationService";
 
 // Workpass Imports
 const workpass = require("./src/test/fixtures/validCert.json");
@@ -20,54 +23,6 @@ console.error = (...args) => {
     )
   ) {
     originalConsoleError(...args);
-  }
-};
-
-const initialState = {
-  workpass: null,
-  dpWorkpassArray: [],
-  workpassAcceptedBooleanArray: [],
-  timeAcceptedArray: [],
-  timeVerifiedArray: [],
-  numberOfProfiles: 0,
-  sessionValidatedArray: []
-};
-
-const oneProfileState = {
-  workpass,
-  dpWorkpassArray: [],
-  workpassAcceptedBooleanArray: [false],
-  timeAcceptedArray: [""],
-  timeVerifiedArray: [""],
-  numberOfProfiles: 1,
-  sessionValidatedArray: []
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "UPDATE_WORKPASS":
-      return { ...state, workpass: action.workpass };
-    case "UPDATE_DP_WORKPASS_ARRAY":
-      return { ...state, dpWorkpassArray: action.dpWorkpassArray };
-    case "SET_WORKPASS_ACCEPTED":
-      return {
-        ...state,
-        workpassAcceptedBooleanArray: action.workpassAcceptedBooleanArray
-      };
-    case "SET_WORKPASS_TIME_ACCEPTED_ARRAY":
-      return { ...state, timeAcceptedArray: action.timeAcceptedArray };
-    case "SET_WORKPASS_TIME_VERIFIED_ARRAY":
-      return { ...state, timeVerifiedArray: action.timeVerifiedArray };
-    case "SET_NUMBER_PROFILES":
-      return { ...state, numberOfProfiles: action.numberOfProfiles };
-    case "NUMBER_PROFILES_PLUS_ONE":
-      return { ...state, numberOfProfiles: state.numberOfProfiles + 1 };
-    case "NUMBER_PROFILES_MINUS_ONE":
-      return { ...state, numberOfProfiles: state.numberOfProfiles - 1 };
-    case "DELETE_WORKPASS":
-      return { ...action.resetState };
-    default:
-      return state;
   }
 };
 
@@ -88,6 +43,26 @@ describe("<CameraTab />", () => {
 });
 
 describe("<ProfileTab />", () => {
+  const profileObjectInit = {
+    workpass,
+    timeAccepted: null,
+    timeLastVerified: null,
+    validityStatus: verificationStatusEnum.VALIDATING
+  };
+
+  const oneProfileState = {
+    tempProfile: null,
+    profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
+  };
+
+  const twoProfileState = {
+    tempProfile: null,
+    profilesArray: [
+      Object.assign({}, profileObjectInit),
+      Object.assign({}, profileObjectInit)
+    ]
+  };
+
   it("Without Profile", () => {
     const tree = render(
       <StateProvider initialState={initialState} reducer={reducer}>
@@ -96,7 +71,7 @@ describe("<ProfileTab />", () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  it("With Profile haven't confirmed", () => {
+  it("With One Profile", () => {
     const tree = render(
       <StateProvider initialState={oneProfileState} reducer={reducer}>
         <ProfileTab />
@@ -104,15 +79,9 @@ describe("<ProfileTab />", () => {
     );
     expect(tree).toMatchSnapshot();
   });
-  it("With Profile have confirmed", () => {
+  it("With Two Profiles", () => {
     const tree = render(
-      <StateProvider
-        initialState={{
-          ...oneProfileState,
-          workpassAcceptedBooleanArray: [true]
-        }}
-        reducer={reducer}
-      >
+      <StateProvider initialState={twoProfileState} reducer={reducer}>
         <ProfileTab />
       </StateProvider>
     );

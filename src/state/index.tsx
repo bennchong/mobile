@@ -1,14 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
-
-export interface IContextState {
-  workpass: any;
-  dpWorkpassArray: any;
-  workpassAcceptedBooleanArray: object;
-  timeAcceptedArray: object;
-  timeVerifiedArray: object;
-  numberOfProfiles: number;
-  sessionValidatedArray: object;
-}
+// eslint-disable-next-line no-unused-vars
+import { IContextState } from "./interfaces";
 
 // Uses React Context to create a AppContext or global state
 export const StateContext = createContext({});

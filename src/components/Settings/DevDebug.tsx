@@ -16,39 +16,15 @@ interface IDevDebugProps {
 
 const DevDebug = (props: IDevDebugProps) => {
   const goBack = () => props.navigation.goBack();
-  const [
-    {
-      workpass,
-      dpWorkpassArray,
-      workpassAcceptedBooleanArray,
-      timeAcceptedArray,
-      timeVerifiedArray,
-      numberOfProfiles,
-      sessionValidatedArray
-    }
-  ] = useStateValue();
+  const [{ profilesArray }] = useStateValue();
 
   let shownWorkpass;
-  if (workpass === null) {
+  if (profilesArray[0].workpass === null) {
     shownWorkpass = "Workpass is null";
   } else {
-    const cleanWorkpass = getData(workpass);
+    const cleanWorkpass = getData(profilesArray[0].workpass);
     shownWorkpass = cleanWorkpass.recipient.name;
   }
-  const dpArrayNames = [];
-  dpWorkpassArray.forEach(dp => {
-    const cleanDP = getData(dp);
-    dpArrayNames.push(cleanDP.recipient.name);
-  });
-
-  // eslint-disable-next-line no-unused-vars
-  // Only call this when you have to reset the entire file-system
-  // const clearAppMemory = () => {
-  //   deleteStoredTimeAccepted();
-  //   deleteStoredTimeVerified();
-  //   deleteStoredDPWorkpass();
-  //   deleteStoredWorkpass();
-  // };
 
   return (
     <ScrollView
@@ -61,23 +37,12 @@ const DevDebug = (props: IDevDebugProps) => {
       <DevStoreWorkPass />
       <DevStoreDPWorkPassArray />
       <DevDeleteWorkpasses />
-      <DevAppStateText> Workpass name: {shownWorkpass}</DevAppStateText>
+      <DevAppStateText>Main workpass name: {shownWorkpass}</DevAppStateText>
       <DevAppStateText>
-        dpWorkpassArrays names: {JSON.stringify(dpArrayNames)}
-      </DevAppStateText>
-      <DevAppStateText>Number of profiles: {numberOfProfiles}</DevAppStateText>
-      <DevAppStateText>
-        workpassAcceptedBooleanArray:
-        {JSON.stringify(workpassAcceptedBooleanArray)}
+        profilesArray Length: {profilesArray.length}
       </DevAppStateText>
       <DevAppStateText>
-        TimeAcceptedArray: {JSON.stringify(timeAcceptedArray)}
-      </DevAppStateText>
-      <DevAppStateText>
-        TimeVerifiedArray: {JSON.stringify(timeVerifiedArray)}
-      </DevAppStateText>
-      <DevAppStateText>
-        Session Validated Array: {JSON.stringify(sessionValidatedArray)}
+        profilesArray: {JSON.stringify(profilesArray)}
       </DevAppStateText>
       <Button title="Go Back to Settings Page" onPress={goBack} />
     </ScrollView>

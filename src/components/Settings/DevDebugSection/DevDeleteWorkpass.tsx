@@ -2,27 +2,27 @@ import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import {
-  deleteStoredWorkpass,
-  deleteStoredTimeAccepted,
-  deleteStoredTimeVerified,
-  deleteStoredDPWorkpass
+  deleteProfilesArray,
+  storeProfilesArray
 } from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { useStateValue } from "../../../state";
+// eslint-disable-next-line no-unused-vars
+import { IProfileObject, IContextState } from "../../../state/interfaces";
 import { red, black } from "../../../themeColors";
 
 const DevDeleteWorkpasses = () => {
   const [, dispatch] = useStateValue();
-  const initialState = {
+  const profileObjectInit: IProfileObject = {
     workpass: null,
-    dpWorkpassArray: [],
-    workpassAcceptedBooleanArray: [],
-    timeAcceptedArray: [],
-    timeVerifiedArray: [],
-    numberOfProfiles: 0,
-    sessionValidatedArray: []
+    timeAccepted: null,
+    timeLastVerified: null,
+    validityStatus: null
   };
 
+  const initialState: IContextState = {
+    profilesArray: [Object.assign({}, profileObjectInit)] // To deep clone profileObject, index 0 reserved for main pass
+  };
   return (
     <TouchableOpacity
       style={styles.container}
@@ -42,13 +42,10 @@ const DevDeleteWorkpasses = () => {
                   resetState: initialState
                 });
                 try {
-                  await deleteStoredWorkpass();
-                  await deleteStoredDPWorkpass();
+                  await deleteProfilesArray();
+                  await storeProfilesArray(initialState.profilesArray);
                 } catch (e) {
-                  await deleteStoredDPWorkpass();
-                } finally {
-                  await deleteStoredTimeAccepted();
-                  await deleteStoredTimeVerified();
+                  Alert.alert("Dev Info", e);
                 }
                 Alert.alert("Dev Info", "Workpass is successfully deleted");
               }

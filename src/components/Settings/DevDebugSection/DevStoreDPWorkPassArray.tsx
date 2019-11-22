@@ -1,26 +1,12 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Text } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import {
-  storeDPWorkpass,
-  storeTimeAccepted,
-  storeTimeVerified
-} from "../../../services/fileSystem";
 import { styles } from "../styles";
 import { fetchDocument } from "../../../services/qrHandler/qrHandler";
 import { useStateValue } from "../../../state";
 
 const DevStoreDPWorkPassArray = () => {
-  const [
-    {
-      dpWorkpassArray,
-      numberOfProfiles,
-      timeAcceptedArray,
-      workpassAcceptedBooleanArray,
-      timeVerifiedArray
-    },
-    dispatch
-  ] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   return (
     <TouchableOpacity
@@ -40,40 +26,17 @@ const DevStoreDPWorkPassArray = () => {
                   const workpass = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid_dependent.json"
                   );
-                  dpWorkpassArray.push(workpass);
                   const workpass1 = await fetchDocument(
                     "https://raw.githubusercontent.com/sgworkpass/demo/master/unencrypted_pass/cert_valid_ltvp.json"
                   );
-                  dpWorkpassArray.push(workpass1);
+                  // Refactor action below
                   dispatch({
-                    type: "UPDATE_DP_WORKPASS_ARRAY",
-                    dpWorkpassArray
-                  });
-                  await storeDPWorkpass(dpWorkpassArray);
-                  let i;
-                  for (i = 0; i <= 1; i += 1) {
-                    timeAcceptedArray.push("");
-                    workpassAcceptedBooleanArray.push(true);
-                    timeVerifiedArray.push("");
-                  }
-
-                  dispatch({
-                    type: "SET_WORKPASS_ACCEPTED",
-                    workpassAcceptedBooleanArray
+                    type: "ADD_DPPASS",
+                    workpass
                   });
                   dispatch({
-                    type: "SET_WORKPASS_TIME_ACCEPTED_ARRAY",
-                    timeAcceptedArray
-                  });
-                  await storeTimeAccepted(timeAcceptedArray);
-                  dispatch({
-                    type: "SET_WORKPASS_TIME_VERIFIED_ARRAY",
-                    timeVerifiedArray
-                  });
-                  await storeTimeVerified(timeVerifiedArray);
-                  dispatch({
-                    type: "SET_NUMBER_PROFILES",
-                    numberOfProfiles: numberOfProfiles + 2
+                    type: "ADD_DPPASS",
+                    workpass: workpass1
                   });
                   // eslint-disable-next-line no-alert
                   Alert.alert(
