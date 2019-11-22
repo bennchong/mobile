@@ -128,7 +128,25 @@ exports[`<ProfileTab /> With One Profile 1`] = `
     ]
   }
 >
+<<<<<<< HEAD
   <View>
+=======
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+>>>>>>> master
     <View
       style={
         Array [

@@ -34,9 +34,9 @@ export const pushService = async (workpass, payload, setProcessingQr) => {
   );
 
   const handlePushWorkpass = async () => {
+    setProcessingQr();
     const response = await axios.post(uri, obfuscatedDoc);
     const responseJSON = await response.data;
-    setProcessingQr();
     return responseJSON;
   };
 
