@@ -7,6 +7,7 @@ import { ProfileTab } from "./src/navigation/tabs/Profile";
 import { StateProvider } from "./src/state";
 import { initialState } from "./src/state/initialState";
 import { reducer } from "./src/state/reducer";
+import { verificationStatusEnum } from "./src/services/verificationService/verificationService";
 
 // Workpass Imports
 const workpass = require("./src/test/fixtures/validCert.json");
@@ -46,7 +47,7 @@ describe("<ProfileTab />", () => {
     workpass: workpass,
     timeAccepted: null,
     timeLastVerified: null,
-    validityStatus: null
+    validityStatus: verificationStatusEnum.VALIDATING
   };
 
   const oneProfileState = {
